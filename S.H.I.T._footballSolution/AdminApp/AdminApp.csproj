@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E12A68E9-7CD2-4982-974B-720880F5BBD5}</ProjectGuid>
+    <ProjectGuid>{306F9604-82B0-49E2-A086-B1BEC3D95EE5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>S.H.I.T._footballSolution</RootNamespace>
-    <AssemblyName>S.H.I.T._footballSolution</AssemblyName>
+    <RootNamespace>AdminApp</RootNamespace>
+    <AssemblyName>AdminApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
