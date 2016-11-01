@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace S.H.I.T._footballSolution
+namespace AdminApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace S.H.I.T._footballSolution
+namespace AdminApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

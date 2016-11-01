@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace S.H.I.T._footballSolution.Properties
+namespace AdminApp.Properties
 {
 
 
