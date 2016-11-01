@@ -12,12 +12,12 @@ namespace FootballEngine.Domain.Entities
         public Team(string name, string homeArena)
         {
             Id = new Guid();
-            Name = new TeamAndArenaName(name);
-            HomeArena = new TeamAndArenaName(homeArena);
+            Name = new GeneralName(name);
+            HomeArena = new GeneralName(homeArena);
         }
         public Guid Id { get; set; }
-        public TeamAndArenaName Name { get; set; }
-        public TeamAndArenaName HomeArena { get; set; }
+        public GeneralName Name { get; set; }
+        public GeneralName HomeArena { get; set; }
         public int Wins { get; set; }
         public int Losses { get; set; }
         public int Ties { get; set; }

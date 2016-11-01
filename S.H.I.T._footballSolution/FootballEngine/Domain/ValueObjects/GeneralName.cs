@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class TeamAndArenaName
+    class GeneralName
     {
-        public TeamAndArenaName(string name)
+        public GeneralName(string name)
         {
             if (IsValidName(name))
             {
@@ -50,11 +50,11 @@ namespace FootballEngine.Domain.ValueObjects
             }
             return false;
         }
-        public static bool TryParse(string name, out TeamAndArenaName result)
+        public static bool TryParse(string name, out GeneralName result)
         {
             try
             {
-                result = new TeamAndArenaName(name);
+                result = new GeneralName(name);
                 return true;
             }
             catch (ArgumentException)

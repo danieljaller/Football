@@ -43,7 +43,8 @@
     <Compile Include="Domain\Entities\Match.cs" />
     <Compile Include="Domain\Entities\Player.cs" />
     <Compile Include="Domain\Entities\Team.cs" />
-    <Compile Include="Domain\ValueObjects\TeamAndArenaName.cs" />
+    <Compile Include="Domain\ValueObjects\PlayerName.cs" />
+    <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
