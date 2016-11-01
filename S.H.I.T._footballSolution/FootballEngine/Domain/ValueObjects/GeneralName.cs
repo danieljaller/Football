@@ -16,7 +16,7 @@ namespace FootballEngine.Domain.ValueObjects
             }
             else
             {
-                throw new Exception("Invalid TeamName");
+                throw new Exception("Invalid Name");
             }
         }
         private string _value;
