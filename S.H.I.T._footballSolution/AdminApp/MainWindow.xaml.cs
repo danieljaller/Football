@@ -24,5 +24,30 @@ namespace AdminApp
         {
             InitializeComponent();
         }
+
+        private void SeriesButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new CreateOrAdministrateSeriesPage();
+        }
+
+        private void TeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new CreateOrAdministrateTeamsPage();
+        }
+
+        private void ProtocolButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new MatchProtocolPage();
+        }
+
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new StatisticsPage();
+        }
+
+        private void PlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new AdministratePlayersPage();
+        }
     }
 }
