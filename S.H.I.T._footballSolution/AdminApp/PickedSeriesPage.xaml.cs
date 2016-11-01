@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace AdminApp
 {
     /// <summary>
-    /// Interaction logic for CreateOrAdministrateSeries.xaml
+    /// Interaction logic for PickedSeriesPage.xaml
     /// </summary>
-    public partial class CreateOrAdministrateSeriesPage : Page
+    public partial class PickedSeriesPage : Page
     {
-        public CreateOrAdministrateSeriesPage()
+        public PickedSeriesPage()
         {
             InitializeComponent();
-        }
-
-        private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
