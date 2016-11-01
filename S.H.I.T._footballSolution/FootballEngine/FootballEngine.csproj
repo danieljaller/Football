@@ -42,7 +42,14 @@
   <ItemGroup>
     <Compile Include="Domain\Entities\Match.cs" />
     <Compile Include="Domain\Entities\Player.cs" />
+    <Compile Include="Domain\Entities\Team.cs" />
+    <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
