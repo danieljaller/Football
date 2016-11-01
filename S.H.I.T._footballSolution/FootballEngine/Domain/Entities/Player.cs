@@ -13,22 +13,25 @@ namespace FootballEngine.Domain.Entities
         public PlayerName FirstName{ get; set; }
         public PlayerName LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public enum Status {
-        Spelbar, Avstängd, Skadad, Landslagsuppdrag, Övrigt}
         public Status PlayerStatus { get; set; }
         public int RedCard { get; set; }
         public int YellowCard { get; set; }
         public int Assist { get; set; }
         public int Goals { get; set; }
         public int MatchesPlayed { get; set; }
+        public Guid Team { get; set; }
+        public List<Guid> PlayerMatchesList { get; set; }
+
+        public enum Status {
+        Spelbar, Avstängd, Skadad, Landslagsuppdrag, Övrigt}
+
         public bool PlayAble {
             get {
                 return PlayAbleCheck();
             }
         }
-        public Guid Team { get; set; }
 
-        public List<Guid> PlayerMatchesList = new List<Guid>();
+        public Player() { }
 
         public Player(PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
             :this(Guid.NewGuid(), firstName, lastName, dateOfBirth)
@@ -41,7 +44,9 @@ namespace FootballEngine.Domain.Entities
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
+            PlayerMatchesList = new List<Guid>();
         }
+
         private bool PlayAbleCheck()
         {
             if (PlayerStatus == Status.Spelbar)
