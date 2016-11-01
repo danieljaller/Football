@@ -8,5 +8,6 @@ namespace FootballEngine.Domain.Entities
 {
     class Match
     {
+
     }
 }
