@@ -37,7 +37,7 @@ namespace FootballEngine.Domain.ValueObjects
 
                     name = name.Substring(1);
                 }
-                if (name.Length < MaxLenght)
+                if (name.Length <= MaxLenght)
                 {
                     foreach (char character in name)
                     {
