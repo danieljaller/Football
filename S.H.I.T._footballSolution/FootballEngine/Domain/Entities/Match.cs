@@ -18,7 +18,7 @@ namespace FootballEngine.Domain.Entities
         }
             
         public Guid Id { get; set; }
-        public GeneralName location { get; set; }
+        public GeneralName Location { get; set; }
         public Guid HomeTeamId { get; }
         public Guid VisitorTeamId { get; }
         public DateTime Date { get; set; }
