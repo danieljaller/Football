@@ -23,8 +23,8 @@ namespace AdminApp
         public CreateOrAdministrateSeriesPage()
         {
             InitializeComponent();
-            List<string> teamList = new List<string> { "Serie1", "Serie2", "Serie3", "Serie4" };
-            seriesList.ItemsSource = teamList;
+            List<string> seriesListC = new List<string> { "Serie1", "Serie2", "Serie3", "Serie4" };
+            seriesList.ItemsSource = seriesListC;
         }
 
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
