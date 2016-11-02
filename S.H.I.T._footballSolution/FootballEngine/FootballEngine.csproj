@@ -44,14 +44,17 @@
     <Compile Include="Domain\Entities\Player.cs" />
     <Compile Include="Domain\Entities\Serie.cs" />
     <Compile Include="Domain\Entities\Team.cs" />
-    <Compile Include="Domain\ValueObjects\Goals.cs" />
+    <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
+    <Compile Include="Helper\TryGetFilePath.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\SerieRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <Folder Include="Resorces\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

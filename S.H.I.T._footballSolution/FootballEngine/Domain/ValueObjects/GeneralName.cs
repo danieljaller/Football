@@ -47,14 +47,14 @@ namespace FootballEngine.Domain.ValueObjects
                 {
                     foreach (char character in name)
                     {
-                        if (char.IsLetterOrDigit(character) || character == '-' || character == ' ')
+                        if (!char.IsLetterOrDigit(character) || character != '-' || character != ' ')
                         {
-                            return true;
+                            return false;
                         }
                     }
                 }
             }
-            return false;
+            return true;
         }
         public static bool TryParse(string name, out GeneralName result)
         {
