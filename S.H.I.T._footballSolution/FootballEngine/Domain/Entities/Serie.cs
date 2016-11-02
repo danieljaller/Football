@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
-    class Serie
+    public class Serie
     {
         public Guid Id { get; set; }
         public GeneralName SerieName {get; set;}
@@ -16,14 +16,11 @@ namespace FootballEngine.Domain.Entities
 
         public Serie() {}
 
-        public Serie(GeneralName serieName)
-                :this(Guid.NewGuid(), serieName)
-        {
-        }
+       
 
-        public Serie(Guid id, GeneralName seriename)
+        public Serie(GeneralName seriename)
         {
-            Id = id;
+            Id = new Guid();
             SerieName = seriename;
             TeamTable = new List<Guid>();
             MatchTable = new List<Guid>();

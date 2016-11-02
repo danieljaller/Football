@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class GeneralName
+    public class GeneralName
     {
+        public GeneralName()
+        {
+
+        }
         public GeneralName(string name)
         {
             if (IsValidName(name))

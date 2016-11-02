@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
-    class Match
+    public class Match
     {
+        public Match()
+        {
+
+        }
         public Match(string plats, DateTime date, Guid homeTeamId, Guid visitorTeamId)
         {
             Id = new Guid();
@@ -16,7 +20,7 @@ namespace FootballEngine.Domain.Entities
             HomeTeamId = homeTeamId;
             VisitorTeamId = visitorTeamId;
         }
-            
+
         public Guid Id { get; set; }
         public GeneralName Location { get; set; }
         public Guid HomeTeamId { get; }
@@ -24,7 +28,7 @@ namespace FootballEngine.Domain.Entities
         public DateTime Date { get; set; }
         // To do add Matchprotkoll
     }
-           
 
-            
+
+
 }

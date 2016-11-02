@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
-    class Player
+    public class Player
     {
         public Guid Id { get; set; }
         public PlayerName FirstName{ get; set; }

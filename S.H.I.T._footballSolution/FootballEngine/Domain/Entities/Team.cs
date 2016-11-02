@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
-    class Team
+    public class Team
     {
+        public Team()
+        {
+
+        }
         public Team(string name, string homeArena)
         {
             Id = new Guid();
