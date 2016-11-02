@@ -18,9 +18,9 @@ namespace FootballEngine.Domain.Entities
         public int YellowCard { get; set; }
         public int Assist { get; set; }
         public int Goals { get; set; }
-        public int MatchesPlayed { get; set; }
+        public int MatchesPlayed { get; }
         public Guid Team { get; set; }
-        public List<Guid> PlayerMatchesList { get; set; }
+        public List<Match> PlayerMatchesList { get; set; }
 
         public enum Status {
         Spelbar, Avstängd, Skadad, Landslagsuppdrag, Övrigt}
@@ -44,7 +44,8 @@ namespace FootballEngine.Domain.Entities
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
-            PlayerMatchesList = new List<Guid>();
+            PlayerMatchesList = new List<Match>();
+            MatchesPlayed = PlayerMatchesList.Count;
         }
 
         private bool PlayAbleCheck()
