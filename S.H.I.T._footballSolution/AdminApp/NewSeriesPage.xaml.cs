@@ -18,9 +18,9 @@ namespace AdminApp
     /// <summary>
     /// Interaction logic for PickedSeriesPage.xaml
     /// </summary>
-    public partial class PickedSeriesPage : Page
+    public partial class NewSeriesPage : Page
     {
-        public PickedSeriesPage()
+        public NewSeriesPage()
         {
             InitializeComponent();
         }

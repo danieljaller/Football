@@ -7,9 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
       Title="CreateOrAdministrateSeries">
+    <Page.Resources>
+        <local:MainWindow x:Key="mainWindow"/>
+    </Page.Resources>
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -32,9 +34,18 @@
         </ListBox>
         <Button Grid.Row="2" Margin="10" Name="NewSeriesButton" Click="NewSeriesButton_Click">SKAPA NY SERIE</Button>
 
-        <Frame x:Name="CreateOrAdministrateSeriesPageFrame" Grid.Column="1" Grid.Row="1" />
+        <Frame x:Name="CreateOrAdministrateSeriesPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+        <!--<Frame x:FieldModifier="{Binding  ElementName=MainPageFrame}" Grid.ColumnSpan="2" Grid.Row="1" />-->
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=seriesList, Path=SelectedValue}"/>
+        <TextBlock Name="matchSchedule" Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=seriesList, Path=SelectedValue}"/>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
 
+            </Grid.ColumnDefinitions>
+        </Grid>
+        
     </Grid>
+    
 </Page>
