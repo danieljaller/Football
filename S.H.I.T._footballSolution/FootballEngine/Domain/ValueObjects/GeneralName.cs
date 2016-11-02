@@ -6,24 +6,30 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class GeneralName
+    public class GeneralName
     {
+        public GeneralName()
+        {
+
+        }
         public GeneralName(string name)
         {
             if (IsValidName(name))
             {
-                _value = name;
+                //_value = name;
+                Value = name;
             }
             else
             {
                 throw new Exception("Invalid Name");
             }
         }
-        private string _value;
-        public string Value
-        {
-            get { return _value; }
-        }
+        public string Value { get; set; }
+        //private string _value;
+        //public string Value
+        //{
+        //    get { return _value; }
+        //}
         public static bool IsValidName(string name)
         {
             if (!string.IsNullOrWhiteSpace(name))

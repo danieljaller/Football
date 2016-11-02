@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace FootballEngine.Domain.Entities
 {
-    class Player
+    public class Player
     {
         public Guid Id { get; set; }
-        public PlayerName FirstName{ get; set; }
+        public PlayerName FirstName { get; set; }
         public PlayerName LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Status PlayerStatus { get; set; }
@@ -18,15 +19,21 @@ namespace FootballEngine.Domain.Entities
         public int YellowCard { get; set; }
         public int Assist { get; set; }
         public int Goals { get; set; }
-        public int MatchesPlayed { get; set; }
+        public int MatchesPlayed { get; }
         public Guid Team { get; set; }
-        public List<Guid> PlayerMatchesList { get; set; }
+        public List<Match> PlayerMatchesList { get; set; }
 
-        public enum Status {
-        Spelbar, Avstängd, Skadad, Landslagsuppdrag, Övrigt}
+        public enum Status
+        {
+            Available, Suspended, Injured, NationalTeam, Other
+        }
 
-        public bool PlayAble {
-            get {
+       
+
+        public bool PlayAble
+        {
+            get
+            {
                 return PlayAbleCheck();
             }
         }
@@ -44,12 +51,13 @@ namespace FootballEngine.Domain.Entities
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
-            PlayerMatchesList = new List<Guid>();
+            PlayerMatchesList = new List<Match>();
+            MatchesPlayed = PlayerMatchesList.Count;
         }
 
         private bool PlayAbleCheck()
         {
-            if (PlayerStatus == Status.Spelbar)
+            if (PlayerStatus == Status.Available)
             {
                 return true;
             }
