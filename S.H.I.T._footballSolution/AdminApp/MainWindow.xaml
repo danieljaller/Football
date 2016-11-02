@@ -8,14 +8,14 @@
         Title="Football Administration App" Height="450" Width="725"
         Icon="Resources/football_icon.ico">
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
             <TextBox MinWidth="100" Margin="10"/>
-            <Button Margin="10" Name="SeriesButton" Click="SeriesButton_Click">SKAPA / ADMINISTERA SERIE</Button>
+            <Button Margin="10" Name="SeriesButton" Click="SeriesButton_Click" Background="#FFDDDDDD">SKAPA / ADMINISTERA SERIE</Button>
             <Button Margin="10" Name="TeamButton" Click="TeamButton_Click">SKAPA / ADMINISTRERA LAG</Button>
             <Button Margin="10" Name="PlayerButton" Click="PlayerButton_Click">ADMINISTRERA SPELARE</Button>
             <Button Margin="10" Name="ProtocolButton" Click="ProtocolButton_Click">MATCHPROTOKOLL</Button>
