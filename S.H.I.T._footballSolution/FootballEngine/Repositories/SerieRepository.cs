@@ -36,7 +36,7 @@ namespace FootballEngine.Repositories
         {
             if (series != null && serie != null)
             {
-                if (series.Find(s => s.Id == serie.Id) != serie)
+                if (!series.Select(s => s.Id).Contains(serie.Id))
                 {
                     series.Add(serie);
                 }
@@ -47,7 +47,7 @@ namespace FootballEngine.Repositories
         {
             if (series != null)
             {
-                if (series.Find(s => s.Id == id) != null)
+                if (series.Select(s => s.Id).Contains(id))
                 {
                     series.Remove(series.Find(s => s.Id == id));
                 }
