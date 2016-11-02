@@ -24,7 +24,9 @@
         <ListBox Name="seriesList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
                 <DataTemplate>
+                    <Grid>
                     <TextBlock FontWeight="Bold" Text="{Binding}"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -32,7 +34,7 @@
 
         <Frame x:Name="CreateOrAdministrateSeriesPageFrame" Grid.Column="1" Grid.Row="1" />
 
-        <TextBlock Text="{Binding ElementName=seriesList, Path=SelectedValue}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=seriesList, Path=SelectedValue}"/>
 
     </Grid>
 </Page>
