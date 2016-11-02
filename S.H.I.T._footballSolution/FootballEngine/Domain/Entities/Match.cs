@@ -25,6 +25,8 @@ namespace FootballEngine.Domain.Entities
         public List<Guid> Goals { get; set; }
         public List<Guid> Injuries { get; set; }
 
+        public Match() { }
+
         public Match(string plats, DateTime date, Guid homeTeamId, Guid visitorTeamId, int homeGoals, int visitorGoals)
         {
             Id = new Guid();
