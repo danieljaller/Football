@@ -19,7 +19,7 @@ namespace FootballEngine.Domain.Entities
         public int YellowCards { get; set; }
         public int Assists { get; set; }
         public int Goals { get; set; }
-        public int MatchesPlayed { get; set; }
+        public int MatchesPlayed { get; }
         public Guid Team { get; set; }
         public List<Guid> MatchesPlayedIds { get; set; }
 
@@ -48,6 +48,7 @@ namespace FootballEngine.Domain.Entities
             LastName = lastName;
             DateOfBirth = dateOfBirth;
             MatchesPlayedIds = new List<Guid>();
+            MatchesPlayed = PlayerMatchesList.Count;
         }
 
         private bool PlayableCheck()
