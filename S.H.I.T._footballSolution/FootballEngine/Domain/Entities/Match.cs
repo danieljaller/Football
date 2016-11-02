@@ -9,8 +9,6 @@ namespace FootballEngine.Domain.Entities
 {
     public class Match
     {
-        public Match()
-        {
         public Guid Id { get; set; }
         public GeneralName Location { get; }
         public Guid HomeTeamId { get; set; }

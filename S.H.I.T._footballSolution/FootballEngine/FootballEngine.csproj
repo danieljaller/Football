@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Entities\Match.cs" />
-    <Compile Include="Domain\Entities\MatchProtocol.cs" />
     <Compile Include="Domain\Entities\Player.cs" />
     <Compile Include="Domain\Entities\Serie.cs" />
     <Compile Include="Domain\Entities\Team.cs" />

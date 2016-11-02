@@ -23,13 +23,15 @@ namespace AdminApp
         public CreateOrAdministrateSeriesPage()
         {
             InitializeComponent();
-            List<string> teamList = new List<string> { "Lag1", "Lag2", "Lag3", "Lag3" };
+            List<string> teamList = new List<string> { "Serie1", "Serie2", "Serie3", "Serie4" };
             seriesList.ItemsSource = teamList;
         }
 
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            CreateOrAdministrateSeriesPageFrame.Content = new NewSeriesPage();
+            matchSchedule.Visibility = Visibility.Collapsed;
         }
     }
 }
