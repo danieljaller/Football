@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class MatchGoals
+    public class MatchGoals
     {
         public int Value { get; set; }
         public MatchGoals() { }
