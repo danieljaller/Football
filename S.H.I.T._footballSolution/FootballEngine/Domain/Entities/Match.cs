@@ -27,7 +27,7 @@ namespace FootballEngine.Domain.Entities
 
         public Match() { }
 
-        public Match(string plats, DateTime date, Guid homeTeamId, Guid visitorTeamId, int homeGoals, int visitorGoals)
+        public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId, int homeGoals, int visitorGoals)
         {
             Id = new Guid();
             Date = date;
