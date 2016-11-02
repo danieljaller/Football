@@ -5,10 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="400"
       Title="CreateOrAdministrateSeries">
 
     <Grid>
-        <TextBlock Text="Skapa/administrera serie" FontSize="20"/>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Skapa/administrera serie" FontSize="20" />
+
+        <ListBox Name="seriesList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                    <TextBlock FontWeight="Bold" Text="{Binding}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="2" Margin="10" Name="NewSeriesButton" Click="NewSeriesButton_Click">SKAPA NY SERIE</Button>
+
+        <Frame x:Name="CreateOrAdministrateSeriesPageFrame" Grid.Column="1" Grid.Row="1" />
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=seriesList, Path=SelectedValue}"/>
+
     </Grid>
 </Page>

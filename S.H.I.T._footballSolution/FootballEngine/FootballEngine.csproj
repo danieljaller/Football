@@ -48,10 +48,10 @@
     <Compile Include="Domain\ValueObjects\Goals.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
+    <Compile Include="Helper\PlayerStatusToString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helper\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
   </ItemGroup>

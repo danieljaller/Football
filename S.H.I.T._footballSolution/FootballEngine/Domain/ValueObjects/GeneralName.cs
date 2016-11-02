@@ -12,18 +12,20 @@ namespace FootballEngine.Domain.ValueObjects
         {
             if (IsValidName(name))
             {
-                _value = name;
+                //_value = name;
+                Value = name;
             }
             else
             {
-                throw new Exception("Invalid TeamName");
+                throw new Exception("Invalid Name");
             }
         }
-        private string _value;
-        public string Value
-        {
-            get { return _value; }
-        }
+        public string Value { get; set; }
+        //private string _value;
+        //public string Value
+        //{
+        //    get { return _value; }
+        //}
         public static bool IsValidName(string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -37,7 +39,7 @@ namespace FootballEngine.Domain.ValueObjects
 
                     name = name.Substring(1);
                 }
-                if (name.Length < MaxLenght)
+                if (name.Length <= MaxLenght)
                 {
                     foreach (char character in name)
                     {

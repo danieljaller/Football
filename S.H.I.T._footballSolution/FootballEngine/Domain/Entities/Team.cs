@@ -32,11 +32,11 @@ namespace FootballEngine.Domain.Entities
         List<Guid> MatchIds;
 
         public int GoalDifferens { get; set; }
+    }
+}
         
            
         
-    }
-}
        
 
 

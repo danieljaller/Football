@@ -9,20 +9,22 @@ namespace FootballEngine.Domain.Entities
 {
     class Match
     {
-        public Match(string plats, DateTime date, Team hemmalag, Team bortaLag)
+        public Match(string plats, DateTime date, Guid homeTeamId, Guid visitorTeamId)
         {
             Id = new Guid();
-             
+            Date = date;
+            HomeTeamId = homeTeamId;
+            VisitorTeamId = visitorTeamId;
         }
             
-           
-
-            
         public Guid Id { get; set; }
-        public GeneralName Plats { get; set; }
-        public Guid HemmaLag { get; set; }
-        public Guid BortaLag { get; set; }
+        public GeneralName Location { get; set; }
+        public Guid HomeTeamId { get; }
+        public Guid VisitorTeamId { get; }
         public DateTime Date { get; set; }
         // To do add Matchprotkoll
     }
+           
+
+            
 }

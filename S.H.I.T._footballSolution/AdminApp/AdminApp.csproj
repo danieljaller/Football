@@ -58,6 +58,9 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PickedSeriesPage.xaml.cs">
+      <DependentUpon>PickedSeriesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MatchProtocolPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PickedSeriesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
