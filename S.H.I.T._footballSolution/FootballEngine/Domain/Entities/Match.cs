@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
-    class Match
+    public class Match
     {
+        public Match()
+        {
         public Guid Id { get; set; }
         public GeneralName Location { get; }
         public Guid HomeTeamId { get; set; }
