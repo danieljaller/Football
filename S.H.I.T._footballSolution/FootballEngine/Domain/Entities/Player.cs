@@ -15,13 +15,13 @@ namespace FootballEngine.Domain.Entities
         public PlayerName LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Status PlayerStatus { get; set; }
-        public int RedCard { get; set; }
-        public int YellowCard { get; set; }
-        public int Assist { get; set; }
+        public int RedCards { get; set; }
+        public int YellowCards { get; set; }
+        public int Assists { get; set; }
         public int Goals { get; set; }
         public int MatchesPlayed { get; set; }
         public Guid Team { get; set; }
-        public List<Guid> PlayerMatchesList { get; set; }
+        public List<Guid> MatchesPlayedIds { get; set; }
 
         public enum Status
         {
@@ -30,31 +30,27 @@ namespace FootballEngine.Domain.Entities
 
        
 
-        public bool PlayAble
+        public bool Playable
         {
             get
             {
-                return PlayAbleCheck();
+                return PlayableCheck();
             }
         }
 
         public Player() { }
 
-        public Player(PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
-            :this(Guid.NewGuid(), firstName, lastName, dateOfBirth)
-        {
-        }
 
-        public Player(Guid id, PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
+        public Player(PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
         {
-            Id = id;
+            Id = new Guid();
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
-            PlayerMatchesList = new List<Guid>();
+            MatchesPlayedIds = new List<Guid>();
         }
 
-        private bool PlayAbleCheck()
+        private bool PlayableCheck()
         {
             if (PlayerStatus == Status.Available)
             {

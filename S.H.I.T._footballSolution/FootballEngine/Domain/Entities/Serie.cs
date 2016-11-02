@@ -10,7 +10,7 @@ namespace FootballEngine.Domain.Entities
     public class Serie
     {
         public Guid Id { get; set; }
-        public GeneralName SerieName {get; set;}
+        public GeneralName Name {get; set;}
         public List<Guid> TeamTable;
         public List<Guid> MatchTable;
 
@@ -18,10 +18,10 @@ namespace FootballEngine.Domain.Entities
 
        
 
-        public Serie(GeneralName seriename)
+        public Serie(GeneralName name)
         {
             Id = new Guid();
-            SerieName = seriename;
+            Name = name;
             TeamTable = new List<Guid>();
             MatchTable = new List<Guid>();
         }
