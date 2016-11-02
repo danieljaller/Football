@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
-    class Team
+    public class Team
     {
+        public Team()
+        {
+
+        }
         public Team(string name, string homeArena)
         {
             Id = new Guid();
@@ -28,15 +32,15 @@ namespace FootballEngine.Domain.Entities
                 return (Wins * 3) + (Ties * 1);
             }
         }
-        List<Guid> PlayerIds;
-        List<Guid> MatchIds;
+        List<Guid> PlayerIds { get; set; }
+        List<Guid> MatchIds { get; set; }
 
         public int GoalDifferens { get; set; }
     }
 }
-        
-           
-        
-       
+
+
+
+
 
 

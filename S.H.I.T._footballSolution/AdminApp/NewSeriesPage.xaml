@@ -1,4 +1,4 @@
-﻿<Page x:Class="AdminApp.PickedSeriesPage"
+﻿<Page x:Class="AdminApp.NewSeriesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,16 +6,15 @@
       xmlns:local="clr-namespace:AdminApp"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="PickedSeriesPage">
+      Title="NewSeriesPage">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="15">Spelschema</TextBlock>
-        <TextBlock Grid.Row="1" FontWeight="Bold" Text="   Datum     Hemmalag   Bortalag  Arena   Resultat"/>
-        <TextBlock Grid.Row="2" Text="2016-03-15 | Göteborg | Malmö | Ullevi | 2 - 1 "/>
+        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="15">NY SERIE</TextBlock>
+       
     </Grid>
 </Page>
