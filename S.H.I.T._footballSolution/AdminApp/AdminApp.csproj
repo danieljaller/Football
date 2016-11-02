@@ -58,8 +58,8 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PickedSeriesPage.xaml.cs">
-      <DependentUpon>PickedSeriesPage.xaml</DependentUpon>
+    <Compile Include="NewSeriesPage.xaml.cs">
+      <DependentUpon>NewSeriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
@@ -98,7 +98,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PickedSeriesPage.xaml">
+    <Page Include="NewSeriesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class PlayerName
+    public class PlayerName
     {
         public PlayerName() { }
         public PlayerName(string name)
