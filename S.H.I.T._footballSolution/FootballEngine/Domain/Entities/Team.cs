@@ -13,11 +13,11 @@ namespace FootballEngine.Domain.Entities
         {
 
         }
-        public Team(string name, string homeArena)
+        public Team(GeneralName name, GeneralName homeArena)
         {
             Id = new Guid();
-            Name = new GeneralName(name);
-            HomeArena = new GeneralName(homeArena);
+            Name = name;
+            HomeArena = homeArena;
         }
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }
@@ -32,15 +32,15 @@ namespace FootballEngine.Domain.Entities
                 return (Wins * 3) + (Ties * 1);
             }
         }
-        List<Guid> PlayerIds;
-        List<Guid> MatchIds;
+        List<Guid> PlayerIds { get; set; }
+        List<Guid> MatchIds { get; set; }
 
         public int GoalDifferens { get; set; }
     }
 }
-        
-           
-        
-       
+
+
+
+
 
 

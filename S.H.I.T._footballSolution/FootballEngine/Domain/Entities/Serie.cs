@@ -10,18 +10,16 @@ namespace FootballEngine.Domain.Entities
     public class Serie
     {
         public Guid Id { get; set; }
-        public GeneralName SerieName {get; set;}
+        public GeneralName Name {get; set;}
         public List<Team> TeamTable;
         public List<Match> MatchTable;
 
         public Serie() {}
 
-       
-
-        public Serie(GeneralName seriename)
+        public Serie(GeneralName name)
         {
             Id = new Guid();
-            SerieName = seriename;
+            Name = name;
             TeamTable = new List<Team>();
             MatchTable = new List<Match>();
         }
