@@ -13,12 +13,10 @@ namespace FootballEngine.Repositories
 {
     class PlayerRepository : IRepository<Player>
     {
-
         private List<Player> players;
 
         public PlayerRepository()
         {
-           // players = new List<Player>();
             Load();
         }
         private static PlayerRepository _instance;

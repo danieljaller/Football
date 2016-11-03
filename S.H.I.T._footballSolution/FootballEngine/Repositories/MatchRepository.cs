@@ -87,7 +87,7 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resorces", true, out path))
+            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resorces", false, out path))
             {
                 try
                 {
@@ -97,9 +97,9 @@ namespace FootballEngine.Repositories
                         matches = xmlSerializer.Deserialize(stream) as List<Match>;
                     }
                 }
-                catch (Exception e)
+                catch
                 {
-                    throw e;
+                    matches = new List<Match>();
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace FootballEngine.Repositories
         public void Save()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resorces", false, out path))
+            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resorces", true, out path))
             {
                 try
                 {
