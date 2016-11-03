@@ -11,7 +11,8 @@ namespace FootballEngine.Interfaces
         void Add(T entity);
         void Delete(Guid id);
         IEnumerable<T> GetAll();
-        T GetById(Guid id);
+        T GetBy(Guid id);
+        T GetBy(string name);
         void Load();
         void Save();
     }
