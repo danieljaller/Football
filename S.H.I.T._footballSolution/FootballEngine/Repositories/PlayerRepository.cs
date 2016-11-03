@@ -13,7 +13,6 @@ namespace FootballEngine.Repositories
 {
     class PlayerRepository : IRepository<Player>
     {
-
         private List<Player> players;
 
         public PlayerRepository()

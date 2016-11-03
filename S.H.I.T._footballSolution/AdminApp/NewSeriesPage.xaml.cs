@@ -23,7 +23,10 @@ namespace AdminApp
         public NewSeriesPage()
         {
             InitializeComponent();
-            List<string> teamsListC = new List<string> { "Lag1", "Lag2", "Lag3", "Lag4" };
+            List<string> teamsListC = new List<string> { "Lag1", "Lag2", "Lag3", "Lag4", "Lag5", "Lag6",
+                                                         "Lag7", "Lag8", "Lag9", "Lag10", "Lag11", "Lag12",
+                                                         "Lag13", "Lag14", "Lag15", "Lag16", "Lag17", "Lag18",
+                                                         "Lag19", "Lag20"};
             teamsList.ItemsSource = teamsListC;
         }
 
@@ -32,9 +35,9 @@ namespace AdminApp
 
         }
 
-        private void CreateMatschScheduleButton_Click(object sender, RoutedEventArgs e)
+        private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -47,8 +50,23 @@ namespace AdminApp
             var team = ((CheckBox)sender).Content;
             tList.Add(team.ToString());
             teamsCheckedList.ItemsSource = tList;
+            if (tList.Count >= 16)
+            {
+                CreateMatchScheduleButton.IsEnabled = true;
+            }
             teamsCheckedList.Items.Refresh();
         }
-        
+
+        private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var team = ((CheckBox)sender).Content;
+            tList.Remove(team.ToString());
+            teamsCheckedList.ItemsSource = tList;
+            if (tList.Count < 16)
+            {
+                CreateMatchScheduleButton.IsEnabled = false;
+            }
+            teamsCheckedList.Items.Refresh();
+        }
     }
 }
