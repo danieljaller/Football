@@ -15,7 +15,7 @@ namespace FootballEngine.Repositories
     {
         public TeamRepository()
         {
-            teams = new List<Team>();
+            //teams = new List<Team>();
             Load();
         }
 
@@ -78,7 +78,7 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", true, out path))
+            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", false, out path))
             {
                 try
                 {
@@ -88,9 +88,9 @@ namespace FootballEngine.Repositories
                         teams = xmlSerializer.Deserialize(stream) as List<Team>;
                     }
                 }
-                catch (Exception e)
+                catch 
                 {
-                    throw e;
+                    teams = new List<Team>();
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace FootballEngine.Repositories
         public void Save()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", false, out path))
+            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", true, out path))
             {
                 try
                 {
