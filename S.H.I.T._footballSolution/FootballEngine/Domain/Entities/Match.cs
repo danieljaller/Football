@@ -45,6 +45,11 @@ namespace FootballEngine.Domain.Entities
             Injuries = new List<Guid>();
         }
         //To do: calculate Location
+
+        public string GetMatchResultAsString()
+        {
+            return $"{HomeGoals.Value} - {VisitorGoals.Value}";
+        }
     }
            
 
