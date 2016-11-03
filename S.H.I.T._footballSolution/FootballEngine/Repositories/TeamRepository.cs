@@ -11,10 +11,11 @@ using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
-    class TeamRepository : IRepository<Team>
+    public class TeamRepository : IRepository<Team>
     {
         public TeamRepository()
         {
+            teams = new List<Team>();
             Load();
         }
 
