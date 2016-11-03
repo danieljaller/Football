@@ -18,6 +18,7 @@ namespace FootballEngine.Repositories
 
         public PlayerRepository()
         {
+           // players = new List<Player>();
             Load();
         }
         private static PlayerRepository _instance;
@@ -88,7 +89,7 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", true, out path))
+            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", false, out path))
             {
                 try
                 {
@@ -98,9 +99,9 @@ namespace FootballEngine.Repositories
                         players = xmlSerializer.Deserialize(stream) as List<Player>;
                     }
                 }
-                catch (Exception e)
+                catch
                 {
-                    throw e;
+                    players = new List<Player>();
                 }
             }
         }
@@ -108,7 +109,7 @@ namespace FootballEngine.Repositories
         public void Save()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", false, out path))
+            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", true, out path))
             {
                 try
                 {
