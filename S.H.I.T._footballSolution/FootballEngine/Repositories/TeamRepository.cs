@@ -15,7 +15,6 @@ namespace FootballEngine.Repositories
     {
         public TeamRepository()
         {
-            //teams = new List<Team>();
             Load();
         }
 
@@ -66,11 +65,20 @@ namespace FootballEngine.Repositories
             return null;
         }
 
-        public Team GetById(Guid id)
+        public Team GetBy(Guid id)
         {
             if (teams != null)
             {
                 return teams.Find(t => t.Id == id);
+            }
+            return null;
+        }
+
+        public Team GetBy(string name)
+        {
+            if (name != null)
+            {
+                return teams.Find(t => t.Name.Value == name);
             }
             return null;
         }
@@ -88,7 +96,7 @@ namespace FootballEngine.Repositories
                         teams = xmlSerializer.Deserialize(stream) as List<Team>;
                     }
                 }
-                catch 
+                catch
                 {
                     teams = new List<Team>();
                 }
