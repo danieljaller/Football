@@ -66,11 +66,21 @@ namespace FootballEngine.Repositories
             return null;
         }
 
-        public Player GetById(Guid id)
+        public Player GetBy(Guid id)
         {
             if (players != null)
             {
                 return players.Find(s => s.Id == id);
+            }
+
+            return null;
+        }
+
+        public Player GetBy(string name)
+        {
+            if (players != null)
+            {
+                return players.Find(s => s.FullName == name);
             }
 
             return null;

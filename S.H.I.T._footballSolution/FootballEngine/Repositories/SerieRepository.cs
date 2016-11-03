@@ -64,11 +64,21 @@ namespace FootballEngine.Repositories
             return null;
         }
 
-        public Serie GetById(Guid id)
+        public Serie GetBy(Guid id)
         {
             if (series != null)
             {
                 return series.Find(s => s.Id == id);
+            }
+
+            return null;
+        }
+
+        public Serie GetBy(string name)
+        {
+            if (series != null)
+            {
+                return series.Find(s => s.Name.Value == name);
             }
 
             return null;
