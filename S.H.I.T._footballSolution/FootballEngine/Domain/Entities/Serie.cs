@@ -16,8 +16,6 @@ namespace FootballEngine.Domain.Entities
 
         public Serie() {}
 
-       
-
         public Serie(GeneralName name)
         {
             Id = new Guid();
