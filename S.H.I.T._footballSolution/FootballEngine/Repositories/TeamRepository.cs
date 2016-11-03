@@ -11,87 +11,86 @@ using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
-    class PlayerRepository : IRepository<Player>
+    public class TeamRepository : IRepository<Team>
     {
-
-        private List<Player> players;
-
-        public PlayerRepository()
+        public TeamRepository()
         {
-           // players = new List<Player>();
+            //teams = new List<Team>();
             Load();
         }
-        private static PlayerRepository _instance;
-        public static PlayerRepository Instance
+
+        private List<Team> teams;
+
+        private static TeamRepository _instance;
+
+        public static TeamRepository Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new PlayerRepository();
+                    _instance = new TeamRepository();
                 }
-
                 return _instance;
             }
         }
-        public void Add(Player player)
+
+        public void Add(Team team)
         {
-            if (players != null && player != null)
+            if (teams != null && team != null)
             {
-                if (!players.Select(s => s.Id).Contains(player.Id))
+                if (!teams.Select(t => t.Id).Contains(team.Id))
                 {
-                    players.Add(player);
+                    teams.Add(team);
                 }
             }
         }
 
         public void Delete(Guid id)
         {
-            if (players != null)
+            if (teams != null)
             {
-                if (players.Select(s => s.Id).Contains(id))
+                if (teams.Select(t => t.Id).Contains(id))
                 {
-                    players.Remove(players.Find(s => s.Id == id));
+                    teams.Remove(teams.Find(t => t.Id == id));
                 }
             }
         }
 
-        public IEnumerable<Player> GetAll()
+        public IEnumerable<Team> GetAll()
         {
-            if (players != null)
+            if (teams != null)
             {
-                return players as IEnumerable<Player>;
+                return teams as IEnumerable<Team>;
             }
-
             return null;
         }
 
-        public Player GetById(Guid id)
+        public Team GetById(Guid id)
         {
-            if (players != null)
+            if (teams != null)
             {
-                return players.Find(s => s.Id == id);
+                return teams.Find(t => t.Id == id);
             }
-
             return null;
         }
 
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", false, out path))
+            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", false, out path))
             {
                 try
                 {
                     using (Stream stream = File.Open(path, FileMode.Open))
                     {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
-                        players = xmlSerializer.Deserialize(stream) as List<Player>;
+                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Team>));
+                        teams = xmlSerializer.Deserialize(stream) as List<Team>;
                     }
                 }
-                catch
+                catch 
                 {
-                    players = new List<Player>();
+                    teams = new List<Team>();
                 }
             }
         }
@@ -99,14 +98,14 @@ namespace FootballEngine.Repositories
         public void Save()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", true, out path))
+            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", true, out path))
             {
                 try
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Team>));
                     using (Stream stream = File.Open(path, FileMode.Open))
                     {
-                        xmlSerializer.Serialize(stream, players);
+                        xmlSerializer.Serialize(stream, teams);
                     }
                 }
                 catch (Exception e)
