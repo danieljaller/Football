@@ -13,6 +13,11 @@ namespace FootballEngine.Domain.Entities
         public Guid Id { get; set; }
         public PlayerName FirstName { get; set; }
         public PlayerName LastName { get; set; }
+        public string FullName
+        {
+            get
+            { return $"{FirstName.Value} {LastName.Value}"; }
+        }
         public DateTime DateOfBirth { get; set; }
         public Status PlayerStatus { get; set; }
         public int RedCards { get; set; }
@@ -34,7 +39,7 @@ namespace FootballEngine.Domain.Entities
             Available, Suspended, Injured, NationalTeam, Other
         }
 
-       
+
 
         public bool Playable
         {
