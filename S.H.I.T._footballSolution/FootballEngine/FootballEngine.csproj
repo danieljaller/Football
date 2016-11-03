@@ -56,8 +56,10 @@
     <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="Repositories\SerieRepository.cs" />
     <Compile Include="Services\MatchService.cs" />
-    <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
+    <Compile Include="Services\PlayerService.cs" />
+    <Compile Include="Services\SerieService.cs" />
+    <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resorces\" />
