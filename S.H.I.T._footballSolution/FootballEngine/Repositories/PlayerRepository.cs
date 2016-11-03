@@ -17,7 +17,6 @@ namespace FootballEngine.Repositories
 
         public PlayerRepository()
         {
-           // players = new List<Player>();
             Load();
         }
         private static PlayerRepository _instance;
