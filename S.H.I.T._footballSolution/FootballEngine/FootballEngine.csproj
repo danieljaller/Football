@@ -54,10 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="Repositories\SerieRepository.cs" />
+    <Compile Include="Services\PlayerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resorces\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
