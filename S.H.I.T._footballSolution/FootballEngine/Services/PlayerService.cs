@@ -29,12 +29,12 @@ namespace FootballEngine.Services
 
         public Player GetBy(string name)
         {
-            return _playerRepository.GetById();
+            return _playerRepository.GetBy(name);
         }
 
         public Player GetBy(Guid id)
         {
-            throw new NotImplementedException();
+            return _playerRepository.GetBy(id);
         }
     }
 }
