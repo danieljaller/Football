@@ -14,9 +14,9 @@ namespace FootballEngine.Domain.Entities
         public Guid HomeTeamId { get; set; }
         public Guid VisitorTeamId { get; set; }
         public DateTime Date { get; set; }
-        public int[] Result { get; set; }
-        public int HomeGoals { get; set; }
-        public int VisitorGoals { get; set; }
+        public MatchGoals[] Result { get; set; }
+        public MatchGoals HomeGoals { get; set; }
+        public MatchGoals VisitorGoals { get; set; }
         public List<Guid> HomeLineup { get; set; }
         public List<Guid> VisitorLineup { get; set; }
         public List<Guid> RedCards { get; set; }
@@ -27,13 +27,13 @@ namespace FootballEngine.Domain.Entities
 
         public Match() { }
 
-        public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId, int homeGoals, int visitorGoals)
+        public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId, MatchGoals homeGoals, MatchGoals visitorGoals)
         {
             Id = new Guid();
             Date = date;
             HomeTeamId = homeTeamId;
             VisitorTeamId = visitorTeamId;
-            Result = new int[2];
+            Result = new MatchGoals[2];
             Result[0] = homeGoals;
             Result[1] = visitorGoals;
             HomeLineup = new List<Guid>();
@@ -45,6 +45,11 @@ namespace FootballEngine.Domain.Entities
             Injuries = new List<Guid>();
         }
         //To do: calculate Location
+
+        public string GetMatchResultAsString()
+        {
+            return $"{HomeGoals.Value} - {VisitorGoals.Value}";
+        }
     }
            
 
