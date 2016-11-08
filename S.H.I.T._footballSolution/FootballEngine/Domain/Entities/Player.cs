@@ -20,10 +20,10 @@ namespace FootballEngine.Domain.Entities
         }
         public DateTime DateOfBirth { get; set; }
         public Status PlayerStatus { get; set; }
-        public int RedCards { get; set; }
-        public int YellowCards { get; set; }
-        public int Assists { get; set; }
-        public int Goals { get; set; }
+        public List<Guid> RedCards { get; set; }
+        public List<Guid> YellowCards { get; set; }
+        public List<Guid> Assists { get; set; }
+        public List<Guid> Goals { get; set; }
         public int MatchesPlayed
         {
             get
