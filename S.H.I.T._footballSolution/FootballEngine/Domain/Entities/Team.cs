@@ -34,8 +34,8 @@ namespace FootballEngine.Domain.Entities
                 return (Wins * 3) + (Ties * 1);
             }
         }
-        List<Guid> PlayerIds { get; set; }
-        List<Guid> MatchIds { get; set; }
+        public List<Guid> PlayerIds { get; set; }
+        public List<Guid> MatchIds { get; set; }
 
         public int GoalDifferens { get; set; }
     }
