@@ -15,7 +15,7 @@ namespace FootballEngine.Domain.Entities
         }
         public Team(GeneralName name, GeneralName homeArena)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Name = name;
             HomeArena = homeArena;
         }

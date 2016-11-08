@@ -30,7 +30,7 @@ namespace FootballEngine.Domain.Entities
 
         public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Date = date;
             HomeTeamId = homeTeamId;
             VisitorTeamId = visitorTeamId;            

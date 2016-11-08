@@ -54,7 +54,7 @@ namespace FootballEngine.Domain.Entities
 
         public Player(PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
