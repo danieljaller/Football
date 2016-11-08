@@ -18,7 +18,7 @@ namespace FootballEngine.Domain.Entities
 
         public Serie(GeneralName name)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Name = name;
             TeamTable = new List<Guid>();
             MatchTable = new List<Guid>();

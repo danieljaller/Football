@@ -14,35 +14,35 @@ namespace FootballEngine.Domain.Entities
         public Guid HomeTeamId { get; set; }
         public Guid VisitorTeamId { get; set; }
         public DateTime Date { get; set; }
-        public MatchGoals[] Result { get; set; }
+        public uint MatchTimeInMinutes { get; set; }
+       
         public MatchGoals HomeGoals { get; set; }
         public MatchGoals VisitorGoals { get; set; }
         public List<Guid> HomeLineup { get; set; }
         public List<Guid> VisitorLineup { get; set; }
-        public List<Guid> RedCards { get; set; }
-        public List<Guid> YellowCards { get; set; }
-        public List<Guid> Assists { get; set; }
-        public List<Guid> Goals { get; set; }
-        public List<Guid> Injuries { get; set; }
+        public List<Event> RedCards { get; set; }
+        public List<Event> YellowCards { get; set; }
+        public List<Event> Assists { get; set; }
+        public List<Event> Goals { get; set; }
+        public List<Event> Injuries { get; set; }
 
         public Match() { }
 
-        public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId, MatchGoals homeGoals, MatchGoals visitorGoals)
+        public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Date = date;
             HomeTeamId = homeTeamId;
-            VisitorTeamId = visitorTeamId;
-            Result = new MatchGoals[2];
-            Result[0] = homeGoals;
-            Result[1] = visitorGoals;
+            VisitorTeamId = visitorTeamId;            
+            HomeGoals = new MatchGoals(0);
+            VisitorGoals = new MatchGoals(0);
             HomeLineup = new List<Guid>();
             VisitorLineup = new List<Guid>();
-            RedCards = new List<Guid>();
-            YellowCards = new List<Guid>();
-            Assists = new List<Guid>();
-            Goals = new List<Guid>();
-            Injuries = new List<Guid>();
+            RedCards = new List<Event>();
+            YellowCards = new List<Event>();
+            Assists = new List<Event>();
+            Goals = new List<Event>();
+            Injuries = new List<Event>();
         }
         //To do: calculate Location
 

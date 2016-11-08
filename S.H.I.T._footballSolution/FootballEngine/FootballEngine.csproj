@@ -44,6 +44,7 @@
     <Compile Include="Domain\Entities\Player.cs" />
     <Compile Include="Domain\Entities\Serie.cs" />
     <Compile Include="Domain\Entities\Team.cs" />
+    <Compile Include="Domain\ValueObjects\Event.cs" />
     <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
