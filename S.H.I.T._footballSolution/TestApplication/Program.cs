@@ -16,6 +16,11 @@ namespace TestApplication
     class Program
     {
         private static List<Player> players;
+        private static readonly string directoryName = "Resources";
+        private static readonly string matchesFileName = "Matches.xml";
+        private static readonly string playerFileName = "Players.xml";
+        private static readonly string seriesFileName = "Series.xml";
+        private static readonly string teamFileName = "Teams.xml";
 
         public Program()
         {
@@ -37,13 +42,13 @@ namespace TestApplication
             Guid teamId = Guid.NewGuid();
             for (int i = 1; i <= 24; i++)
             {
-                var player = new Player(new PlayerName("Peter"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
+                var player = new Player(new PlayerName("Pelle"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
                 player.TeamId = teamId;
                 players.Add(player);
             }
             try
             {
-                Save();
+                SaveToXML(players, playerFileName);
             }
             catch (Exception e)
             {
@@ -53,37 +58,28 @@ namespace TestApplication
 
         }
 
-        public static void Save()
+        public static void SaveToXML(object o, string fileName)
         {
             string path;
-            try
+            Exception innerException = null;
+            if (TryGetFilePath.InProjectDirectory(fileName, directoryName, true, out path))
             {
-                Exception e = null;
-
-                if (TryGetFilePath.InProjectDirectory("Players.xml", "Resources", true, out path))
+                try
                 {
-                
-                    try
+                    XmlSerializer xmlSerializer = new XmlSerializer(o.GetType());
+                    using (Stream stream = File.Open(path, FileMode.Create))
                     {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
-                        using (Stream stream = File.Open(path, FileMode.Create))
-                        {
-                            xmlSerializer.Serialize(stream, players);
-                        }
-                    }
-                    catch (Exception f)
-                    {
-                        e = f;
+                        xmlSerializer.Serialize(stream, players);
                     }
                 }
-                else
+                catch (Exception exception)
                 {
-                    throw new Exception("Could not save file", e);
+                    innerException = exception;
                 }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                throw new Exception($"Could not save to {fileName}", innerException);
             }
         }
 
