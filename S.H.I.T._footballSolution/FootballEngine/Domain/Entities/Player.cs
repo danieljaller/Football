@@ -31,7 +31,7 @@ namespace FootballEngine.Domain.Entities
                 return MatchesPlayedIds.Count;
             }
         }
-        public Guid Team { get; set; }
+        public Guid TeamId { get; set; }
         public List<Guid> MatchesPlayedIds { get; set; }
 
         public enum Status
