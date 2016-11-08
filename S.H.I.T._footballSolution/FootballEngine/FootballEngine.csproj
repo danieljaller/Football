@@ -48,6 +48,7 @@
     <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
+    <Compile Include="Helper\LoadSaveXml.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
     <Compile Include="Helper\TryGetFilePath.cs" />
     <Compile Include="Interfaces\IRepository.cs" />

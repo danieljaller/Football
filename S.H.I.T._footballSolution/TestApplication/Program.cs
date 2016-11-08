@@ -28,8 +28,9 @@ namespace TestApplication
         static void Main(string[] args)
         {
             players = new List<Player>();
+            //players = LoadPlayers();
             AddAndSavePlayers();
-            Console.WriteLine("Save successful");
+
             Console.ReadLine();
         }
         public static void AddAndSaveTeam()
@@ -42,13 +43,18 @@ namespace TestApplication
             Guid teamId = Guid.NewGuid();
             for (int i = 1; i <= 24; i++)
             {
-                var player = new Player(new PlayerName("Pelle"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
+                var player = new Player(new PlayerName("Peter"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
                 player.TeamId = teamId;
                 players.Add(player);
             }
             try
             {
-                SaveToXML(players, playerFileName);
+                string path;
+                if (TryGetFilePath.InProjectDirectory(playerFileName, directoryName, true, out path))
+                {
+                    LoadSaveToXml.SaveTo(path, players);
+                    Console.WriteLine("Save successful");
+                }
             }
             catch (Exception e)
             {
@@ -56,6 +62,28 @@ namespace TestApplication
                 Console.WriteLine(e);
             }
 
+        }
+
+        public static List<Player> LoadPlayers()
+        {
+            string path;
+            List<Player> playerList;
+
+            try
+            {
+                if (TryGetFilePath.InProjectDirectory(playerFileName, directoryName, false, out path))
+                {
+                    playerList = (List<Player>)LoadSaveToXml.Load(path, typeof(List<Player>));
+                    Console.WriteLine("Load successful");
+                    return playerList;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public static void SaveToXML(object o, string fileName)
