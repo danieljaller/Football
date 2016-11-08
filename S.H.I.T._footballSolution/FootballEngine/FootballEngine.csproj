@@ -49,6 +49,7 @@
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
+    <Compile Include="Helper\SerieAndMatchGenerator.cs" />
     <Compile Include="Helper\TryGetFilePath.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IService.cs" />
