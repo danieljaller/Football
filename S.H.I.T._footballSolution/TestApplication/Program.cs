@@ -19,11 +19,12 @@ namespace TestApplication
 
         public Program()
         {
-            players = new List<Player>();
         }
         static void Main(string[] args)
         {
-            
+            players = new List<Player>();
+            AddAndSavePlayers();
+            Console.ReadLine();
         }
 
         public static void AddAndSavePlayers()
