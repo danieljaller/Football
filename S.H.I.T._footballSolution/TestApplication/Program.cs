@@ -24,19 +24,26 @@ namespace TestApplication
         {
             players = new List<Player>();
             AddAndSavePlayers();
+            Console.WriteLine("Save successful");
             Console.ReadLine();
+        }
+        public static void AddAndSaveTeam()
+        {
+
         }
 
         public static void AddAndSavePlayers()
         {
+            Guid teamId = Guid.NewGuid();
             for (int i = 1; i <= 24; i++)
             {
-                var player = new Player(new PlayerName("Jonas"), new PlayerName("hanson"), new DateTime(1992 - 08 - 06));
+                var player = new Player(new PlayerName("Peter"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
+                player.Team = teamId;
                 players.Add(player);
             }
             try
             {
-            Save();
+                Save();
             }
             catch (Exception e)
             {
@@ -51,17 +58,27 @@ namespace TestApplication
             string path;
             try
             {
-                if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", true, out path))
+                Exception e = null;
+
+                if (TryGetFilePath.InProjectDirectory("Players.xml", "Resources", true, out path))
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
-                    using (Stream stream = File.Open(path, FileMode.Open))
+                
+                    try
                     {
-                        xmlSerializer.Serialize(stream, players);
+                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
+                        using (Stream stream = File.Open(path, FileMode.Create))
+                        {
+                            xmlSerializer.Serialize(stream, players);
+                        }
+                    }
+                    catch (Exception f)
+                    {
+                        e = f;
                     }
                 }
                 else
                 {
-                    throw new Exception("Could not save file");
+                    throw new Exception("Could not save file", e);
                 }
             }
             catch (Exception e)
@@ -69,6 +86,7 @@ namespace TestApplication
                 throw e;
             }
         }
+
     }
 
 }

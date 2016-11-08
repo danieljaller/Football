@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<ArrayOfPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Player>
+    <Id>0d6de21a-1fa0-4af0-b7c8-ffdba053379e</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>d6536694-2b58-472c-956c-7741384b31b9</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>f8086ba6-c8fd-4e50-8d2e-a0bbf2e5f95b</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>bd014548-3451-457b-9437-8855cab757e0</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>c73a8c31-34d1-4917-9b73-fbcf30f7e890</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>8ec21dfa-3520-41ad-8457-8de4ea6b7162</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>7c33a066-733b-4797-bcb3-fa0904688e13</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>c01fa4f1-e5d3-443d-961a-69897fc903b5</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>ba328b6e-f981-465b-a6db-3f19bdf8626f</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>e65e19ee-30fd-4089-b3c2-90efd3890ca8</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>d3f32ab9-7544-4c02-bf32-cee25e995cba</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>ca3f604c-ba38-40f5-8682-23afff107697</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>c82673d0-7c35-4674-ab0e-b2b328853ec5</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>fe44d085-06f5-4596-8f8a-47a8faa0244b</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>35eb9532-3c28-47d6-87da-cc2dcb430773</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>774fb3fc-0cd0-4567-9888-62f24d47c7a5</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>02163c01-5205-408b-af62-dbe0c3392abb</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>b204eeea-41fd-4f61-92e8-514820907e10</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>5c8237a6-07ef-4583-910c-c3d0c734bcc7</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>1dff77ff-9587-49f7-aeb4-ef16b7bb36d7</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>d40dd726-5171-42e4-bbde-d2a58252e346</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>d13c229c-b791-4025-aa10-b2a4a8197585</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>fe57f942-8994-4f40-85cb-409f5009e4ee</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+  <Player>
+    <Id>0360347b-c6a2-4be6-bed8-dbedf91ddfac</Id>
+    <FirstName>
+      <Value>Peter</Value>
+    </FirstName>
+    <LastName>
+      <Value>Hanson</Value>
+    </LastName>
+    <DateOfBirth>0001-01-01T00:00:00.0001978</DateOfBirth>
+    <PlayerStatus>Available</PlayerStatus>
+    <RedCards />
+    <YellowCards />
+    <Assists />
+    <Goals />
+    <Team>71dad61a-1408-4844-a9f7-03a8b241cd1a</Team>
+    <MatchesPlayedIds />
+  </Player>
+</ArrayOfPlayer>

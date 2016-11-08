@@ -42,19 +42,17 @@ namespace FootballEngine.Helper
                 {
                     try
                     {
-                        File.Create(path);
+                        File.Create(path).Close();
                     }
                     catch (Exception)
                     {
                         path = null;
                         return false;
                     }
-                    return true;
                 }
             }
 
-            path = null;
-            return false;
+            return true;
         }
 
         public static bool InProjectDirectory(string fileName, string subDirectory, bool createFileIfFileDoesNotExist, out string path)
@@ -128,19 +126,17 @@ namespace FootballEngine.Helper
                 {
                     try
                     {
-                        File.Create(path);
+                        File.Create(path).Close();
                     }
                     catch (Exception)
                     {
                         path = null;
                         return false;
                     }
-                    return true;
                 }
             }
 
-            path = null;
-            return false;
+            return true;
         }
 
         public static bool InSolutionDirectory(string fileName, string subDirectory, bool createFileIfFileDoesNotExist, out string path)
