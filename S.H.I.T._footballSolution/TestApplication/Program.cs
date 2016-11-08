@@ -38,7 +38,7 @@ namespace TestApplication
             for (int i = 1; i <= 24; i++)
             {
                 var player = new Player(new PlayerName("Peter"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
-                player.Team = teamId;
+                player.TeamId = teamId;
                 players.Add(player);
             }
             try
