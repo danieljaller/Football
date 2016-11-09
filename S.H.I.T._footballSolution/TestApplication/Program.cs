@@ -34,25 +34,39 @@ namespace TestApplication
         static void Main(string[] args)
         {
             players = new List<Player>();
+            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
+            for (int i = 0; i < 16; i++)
+            {
+                listOfPlayerLists.Add(CreatePlayerList());
+            }
+            List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
+
+            
             //players = LoadPlayers();
-            AddAndSavePlayers();
+            //AddAndSavePlayers();
 
             Console.ReadLine();
         }
 
-        public static List<Team> CreateTeamsWithPlayers(uint amount)
+        public static List<Player> CreatePlayerList()
+        {
+            Random rand = new Random();
+            uint numberOfPlayers = Convert.ToUInt32(rand.Next(24, 31));
+
+            return PlayerFactory.Create(numberOfPlayers) as List<Player>;
+        }
+
+        public static List<Team> CreateTeamsWithPlayers(List<List<Player>> players)
         {
             List<Team> teams = new List<Team>();
-            for (int i = 1; i <= amount; i++)
+            for (int i = 1; i <= players.Count; i++)
             {
-                Random rand = new Random();
-                uint numberOfPlayers = Convert.ToUInt32(rand.Next(24, 31));
-                List<Player> players = PlayerFactory.Create(numberOfPlayers) as List<Player>;
+                Team team = TeamFactory.Create($"Team{i}", $"Arena-{i}", players[i].Select(p => p.Id));
 
-                Team team = TeamFactory.Create($"Team{i}", $"Arena-{i}", players.Select(p => p.Id));
-
-                foreach (Player player in players)
+                foreach (Player player in players[i])
+                {
                     player.TeamId = team.Id;
+                }
 
                 teams.Add(team);
             }
