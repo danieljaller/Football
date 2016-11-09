@@ -86,7 +86,7 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", false, out path))
+            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", false, out path))
             {
                 try
                 {
@@ -106,7 +106,7 @@ namespace FootballEngine.Repositories
         public void Save()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resorces", true, out path))
+            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", true, out path))
             {
                 try
                 {
