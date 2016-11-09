@@ -87,7 +87,7 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resorces", false, out path))
+            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", false, out path))
             {
                 try
                 {
@@ -106,21 +106,52 @@ namespace FootballEngine.Repositories
 
         public void Save()
         {
+            //string path;
+            //if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", true, out path))
+            //{
+            //    try
+            //    {
+            //        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Match>));
+            //        using (Stream stream = File.Open(path, FileMode.Open))
+            //        {
+            //            xmlSerializer.Serialize(stream, matches);
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        throw e;
+            //    }
+            //}
+
             string path;
-            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resorces", true, out path))
+            try
             {
-                try
+                Exception e = null;
+
+                if (TryGetFilePath.InProjectDirectory($"{nameof(Match)}.xml", "Resources", true, out path))
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Match>));
-                    using (Stream stream = File.Open(path, FileMode.Open))
+
+                    try
                     {
-                        xmlSerializer.Serialize(stream, matches);
+                        XmlSerializer xmlSerializer = new XmlSerializer(matches.GetType());
+                        using (Stream stream = File.Open(path, FileMode.Create))
+                        {
+                            xmlSerializer.Serialize(stream, matches);
+                        }
+                    }
+                    catch (Exception f)
+                    {
+                        e = f;
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    throw e;
+                    throw new Exception("Could not save file", e);
                 }
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }
