@@ -52,7 +52,7 @@ namespace TestApplication
                 string path;
                 if (TryGetFilePath.InProjectDirectory(playerFileName, directoryName, true, out path))
                 {
-                    LoadSaveToXml.SaveTo(path, players);
+                    XmlHandler.SaveTo(path, players);
                     Console.WriteLine("Save successful");
                 }
             }
@@ -73,7 +73,7 @@ namespace TestApplication
             {
                 if (TryGetFilePath.InProjectDirectory(playerFileName, directoryName, false, out path))
                 {
-                    playerList = (List<Player>)LoadSaveToXml.Load(path, typeof(List<Player>));
+                    playerList = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
                     Console.WriteLine("Load successful");
                     return playerList;
                 }
@@ -82,35 +82,8 @@ namespace TestApplication
             {
                 Console.WriteLine(e);
             }
-
             return null;
         }
-
-        public static void SaveToXML(object o, string fileName)
-        {
-            string path;
-            Exception innerException = null;
-            if (TryGetFilePath.InProjectDirectory(fileName, directoryName, true, out path))
-            {
-                try
-                {
-                    XmlSerializer xmlSerializer = new XmlSerializer(o.GetType());
-                    using (Stream stream = File.Open(path, FileMode.Create))
-                    {
-                        xmlSerializer.Serialize(stream, players);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    innerException = exception;
-                }
-            }
-            else
-            {
-                throw new Exception($"Could not save to {fileName}", innerException);
-            }
-        }
-
     }
 
 }
