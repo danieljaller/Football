@@ -20,10 +20,10 @@ namespace FootballEngine.Domain.Entities
         }
         public DateTime DateOfBirth { get; set; }
         public Status PlayerStatus { get; set; }
-        public int RedCards { get; set; }
-        public int YellowCards { get; set; }
-        public int Assists { get; set; }
-        public int Goals { get; set; }
+        public List<Guid> RedCards { get; set; }
+        public List<Guid> YellowCards { get; set; }
+        public List<Guid> Assists { get; set; }
+        public List<Guid> Goals { get; set; }
         public int MatchesPlayed
         {
             get
@@ -31,7 +31,7 @@ namespace FootballEngine.Domain.Entities
                 return MatchesPlayedIds.Count;
             }
         }
-        public Guid Team { get; set; }
+        public Guid TeamId { get; set; }
         public List<Guid> MatchesPlayedIds { get; set; }
 
         public enum Status
@@ -54,7 +54,7 @@ namespace FootballEngine.Domain.Entities
 
         public Player(PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;

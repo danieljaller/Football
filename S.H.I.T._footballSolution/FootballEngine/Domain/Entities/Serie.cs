@@ -11,17 +11,17 @@ namespace FootballEngine.Domain.Entities
     {
         public Guid Id { get; set; }
         public GeneralName Name {get; set;}
-        public List<Team> TeamTable;
-        public List<Match> MatchTable;
+        public List<Guid> TeamTable;
+        public List<Guid> MatchTable;
 
         public Serie() {}
 
         public Serie(GeneralName name)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Name = name;
-            TeamTable = new List<Team>();
-            MatchTable = new List<Match>();
+            TeamTable = new List<Guid>();
+            MatchTable = new List<Guid>();
         }
     }
 }
