@@ -49,6 +49,7 @@
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
+    <Compile Include="Helper\StringUtil.cs" />
     <Compile Include="Helper\TryGetFilePath.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IService.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Services\PlayerService.cs" />
+    <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\SerieService.cs" />
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
