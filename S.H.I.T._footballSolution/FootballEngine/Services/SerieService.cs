@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class SerieService : IService<Serie>
+    public class SerieService : IService<Serie>
     {
         private readonly SerieRepository _serieRepository = SerieRepository.Instance;
 

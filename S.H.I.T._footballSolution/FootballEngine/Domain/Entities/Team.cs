@@ -20,6 +20,10 @@ namespace FootballEngine.Domain.Entities
             HomeArena = homeArena;
             PlayerIds = new List<Guid>();
             MatchIds = new List<Guid>();
+            Wins = 0;
+            Losses = 0;
+            Ties = 0;
+            GoalDifferens = 0;
         }
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }

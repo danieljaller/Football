@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class SearchService
+    public class SearchService
     {
         public IEnumerable<object> Search(string searchText, bool ignoreCase, bool playerSearch, bool teamSearch, bool serieSearch)
         {

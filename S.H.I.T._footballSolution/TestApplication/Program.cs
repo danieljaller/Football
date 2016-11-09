@@ -10,11 +10,17 @@ using FootballEngine.Helper;
 using System.Xml.Serialization;
 using System.IO;
 using FootballEngine.Domain.ValueObjects;
+using TestApplication.Factories;
 
 namespace TestApplication
 {
     class Program
     {
+        private static SearchService searchService;
+        private static MatchService matchService;
+        private static SerieService serieService;
+        private static TeamService teamService;
+        private static PlayerService playerService;
         private static List<Player> players;
         private static readonly string directoryName = "Resources";
         private static readonly string matchesFileName = "Matches.xml";
@@ -33,6 +39,53 @@ namespace TestApplication
 
             Console.ReadLine();
         }
+
+        public static List<Team> CreateTeamsWithPlayers(uint amount)
+        {
+            List<Team> teams = new List<Team>();
+            for (int i = 1; i <= amount; i++)
+            {
+                Random rand = new Random();
+                uint numberOfPlayers = Convert.ToUInt32(rand.Next(24, 31));
+                List<Player> players = PlayerFactory.Create(numberOfPlayers) as List<Player>;
+
+                Team team = TeamFactory.Create($"Team{i}", $"Arena-{i}", players.Select(p => p.Id));
+
+                foreach (Player player in players)
+                    player.TeamId = team.Id;
+
+                teams.Add(team);
+            }
+
+            return teams;
+        }
+
+        public static void PrintList(List<object> list)
+        {
+            foreach (var item in list)
+            {
+                if (item is Player)
+                {
+                    Player player = item as Player;
+                    Team playersTeam = teamService.GetBy(player.TeamId);
+                    string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
+                    StringBuilder playerBuilder = new StringBuilder();
+                    playerBuilder.AppendLine(player.FullName);
+                    playerBuilder.AppendLine(player.DateOfBirth.ToShortDateString());
+                    playerBuilder.AppendLine(teamName);
+                    playerBuilder.AppendLine($"Assists: {player.Assists.Count}");
+                    playerBuilder.AppendLine($"Goals: {player.Goals.Count}");
+                    playerBuilder.AppendLine($"Yellow cards: {player.YellowCards.Count}");
+                    playerBuilder.AppendLine($"Red cards: {player.RedCards.Count}");
+                    playerBuilder.AppendLine($"Matches played: {player.MatchesPlayed}");
+                    playerBuilder.AppendLine($"Status: {player.PlayerStatus.ToString()}");
+                    playerBuilder.AppendLine($"Playable: {player.Playable}");
+                    Console.WriteLine(playerBuilder.ToString());
+                    Console.WriteLine("----------------------------------------------------------");
+                }
+            }
+        }
+
         public static void AddAndSaveTeam()
         {
 

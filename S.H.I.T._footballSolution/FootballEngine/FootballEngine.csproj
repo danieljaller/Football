@@ -61,6 +61,7 @@
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Services\PlayerService.cs" />
+    <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\SerieService.cs" />
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>

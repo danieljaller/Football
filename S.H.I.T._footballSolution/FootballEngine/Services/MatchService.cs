@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class MatchService : IService<Match>
+    public class MatchService : IService<Match>
     {
         private readonly MatchRepository _matchRepository = MatchRepository.Instance;
         public void Add(Match match)
