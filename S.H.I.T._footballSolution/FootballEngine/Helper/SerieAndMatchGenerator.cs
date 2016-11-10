@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Helper
 {
-    class SerieAndMatchGenerator
+    public class SerieAndMatchGenerator
     {
         private MatchService matchService = new MatchService();
         private Guid[] pairing;
