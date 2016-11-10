@@ -12,6 +12,7 @@ using System.IO;
 using FootballEngine.Domain.ValueObjects;
 using TestApplication.Factories;
 using static FootballEngine.Domain.Entities.Player;
+using System.Windows.Input;
 
 namespace TestApplication
 {
@@ -22,15 +23,21 @@ namespace TestApplication
         private static SerieService serieService;
         private static TeamService teamService;
         private static PlayerService playerService;
-        private static List<Player> players;
+        
         private static readonly string directoryName = "Resources";
         private static readonly string matchesFileName = "Matches.xml";
         private static readonly string playerFileName = "Players.xml";
         private static readonly string seriesFileName = "Series.xml";
         private static readonly string teamFileName = "Teams.xml";
+        private bool stopRuuning;
+
+        
+        
 
         public Program()
         {
+            
+          
         }
         static void Main(string[] args)
         {
@@ -39,51 +46,88 @@ namespace TestApplication
             serieService = new SerieService();
             searchService = new SearchService();
             teamService = new TeamService();
+
+            CreateTestData();
+
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                PrintMenu();
+
+                var key = Console.ReadKey().Key;
+                switch (key)
+                {
+                    case ConsoleKey.D1:
+                        PrintPlayers(playerService.GetAll().ToList());
+                        
+                        break;
+
+                    case ConsoleKey.D2:
+                        PrintTeams(teamService.GetAll().ToList());
+                        break; 
+
+                    case ConsoleKey.Q:
+                        keepRunning = false;
+                        break;
+
+
+                }
+            }
+
+
+
+
             
-            //players = new List<Player>();
-            //List<List<Player>> listOfPlayerLists = new List<List<Player>>();
-            //for (int i = 0; i < 16; i++)
-            //{
-            //    listOfPlayerLists.Add(CreatePlayerList());
-            //}
-            //List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
-
-            //foreach (List<Player> playerList in listOfPlayerLists)
-            //{
-            //    foreach (Player player in playerList)
-            //    {
-            //        playerService.Add(player);
-            //    }
-            //}
-            //foreach (Team team in teamList)
-            //{
-            //    teamService.Add(team);
-            //}
-
-            //try
-            //{
-            //    playerService.Save();
-            //    Console.WriteLine("Save successful");
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine($"Save failed\n{e}");
-            //}
-            //try
-            //{
-            //    teamService.Save();
-            //    Console.WriteLine("Save successful");
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine($"Save failed\n{e}");
-            //}
-            
-            //players = LoadPlayers();
-            //AddAndSavePlayers();
-
-            Console.ReadLine();
         }
+        public static void CreateTestData()
+        {
+           
+            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
+            for (int i = 0; i < 16; i++)
+            {
+                listOfPlayerLists.Add(CreatePlayerList());
+            }
+            List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
+
+            foreach (List<Player> playerList in listOfPlayerLists)
+            {
+                foreach (Player player in playerList)
+                {
+                    playerService.Add(player);
+                }
+            }
+            for (int i = 0; i < teamList.Count; i++)
+            {
+                List<Player> l = listOfPlayerLists[i];
+                teamList[i].PlayerIds = l.Select(p => p.Id).ToList();
+            }
+            foreach (Team team in teamList)
+            {
+               
+                teamService.Add(team);
+            }
+
+            try
+            {
+                playerService.Save();
+                Console.WriteLine("Save successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Save failed\n{e}");
+            }
+            try
+            {
+                teamService.Save();
+                Console.WriteLine("Save successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Save failed\n{e}");
+            }
+        }
+
+          
 
         public static List<Player> CreatePlayerList()
         {
@@ -140,58 +184,49 @@ namespace TestApplication
             }
         }
 
-        public static void AddAndSaveTeam()
+        private static void PrintTeams(List<Team> teamList)
         {
+            foreach (Team team in teamList)
+            {
+                //Team playersTeam = teamService.GetBy(player.TeamId);
+                //string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
+                StringBuilder playerBuilder = new StringBuilder();
+                playerBuilder.AppendLine($"Name: {team.Name.Value}");
+                playerBuilder.AppendLine($"HomeArena: {team.HomeArena.Value}");
+                playerBuilder.AppendLine($"Points: {team.Points}");
+                playerBuilder.AppendLine($"Wins: {team.Wins}");
+                playerBuilder.AppendLine($"Losses: {team.Losses}");
+                playerBuilder.AppendLine($"Ties: {team.Ties}");
+                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifferens}");
+                playerBuilder.AppendLine($"Matches Played: {team.MatchIds.Count}");
+                playerBuilder.AppendLine($"Players: {team.PlayerIds.Count}");
 
+
+                Console.WriteLine(playerBuilder.ToString());
+                Console.WriteLine("----------------------------------------------------------");
+            }
         }
 
-        public static void AddAndSavePlayers()
+
+      
+
+        private static void PrintMenu()
         {
-            Guid teamId = Guid.NewGuid();
-            for (int i = 1; i <= 24; i++)
-            {
-                var player = new Player(new PlayerName("Peter"), new PlayerName("Hanson"), new DateTime(1992 - 08 - 06));
-                player.TeamId = teamId;
-                players.Add(player);
-            }
-            try
-            {
-                string path;
-                if (TryGetFilePath.InProjectDirectory(playerFileName, directoryName, true, out path))
-                {
-                    XmlHandler.SaveTo(path, players);
-                    Console.WriteLine("Save successful");
-                }
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e);
-            }
-
+            Console.WriteLine();
+            Console.WriteLine("+-----------------------------------------------------------------+");
+            Console.WriteLine("|   [1] Print Players         [3] Print Series                    |");
+            Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit  |");
+            Console.WriteLine("+-----------------------------------------------------------------+");
+            Console.WriteLine();
         }
-
-        public static List<Player> LoadPlayers()
-        {
-            string path;
-            List<Player> playerList;
-
-            try
-            {
-                if (TryGetFilePath.InProjectDirectory(playerFileName, directoryName, false, out path))
-                {
-                    playerList = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
-                    Console.WriteLine("Load successful");
-                    return playerList;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return null;
-        }
+      
     }
-
 }
+
+
+     
+
+      
+
+     
 

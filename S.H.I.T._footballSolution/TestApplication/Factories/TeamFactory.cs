@@ -17,7 +17,7 @@ namespace TestApplication.Factories
             if (playerIds.Count() == 0)
                 throw new Exception($"{nameof(playerIds)} is empty");
             if (playerIds.Count() < 24)
-                throw new Exception($"Not enough Guid's in {nameof(playerIds)}");
+               throw new Exception($"Not enough Guid's in {nameof(playerIds)}");
             if (playerIds.Count() > 30)
                 throw new Exception($"Too many Guid's in {nameof(playerIds)}");
             
