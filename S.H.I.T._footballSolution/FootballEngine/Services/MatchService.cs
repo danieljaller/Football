@@ -36,5 +36,10 @@ namespace FootballEngine.Services
         {
             return _matchRepository.GetBy(id);
         }
+
+        public void Save()
+        {
+            _matchRepository.Save();
+        }
     }
 }

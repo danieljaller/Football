@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 using System.IO;
 using FootballEngine.Domain.ValueObjects;
 using TestApplication.Factories;
+using static FootballEngine.Domain.Entities.Player;
 
 namespace TestApplication
 {
@@ -33,14 +34,50 @@ namespace TestApplication
         }
         static void Main(string[] args)
         {
-            players = new List<Player>();
-            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
-            for (int i = 0; i < 16; i++)
-            {
-                listOfPlayerLists.Add(CreatePlayerList());
-            }
-            List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
+            matchService = new MatchService();
+            playerService = new PlayerService();
+            serieService = new SerieService();
+            searchService = new SearchService();
+            teamService = new TeamService();
+            
+            //players = new List<Player>();
+            //List<List<Player>> listOfPlayerLists = new List<List<Player>>();
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    listOfPlayerLists.Add(CreatePlayerList());
+            //}
+            //List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
 
+            //foreach (List<Player> playerList in listOfPlayerLists)
+            //{
+            //    foreach (Player player in playerList)
+            //    {
+            //        playerService.Add(player);
+            //    }
+            //}
+            //foreach (Team team in teamList)
+            //{
+            //    teamService.Add(team);
+            //}
+
+            //try
+            //{
+            //    playerService.Save();
+            //    Console.WriteLine("Save successful");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine($"Save failed\n{e}");
+            //}
+            //try
+            //{
+            //    teamService.Save();
+            //    Console.WriteLine("Save successful");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine($"Save failed\n{e}");
+            //}
             
             //players = LoadPlayers();
             //AddAndSavePlayers();
@@ -59,44 +96,47 @@ namespace TestApplication
         public static List<Team> CreateTeamsWithPlayers(List<List<Player>> players)
         {
             List<Team> teams = new List<Team>();
-            for (int i = 1; i <= players.Count; i++)
+            for (int i = 0; i < players.Count; i++)
             {
-                Team team = TeamFactory.Create($"Team{i}", $"Arena-{i}", players[i].Select(p => p.Id));
-
-                foreach (Player player in players[i])
+                try
                 {
-                    player.TeamId = team.Id;
-                }
+                    Team team = TeamFactory.Create($"Team{i + 1}", $"Arena-{i + 1}", players[i].Select(p => p.Id));
 
-                teams.Add(team);
+                    foreach (Player player in players[i])
+                    {
+                        player.TeamId = team.Id;
+                    }
+
+                    teams.Add(team);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
 
             return teams;
         }
 
-        public static void PrintList(List<object> list)
+        public static void PrintPlayers(List<Player> listOfPlayers)
         {
-            foreach (var item in list)
+            foreach (Player player in listOfPlayers)
             {
-                if (item is Player)
-                {
-                    Player player = item as Player;
-                    Team playersTeam = teamService.GetBy(player.TeamId);
-                    string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
-                    StringBuilder playerBuilder = new StringBuilder();
-                    playerBuilder.AppendLine(player.FullName);
-                    playerBuilder.AppendLine(player.DateOfBirth.ToShortDateString());
-                    playerBuilder.AppendLine(teamName);
-                    playerBuilder.AppendLine($"Assists: {player.Assists.Count}");
-                    playerBuilder.AppendLine($"Goals: {player.Goals.Count}");
-                    playerBuilder.AppendLine($"Yellow cards: {player.YellowCards.Count}");
-                    playerBuilder.AppendLine($"Red cards: {player.RedCards.Count}");
-                    playerBuilder.AppendLine($"Matches played: {player.MatchesPlayed}");
-                    playerBuilder.AppendLine($"Status: {player.PlayerStatus.ToString()}");
-                    playerBuilder.AppendLine($"Playable: {player.Playable}");
-                    Console.WriteLine(playerBuilder.ToString());
-                    Console.WriteLine("----------------------------------------------------------");
-                }
+                Team playersTeam = teamService.GetBy(player.TeamId);
+                string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
+                StringBuilder playerBuilder = new StringBuilder();
+                playerBuilder.AppendLine($"Name: {player.FullName}");
+                playerBuilder.AppendLine($"Date of birth: {player.DateOfBirth.ToShortDateString()}");
+                playerBuilder.AppendLine($"Team: {teamName}");
+                playerBuilder.AppendLine($"Assists: {player.Assists.Count}");
+                playerBuilder.AppendLine($"Goals: {player.Goals.Count}");
+                playerBuilder.AppendLine($"Yellow cards: {player.YellowCards.Count}");
+                playerBuilder.AppendLine($"Red cards: {player.RedCards.Count}");
+                playerBuilder.AppendLine($"Matches played: {player.MatchesPlayed}");
+                playerBuilder.AppendLine($"Status: {player.PlayerStatus.ToString()}");
+                playerBuilder.AppendLine($"Playable: {player.Playable}");
+                Console.WriteLine(playerBuilder.ToString());
+                Console.WriteLine("----------------------------------------------------------");
             }
         }
 

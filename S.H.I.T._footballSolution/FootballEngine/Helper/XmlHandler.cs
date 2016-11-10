@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,22 +11,22 @@ namespace FootballEngine.Helper
 {
     public static class XmlHandler
     {
-        public static object LoadFrom(string filePath, Type listWithTypes)
+        public static object LoadFrom(string filePath, Type typeToLoad)
         {
             try
             {
                 object loadedObject;
                 using (Stream stream = File.Open(filePath, FileMode.Open))
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(listWithTypes);
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeToLoad);
                     loadedObject = xmlSerializer.Deserialize(stream);
                 }
 
                 return loadedObject;
             }
-            catch (Exception e)
+            catch (Exception innerException)
             {
-                throw new Exception($"Could not load {filePath}", e);
+                throw new Exception($"Could not load {filePath}", innerException);
             }
         }
 
@@ -33,7 +34,37 @@ namespace FootballEngine.Helper
         {
             try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(objectToSave.GetType());
+                Type typeToSave;
+
+                if (objectToSave.GetType() == typeof(List<Match>))
+                {
+                    objectToSave = objectToSave as List<Match>;
+                    typeToSave = objectToSave.GetType();
+                }
+
+                else if (objectToSave.GetType() == typeof(List<Player>))
+                {
+                    objectToSave = objectToSave as List<Player>;
+                    typeToSave = objectToSave.GetType();
+                }
+
+                else if (objectToSave.GetType() == typeof(List<Serie>))
+                {
+                    objectToSave = objectToSave as List<Serie>;
+                    typeToSave = objectToSave.GetType();
+                }
+
+                else if (objectToSave.GetType() == typeof(List<Team>))
+                {
+                    objectToSave = objectToSave as List<Team>;
+                    typeToSave = objectToSave.GetType();
+                }
+                else
+                {
+                    throw new Exception("Not a valid type to save");
+                }
+                
+                XmlSerializer xmlSerializer = new XmlSerializer(typeToSave);
                 using (Stream stream = File.Open(filePath, FileMode.Create))
                 {
                     xmlSerializer.Serialize(stream, objectToSave);

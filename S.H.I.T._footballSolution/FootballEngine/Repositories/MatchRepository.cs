@@ -87,71 +87,40 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", false, out path))
+            try
             {
-                try
+                if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", false, out path))
                 {
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Match>));
-                        matches = xmlSerializer.Deserialize(stream) as List<Match>;
-                    }
+                    matches = (List<Match>)XmlHandler.LoadFrom(path, typeof(List<Match>));
                 }
-                catch
+                else
                 {
-                    matches = new List<Match>();
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Matches.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch
+            {
+                matches = new List<Match>();
             }
         }
 
         public void Save()
         {
-            //string path;
-            //if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", true, out path))
-            //{
-            //    try
-            //    {
-            //        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Match>));
-            //        using (Stream stream = File.Open(path, FileMode.Open))
-            //        {
-            //            xmlSerializer.Serialize(stream, matches);
-            //        }
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        throw e;
-            //    }
-            //}
-
-            string path;
             try
             {
-                Exception e = null;
-
-                if (TryGetFilePath.InProjectDirectory($"{nameof(Match)}.xml", "Resources", true, out path))
+                string path;
+                if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", true, out path))
                 {
-
-                    try
-                    {
-                        XmlSerializer xmlSerializer = new XmlSerializer(matches.GetType());
-                        using (Stream stream = File.Open(path, FileMode.Create))
-                        {
-                            xmlSerializer.Serialize(stream, matches);
-                        }
-                    }
-                    catch (Exception f)
-                    {
-                        e = f;
-                    }
+                    XmlHandler.SaveTo(path, matches);
                 }
                 else
                 {
-                    throw new Exception("Could not save file", e);
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Matches.xml\", \"Resources\", false, out path) failed");
                 }
             }
-            catch (Exception e)
+            catch (Exception innerException)
             {
-                throw e;
+                throw new Exception("Could not save file", innerException);
             }
         }
     }
