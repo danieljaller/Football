@@ -48,10 +48,12 @@
     <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
-    <Compile Include="Helper\LoadAndSaveToXml.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
+<<<<<<< HEAD
     <Compile Include="Helper\SerieAndMatchGenerator.cs" />
+=======
     <Compile Include="Helper\StringUtil.cs" />
+>>>>>>> master
     <Compile Include="Helper\TryGetFilePath.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IService.cs" />
