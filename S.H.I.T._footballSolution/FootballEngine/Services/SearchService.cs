@@ -45,10 +45,9 @@ namespace FootballEngine.Services
             if (serieSearch)
             {
                 IEnumerable<object> serieResult = serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
-                                                        s.TeamTable.Join(teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase)),
-                                                                        a => a,
-                                                                        b => b.Id,
-                                                                        (a, b) => new { a }).Count() > 0
+                                                        
+                                                        teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
+                                                            .Any(t => t.SeriesIds.Contains(s.Id))
                                                         );
                 result = result.Concat(serieResult);
             }
