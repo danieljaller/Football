@@ -10,9 +10,7 @@ namespace FootballEngine.Domain.Entities
     public class Team
     {
         public Team()
-        {
-
-        }
+        { }
         public Team(GeneralName name, GeneralName homeArena)
         {
             Id = Guid.NewGuid();
@@ -38,7 +36,7 @@ namespace FootballEngine.Domain.Entities
         public List<Guid> PlayerIds { get; set; }
         public List<Guid> MatchIds { get; set; }
         public List<Guid> SeriesIds { get; set; }
-        public int GoalDifferens { get; set; }
+        public int GoalDifference { get; set; }
     }
 }
 
