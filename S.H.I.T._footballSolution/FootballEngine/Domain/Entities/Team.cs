@@ -18,6 +18,9 @@ namespace FootballEngine.Domain.Entities
             Id = Guid.NewGuid();
             Name = name;
             HomeArena = homeArena;
+            PlayerIds = new List<Guid>();
+            MatchIds = new List<Guid>();
+            SeriesIds = new List<Guid>();
         }
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }
@@ -34,7 +37,7 @@ namespace FootballEngine.Domain.Entities
         }
         public List<Guid> PlayerIds { get; set; }
         public List<Guid> MatchIds { get; set; }
-
+        public List<Guid> SeriesIds { get; set; }
         public int GoalDifferens { get; set; }
     }
 }
