@@ -20,6 +20,7 @@ namespace FootballEngine.Domain.Entities
             HomeArena = homeArena;
             PlayerIds = new List<Guid>();
             MatchIds = new List<Guid>();
+            SeriesIds = new List<Guid>();
             Wins = 0;
             Losses = 0;
             Ties = 0;
@@ -40,7 +41,7 @@ namespace FootballEngine.Domain.Entities
         }
         public List<Guid> PlayerIds { get; set; }
         public List<Guid> MatchIds { get; set; }
-
+        public List<Guid> SeriesIds { get; set; }
         public int GoalDifferens { get; set; }
     }
 }
