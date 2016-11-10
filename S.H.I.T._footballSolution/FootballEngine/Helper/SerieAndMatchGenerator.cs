@@ -15,13 +15,13 @@ namespace FootballEngine.Helper
         private DateTime date;
         private Match match;
         private DateTime latestDate;
-        public List<Match> matches;
+        public List<Guid> matches;
         
 
-        public List<Match> SerieGenerator(List<Guid> teams, DateTime startDate)
+        public List<Guid> SerieGenerator(List<Guid> teams, DateTime startDate)
         {
             latestDate = startDate.AddDays(-1);
-            matches = new List<Match>();
+            matches = new List<Guid>();
 
             for (int i = 0; i < 2*(teams.Count - 1); i++)
             {
@@ -61,7 +61,7 @@ namespace FootballEngine.Helper
 
                 match = new Match(date, pairing[0], pairing[1]);
                 matchService.Add(match);
-                matches.Add(match);
+                matches.Add(match.Id);
             }
         }
 
