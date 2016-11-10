@@ -12,35 +12,48 @@ namespace FootballEngine.Helper
     {
         private MatchService matchService = new MatchService();
 
-        public List<Guid> SerieGenerator(List<Guid> teams)
+        public List<Match> SerieGenerator(List<Guid> teams)
         {
             int numberOfRounds = (teams.Count - 1) * 2;
             Guid[] pairing;
-            DateTime lastDate = DateTime.Today;
-            //var round = new List<Guid[]>();
+            DateTime date;
             DateTime lastDate = DateTime.Today;
             var matches = new List<Match>();
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 2 * (teams.Count - 1); i++)
             {
                 for (int j = 0; j < teams.Count / 2; j++)
                 {
                     pairing = new Guid[2];
-                    if (i * 2 > teams.Count)
-                    {
-                        pairing[0] = teams[j];
-                        pairing[1] = teams[teams.Count - 1 - j];
-                    }
-                    else
+                    if (i < teams.Count / 2)
                     {
                         pairing[1] = teams[j];
                         pairing[0] = teams[teams.Count - 1 - j];
                     }
+                    else
+                    {
+                        pairing[0] = teams[j];
+                        pairing[1] = teams[teams.Count - 1 - j];
+                    }
 
-                    DateGenerator(j, teams, lastDate);
+                    if (j == teams.Count / 4 || j == 0)
+                    {
+                        lastDate = lastDate.AddDays(1);
+                    }
+
+                    if (lastDate.DayOfWeek != DayOfWeek.Saturday && lastDate.DayOfWeek != DayOfWeek.Sunday)
+                    {
+                        lastDate = lastDate.AddDays((int)DayOfWeek.Saturday - (int)DateTime.Today.DayOfWeek);
+                    }
+
+                    date = lastDate;
+
                     Match match = new Match(date, pairing[0], pairing[1]);
+                    matchService.Add(match);
                     matches.Add(match);
                 }
+
+
                 var tempTeams = new List<Guid>();
                 for (int j = 0; j < teams.Count; j++)
                 {
@@ -59,28 +72,8 @@ namespace FootballEngine.Helper
                 }
                 teams = tempTeams;
             }
-
-            private DateTime DateGenerator(int j, List<Guid> teams, out DateTime lastDate) { 
-                DateTime date;
-                if (j == teams.Count/4 || j==0)
-                { 
-                    lastDate = lastDate.AddDays(1);
-                }
-
-                if (lastDate.DayOfWeek != DayOfWeek.Saturday && lastDate.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    lastDate = lastDate.AddDays((int)DayOfWeek.Saturday - (int)DateTime.Today.DayOfWeek);
-                }
-
-                date = lastDate;
-
-                matchService.Add(match);
-                matches.Add(match.Id);
-            }
-
             return matches;
         }
-
-        
     }
 }
+
