@@ -87,40 +87,40 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", false, out path))
+            try
             {
-                try
+                if (TryGetFilePath.InProjectDirectory("Players.xml", "Resources", false, out path))
                 {
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
-                        players = xmlSerializer.Deserialize(stream) as List<Player>;
-                    }
+                    players = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
                 }
-                catch
+                else
                 {
-                    players = new List<Player>();
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Players.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch
+            {
+                players = new List<Player>();
             }
         }
 
         public void Save()
         {
-            string path;
-            if (TryGetFilePath.InProjectDirectory("Players.xml", "Resorces", true, out path))
+            try
             {
-                try
+                string path;
+                if (TryGetFilePath.InProjectDirectory("Players.xml", "Resources", true, out path))
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Player>));
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        xmlSerializer.Serialize(stream, players);
-                    }
+                    XmlHandler.SaveTo(path, players);
                 }
-                catch (Exception e)
+                else
                 {
-                    throw e;
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Players.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch (Exception innerException)
+            {
+                throw new Exception("Could not save file", innerException);
             }
         }
     }

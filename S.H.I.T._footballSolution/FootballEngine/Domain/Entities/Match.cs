@@ -1,5 +1,4 @@
 ﻿using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +9,12 @@ namespace FootballEngine.Domain.Entities
 {
     public class Match
     {
-        private TeamService teamService = new TeamService();
         public Guid Id { get; set; }
-        public GeneralName Location
-        {
-            get { return teamService.GetBy(HomeTeamId).HomeArena; }
-        }
+        public GeneralName Location { get; }
         public Guid HomeTeamId { get; set; }
         public Guid VisitorTeamId { get; set; }
         public DateTime Date { get; set; }
         public uint MatchTimeInMinutes { get; set; }
-       
         public MatchGoals HomeGoals { get; set; }
         public MatchGoals VisitorGoals { get; set; }
         public List<Guid> HomeLineup { get; set; }
@@ -37,6 +31,7 @@ namespace FootballEngine.Domain.Entities
         {
             Id = Guid.NewGuid();
             Date = date;
+            MatchTimeInMinutes = 0;
             HomeTeamId = homeTeamId;
             VisitorTeamId = visitorTeamId;            
             HomeGoals = new MatchGoals(0);
@@ -49,6 +44,7 @@ namespace FootballEngine.Domain.Entities
             Goals = new List<Event>();
             Injuries = new List<Event>();
         }
+        //To do: calculate Location
 
         public string GetMatchResultAsString()
         {

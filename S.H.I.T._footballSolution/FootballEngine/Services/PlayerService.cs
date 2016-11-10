@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class PlayerService : IService<Player>
+  public  class PlayerService : IService<Player>
     {
         private readonly PlayerRepository _playerRepository = PlayerRepository.Instance;
         public void Add(Player player)
@@ -35,6 +35,11 @@ namespace FootballEngine.Services
         public Player GetBy(Guid id)
         {
             return _playerRepository.GetBy(id);
+        }
+
+        public void Save()
+        {
+            _playerRepository.Save();
         }
     }
 }

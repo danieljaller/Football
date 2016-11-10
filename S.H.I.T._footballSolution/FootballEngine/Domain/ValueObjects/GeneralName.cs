@@ -47,9 +47,13 @@ namespace FootballEngine.Domain.ValueObjects
                 {
                     foreach (char character in name)
                     {
-                        if (!char.IsLetterOrDigit(character) || character != '-' || character != ' ')
+                        if (char.IsLetterOrDigit(character) || character == '-' || character == ' ')
                         {
-                            return false;
+                            continue;
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                 }
