@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="400"
       Title="CreateOrAdministrateTeamsPage">
 
-    <Grid>
+    <Grid Background="White">
         <TextBlock Text="Skapa/Administrera lag" FontSize="20"/>
     </Grid>
 </Page>
