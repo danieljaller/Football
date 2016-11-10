@@ -1,8 +1,9 @@
 # Tmp ignores
-Matches.xml
-Players.xml
-Series.xml
-Teams.xml
+Resources/
+#Matches.xml
+#Players.xml
+#Series.xml
+#Teams.xml
 
 #ignore thumbnails created by windows
 Thumbs.db
