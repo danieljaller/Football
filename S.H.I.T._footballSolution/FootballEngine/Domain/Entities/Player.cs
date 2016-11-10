@@ -63,6 +63,7 @@ namespace FootballEngine.Domain.Entities
             YellowCards = new List<Guid>();
             Assists = new List<Guid>();
             Goals = new List<Guid>();
+            PlayerStatus = Status.Available;
     }
 
         private bool PlayableCheck()
