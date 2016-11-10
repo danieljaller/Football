@@ -12,6 +12,7 @@ namespace FootballEngine.Services
     class TeamService : IService<Team>
     {
         private readonly TeamRepository _teamRepository = TeamRepository.Instance;
+        PlayerService playerService = new PlayerService();
 
         public void Add(Team team)
         {
@@ -20,7 +21,16 @@ namespace FootballEngine.Services
 
         public void Delete(Guid id)
         {
+            foreach(var player in GetAllPlayers(id))
+            {
+                playerService.Delete(player.Id);
+            }
             _teamRepository.Delete(id);
+        }
+
+        public IEnumerable<Player> GetAllPlayers(Guid id)
+        {
+            return playerService.GetAll().Where(p => p.TeamId == id);
         }
 
         public IEnumerable<Team> GetAll()
