@@ -87,40 +87,40 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Series.xml", "Resorces", false, out path))
+            try
             {
-                try
+                if (TryGetFilePath.InProjectDirectory("Series.xml", "Resources", false, out path))
                 {
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Serie>));
-                        series = xmlSerializer.Deserialize(stream) as List<Serie>;
-                    }
+                    series = (List<Serie>)XmlHandler.LoadFrom(path, typeof(List<Serie>));
                 }
-                catch
+                else
                 {
-                    series = new List<Serie>();
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Series.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch
+            {
+                series = new List<Serie>();
             }
         }
 
         public void Save()
         {
-            string path;
-            if (TryGetFilePath.InProjectDirectory("Series.xml", "Resorces", true, out path))
+            try
             {
-                try
+                string path;
+                if (TryGetFilePath.InProjectDirectory("Series.xml", "Resources", true, out path))
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Serie>));
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        xmlSerializer.Serialize(stream, series);
-                    }
+                    XmlHandler.SaveTo(path, series);
                 }
-                catch (Exception e)
+                else
                 {
-                    throw e;
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Series.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch (Exception innerException)
+            {
+                throw new Exception("Could not save file", innerException);
             }
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class SearchService
+    public class SearchService
     {
         public IEnumerable<object> Search(string searchText, bool ignoreCase, bool playerSearch, bool teamSearch, bool serieSearch)
         {
@@ -45,9 +45,10 @@ namespace FootballEngine.Services
             if (serieSearch)
             {
                 IEnumerable<object> serieResult = serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
-                                                        
-                                                        teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
-                                                            .Any(t => t.SeriesIds.Contains(s.Id))
+                                                        s.TeamTable.Join(teamRepository.GetAll(),
+                                                                        a => a,
+                                                                        b => b.Id,
+                                                                        (a, b) => new { a }).Count() > 0
                                                         );
                 result = result.Concat(serieResult);
             }
