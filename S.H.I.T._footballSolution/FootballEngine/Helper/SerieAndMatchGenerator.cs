@@ -14,13 +14,13 @@ namespace FootballEngine.Helper
         private Guid[] pairing;
         private DateTime date;
         private Match match;
-        private DateTime lastDate;
+        private DateTime latestDate;
         public List<Match> matches;
         
 
         public List<Match> SerieGenerator(List<Guid> teams, DateTime startDate)
         {
-            lastDate = startDate.AddDays(-1);
+            latestDate = startDate.AddDays(-1);
             matches = new List<Match>();
 
             for (int i = 0; i < 2*(teams.Count - 1); i++)
@@ -49,15 +49,15 @@ namespace FootballEngine.Helper
 
                 if (j == teams.Count / 4 || j == 0)
                 {
-                    lastDate = lastDate.AddDays(1);
+                    latestDate = latestDate.AddDays(1);
                 }
 
-                if (lastDate.DayOfWeek != DayOfWeek.Saturday && lastDate.DayOfWeek != DayOfWeek.Sunday)
+                if (latestDate.DayOfWeek != DayOfWeek.Saturday && latestDate.DayOfWeek != DayOfWeek.Sunday)
                 {
-                    lastDate = lastDate.AddDays((int)DayOfWeek.Saturday - (int)lastDate.DayOfWeek);
+                    latestDate = latestDate.AddDays((int)DayOfWeek.Saturday - (int)latestDate.DayOfWeek);
                 }
 
-                date = lastDate;
+                date = latestDate;
 
                 match = new Match(date, pairing[0], pairing[1]);
                 matchService.Add(match);
