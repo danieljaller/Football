@@ -38,7 +38,7 @@ namespace FootballEngine.Repositories
         {
             if (teams != null && team != null)
             {
-                if (!teams.Select(t => t.Id).Contains(team.Id))
+                if (!teams.Select(t => t.Id).Contains(team.Id) || !teams.Select(t => t.Name).Contains(team.Name))
                 {
                     teams.Add(team);
                 }
