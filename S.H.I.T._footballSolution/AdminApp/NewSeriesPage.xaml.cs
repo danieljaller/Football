@@ -33,7 +33,7 @@ namespace AdminApp
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
         {
             
-            this.NavigationService.Navigate(new Uri("CreateOrAdministrateTeamsPage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("NewTeamPage.xaml", UriKind.Relative));
         }
 
         private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)

@@ -24,5 +24,25 @@ namespace AdminApp
         {
             InitializeComponent();
         }
+
+        private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NewTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreateTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -32,7 +32,8 @@ namespace AdminApp
 
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateOrAdministrateTeamsPageFrame.Content = new NewTeamPage();
+            teamsOverview.Visibility = Visibility.Collapsed;
         }
     }
 }
