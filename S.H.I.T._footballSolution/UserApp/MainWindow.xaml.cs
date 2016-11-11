@@ -56,7 +56,7 @@ namespace UserApp
 
         private void doesSomething_Click(object sender, RoutedEventArgs e)
         {
-            MainPageFrame.Content = new SeriePage();
+            MainPageFrame.Content = new TeamPage();
         }
     }
 }
