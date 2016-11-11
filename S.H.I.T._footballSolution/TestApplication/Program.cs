@@ -23,7 +23,7 @@ namespace TestApplication
         private static SerieService serieService;
         private static TeamService teamService;
         private static PlayerService playerService;
-        
+
         private static readonly string directoryName = "Resources";
         private static readonly string matchesFileName = "Matches.xml";
         private static readonly string playerFileName = "Players.xml";
@@ -31,13 +31,13 @@ namespace TestApplication
         private static readonly string teamFileName = "Teams.xml";
         private bool stopRuuning;
 
-        
-        
+
+
 
         public Program()
         {
-            
-          
+
+
         }
         static void Main(string[] args)
         {
@@ -59,15 +59,27 @@ namespace TestApplication
                 {
                     case ConsoleKey.D1:
                         PrintPlayers(playerService.GetAll().ToList());
-                        
+
                         break;
 
                     case ConsoleKey.D2:
                         PrintTeams(teamService.GetAll().ToList());
-                        break; 
+                        break;
 
                     case ConsoleKey.Q:
                         keepRunning = false;
+                        break;
+
+                    case ConsoleKey.D3:
+                        PrintSerie(serieService.GetAll().ToList());
+                        break;
+
+                    case ConsoleKey.D4:
+                        PrintMatches(matchService.GetAll().ToList());
+                        break;
+
+                    case ConsoleKey.D5:
+                        FreeSearch();
                         break;
 
 
@@ -77,11 +89,11 @@ namespace TestApplication
 
 
 
-            
+
         }
         public static void CreateTestData()
         {
-           
+
             List<List<Player>> listOfPlayerLists = new List<List<Player>>();
             for (int i = 0; i < 16; i++)
             {
@@ -103,7 +115,7 @@ namespace TestApplication
             }
             foreach (Team team in teamList)
             {
-               
+
                 teamService.Add(team);
             }
 
@@ -127,7 +139,7 @@ namespace TestApplication
             }
         }
 
-          
+
 
         public static List<Player> CreatePlayerList()
         {
@@ -207,26 +219,80 @@ namespace TestApplication
             }
         }
 
+        private static void PrintSerie(List<Serie> serieList)
+        {
 
-      
+            foreach (var serie in serieList)
+            {
+
+                StringBuilder playerBuilder = new StringBuilder();
+                playerBuilder.AppendLine($"Name: {serie.Name.Value}");
+                playerBuilder.AppendLine($"Number of teams: {serie.TeamTable.Count}");
+                playerBuilder.AppendLine($"Matches: {serie.MatchTable}");
+
+                Console.WriteLine(playerBuilder.ToString());
+                Console.WriteLine("----------------------------------------------------------");
+            }
+        }
+
+        private static void PrintMatches(List<Match> matchList)
+        {
+            foreach (var match  in matchList)
+            {
+
+            StringBuilder playerBuilder = new StringBuilder();
+            playerBuilder.AppendLine($"Location:{match.Location.Value}  ");
+            playerBuilder.AppendLine($"Date:{match.Date.Date.ToString()} ");
+            playerBuilder.AppendLine($"Points:{match.Goals.Count} ");
+            Console.WriteLine(playerBuilder.ToString());
+            Console.WriteLine("----------------------------------------------------------");
+            }
+
+        }
+
+        private static void FreeSearch()
+        {
+            Console.Write("Enter text:");
+            string userInput = Console.ReadLine();
+
+            var searchResult = searchService.Search(userInput, true, true, true, false);
+
+            foreach (var item in searchResult)
+            {
+                if(item.GetType()== typeof(Team))
+                {
+                    var team = item as Team;
+                    Console.WriteLine(team.Name.Value);
+                }
+
+                if (item.GetType() == typeof(Player))
+                {
+                    var player = item as Player;
+                    Console.WriteLine(player.FullName, player.DateOfBirth.ToString());
+                }
+            }
+        }
+
+
+
 
         private static void PrintMenu()
         {
             Console.WriteLine();
-            Console.WriteLine("+-----------------------------------------------------------------+");
-            Console.WriteLine("|   [1] Print Players         [3] Print Series                    |");
-            Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit  |");
-            Console.WriteLine("+-----------------------------------------------------------------+");
+            Console.WriteLine("+-----------------------------------------------------------------------+");
+            Console.WriteLine("|   [1] Print Players         [3] Print Series          [5] FreeSearch  |");
+            Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit        |");
+            Console.WriteLine("+-----------------------------------------------------------------------+");
             Console.WriteLine();
         }
-      
+
     }
 }
 
 
-     
 
-      
 
-     
+
+
+
 
