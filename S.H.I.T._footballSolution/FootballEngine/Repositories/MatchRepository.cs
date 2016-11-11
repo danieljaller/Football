@@ -115,7 +115,7 @@ namespace FootballEngine.Repositories
                 }
                 else
                 {
-                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Matches.xml\", \"Resources\", false, out path) failed");
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Matches.xml\", \"Resources\", true, out path) failed");
                 }
             }
             catch (Exception innerException)
