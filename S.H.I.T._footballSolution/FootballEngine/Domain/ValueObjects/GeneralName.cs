@@ -52,7 +52,7 @@ namespace FootballEngine.Domain.ValueObjects
                         }
                         else
                         {
-                            throw new Exception("Name contains illegal characters. Can only contain A-Ö, a-ö, \"-\" and blankspace");
+                            throw new Exception("Name contains illegal characters. Can only contain letters, digits, \"-\" and white spaces");
                         }
                     }
                 }
