@@ -20,7 +20,6 @@ namespace FootballEngine.Domain.Entities
         public Guid VisitorTeamId { get; set; }
         public DateTime Date { get; set; }
         public uint MatchTimeInMinutes { get; set; }
-       
         public MatchGoals HomeGoals { get; set; }
         public MatchGoals VisitorGoals { get; set; }
         public List<Guid> HomeLineup { get; set; }
@@ -37,6 +36,7 @@ namespace FootballEngine.Domain.Entities
         {
             Id = Guid.NewGuid();
             Date = date;
+            MatchTimeInMinutes = 0;
             HomeTeamId = homeTeamId;
             VisitorTeamId = visitorTeamId;            
             HomeGoals = new MatchGoals(0);
