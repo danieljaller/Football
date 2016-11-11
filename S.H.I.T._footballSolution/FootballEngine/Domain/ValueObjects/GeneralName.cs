@@ -8,6 +8,11 @@ namespace FootballEngine.Domain.ValueObjects
 {
     public class GeneralName
     {
+        public string Value { get; set; }
+        public static int MaxLenght
+        {
+            get { return 25; }
+        }
         public GeneralName()
         {
 
@@ -16,20 +21,14 @@ namespace FootballEngine.Domain.ValueObjects
         {
             if (IsValidName(name))
             {
-                //_value = name;
                 Value = name;
             }
             else
             {
-                throw new Exception("Invalid Name");
+                throw new Exception("Invalid Name.");
             }
-        }
-        public string Value { get; set; }
-        //private string _value;
-        //public string Value
-        //{
-        //    get { return _value; }
-        //}
+        }   
+        
         public static bool IsValidName(string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -53,9 +52,13 @@ namespace FootballEngine.Domain.ValueObjects
                         }
                         else
                         {
-                            break;
+                            throw new Exception("Name contains illegal characters. Can only contain A-Ö, a-ö, \"-\" and blankspace");
                         }
                     }
+                }
+                else
+                {
+                    throw new Exception("Name is too long. Enter 1-25 characters.");
                 }
             }
             return true;
@@ -73,14 +76,9 @@ namespace FootballEngine.Domain.ValueObjects
                 return false;
             }
         }
-
-        public static int MaxLenght
+        public override string ToString()
         {
-            get { return 25; }
-        }
-        public static string AcceptedChars
-        {
-            get { return "Endast bokstäver och siffror"; }
+            return Value;
         }
     }
 }
