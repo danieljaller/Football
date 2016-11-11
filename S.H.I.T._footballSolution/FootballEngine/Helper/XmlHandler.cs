@@ -70,9 +70,9 @@ namespace FootballEngine.Helper
                     xmlSerializer.Serialize(stream, objectToSave);
                 }
             }
-            catch (Exception e)
+            catch (Exception innerException)
             {
-                throw new Exception("Could not save file", e);
+                throw new Exception("XML-serialization failed", innerException);
             }
         }
     }
