@@ -13,5 +13,7 @@ namespace FootballEngine.Interfaces
         IEnumerable<T> GetAll();
         T GetBy(Guid id);
         T GetBy(string name);
+
+        void Save();
     }
 }

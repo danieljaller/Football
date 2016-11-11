@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class SerieService : IService<Serie>
+    public class SerieService : IService<Serie>
     {
         private readonly SerieRepository _serieRepository = SerieRepository.Instance;
 
@@ -36,6 +36,11 @@ namespace FootballEngine.Services
         public Serie GetBy(Guid id)
         {
             return _serieRepository.GetBy(id);
+        }
+
+        public void Save()
+        {
+            _serieRepository.Save();
         }
     }
 }

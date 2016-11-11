@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-    class MatchService : IService<Match>
+    public class MatchService : IService<Match>
     {
         private readonly MatchRepository _matchRepository = MatchRepository.Instance;
         public void Add(Match match)
@@ -35,6 +35,11 @@ namespace FootballEngine.Services
         public Match GetBy(Guid id)
         {
             return _matchRepository.GetBy(id);
+        }
+
+        public void Save()
+        {
+            _matchRepository.Save();
         }
     }
 }

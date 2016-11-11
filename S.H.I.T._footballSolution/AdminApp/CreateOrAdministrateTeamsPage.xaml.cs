@@ -23,6 +23,16 @@ namespace AdminApp
         public CreateOrAdministrateTeamsPage()
         {
             InitializeComponent();
+            List<string> teamsListC = new List<string> { "Lag1", "Lag2", "Lag3", "Lag4", "Lag5", "Lag6",
+                                                         "Lag7", "Lag8", "Lag9", "Lag10", "Lag11", "Lag12",
+                                                         "Lag13", "Lag14", "Lag15", "Lag16", "Lag17", "Lag18",
+                                                         "Lag19", "Lag20"};
+            teamsList.ItemsSource = teamsListC;
+        }
+
+        private void NewTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

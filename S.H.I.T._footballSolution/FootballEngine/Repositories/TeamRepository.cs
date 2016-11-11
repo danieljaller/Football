@@ -38,7 +38,7 @@ namespace FootballEngine.Repositories
         {
             if (teams != null && team != null)
             {
-                if (!teams.Select(t => t.Id).Contains(team.Id))
+                if (!teams.Select(t => t.Id).Contains(team.Id) || !teams.Select(t => t.Name).Contains(team.Name))
                 {
                     teams.Add(team);
                 }
@@ -86,40 +86,40 @@ namespace FootballEngine.Repositories
         public void Load()
         {
             string path;
-            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", false, out path))
+            try
             {
-                try
+                if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", false, out path))
                 {
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Team>));
-                        teams = xmlSerializer.Deserialize(stream) as List<Team>;
-                    }
+                    teams = (List<Team>)XmlHandler.LoadFrom(path, typeof(List<Team>));
                 }
-                catch
+                else
                 {
-                    teams = new List<Team>();
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Teams.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch
+            {
+                teams = new List<Team>();
             }
         }
 
         public void Save()
         {
-            string path;
-            if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", true, out path))
+            try
             {
-                try
+                string path;
+                if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", true, out path))
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Team>));
-                    using (Stream stream = File.Open(path, FileMode.Open))
-                    {
-                        xmlSerializer.Serialize(stream, teams);
-                    }
+                    XmlHandler.SaveTo(path, teams);
                 }
-                catch (Exception e)
+                else
                 {
-                    throw e;
+                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Teams.xml\", \"Resources\", false, out path) failed");
                 }
+            }
+            catch (Exception innerException)
+            {
+                throw new Exception("Could not save file", innerException);
             }
         }
     }

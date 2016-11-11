@@ -38,6 +38,12 @@ namespace FootballEngine.Domain.ValueObjects
             return Regex.IsMatch(name, @"\A[a-zA-Z´¨åäöÅÄÖ]+\s?-?[a-zA-Z´¨åäöÅÄÖ]*\z", RegexOptions.IgnoreCase);
         }
         public string Value { get; set; }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
+
 }
 

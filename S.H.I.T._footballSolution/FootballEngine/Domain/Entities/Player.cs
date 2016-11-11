@@ -58,7 +58,12 @@ namespace FootballEngine.Domain.Entities
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
+            PlayerStatus = Status.Available;
             MatchesPlayedIds = new List<Guid>();
+            YellowCards = new List<Guid>();
+            RedCards = new List<Guid>();
+            Assists = new List<Guid>();
+            Goals = new List<Guid>();
         }
 
         private bool PlayableCheck()
