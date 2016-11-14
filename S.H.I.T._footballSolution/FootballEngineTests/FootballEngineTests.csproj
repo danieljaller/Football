@@ -51,6 +51,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Domain\Entities\MatchTests.cs" />
+    <Compile Include="Domain\Entities\PlayerTests.cs" />
+    <Compile Include="Domain\Entities\SerieTests.cs" />
+    <Compile Include="Domain\Entities\TeamTests.cs" />
+    <Compile Include="Domain\ValueObjects\EventTests.cs" />
+    <Compile Include="Domain\ValueObjects\GeneralNameTests.cs" />
+    <Compile Include="Domain\ValueObjects\MatchGoalsTests.cs" />
+    <Compile Include="Domain\ValueObjects\PlayerNameTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

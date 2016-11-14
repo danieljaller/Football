@@ -48,6 +48,7 @@
     <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
+    <Compile Include="Exceptions\InvalidNameException.cs" />
     <Compile Include="Helper\XmlHandler.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
     <Compile Include="Helper\SerieAndMatchGenerator.cs" />
@@ -67,7 +68,7 @@
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resorces\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
