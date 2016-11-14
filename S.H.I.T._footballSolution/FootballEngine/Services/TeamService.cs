@@ -21,14 +21,14 @@ namespace FootballEngine.Services
 
         public void Delete(Guid id)
         {
-            foreach (var player in GetAllPlayers(id))
+            foreach (var player in GetAllPlayersBy(id))
             {
                 playerService.Delete(player.Id);
             }
             _teamRepository.Delete(id);
         }
 
-        public IEnumerable<Player> GetAllPlayers(Guid id)
+        public IEnumerable<Player> GetAllPlayersBy(Guid id)
         {
             return playerService.GetAll().Where(p => p.TeamId == id);
         }

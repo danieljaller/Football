@@ -28,6 +28,7 @@ namespace AdminApp
                                                          "Lag13", "Lag14", "Lag15", "Lag16", "Lag17", "Lag18",
                                                          "Lag19", "Lag20"};
             teamsList.ItemsSource = teamsListC;
+            serieDatePicker.BlackoutDates.AddDatesInPast();
         }
 
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
