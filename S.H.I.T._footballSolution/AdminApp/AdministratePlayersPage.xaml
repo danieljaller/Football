@@ -28,7 +28,8 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>        
+        </ListBox>
+        <Button Grid.Column="0" Grid.Row="2" Content="Radera Spelare"></Button>
 
         <Frame x:Name="AdministratePlayersPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" />
 
