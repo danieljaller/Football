@@ -28,12 +28,13 @@ namespace AdminApp
                                                          "Lag13", "Lag14", "Lag15", "Lag16", "Lag17", "Lag18",
                                                          "Lag19", "Lag20"};
             teamsList.ItemsSource = teamsListC;
+            serieDatePicker.BlackoutDates.AddDatesInPast();
         }
 
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
         {
             
-            this.NavigationService.Navigate(new Uri("CreateOrAdministrateTeamsPage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("NewTeamPage.xaml", UriKind.Relative));
         }
 
         private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)
@@ -51,9 +52,13 @@ namespace AdminApp
             var team = ((CheckBox)sender).Content;
             tList.Add(team.ToString());
             teamsCheckedList.ItemsSource = tList;
-            if (tList.Count >= 16)
+            if (tList.Count == 16)
             {
                 CreateMatchScheduleButton.IsEnabled = true;
+            }
+            if(tList.Count > 16)
+            {
+                CreateMatchScheduleButton.IsEnabled = false;
             }
             teamsCheckedList.Items.Refresh();
         }
@@ -66,6 +71,10 @@ namespace AdminApp
             if (tList.Count < 16)
             {
                 CreateMatchScheduleButton.IsEnabled = false;
+            }
+            if(tList.Count == 16)
+            {
+                CreateMatchScheduleButton.IsEnabled = true;
             }
             teamsCheckedList.Items.Refresh();
         }
