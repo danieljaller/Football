@@ -52,9 +52,13 @@ namespace AdminApp
             var team = ((CheckBox)sender).Content;
             tList.Add(team.ToString());
             teamsCheckedList.ItemsSource = tList;
-            if (tList.Count >= 16)
+            if (tList.Count == 16)
             {
                 CreateMatchScheduleButton.IsEnabled = true;
+            }
+            if(tList.Count > 16)
+            {
+                CreateMatchScheduleButton.IsEnabled = false;
             }
             teamsCheckedList.Items.Refresh();
         }
@@ -67,6 +71,10 @@ namespace AdminApp
             if (tList.Count < 16)
             {
                 CreateMatchScheduleButton.IsEnabled = false;
+            }
+            if(tList.Count == 16)
+            {
+                CreateMatchScheduleButton.IsEnabled = true;
             }
             teamsCheckedList.Items.Refresh();
         }
