@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UserApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SchedulePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SchedulePage : Page
     {
-        public MainWindow()
+        public SchedulePage()
         {
             InitializeComponent();
         }
