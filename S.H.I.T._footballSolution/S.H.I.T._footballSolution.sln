@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballEngine", "FootballE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminApp", "AdminApp\AdminApp.csproj", "{306F9604-82B0-49E2-A086-B1BEC3D95EE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{D3B2EE71-9597-44B6-BA14-98E653000837}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{306F9604-82B0-49E2-A086-B1BEC3D95EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{306F9604-82B0-49E2-A086-B1BEC3D95EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{306F9604-82B0-49E2-A086-B1BEC3D95EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3B2EE71-9597-44B6-BA14-98E653000837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3B2EE71-9597-44B6-BA14-98E653000837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3B2EE71-9597-44B6-BA14-98E653000837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3B2EE71-9597-44B6-BA14-98E653000837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
