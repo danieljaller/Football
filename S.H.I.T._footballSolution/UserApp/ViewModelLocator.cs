@@ -8,7 +8,7 @@ using UserApp.ViewModels;
 
 namespace UserApp
 {
-    class ViewModelLocator
+    public class ViewModelLocator
     {
         private static MatchService matchService = new MatchService();
         private static PlayerService playerService = new PlayerService();
@@ -19,8 +19,8 @@ namespace UserApp
         private static PlayerViewModel _playerViewModel = new PlayerViewModel();
         private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel(teamService);
 
-        public static PlayerInfoViewModel PlayerInfoViewModle { get { return _playerInfoViewModel; } }
-        public static PlayerViewModel PlayerViewModel { get { return _playerViewModel; } }
-        public static SinglePlayerViewModel SinglePlayerViewModel { get { return _singlePlayerViewModel; } }
+        static PlayerInfoViewModel PlayerInfoViewModle { get { return _playerInfoViewModel; } }
+        static PlayerViewModel PlayerViewModel { get { return _playerViewModel; } }
+        static SinglePlayerViewModel SinglePlayerViewModel { get { return _singlePlayerViewModel; } }
     }
 }

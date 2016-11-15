@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="InformationHolders\ObjectHolder.cs" />
+    <Compile Include="Utilities\CustomCommand.cs" />
     <Compile Include="Utilities\Messenger.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\PlayerInfoViewModel.cs" />
@@ -66,6 +67,9 @@
     </Compile>
     <Compile Include="Views\PlayerInfoPage.xaml.cs">
       <DependentUpon>PlayerInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerInfoView.xaml.cs">
+      <DependentUpon>PlayerInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlayerPage.xaml.cs">
       <DependentUpon>PlayerPage.xaml</DependentUpon>
@@ -105,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlayerInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayerInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

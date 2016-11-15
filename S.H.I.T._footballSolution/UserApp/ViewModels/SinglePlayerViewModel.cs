@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using UserApp.InformationHolders;
 using UserApp.Utilities;
 
@@ -28,6 +30,12 @@ namespace UserApp.ViewModels
             return true;
         }
 
+        public ICommand ViewPlayerInfoCommand { get; set; }
+        public ICommand ViewPlayersTeamInfoCommand { get; set; }
+
+        public Visibility ViewPlayerInfoVisibility { get; set; }
+        public Visibility ViewPlayersTeamInfoVisibility { get; set; }
+
         private TeamService teamService;
 
         private Player _selectedPlayer;
@@ -47,11 +55,51 @@ namespace UserApp.ViewModels
         public SinglePlayerViewModel(TeamService teamService)
         {
             this.teamService = teamService;
+
+            LoadCommands();
+
             Messenger.Default.Register<ObjectHolder<Player, Team>>(this, OnObjectHolderRecived);
+        }
+
+        private void LoadCommands()
+        {
+            ViewPlayerInfoCommand = new CustomCommand(ViewPlayerInfo, CanViewPlayerInfo);
+            ViewPlayersTeamInfoCommand = new CustomCommand(ViewPlayersTeamInfo, CanViewPlayersTeamInfo);
+
+            ViewPlayerInfoVisibility = Visibility.Collapsed;
+            ViewPlayersTeamInfoVisibility = Visibility.Collapsed;
+        }
+
+        private void ViewPlayerInfo(object obj)
+        {
+            Messenger.Default.Send(new ObjectHolder<Player, string>(SelectedPlayer, PlayersTeam.Name.Value));
+            ViewPlayerInfoVisibility = Visibility.Visible;
+        }
+
+        private bool CanViewPlayerInfo(object obj)
+        {
+            if (SelectedPlayer != null)
+                return true;
+
+            return false;
+        }
+
+        private void ViewPlayersTeamInfo(object obj)
+        {
+            throw new NotImplementedException();
+        }
+        
+        private bool CanViewPlayersTeamInfo(object obj)
+        {
+            if (PlayersTeam != null)
+                return true;
+
+            return false;
         }
 
         public void OnObjectHolderRecived(ObjectHolder<Player, Team> playerAndTeamHolder)
         {
+            LoadCommands();
             SelectedPlayer = playerAndTeamHolder.FirstObject;
             PlayersTeam = teamService.GetBy(SelectedPlayer.TeamId);
         }
