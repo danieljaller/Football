@@ -232,7 +232,7 @@ namespace TestApplication
                 playerBuilder.AppendLine($"Wins: {team.Wins}");
                 playerBuilder.AppendLine($"Losses: {team.Losses}");
                 playerBuilder.AppendLine($"Ties: {team.Ties}");
-                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifferens}");
+                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifference}");
                 playerBuilder.AppendLine($"Matches Played: {team.MatchIds.Count}");
                 playerBuilder.AppendLine($"Players: {team.PlayerIds.Count}");
 
