@@ -30,6 +30,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod()]
         public void Player_ValidateNewPlayer()
         {
+            Assert.AreNotEqual(Guid.Empty, player.Id);
             Assert.IsNotNull(player.Assists);
             // DateOfBirth?
             Assert.IsNotNull(player.FirstName);

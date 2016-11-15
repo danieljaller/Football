@@ -85,12 +85,8 @@ namespace TestApplication
 
                 }
             }
-
-
-
-
-
         }
+
         public static void CreateTestData()
         {
 
@@ -118,24 +114,53 @@ namespace TestApplication
 
                 teamService.Add(team);
             }
+            List<Guid> teamIds = teamList.Select(p => p.Id).ToList();
+            SerieAndMatchGenerator generator = new SerieAndMatchGenerator();
+            List<Guid> matchIds = generator.SerieGenerator(teamIds, DateTime.Now);
+            Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
 
             try
             {
+                Console.Write("Players: ");
                 playerService.Save();
-                Console.WriteLine("Save successful");
+                Console.WriteLine("successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Save failed\n{e}");
+                Console.WriteLine($"failed\n{e}");
             }
+
             try
             {
+                Console.Write("Teams: ");
                 teamService.Save();
-                Console.WriteLine("Save successful");
+                Console.WriteLine("successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Save failed\n{e}");
+                Console.WriteLine($"failed\n{e}");
+            }
+
+            try
+            {
+                Console.Write("Matches: ");
+                matchService.Save();
+                Console.WriteLine("successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"failed\n{e}");
+            }
+
+            try
+            {
+                Console.Write("Series: ");
+                serieService.Save();
+                Console.WriteLine("successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"failed\n{e}");
             }
         }
 

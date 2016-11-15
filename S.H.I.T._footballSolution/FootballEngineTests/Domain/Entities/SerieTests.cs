@@ -22,13 +22,24 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod()]
         public void Serie_CreateNewSerie()
         {
-            serie = new Serie(new ValueObjects.GeneralName("Serie"));
+            List<Guid> teamIds = new List<Guid>();
+            for (int i = 0; i < Serie.NumberOfTeams; i++)
+            {
+                teamIds.Add(Guid.NewGuid());
+            }
+            List<Guid> matchIds = new List<Guid>();
+            for (int i = 0; i < Serie.NumberOfMatches; i++)
+            {
+                matchIds.Add(Guid.NewGuid());
+            }
+            serie = new Serie(new ValueObjects.GeneralName("Serie"), teamIds, matchIds);
             Assert.IsNotNull(serie);
         }
 
         [TestMethod]
         public void Serie_ValidateNewSerie()
         {
+            Assert.AreNotEqual(Guid.Empty, serie.Id);
             Assert.IsNotNull(serie.Name);
             Assert.IsNotNull(serie.MatchTable);
             Assert.AreEqual(0, serie.MatchTable.Count);
