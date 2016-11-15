@@ -17,10 +17,17 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <TextBlock Name="singlePlayerName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"  FontSize="15" FontWeight="Black" Text="Spelarnamn"/>
         <Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Click="playerInfo_Click" Content="Spelarinfo" />
         <Button Name="team" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Click="team_Click" Content="Lag" />
         <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="singlePlayerPageFrame" />
+        <ComboBox Name="serieSelector" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
+            <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
+            <DataTemplate>
+                <TextBox Name="comboBoxSeries" Text="serie X"  />
+            </DataTemplate>
+        </ComboBox>
     </Grid>
 </Page>

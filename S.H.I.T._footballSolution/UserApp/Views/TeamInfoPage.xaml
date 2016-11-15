@@ -38,11 +38,5 @@
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Insläppta mål:" />
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Röda kort:" />
         <TextBlock Grid.Row="10" Grid.Column="0" Text="Gula kort:" />
-        <ComboBox Name="serieSelector" Grid.Row="11" Grid.Column="0" >
-            <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
-            <DataTemplate>
-                <TextBox Name="comboBoxSeries" Text="serie X"  />
-            </DataTemplate>
-        </ComboBox>
     </Grid>
 </Page>
