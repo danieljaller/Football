@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserApp.Views;
 
 namespace UserApp
 {
@@ -54,9 +55,25 @@ namespace UserApp
 
         }
 
-        private void doesSomething_Click(object sender, RoutedEventArgs e)
+        private void serie_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new SeriePage();
+        }
+
+        private void team_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new TeamPage();
+        }
+
+        private void player_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageFrame.Content = new SinglePlayerPage();
+        }
+
+        private void playerinfo_Click(object sender, RoutedEventArgs e)
+        {
+            var matchWindow = new MatchProtocol();
+            var showMatch = matchWindow.ShowDialog();
         }
     }
 }

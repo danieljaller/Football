@@ -29,6 +29,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Grid.Column="0" Grid.Row="2" Content="Radera Spelare"></Button>
 
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Name="playersOverview">
             <Grid.ColumnDefinitions>

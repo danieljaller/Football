@@ -64,6 +64,9 @@
     <Compile Include="NewPlayerPage.xaml.cs">
       <DependentUpon>NewPlayerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewPlayerWindow.xaml.cs">
+      <DependentUpon>NewPlayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewSeriesPage.xaml.cs">
       <DependentUpon>NewSeriesPage.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewPlayerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

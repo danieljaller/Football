@@ -35,9 +35,10 @@ namespace AdminApp
 
         }
 
-        private void NewTeamButton_Click(object sender, RoutedEventArgs e)
+        private void NewPlayerButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var newPlayerWindow = new NewPlayerWindow();
+            var newPlayerWindowResult = newPlayerWindow.ShowDialog();           
         }
 
         private void CreateTeamButton_Click(object sender, RoutedEventArgs e)

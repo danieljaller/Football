@@ -55,25 +55,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PlayerPage.xaml.cs">
+    <Compile Include="Views\MatchProtocol.xaml.cs">
+      <DependentUpon>MatchProtocol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerInfoPage.xaml.cs">
+      <DependentUpon>PlayerInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerPage.xaml.cs">
       <DependentUpon>PlayerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SchedulePage.xaml.cs">
+    <Compile Include="Views\SchedulePage.xaml.cs">
       <DependentUpon>SchedulePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SeriePage.xaml.cs">
+    <Compile Include="Views\SeriePage.xaml.cs">
       <DependentUpon>SeriePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TablePage.xaml.cs">
+    <Compile Include="Views\SinglePlayerPage.xaml.cs">
+      <DependentUpon>SinglePlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TablePage.xaml.cs">
       <DependentUpon>TablePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TeamInfoPage.xaml.cs">
+    <Compile Include="Views\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TeamPage.xaml.cs">
+    <Compile Include="Views\TeamPage.xaml.cs">
       <DependentUpon>TeamPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -81,31 +90,43 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PlayerPage.xaml">
+    <Page Include="Views\MatchProtocol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SchedulePage.xaml">
+    <Page Include="Views\PlayerInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SeriePage.xaml">
+    <Page Include="Views\PlayerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TablePage.xaml">
+    <Page Include="Views\SchedulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamInfoPage.xaml">
+    <Page Include="Views\SeriePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamPage.xaml">
+    <Page Include="Views\SinglePlayerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,9 +158,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -38,7 +38,12 @@
             <CheckBox Name="serieCheckBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 0" Checked="serieCheckBox_Checked" Content="Serie" Unchecked="serieCheckBox_Unchecked" />
             <CheckBox Name="teamCheckBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 0" Checked="teamCheckBox_Checked" Content="Lag" Unchecked="teamCheckBox_Unchecked" />
             <CheckBox Name="playerCheckBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 0" Checked="playerCheckBox_Checked" Content="Spelare" Unchecked="playerCheckBox_Unchecked" />
-            <Button Name="doesSomething" Grid.Row="5" Width="20" Height="10" Click="doesSomething_Click" />
+            <StackPanel Orientation="Horizontal" Grid.Row="5">
+            <Button Name="serie" Width="20" Height="10" Click="serie_Click" />
+            <Button Name="team" Width="20" Height="10" Click="team_Click" />
+            <Button Name="player" Width="20" Height="10" Click="player_Click" />
+            <Button Name="playerinfo" Width="20" Height="10" Click="playerinfo_Click" />
+            </StackPanel>
             <ListBox Name="SearchCheckedList"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" MinWidth="70" MinHeight="100">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

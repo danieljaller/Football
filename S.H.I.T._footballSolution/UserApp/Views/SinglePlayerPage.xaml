@@ -1,0 +1,33 @@
+﻿<Page x:Class="UserApp.Views.SinglePlayerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UserApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="SinglePlayerPage">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Name="singlePlayerName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"  FontSize="15" FontWeight="Black" Text="Spelarnamn"/>
+        <Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Click="playerInfo_Click" Content="Spelarinfo" />
+        <Button Name="team" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Click="team_Click" Content="Lag" />
+        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="singlePlayerPageFrame" />
+        <ComboBox Name="serieSelector" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
+            <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
+            <DataTemplate>
+                <TextBox Name="comboBoxSeries" Text="serie X"  />
+            </DataTemplate>
+        </ComboBox>
+    </Grid>
+</Page>

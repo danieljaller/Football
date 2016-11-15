@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace AdminApp
 {
-    class TempMatchToStringConverter : IValueConverter
+    public class TempMatchToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
