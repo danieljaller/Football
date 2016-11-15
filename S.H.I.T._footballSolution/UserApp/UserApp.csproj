@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utilities\Messenger.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\PlayerInfoViewModel.cs" />
+    <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\SinglePlayerViewModel.cs" />
     <Compile Include="Views\MatchProtocol.xaml.cs">
       <DependentUpon>MatchProtocol.xaml</DependentUpon>
     </Compile>
@@ -158,7 +163,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
+      <Project>{11603a52-1f43-48a5-9b41-ff02da7ac2ad}</Project>
+      <Name>FootballEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
