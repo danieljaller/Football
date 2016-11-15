@@ -8,7 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using UserApp.Utilities.JoeCoffeeStore.StockManagement.App.Utility;
+using UserApp.Utilities;
 
 namespace UserApp.ViewModels
 {
@@ -42,15 +42,15 @@ namespace UserApp.ViewModels
             get { return _playersTeam; }
             set { SetField(ref _playersTeam, value); }
         }
-        public string Team { get { return PlayersTeam.Name.Value; } }
-        public string Age { get { return (DateTime.Now.Year - SelectedPlayer.DateOfBirth.Year).ToString(); } }
-        public string DateOfBirth { get { return SelectedPlayer.DateOfBirth.ToShortDateString(); } }
-        public string Goals { get { return SelectedPlayer.Goals.Count.ToString(); } }
-        public string Assists { get { return SelectedPlayer.Assists.Count.ToString(); } }
-        public string RedCards { get { return SelectedPlayer.RedCards.Count.ToString(); } }
-        public string YellowCards { get { return SelectedPlayer.YellowCards.Count.ToString(); } }
-        public string MatchesPlayed { get { return SelectedPlayer.MatchesPlayed.ToString(); } }
-        public string PlayerStatus { get { return SelectedPlayer.PlayerStatus.ToSwedishString(); } }
+        public string Team { get { return (PlayersTeam != null) ? PlayersTeam.Name.Value : ""; } }
+        public string Age { get { return (SelectedPlayer != null) ? (DateTime.Now.Year - SelectedPlayer.DateOfBirth.Year).ToString() : ""; } }
+        public string DateOfBirth { get { return (SelectedPlayer != null) ? SelectedPlayer.DateOfBirth.ToShortDateString() : ""; } }
+        public string Goals { get { return (SelectedPlayer != null) ? SelectedPlayer.Goals.Count.ToString() : ""; } }
+        public string Assists { get { return (SelectedPlayer != null) ? SelectedPlayer.Assists.Count.ToString() : ""; } }
+        public string RedCards { get { return (SelectedPlayer != null) ? SelectedPlayer.RedCards.Count.ToString() : ""; } }
+        public string YellowCards { get { return (SelectedPlayer != null) ? SelectedPlayer.YellowCards.Count.ToString() : ""; } }
+        public string MatchesPlayed { get { return (SelectedPlayer != null) ? SelectedPlayer.MatchesPlayed.ToString() : ""; } }
+        public string PlayerStatus { get { return (SelectedPlayer != null) ? SelectedPlayer.PlayerStatus.ToSwedishString() : ""; } }
 
         public PlayerInfoViewModel(TeamService teamService)
         {

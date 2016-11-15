@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="PlayerInfoPage"
-      DataContext="{Binding Source={StaticResource mainViewModelLocator}, Path=PlayerInfoViewModle}">
+      DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=PlayerInfoViewModle}">
 
     <Grid>
         <Grid.ColumnDefinitions>
