@@ -26,6 +26,12 @@
         <Button Name="table" Grid.Row="1" Grid.Column="2" Width="85" Height="20" Click="table_Click" Content="Serietabell" />
         <Button Name="player" Grid.Row="1" Grid.Column="3" Width="85" Height="20" Click="player_Click" Content="Spelare" />
         <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" x:Name="teamPageFrame" />
+        <ComboBox Name="serieSelector" Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
+            <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
+            <DataTemplate>
+                <TextBox Name="comboBoxSeries" Text="serie X"  />
+            </DataTemplate>
+        </ComboBox>
     </Grid>
 
 
