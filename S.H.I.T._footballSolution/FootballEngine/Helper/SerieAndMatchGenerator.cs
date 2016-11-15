@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Helper
 {
-    public class SerieAndMatchGenerator
+    public static class SerieAndMatchGenerator
     {
-        private MatchService matchService = new MatchService();
-        private Guid[] pairing;
-        private DateTime date;
-        private Match match;
-        private DateTime latestDate;
-        public List<Guid> matches;
+        private static MatchService matchService = new MatchService();
+        private static Guid[] pairing;
+        private static DateTime date;
+        private static Match match;
+        private static DateTime latestDate;
+        private static List<Guid> matches;
         
 
-        public List<Guid> SerieGenerator(List<Guid> teams, DateTime startDate)
+        public static List<Guid> SerieGenerator(List<Guid> teams, DateTime startDate)
         {
             latestDate = startDate.AddDays(-1);
             matches = new List<Guid>();
@@ -31,7 +31,7 @@ namespace FootballEngine.Helper
             return matches;
         }
 
-        private void RoundGenerator(List<Guid> teams, int i)
+        private static void RoundGenerator(List<Guid> teams, int i)
         {
             for (int j = 0; j < teams.Count / 2; j++)
             {
@@ -65,7 +65,7 @@ namespace FootballEngine.Helper
             }
         }
 
-        private List<Guid> ListShuffler(List<Guid> teams)
+        private static List<Guid> ListShuffler(List<Guid> teams)
         {
             var tempTeams = new List<Guid>();
             for (int j = 0; j < teams.Count; j++)
