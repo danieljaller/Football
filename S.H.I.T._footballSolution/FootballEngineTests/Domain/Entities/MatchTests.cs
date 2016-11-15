@@ -29,6 +29,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod]
         public void Match_ValidateNewMatch()
         {
+            Assert.AreNotEqual(Guid.Empty, match.Id);
             Assert.IsNotNull(match.Assists);
             Assert.AreEqual(0, match.Assists.Count);
             // Date?

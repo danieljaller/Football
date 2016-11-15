@@ -10,8 +10,8 @@ namespace FootballEngine.Domain.Entities
 {
     public class Serie
     {
-        public readonly int NumberOfTeams;
-        public readonly int NumberOfMatches;
+        public static readonly int NumberOfTeams = 16;
+        public static readonly int NumberOfMatches = 240;
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }
         public List<Guid> TeamTable { get; set; }
@@ -21,8 +21,6 @@ namespace FootballEngine.Domain.Entities
 
         public Serie(GeneralName name, List<Guid> teamTable, List<Guid> matchTable)
         {
-            NumberOfTeams = 16;
-            NumberOfMatches = 240;
             ValidateInparameters(name, teamTable, matchTable);
             Id = Guid.NewGuid();
             Name = name;
@@ -38,7 +36,11 @@ namespace FootballEngine.Domain.Entities
             {
                 GeneralName generalName = new GeneralName(name.Value);
             }
-            catch (InvalidNameException e)
+            catch (InvalidNameException ine)
+            {
+                throw ine;
+            }
+            catch (Exception e)
             {
                 throw e;
             }
