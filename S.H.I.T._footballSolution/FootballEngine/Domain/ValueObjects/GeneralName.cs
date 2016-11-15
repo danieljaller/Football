@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,42 +26,34 @@ namespace FootballEngine.Domain.ValueObjects
             }
             else
             {
-                throw new Exception("Invalid Name.");
+                throw new InvalidNameException("The name is either null, empty or consists only of white-space characters.");
             }
-        }   
-        
+        }
+
         public static bool IsValidName(string name)
         {
-            if (!string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                while (true)
-                {
-                    if (!name.StartsWith(" "))
-                    {
-                        break;
-                    }
+                return false;
+            }
 
-                    name = name.Substring(1);
-                }
-                if (name.Length <= MaxLenght)
+            if (name.Length > MaxLenght)
+            {
+                throw new InvalidNameException($"Name is too long. Maximum length is {MaxLenght} characters.");
+            }
+
+            foreach (char character in name)
+            {
+                if (char.IsLetterOrDigit(character) || character == '-' || character == ' ')
                 {
-                    foreach (char character in name)
-                    {
-                        if (char.IsLetterOrDigit(character) || character == '-' || character == ' ')
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            throw new Exception("Name contains illegal characters. Can only contain letters, digits, \"-\" and white spaces");
-                        }
-                    }
+                    continue;
                 }
                 else
                 {
-                    throw new Exception("Name is too long. Enter 1-25 characters.");
+                    throw new InvalidNameException("Name contains illegal characters. Can only contain letters, digits, '-' and white-spaces.");
                 }
             }
+
             return true;
         }
         public static bool TryParse(string name, out GeneralName result)
@@ -70,7 +63,7 @@ namespace FootballEngine.Domain.ValueObjects
                 result = new GeneralName(name);
                 return true;
             }
-            catch (ArgumentException)
+            catch (InvalidNameException)
             {
                 result = null;
                 return false;
