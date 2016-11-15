@@ -31,6 +31,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod]
         public void Team_ValidateNewTeam()
         {
+            Assert.AreNotEqual(Guid.Empty, team.Id);
             Assert.AreEqual(0, team.GoalDifferens);
             Assert.IsNotNull(team.HomeArena);
             Assert.AreEqual(homeArena, team.HomeArena.Value);

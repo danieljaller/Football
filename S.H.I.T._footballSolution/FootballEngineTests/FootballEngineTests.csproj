@@ -59,8 +59,14 @@
     <Compile Include="Domain\ValueObjects\GeneralNameTests.cs" />
     <Compile Include="Domain\ValueObjects\MatchGoalsTests.cs" />
     <Compile Include="Domain\ValueObjects\PlayerNameTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Helper\SerieAndMatchGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
+      <Project>{11603A52-1F43-48A5-9B41-FF02DA7AC2AD}</Project>
+      <Name>FootballEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

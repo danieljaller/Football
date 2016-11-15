@@ -51,9 +51,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TempMatchToStringConverterTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempMatchToStringConverterTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdminApp\AdminApp.csproj">
+      <Project>{306F9604-82B0-49E2-A086-B1BEC3D95EE5}</Project>
+      <Name>AdminApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

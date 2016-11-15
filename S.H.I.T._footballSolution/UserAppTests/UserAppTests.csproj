@@ -52,8 +52,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MainWindowTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserApp\UserApp.csproj">
+      <Project>{02BBC75A-6D8B-4D3F-883E-C419C0BEB5A2}</Project>
+      <Name>UserApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
