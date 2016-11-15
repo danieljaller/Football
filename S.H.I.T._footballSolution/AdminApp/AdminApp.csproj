@@ -55,11 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEvent.xaml.cs">
+      <DependentUpon>AddEvent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddExchangeWindow.xaml.cs">
+      <DependentUpon>AddExchangeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPlayerWindow.xaml.cs">
+      <DependentUpon>AddPlayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditMatchProtocolPage.xaml.cs">
-      <DependentUpon>EditMatchProtocolPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="NewPlayerPage.xaml.cs">
       <DependentUpon>NewPlayerPage.xaml</DependentUpon>
@@ -77,6 +83,18 @@
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TempMatchToStringConverter.cs" />
+    <Page Include="AddEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddExchangeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdministratePlayersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,10 +104,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateOrAdministrateTeamsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditMatchProtocolPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

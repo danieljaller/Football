@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AdminApp
 {
     /// <summary>
-    /// Interaction logic for EditMatchProtocolPage.xaml
+    /// Interaction logic for AddExchangeWindow.xaml
     /// </summary>
-    public partial class EditMatchProtocolPage : Page
+    public partial class AddExchangeWindow : Window
     {
-        public EditMatchProtocolPage()
+        public AddExchangeWindow()
         {
             InitializeComponent();
         }

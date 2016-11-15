@@ -72,7 +72,7 @@
 
             <TextBox Grid.Row="2" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
 
-            <TextBox Grid.Row="3" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+            <DatePicker Name="playerDoBPicker" Grid.Row="3" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
 
             <ComboBox Grid.Row="4" Grid.Column="1" Height="23" FontWeight="Bold" Margin="5,5,0,0" >
                 <ComboBoxItem>
