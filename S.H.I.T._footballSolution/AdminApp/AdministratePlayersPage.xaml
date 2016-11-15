@@ -28,37 +28,91 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>        
-
-        <Frame x:Name="AdministratePlayersPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+        </ListBox>
 
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Name="playersOverview">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=playersList, Path=SelectedItem}" FontWeight="Bold"/>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Förnamn:"/>
+            <TextBlock Grid.Row="1" FontWeight="Bold" Margin="5,5,0,0" Text="Förnamn:"/>
 
-                <TextBlock  FontWeight="Bold" Margin="5,5,0,0" Text="Efternamn:"/>
+            <TextBlock Grid.Row="2" FontWeight="Bold" Margin="5,5,0,0" Text="Efternamn:"/>
 
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Födelsedatum:"/>
+            <TextBlock Grid.Row="3" FontWeight="Bold" Margin="5,5,0,0" Text="Födelsedatum:"/>
 
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelbar"/>
+            <TextBlock Grid.Row="4" FontWeight="Bold" Margin="5,5,0,0" Text="Spelbar"/>
 
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="gula kort"/>
+            <TextBlock Grid.Row="5" FontWeight="Bold" Margin="5,5,0,0" Text="gula kort"/>
 
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="röda kort"/>
-            </StackPanel>
+            <TextBlock Grid.Row="6" FontWeight="Bold" Margin="5,5,0,0" Text="röda kort"/>
             
+            <TextBlock Grid.Row="7" FontWeight="Bold" Margin="5,5,0,0" Text="Mål"/>
+
+            <TextBlock Grid.Row="8" FontWeight="Bold" Margin="5,5,0,0" Text="Assist"/>
+
+
+
+            <TextBox Grid.Row="1" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0"/>
+
+            <TextBox Grid.Row="2" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+
+            <TextBox Grid.Row="3" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+
+            <ComboBox Grid.Row="4" Grid.Column="1" Height="23" FontWeight="Bold" Margin="5,5,0,0" >
+                <ComboBoxItem>
+                    <TextBlock Text="Spelbar" />
+                </ComboBoxItem>
+                    
+                <ComboBoxItem>
+                    <TextBlock Text="Skadad"/>
+                </ComboBoxItem>
+
+                <ComboBoxItem>
+                    <TextBlock Text="Avstängd"/>
+                </ComboBoxItem>
+
+                <ComboBoxItem>
+                    <TextBlock Text="Landslagsuppdrag"/>
+                </ComboBoxItem>
+
+                <ComboBoxItem>
+                    <TextBlock Text="Annan frånvaro"/>
+                </ComboBoxItem>
+            </ComboBox>
+
+            
+            <TextBlock Grid.Row="5" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+
+            <TextBlock Grid.Row="6" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+            
+            <TextBlock Grid.Row="7" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+
+            <TextBlock Grid.Row="8" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
+
+            
+                <Button Grid.Row="9" Margin="0, 10,0,0" Name="Save" HorizontalAlignment="Left" Width="50">Save</Button>
+            <Button Grid.Row="9" Grid.Column="1" Margin="0, 10,0,0"  Name="Cancel" HorizontalAlignment="Right" Width="50">Cancel</Button>
         </Grid>
 
     </Grid>
 </Page>
+
+
+
+            
+
