@@ -35,15 +35,15 @@
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" />
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Status:"/>
         <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="9">
-            <TextBlock Text="{Binding Team}"/>
-            <TextBlock Text="{Binding Age}"/>
-            <TextBlock Text="{Binding DateOfBirth}"/>
-            <TextBlock Text="{Binding Goals}"/>
-            <TextBlock Text="{Binding Assists}"/>
-            <TextBlock Text="{Binding RedCards}"/>
-            <TextBlock Text="{Binding YellowCards}"/>
-            <TextBlock Text="{Binding MatchesPlayed}"/>
-            <TextBlock Text="{Binding PlayerStatus}"/>
+            <TextBlock Text="{Binding Team, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding Goals, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding Assists, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding RedCards, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding YellowCards, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding MatchesPlayed, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding PlayerStatus, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </Page>

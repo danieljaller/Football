@@ -17,7 +17,7 @@ namespace UserApp
 
         private static PlayerInfoViewModel _playerInfoViewModel = new PlayerInfoViewModel(teamService);
         private static PlayerViewModel _playerViewModel = new PlayerViewModel();
-        private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel();
+        private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel(teamService);
 
         public static PlayerInfoViewModel PlayerInfoViewModle { get { return _playerInfoViewModel; } }
         public static PlayerViewModel PlayerViewModel { get { return _playerViewModel; } }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using UserApp.InformationHolders;
 using UserApp.Utilities;
 
 namespace UserApp.ViewModels
@@ -36,13 +37,12 @@ namespace UserApp.ViewModels
             get { return _selectedPlayer; }
             set { SetField(ref _selectedPlayer, value); }
         }
-        private Team _playersTeam;
-        public Team PlayersTeam
+        private string _team;
+        public string Team
         {
-            get { return _playersTeam; }
-            set { SetField(ref _playersTeam, value); }
+            get { return (_team != null) ? _team : ""; }
+            set { _team = value; }
         }
-        public string Team { get { return (PlayersTeam != null) ? PlayersTeam.Name.Value : ""; } }
         public string Age { get { return (SelectedPlayer != null) ? (DateTime.Now.Year - SelectedPlayer.DateOfBirth.Year).ToString() : ""; } }
         public string DateOfBirth { get { return (SelectedPlayer != null) ? SelectedPlayer.DateOfBirth.ToShortDateString() : ""; } }
         public string Goals { get { return (SelectedPlayer != null) ? SelectedPlayer.Goals.Count.ToString() : ""; } }
@@ -55,13 +55,13 @@ namespace UserApp.ViewModels
         public PlayerInfoViewModel(TeamService teamService)
         {
             this.teamService = teamService;
-            Messenger.Default.Register<Player>(this, OnPlayerRecived);
+            Messenger.Default.Register<ObjectHolder<Player, string>>(this, OnInformationHolderRecived);
         }
 
-        public void OnPlayerRecived(Player player)
+        public void OnInformationHolderRecived(ObjectHolder<Player, string> playerAndTeamNameHolder)
         {
-            SelectedPlayer = player;
-            PlayersTeam = teamService.GetBy(SelectedPlayer.TeamId);
+            SelectedPlayer = playerAndTeamNameHolder.FirstObject;
+            Team = playerAndTeamNameHolder.SecondObject;
         }
     }
 }

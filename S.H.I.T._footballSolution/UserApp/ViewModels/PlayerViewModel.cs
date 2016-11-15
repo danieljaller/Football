@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using UserApp.Utilities;
 
 namespace UserApp.ViewModels
 {
@@ -32,5 +33,14 @@ namespace UserApp.ViewModels
             set { SetField(ref _selectedPlayer, value); }
         }
 
+        public PlayerViewModel()
+        {
+            Messenger.Default.Register<Player>(this, OnPlayerRecived);
+        }
+
+        public void OnPlayerRecived(Player player)
+        {
+            SelectedPlayer = player;
+        }
     }
 }
