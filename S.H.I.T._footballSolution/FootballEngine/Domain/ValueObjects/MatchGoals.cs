@@ -19,7 +19,7 @@ namespace FootballEngine.Domain.ValueObjects
             }
             else
             {
-                throw new Exception("Invalid number of goals");
+                throw new ArgumentException("Invalid number of goals");
             }
         }
 

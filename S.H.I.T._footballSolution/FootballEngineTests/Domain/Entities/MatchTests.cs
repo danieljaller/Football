@@ -64,35 +64,35 @@ namespace FootballEngine.Domain.Entities.Tests
         [ExpectedException(typeof(InvalidDateTimeException))]
         public void Match_CreateInvalidMatch1()
         {
-            
+            Match match = new Match(DateTime.Now.AddDays(-1), Guid.NewGuid(), Guid.NewGuid());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EmptyGuidException))]
+        [ExpectedException(typeof(InvalidDateTimeException))]
         public void Match_CreateInvalidMatch2()
         {
-
+            Match match = new Match(DateTime.Now.AddYears(2), Guid.NewGuid(), Guid.NewGuid());
         }
 
         [TestMethod]
         [ExpectedException(typeof(EmptyGuidException))]
         public void Match_CreateInvalidMatch3()
         {
-
+            Match match = new Match(DateTime.Now, Guid.Empty, Guid.Empty);
         }
 
         [TestMethod]
         [ExpectedException(typeof(EmptyGuidException))]
         public void Match_CreateInvalidMatch4()
         {
-
+            Match match = new Match(DateTime.Now, Guid.NewGuid(), Guid.Empty);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(EmptyGuidException))]
         public void Match_CreateInvalidMatch5()
         {
-
+            Match match = new Match(DateTime.Now, Guid.Empty, Guid.NewGuid());
         }
     }
 }

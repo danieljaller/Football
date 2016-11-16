@@ -17,11 +17,11 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestInitialize]
         public void Init()
         {
-            Player_CreateNewPlayer();
+            Player_CreateNewValidPlayer();
         }
 
         [TestMethod()]
-        public void Player_CreateNewPlayer()
+        public void Player_CreateNewValidPlayer()
         {
             player = new Player(new ValueObjects.PlayerName("Kalle"), new ValueObjects.PlayerName("Anka"), DateTime.Now.AddYears(-20));
             Assert.IsNotNull(player);
@@ -47,5 +47,13 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.IsNotNull(player.YellowCards);
             Assert.AreEqual(0, player.YellowCards.Count);
         }
+
+        // InvalidNameException
+
+        // InvalidNameException
+
+        // InvalidNameException
+
+        // InvalidDateTimeException
     }
 }
