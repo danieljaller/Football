@@ -39,10 +39,10 @@ namespace TestApplication
         static void Main(string[] args)
         {
             matchService = new MatchService();
-            playerService = new PlayerService();
+            teamService = new TeamService();
+            playerService = new PlayerService(teamService);
             serieService = new SerieService();
             searchService = new SearchService();
-            teamService = new TeamService();
 
             //CreateTestData();
 
@@ -161,6 +161,10 @@ namespace TestApplication
                 Console.WriteLine($"failed\n{e}");
             }
         }
+        //private static void GetPlayers()
+        //{
+        //    var list = playerService.GetAllPlayersBySerie();
+        //}
 
 
 

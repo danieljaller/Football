@@ -12,7 +12,13 @@ namespace FootballEngine.Services
   public  class PlayerService : IService<Player>
     {
         private readonly PlayerRepository _playerRepository = PlayerRepository.Instance;
-        TeamService teamService = new TeamService();
+        TeamService teamService;
+        public PlayerService(TeamService teamService)
+        {
+            this.teamService = teamService;    
+        }
+        
+        SerieService serieService = new SerieService();
         public void Add(Player player)
         {
             _playerRepository.Add(player);
@@ -42,45 +48,51 @@ namespace FootballEngine.Services
         {
             _playerRepository.Save();
         }
-        public IEnumerable<Player> OrderByFirstName()
+
+        public IEnumerable<Player> GetAllPlayersBySerie(Guid serieId)
         {
-            return GetAll().OrderBy(p => p.FirstName);
+            return teamService.GetAllTeamsBySerie(serieId).SelectMany(t => teamService.GetAllPlayersByTeam(t.Id));
         }
-        public IEnumerable<Player> OrderByLastName()
+
+        public IEnumerable<Player> OrderByFirstName(Guid serieId)
         {
-            return GetAll().OrderBy(p => p.LastName);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => p.FirstName);
         }
-        public IEnumerable<Player> OrderByDateOfBirth()
+        public IEnumerable<Player> OrderByLastName(Guid serieId)
         {
-            return GetAll().OrderBy(p => p.DateOfBirth);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => p.LastName);
         }
-        public IEnumerable<Player> OrderByTeamName()
+        public IEnumerable<Player> OrderByDateOfBirth(Guid serieId)
         {
-            return GetAll().OrderBy(p => teamService.GetBy(p.TeamId).Name);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => p.DateOfBirth);
         }
-        public IEnumerable<Player> OrderByNumberOfMatchesPlayed()
+        public IEnumerable<Player> OrderByTeamName(Guid serieId)
         {
-            return GetAll().OrderByDescending(p => p.MatchesPlayed);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => teamService.GetBy(p.TeamId).Name);
         }
-        public IEnumerable<Player> OrderByNumberOfGoals()
+        public IEnumerable<Player> OrderByNumberOfMatchesPlayed(Guid serieId)
         {
-            return GetAll().OrderByDescending(p => p.Goals.Count());
+            return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.MatchesPlayed);
         }
-        public IEnumerable<Player> OrderByNumberOfAssists()
+        public IEnumerable<Player> OrderByNumberOfGoals(Guid serieId)
         {
-            return GetAll().OrderByDescending(p => p.Assists.Count());
+            return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.Goals.Count());
         }
-        public IEnumerable<Player> OrderByNumberOfRedCards()
+        public IEnumerable<Player> OrderByNumberOfAssists(Guid serieId)
         {
-            return GetAll().OrderByDescending(p => p.RedCards.Count());
+            return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.Assists.Count());
         }
-        public IEnumerable<Player> OrderByNumberOfYellowCards()
+        public IEnumerable<Player> OrderByNumberOfRedCards(Guid serieId)
         {
-            return GetAll().OrderByDescending(p => p.YellowCards.Count());
+            return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.RedCards.Count());
         }
-        public IEnumerable<Player> OrderByPlayerStatus()
+        public IEnumerable<Player> OrderByNumberOfYellowCards(Guid serieId)
         {
-            return GetAll().OrderByDescending(p => (int)p.PlayerStatus);
+            return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.YellowCards.Count());
+        }
+        public IEnumerable<Player> OrderByPlayerStatus(Guid serieId)
+        {
+            return GetAllPlayersBySerie(serieId).OrderByDescending(p => (int)p.PlayerStatus);
         }
     }
 }
