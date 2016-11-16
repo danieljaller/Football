@@ -70,22 +70,36 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         }
 
         [TestMethod()]
-        public void GeneralName_CreateInvalidName()
+        [ExpectedException(typeof(InvalidNameException))]
+        public void GeneralName_CreateInvalidName9()
         {
-            try
-            {
-                GeneralName invalidName1 = new GeneralName(null);
-                Assert.Fail("An exception should have been thrown");
-            }
-            catch (InvalidNameException invalidNameException)
-            {
-                Assert.IsInstanceOfType(invalidNameException, typeof(InvalidNameException));
-            }
-            catch (Exception e)
-            {
-                Assert.Fail($"Unexpected exception of type {e.GetType()} caught: {e.Message}");
-            }
+            GeneralName n = new GeneralName(" Team");
         }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidNameException))]
+        public void GeneralName_CreateInvalidName10()
+        {
+            GeneralName n = new GeneralName("Team ");
+        }
+
+        //[TestMethod()]
+        //public void GeneralName_CreateInvalidName()
+        //{
+        //    try
+        //    {
+        //        GeneralName invalidName1 = new GeneralName(null);
+        //        Assert.Fail("An exception should have been thrown");
+        //    }
+        //    catch (InvalidNameException invalidNameException)
+        //    {
+        //        Assert.IsInstanceOfType(invalidNameException, typeof(InvalidNameException));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Assert.Fail($"Unexpected exception of type {e.GetType()} caught: {e.Message}");
+        //    }
+        //}
         #endregion
 
         #region Create valid names
@@ -111,12 +125,6 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         public void GeneralName_CreateValidName4()
         {
             Assert.AreEqual("Team4", (new GeneralName("Team4")).Value);
-        }
-
-        [TestMethod()]
-        public void GeneralName_CreateValidName5()
-        {
-            Assert.AreEqual("  5Team", (new GeneralName("  5Team")).Value);
         }
 
         [TestMethod()]
