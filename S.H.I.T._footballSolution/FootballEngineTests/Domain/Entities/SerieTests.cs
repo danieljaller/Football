@@ -42,9 +42,9 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.AreNotEqual(Guid.Empty, serie.Id);
             Assert.IsNotNull(serie.Name);
             Assert.IsNotNull(serie.MatchTable);
-            //Assert.AreEqual(0, serie.MatchTable.Count);
+            //Assert.AreEqual(0, serie.MatchTable.Count);     // Should serie.MatchTable.Count be equal to 240?
             Assert.IsNotNull(serie.TeamTable);
-            //Assert.AreEqual(0, serie.TeamTable.Count);
+            //Assert.AreEqual(0, serie.TeamTable.Count);      // Should serie.TeamTable.Count be equal to 16?
         }
     }
 }
