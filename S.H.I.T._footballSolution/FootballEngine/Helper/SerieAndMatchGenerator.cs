@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Exceptions;
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,21 @@ namespace FootballEngine.Helper
         private static Match match;
         private static DateTime latestDate;
         private static List<Guid> matches;
-        
+        public static readonly int NumberOfPlayerRequired = 16;
 
         public static List<Guid> SerieGenerator(List<Guid> teams, DateTime startDate)
         {
+            if (teams == null)
+                throw new NullReferenceException($"{nameof(teams)} can not be null.");
+            if (teams.Count == 0)
+                throw new InvalidNumberOfPlayersException($"{nameof(teams)} can not be empty.");
+            if (teams.Count < 16)
+                throw new InvalidNumberOfPlayersException($"{nameof(teams)} can contain {NumberOfPlayerRequired} players.");
+            if (teams.Count > 16)
+                throw new InvalidNumberOfPlayersException($"{nameof(teams)} can contain {NumberOfPlayerRequired} players.");
+            if (DateTime.Compare(startDate, DateTime.Now) < 0)
+                throw new InvalidDateTimeException($"{nameof(startDate)} can not be earlier than today ({DateTime.Now}).");
+
             latestDate = startDate.AddDays(-1);
             matches = new List<Guid>();
 
