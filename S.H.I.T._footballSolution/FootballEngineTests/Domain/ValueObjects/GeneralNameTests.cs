@@ -13,61 +13,61 @@ namespace FootballEngine.Domain.ValueObjects.Tests
     public class GeneralNameTests
     {
         #region Create invalid names
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName1()
-        {
-            GeneralName n = new GeneralName(null);
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName1()
+        //{
+        //    GeneralName n = new GeneralName(null);
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName2()
-        {
-            GeneralName n = new GeneralName("");
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName2()
+        //{
+        //    GeneralName n = new GeneralName("");
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName3()
-        {
-            GeneralName n = new GeneralName("   ");
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName3()
+        //{
+        //    GeneralName n = new GeneralName("   ");
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName4()
-        {
-            GeneralName n = new GeneralName("#");
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName4()
+        //{
+        //    GeneralName n = new GeneralName("#");
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName5()
-        {
-            GeneralName n = new GeneralName("Aaaaaaaaaaaaaaaaaaaaaaaaaa");      // 26
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName5()
+        //{
+        //    GeneralName n = new GeneralName("Aaaaaaaaaaaaaaaaaaaaaaaaaa");      // 26
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName6()
-        {
-            GeneralName n = new GeneralName("´");
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName6()
+        //{
+        //    GeneralName n = new GeneralName("´");
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName7()
-        {
-            GeneralName n = new GeneralName("¨");
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName7()
+        //{
+        //    GeneralName n = new GeneralName("¨");
+        //}
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
-        public void GeneralName_CreateInvalidName8()
-        {
-            GeneralName n = new GeneralName("`");
-        }
+        //[TestMethod()]
+        //[ExpectedException(typeof(InvalidNameException))]
+        //public void GeneralName_CreateInvalidName8()
+        //{
+        //    GeneralName n = new GeneralName("`");
+        //}
 
         //[TestMethod()]
         //public void GeneralName_CreateInvalidName()
