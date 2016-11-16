@@ -83,6 +83,33 @@
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TempMatchToStringConverter.cs" />
+    <Compile Include="MatchProtocol.xaml.cs">
+      <DependentUpon>MatchProtocol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerInfoPage.xaml.cs">
+      <DependentUpon>PlayerInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerPage.xaml.cs">
+      <DependentUpon>PlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SeriePage.xaml.cs">
+      <DependentUpon>SeriePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SinglePlayerPage.xaml.cs">
+      <DependentUpon>SinglePlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TablePage.xaml.cs">
+      <DependentUpon>TablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeamInfoPage.xaml.cs">
+      <DependentUpon>TeamInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeamPage.xaml.cs">
+      <DependentUpon>TeamPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +176,42 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MatchProtocol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PlayerInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SchedulePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SeriePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SinglePlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TablePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TeamInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TeamPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MatchProtocolPage.xaml.cs">
@@ -184,6 +247,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\football_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserApp\UserApp.csproj">
+      <Project>{02BBC75A-6D8B-4D3F-883E-C419C0BEB5A2}</Project>
+      <Name>UserApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

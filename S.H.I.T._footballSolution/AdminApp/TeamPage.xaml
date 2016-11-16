@@ -1,0 +1,38 @@
+﻿<Page x:Class="AdminApp.TeamPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdminApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="TeamPage">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Name="teamName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="4"  FontSize="15" FontWeight="Black" Text="Lagnamn"/>
+        <Button Name="teaminfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Click="teaminfo_Click" Content="Laginfo" />
+        <Button Name="schedule" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Click="schedule_Click" Content="Spelschema" />
+        <Button Name="table" Grid.Row="1" Grid.Column="2" Width="85" Height="20" Click="table_Click" Content="Serietabell" />
+        <Button Name="player" Grid.Row="1" Grid.Column="3" Width="85" Height="20" Click="player_Click" Content="Spelare" />
+        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" x:Name="teamPageFrame" />
+        <ComboBox Name="serieSelector" Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
+            <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
+            <DataTemplate>
+                <TextBox Name="comboBoxSeries" Text="serie X"  />
+            </DataTemplate>
+        </ComboBox>
+    </Grid>
+
+
+</Page>
