@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FootballEngine.Helper;
+using FootballEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,30 +12,29 @@ namespace FootballEngine.Helper.Tests
     [TestClass()]
     public class SerieAndMatchGeneratorTests
     {
+        [TestInitialize]
+        public void Init()
+        {
+
+        }
+
         [TestMethod()]
         [ExpectedException(typeof(NullReferenceException))]
-        public void SerieAndMatchGenerator_SerieGeneratorTest()
+        public void SerieAndMatchGenerator_InvalidInputTest1()
         {
             SerieAndMatchGenerator.SerieGenerator(null, DateTime.Now);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(Exception))]
-        public void SerieAndMatchGenerator_SerieGeneratorTest1()
-        {
-            SerieAndMatchGenerator.SerieGenerator(null, DateTime.Now);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(Exception))]
-        public void SerieAndMatchGenerator_SerieGeneratorTest2()
+        [ExpectedException(typeof(InvalidNumberOfPlayersException))]
+        public void SerieAndMatchGenerator_InvalidInputTest2()
         {
             SerieAndMatchGenerator.SerieGenerator(new List<Guid>(), DateTime.Now);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(Exception))]
-        public void SerieAndMatchGenerator_SerieGeneratorTest3()
+        [ExpectedException(typeof(InvalidNumberOfPlayersException))]
+        public void SerieAndMatchGenerator_InvalidInputTest3()
         {
             List<Guid> teamIds = new List<Guid>();
             for (int i = 0; i < 14; i++)
@@ -45,8 +45,8 @@ namespace FootballEngine.Helper.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(Exception))]
-        public void SerieAndMatchGenerator_SerieGeneratorTest4()
+        [ExpectedException(typeof(InvalidNumberOfPlayersException))]
+        public void SerieAndMatchGenerator_InvalidInputTest4()
         {
             List<Guid> teamIds = new List<Guid>();
             for (int i = 0; i < 17; i++)
@@ -57,8 +57,8 @@ namespace FootballEngine.Helper.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(Exception))]
-        public void SerieAndMatchGenerator_SerieGeneratorTest5()
+        [ExpectedException(typeof(InvalidDateTimeException))]
+        public void SerieAndMatchGenerator_InvalidInputTest5()
         {
             List<Guid> teamIds = new List<Guid>();
             for (int i = 0; i < 16; i++)
@@ -67,6 +67,9 @@ namespace FootballEngine.Helper.Tests
             }
             SerieAndMatchGenerator.SerieGenerator(teamIds, DateTime.Now.AddDays(-1));
         }
+
+        
+
 
 
         [TestMethod]

@@ -12,19 +12,19 @@ namespace FootballEngine.Domain.Entities.Tests
     public class TeamTests
     {
         private Team team;
-        private readonly string teamName = "Team";
-        private readonly string homeArena = "Arena";
+        private readonly ValueObjects.GeneralName validTeamName = new ValueObjects.GeneralName("Team");
+        private readonly ValueObjects.GeneralName validHomeArena = new ValueObjects.GeneralName("Arena");
 
         [TestInitialize]
         public void Init()
         {
-            Team_CreateNewTeam();
+            Team_CreateNewValidTeam();
         }
 
         [TestMethod()]
-        public void Team_CreateNewTeam()
+        public void Team_CreateNewValidTeam()
         {
-            team = new Team(new ValueObjects.GeneralName(teamName), new ValueObjects.GeneralName(homeArena));
+            team = new Team(validTeamName, validHomeArena);
             Assert.IsNotNull(team);
         }
 
@@ -34,12 +34,12 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.AreNotEqual(Guid.Empty, team.Id);
             Assert.AreEqual(0, team.GoalDifference);
             Assert.IsNotNull(team.HomeArena);
-            Assert.AreEqual(homeArena, team.HomeArena.Value);
+            Assert.AreEqual(validHomeArena, team.HomeArena);
             Assert.AreEqual(0, team.Losses);
             Assert.IsNotNull(team.MatchIds);
             Assert.AreEqual(0, team.MatchIds.Count);
             Assert.IsNotNull(team.Name);
-            Assert.AreEqual(teamName, team.Name.Value);
+            Assert.AreEqual(validTeamName, team.Name);
             Assert.IsNotNull(team.PlayerIds);
             Assert.AreEqual(0, team.PlayerIds.Count);
             Assert.AreEqual(0, team.Points);
@@ -47,6 +47,27 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.AreEqual(0, team.SeriesIds.Count);
             Assert.AreEqual(0, team.Ties);
             Assert.AreEqual(0, team.Wins);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Team_CreateInvalidTeam1()
+        {
+            Team _team = new Team(null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Team_CreateInvalidTeam2()
+        {
+            Team _team = new Team(validTeamName, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Team_CreateInvalidTeam3()
+        {
+            Team _team = new Team(null, validHomeArena);
         }
     }
 }
