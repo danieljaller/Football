@@ -17,6 +17,8 @@ namespace FootballEngine.Domain.Entities.Tests
         public void Init()
         {
             Match_CreateNewMatch();
+            //match = new Match(DateTime.Now, Guid.NewGuid(), Guid.NewGuid());
+            //Assert.IsNotNull(match);
         }
 
         [TestMethod]

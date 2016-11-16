@@ -69,23 +69,23 @@ namespace FootballEngine.Domain.ValueObjects.Tests
             GeneralName n = new GeneralName("`");
         }
 
-        //[TestMethod()]
-        //public void GeneralName_CreateInvalidName()
-        //{
-        //    try
-        //    {
-        //        GeneralName invalidName1 = new GeneralName(null);
-        //        Assert.Fail("An exception should have been thrown");
-        //    }
-        //    catch (InvalidNameException invalidNameException)
-        //    {
-        //        Assert.IsInstanceOfType(invalidNameException, typeof(InvalidNameException));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Assert.Fail($"Unexpected exception of type {e.GetType()} caught: {e.Message}");
-        //    }
-        //}
+        [TestMethod()]
+        public void GeneralName_CreateInvalidName()
+        {
+            try
+            {
+                GeneralName invalidName1 = new GeneralName(null);
+                Assert.Fail("An exception should have been thrown");
+            }
+            catch (InvalidNameException invalidNameException)
+            {
+                Assert.IsInstanceOfType(invalidNameException, typeof(InvalidNameException));
+            }
+            catch (Exception e)
+            {
+                Assert.Fail($"Unexpected exception of type {e.GetType()} caught: {e.Message}");
+            }
+        }
         #endregion
 
         #region Create valid names
