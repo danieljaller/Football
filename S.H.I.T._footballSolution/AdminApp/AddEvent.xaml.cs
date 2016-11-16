@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AdminApp
 {
     /// <summary>
-    /// Interaction logic for AdministratePlayersPage.xaml
+    /// Interaction logic for AddEvent.xaml
     /// </summary>
-    public partial class AdministratePlayersPage : Page
+    public partial class AddEvent : Window
     {
-        public AdministratePlayersPage()
+        public AddEvent()
         {
             InitializeComponent();
-            playerDoBPicker.DisplayDateEnd=DateTime.Today;
         }
     }
 }
