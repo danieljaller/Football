@@ -12,6 +12,7 @@ namespace FootballEngine.Services
   public  class PlayerService : IService<Player>
     {
         private readonly PlayerRepository _playerRepository = PlayerRepository.Instance;
+        TeamService teamService = new TeamService();
         public void Add(Player player)
         {
             _playerRepository.Add(player);
@@ -40,6 +41,46 @@ namespace FootballEngine.Services
         public void Save()
         {
             _playerRepository.Save();
+        }
+        public IEnumerable<Player> OrderByFirstName()
+        {
+            return GetAll().OrderBy(p => p.FirstName);
+        }
+        public IEnumerable<Player> OrderByLastName()
+        {
+            return GetAll().OrderBy(p => p.LastName);
+        }
+        public IEnumerable<Player> OrderByDateOfBirth()
+        {
+            return GetAll().OrderBy(p => p.DateOfBirth);
+        }
+        public IEnumerable<Player> OrderByTeamName()
+        {
+            return GetAll().OrderBy(p => teamService.GetBy(p.TeamId).Name);
+        }
+        public IEnumerable<Player> OrderByNumberOfMatchesPlayed()
+        {
+            return GetAll().OrderByDescending(p => p.MatchesPlayed);
+        }
+        public IEnumerable<Player> OrderByNumberOfGoals()
+        {
+            return GetAll().OrderByDescending(p => p.Goals.Count());
+        }
+        public IEnumerable<Player> OrderByNumberOfAssists()
+        {
+            return GetAll().OrderByDescending(p => p.Assists.Count());
+        }
+        public IEnumerable<Player> OrderByNumberOfRedCards()
+        {
+            return GetAll().OrderByDescending(p => p.RedCards.Count());
+        }
+        public IEnumerable<Player> OrderByNumberOfYellowCards()
+        {
+            return GetAll().OrderByDescending(p => p.YellowCards.Count());
+        }
+        public IEnumerable<Player> OrderByPlayerStatus()
+        {
+            return GetAll().OrderByDescending(p => (int)p.PlayerStatus);
         }
     }
 }

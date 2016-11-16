@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace FootballEngine.Domain.ValueObjects
                 Value = name;
             else
             {
-                throw new ArgumentException("Not a valid Name");
+                throw new InvalidNameException("Not a valid Name");
             }
         }
 
@@ -27,7 +28,7 @@ namespace FootballEngine.Domain.ValueObjects
                 result = new PlayerName(name);
                 return true;
             }
-            catch (ArgumentException)
+            catch (InvalidNameException)
             {
                 result = null;
                 return false;

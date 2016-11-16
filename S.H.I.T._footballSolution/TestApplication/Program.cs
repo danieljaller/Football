@@ -37,7 +37,7 @@ namespace TestApplication
             searchService = new SearchService();
             teamService = new TeamService();
 
-            CreateTestData();
+            //CreateTestData();
 
             bool keepRunning = true;
             while (keepRunning)
@@ -71,7 +71,9 @@ namespace TestApplication
                     case ConsoleKey.D5:
                         FreeSearch();
                         break;
-
+                    case ConsoleKey.D6:
+                        CreateMatchTable();
+                        break;
 
                 }
             }
@@ -105,8 +107,7 @@ namespace TestApplication
                 teamService.Add(team);
             }
             List<Guid> teamIds = teamList.Select(p => p.Id).ToList();
-            SerieAndMatchGenerator generator = new SerieAndMatchGenerator();
-            List<Guid> matchIds = generator.SerieGenerator(teamIds, DateTime.Now);
+            List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds, DateTime.Now);
             Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
 
             try
@@ -224,7 +225,7 @@ namespace TestApplication
                 playerBuilder.AppendLine($"Wins: {team.Wins}");
                 playerBuilder.AppendLine($"Losses: {team.Losses}");
                 playerBuilder.AppendLine($"Ties: {team.Ties}");
-                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifferens}");
+                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifference}");
                 playerBuilder.AppendLine($"Matches Played: {team.MatchIds.Count}");
                 playerBuilder.AppendLine($"Players: {team.PlayerIds.Count}");
 
@@ -239,30 +240,70 @@ namespace TestApplication
 
             foreach (var serie in serieList)
             {
+            
+                StringBuilder serieBuilder = new StringBuilder();
+                serieBuilder.AppendLine($"Name: {serie.Name.Value}");
+                serieBuilder.AppendLine($"Number of teams: {serie.TeamTable.Count}");
+                serieBuilder.AppendLine($"Matches:"); 
+                foreach (var match in serie.MatchTable)
+                {
+                    serieBuilder.AppendLine($"{teamService.GetBy(matchService.GetBy(match).HomeTeamId).Name} - {teamService.GetBy(matchService.GetBy(match).VisitorTeamId).Name} - {matchService.GetBy(match).Location.ToString()} - {matchService.GetBy(match).Date.ToShortDateString()}");
+                }
+                
 
-                StringBuilder playerBuilder = new StringBuilder();
-                playerBuilder.AppendLine($"Name: {serie.Name.Value}");
-                playerBuilder.AppendLine($"Number of teams: {serie.TeamTable.Count}");
-                playerBuilder.AppendLine($"Matches: {serie.MatchTable}");
-
-                Console.WriteLine(playerBuilder.ToString());
+                Console.WriteLine(serieBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
         }
 
         private static void PrintMatches(List<Match> matchList)
         {
-            foreach (var match  in matchList)
+            foreach (var match in matchList)
             {
-
-            StringBuilder playerBuilder = new StringBuilder();
-            playerBuilder.AppendLine($"Location:{match.Location.Value}  ");
-            playerBuilder.AppendLine($"Date:{match.Date.Date.ToString()} ");
-            playerBuilder.AppendLine($"Points:{match.Goals.Count} ");
-            Console.WriteLine(playerBuilder.ToString());
-            Console.WriteLine("----------------------------------------------------------");
+                StringBuilder playerBuilder = new StringBuilder();
+                playerBuilder.AppendLine($"Home team: {teamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Value}");
+                playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Value}");
+                playerBuilder.AppendLine($"Total match time: {match.MatchTimeInMinutes}");
+                playerBuilder.AppendLine($"Goals:");
+                foreach(var goal in match.Goals)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
+                }
+                playerBuilder.AppendLine($"Assists:");
+                foreach (var assist in match.Assists)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
+                }
+                playerBuilder.AppendLine("Red cards: ");
+                foreach(var card in match.RedCards)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                }
+                playerBuilder.AppendLine("Yellow cards:");
+                foreach(var card in match.YellowCards)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                }
+                playerBuilder.AppendLine("Injuries: ");
+                foreach(var injury in match.Injuries)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
+                }
+                playerBuilder.AppendLine($"Location: {match.Location.Value}  ");
+                playerBuilder.AppendLine($"Date: {match.Date.Date.ToShortDateString()} ");
+                playerBuilder.AppendLine($"Home team lineup:");
+                foreach (var player in match.HomeLineup)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(player).FullName}");
+                }
+                playerBuilder.AppendLine($"Visitor team lineup:");
+                foreach (var player in match.VisitorLineup)
+                {
+                    playerBuilder.AppendLine($"{playerService.GetBy(player).FullName}");
+                }
+                Console.WriteLine(playerBuilder.ToString());
+                Console.WriteLine("----------------------------------------------------------");
             }
-
         }
 
         private static void FreeSearch()
@@ -274,7 +315,7 @@ namespace TestApplication
 
             foreach (var item in searchResult)
             {
-                if(item.GetType()== typeof(Team))
+                if (item.GetType() == typeof(Team))
                 {
                     var team = item as Team;
                     Console.WriteLine(team.Name.Value);
@@ -288,7 +329,35 @@ namespace TestApplication
             }
         }
 
+        private static void CreateMatchTable()
+        {
+            Console.Write("Namn på serie: ");
+            string serieName = Console.ReadLine();
+            DateTime startDate = new DateTime();
+            while (true)
+            {
+                Console.Write("Startdatum: ");
+                try
+                {
+                    startDate = DateTime.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Felaktigt format");
+                }
+            }
 
+            List<Guid> teams = new List<Guid>();
+            teams = teamService.GetAll().Select(t => t.Id).ToList().GetRange(0, 16);
+            List<Guid> matchTable = SerieAndMatchGenerator.SerieGenerator(teams, startDate);
+            foreach (var match in matchTable)
+            {
+                matchService.Add(matchService.GetBy(match));
+            }
+            serieService.Add(new Serie(new GeneralName(serieName), teams, matchTable));
+
+        }
 
 
         private static void PrintMenu()
@@ -297,6 +366,7 @@ namespace TestApplication
             Console.WriteLine("+-----------------------------------------------------------------------+");
             Console.WriteLine("|   [1] Print Players         [3] Print Series          [5] FreeSearch  |");
             Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit        |");
+            Console.WriteLine("|   [6] Create Serie                                                    |");
             Console.WriteLine("+-----------------------------------------------------------------------+");
             Console.WriteLine();
         }

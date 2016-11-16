@@ -20,9 +20,13 @@ namespace AdminApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<string> testList = new List<string> { "Lag1", "Lag2", "Spelare1", "Spelare2", "Serie1", "Serie2", "Match1", "Match2" };
         public MainWindow()
         {
             InitializeComponent();
+            SearchBox.MaxDropDownHeight = 0;
+            SearchBox.Loaded += new RoutedEventHandler(SearchBox_Loaded);
+            SearchBox.DropDownClosed += new EventHandler(SearchBox_DropDownClosed);
         }
 
         private void SeriesButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +52,64 @@ namespace AdminApp
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new AdministratePlayersPage();
+        }
+        private void SearchBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (SearchBox.Text != string.Empty)
+            {
+                TextBox textBox = SearchBox.Template.FindName("PART_EditableTextBox", SearchBox) as TextBox;
+
+                if (!SearchBox.Items.Contains(textBox.Text) && SearchBox.SelectedIndex < 0)
+                {
+                    textBox.Clear();
+                }
+            }
+
+        }
+
+        private void SearchBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            SearchBox.ApplyTemplate();
+            TextBox textBox = SearchBox.Template.FindName("PART_EditableTextBox", SearchBox) as TextBox;
+            textBox.SelectionLength = 0;
+
+            if (textBox != null)
+            {
+                textBox.TextChanged += delegate
+                {
+                    SearchBox.IsDropDownOpen = true;
+                    SearchBox.SelectedIndex = -1;
+                    SearchBox.Items.Filter += a =>
+                    {
+                        if (a.ToString().ToLower().Contains(textBox.Text.ToLower()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    };
+
+                    textBox.SelectionLength = 0;
+                    textBox.CaretIndex = textBox.Text.Length;
+                };
+            }
+        }
+
+        private void SearchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (SearchBox.Text.Length == 0)
+            {
+                SearchBox.IsDropDownOpen = false;
+                SearchBox.ItemsSource = null;
+                SearchBox.MaxDropDownHeight = 0;
+            }
+            else
+            {
+                SearchBox.ItemsSource = testList; //Lägg till itemsource här!!
+                SearchBox.MaxDropDownHeight = 200;
+            }
         }
     }
 }
