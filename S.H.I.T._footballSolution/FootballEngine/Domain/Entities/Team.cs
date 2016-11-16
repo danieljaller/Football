@@ -24,7 +24,9 @@ namespace FootballEngine.Domain.Entities
             Wins = 0;
             Losses = 0;
             Ties = 0;
-            GoalDifferens = 0;
+            GoalsFor = 0;
+            GoalsAgainst = 0;
+            GoalDifference = 0;
         }
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }
@@ -39,10 +41,12 @@ namespace FootballEngine.Domain.Entities
                 return (Wins * 3) + (Ties * 1);
             }
         }
+        public int GoalsFor { get; set; }
+        public int GoalsAgainst { get; set; }
         public List<Guid> PlayerIds { get; set; }
         public List<Guid> MatchIds { get; set; }
         public List<Guid> SeriesIds { get; set; }
-        public int GoalDifferens { get; set; }
+        public int GoalDifference { get; set; }
     }
 }
 

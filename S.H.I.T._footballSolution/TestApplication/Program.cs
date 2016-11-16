@@ -24,13 +24,6 @@ namespace TestApplication
         private static TeamService teamService;
         private static PlayerService playerService;
 
-        //private static readonly string directoryName = "Resources";
-        //private static readonly string matchesFileName = "Matches.xml";
-        //private static readonly string playerFileName = "Players.xml";
-        //private static readonly string seriesFileName = "Series.xml";
-        //private static readonly string teamFileName = "Teams.xml";
-
-
         public Program()
         {
 
@@ -232,7 +225,7 @@ namespace TestApplication
                 playerBuilder.AppendLine($"Wins: {team.Wins}");
                 playerBuilder.AppendLine($"Losses: {team.Losses}");
                 playerBuilder.AppendLine($"Ties: {team.Ties}");
-                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifferens}");
+                playerBuilder.AppendLine($"GoalDifferens: {team.GoalDifference}");
                 playerBuilder.AppendLine($"Matches Played: {team.MatchIds.Count}");
                 playerBuilder.AppendLine($"Players: {team.PlayerIds.Count}");
 

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:UserApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="PlayerInfoPage">
+      Title="PlayerInfoPage"
+      DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=PlayerInfoViewModle}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -33,5 +34,16 @@
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Gula kort:" />
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" />
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Status:"/>
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="9">
+            <TextBlock Text="{Binding Team, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding Goals, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding Assists, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding RedCards, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding YellowCards, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding MatchesPlayed, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding PlayerStatus, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
     </Grid>
 </Page>
