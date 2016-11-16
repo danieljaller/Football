@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FootballEngine.Exceptions;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
@@ -16,11 +17,11 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestInitialize]
         public void Init()
         {
-            Match_CreateNewMatch();
+            Match_CreateNewValidMatch();
         }
 
         [TestMethod]
-        public void Match_CreateNewMatch()
+        public void Match_CreateNewValidMatch()
         {
             match = new Match(DateTime.Now, Guid.NewGuid(), Guid.NewGuid());
             Assert.IsNotNull(match);
@@ -55,6 +56,43 @@ namespace FootballEngine.Domain.Entities.Tests
         public void Match_GetMatchResultAsStringTest()
         {
             Assert.AreEqual($"{match.HomeGoals.Value} - {match.VisitorGoals.Value}", match.GetMatchResultAsString());
+        }
+
+
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidDateTimeException))]
+        public void Match_CreateInvalidMatch1()
+        {
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(EmptyGuidException))]
+        public void Match_CreateInvalidMatch2()
+        {
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(EmptyGuidException))]
+        public void Match_CreateInvalidMatch3()
+        {
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(EmptyGuidException))]
+        public void Match_CreateInvalidMatch4()
+        {
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Match_CreateInvalidMatch5()
+        {
+
         }
     }
 }
