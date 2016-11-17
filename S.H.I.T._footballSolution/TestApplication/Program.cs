@@ -31,13 +31,14 @@ namespace TestApplication
         }
         static void Main(string[] args)
         {
+
             matchService = new MatchService();
             teamService = new TeamService();
             playerService = new PlayerService(teamService);
             serieService = new SerieService();
             searchService = new SearchService();
 
-            //CreateTestData();
+            CreateTestData();
 
             bool keepRunning = true;
             while (keepRunning)

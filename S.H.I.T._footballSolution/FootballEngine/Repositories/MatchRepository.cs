@@ -14,7 +14,7 @@ namespace FootballEngine.Repositories
     public class MatchRepository : IRepository<Match>
     {
         private List<Match> matches;
-        public MatchRepository()
+        private MatchRepository()
         {
             Load();
         }
@@ -34,6 +34,8 @@ namespace FootballEngine.Repositories
         }
         public void Add(Match match)
         {
+            if (match == null)
+            { throw new ArgumentNullException($"Match cannot be null."); }
             if (matches != null && match != null)
             {
                 if (!matches.Select(s => s.Id).Contains(match.Id))
@@ -41,6 +43,7 @@ namespace FootballEngine.Repositories
                     matches.Add(match);
                 }
             }
+
         }
 
         public void Delete(Guid id)
@@ -83,22 +86,18 @@ namespace FootballEngine.Repositories
 
             return null;
         }
-
+        string[] directories = new string[2] { "FootballEngine", "Resources" };
         public void Load()
         {
             string path;
             try
             {
-                if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", false, out path))
+                if (TryGetFilePath.InSolutionDirectory("Matches.xml", directories, false, out path))
                 {
                     matches = (List<Match>)XmlHandler.LoadFrom(path, typeof(List<Match>));
                 }
-                else
-                {
-                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Matches.xml\", \"Resources\", false, out path) failed");
-                }
             }
-            catch
+            catch (LoadFailedException)
             {
                 matches = new List<Match>();
             }
@@ -109,19 +108,18 @@ namespace FootballEngine.Repositories
             try
             {
                 string path;
-                if (TryGetFilePath.InProjectDirectory("Matches.xml", "Resources", true, out path))
+
+                if (TryGetFilePath.InSolutionDirectory("Matches.xml", directories, true, out path))
                 {
                     XmlHandler.SaveTo(path, matches);
                 }
-                else
-                {
-                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Matches.xml\", \"Resources\", true, out path) failed");
-                }
             }
-            catch (Exception innerException)
+            catch (SaveFailedException s)
             {
-                throw new Exception("Could not save file", innerException);
+                throw s;
             }
+            catch (ArgumentException a)
+            { throw a; }
         }
     }
 }
