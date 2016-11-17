@@ -72,9 +72,9 @@
     <Compile Include="Services\SerieService.cs" />
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resorces\" />
-    <Folder Include="Resources\" />
+    <Content Include="Resources\Matches.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
