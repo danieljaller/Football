@@ -19,21 +19,21 @@ namespace FootballEngine.Helper.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void SerieAndMatchGenerator_InvalidInputTest1()
         {
             SerieAndMatchGenerator.SerieGenerator(null, DateTime.Now);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNumberOfPlayersException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void SerieAndMatchGenerator_InvalidInputTest2()
         {
             SerieAndMatchGenerator.SerieGenerator(new List<Guid>(), DateTime.Now);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNumberOfPlayersException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void SerieAndMatchGenerator_InvalidInputTest3()
         {
             List<Guid> teamIds = new List<Guid>();
@@ -45,7 +45,7 @@ namespace FootballEngine.Helper.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNumberOfPlayersException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void SerieAndMatchGenerator_InvalidInputTest4()
         {
             List<Guid> teamIds = new List<Guid>();
@@ -57,7 +57,7 @@ namespace FootballEngine.Helper.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidDateTimeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void SerieAndMatchGenerator_InvalidInputTest5()
         {
             List<Guid> teamIds = new List<Guid>();

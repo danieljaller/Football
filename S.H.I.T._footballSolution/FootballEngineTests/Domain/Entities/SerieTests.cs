@@ -47,7 +47,7 @@ namespace FootballEngine.Domain.Entities.Tests
 
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void Serie_CreateInvalidSerie1()
         {
             Serie serie = new Serie(null, validTeamTable, validMatchTable);

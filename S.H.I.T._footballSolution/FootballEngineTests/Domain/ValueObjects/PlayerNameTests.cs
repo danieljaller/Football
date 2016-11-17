@@ -14,105 +14,105 @@ namespace FootballEngine.Domain.ValueObjects.Tests
     {
         #region Create invalid names
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName1()
         {
             PlayerName p = new PlayerName(null);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName2()
         {
             PlayerName p = new PlayerName("");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName3()
         {
             PlayerName p = new PlayerName("#");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName4()
         {
             PlayerName p = new PlayerName("1");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName5()
         {
             PlayerName p = new PlayerName(" ");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName6()
         {
             PlayerName p = new PlayerName("Aaaaaaaaaaaaaaaaaaaaaaaaaa"); // 26
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName7()
         {
             PlayerName p = new PlayerName("a");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName8()
         {
             PlayerName p = new PlayerName(" aaa");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName9()
         {
             PlayerName p = new PlayerName("a  ");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName10()
         {
             PlayerName p = new PlayerName("a  \n");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName11()
         {
             PlayerName p = new PlayerName("+");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName12()
         {
             PlayerName p = new PlayerName("^");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName13()
         {
             PlayerName p = new PlayerName("´");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName14()
         {
             PlayerName p = new PlayerName("`");
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidNameException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName15()
         {
             PlayerName p = new PlayerName("¨");

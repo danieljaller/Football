@@ -24,13 +24,13 @@ namespace FootballEngine.Helper
             if (teams == null)
                 throw new ArgumentNullException($"{nameof(teams)} can not be null.");
             if (teams.Count == 0)
-                throw new ArgumentException($"{nameof(teams)} can not be empty.");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
             if (teams.Count < 16)
-                throw new ArgumentException($"{nameof(teams)} can contain {NumberOfPlayerRequired} players.");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
             if (teams.Count > 16)
-                throw new ArgumentException($"{nameof(teams)} can contain {NumberOfPlayerRequired} players.");
-            if (DateTime.Compare(startDate, DateTime.Now) < 0)
-                throw new ArgumentException($"{nameof(startDate)} can not be earlier than today ({DateTime.Now.ToShortDateString()}).");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
+            if (startDate.Day < DateTime.Now.Day)
+                throw new ArgumentOutOfRangeException($"{nameof(startDate)} ({startDate}) can not be earlier than today ({DateTime.Now}).");
 
             latestDate = startDate.AddDays(-1);
             matches = new List<Guid>();
