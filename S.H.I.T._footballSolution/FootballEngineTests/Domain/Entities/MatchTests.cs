@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FootballEngine.Exceptions;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
@@ -16,11 +17,11 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestInitialize]
         public void Init()
         {
-            Match_CreateNewMatch();
+            Match_CreateNewValidMatch();
         }
 
         [TestMethod]
-        public void Match_CreateNewMatch()
+        public void Match_CreateNewValidMatch()
         {
             match = new Match(DateTime.Now, Guid.NewGuid(), Guid.NewGuid());
             Assert.IsNotNull(match);
@@ -55,6 +56,43 @@ namespace FootballEngine.Domain.Entities.Tests
         public void Match_GetMatchResultAsStringTest()
         {
             Assert.AreEqual($"{match.HomeGoals.Value} - {match.VisitorGoals.Value}", match.GetMatchResultAsString());
+        }
+
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Match_CreateInvalidMatch1()
+        {
+            Match match = new Match(DateTime.Now.AddDays(-1), Guid.NewGuid(), Guid.NewGuid());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Match_CreateInvalidMatch2()
+        {
+            Match match = new Match(DateTime.Now.AddYears(2), Guid.NewGuid(), Guid.NewGuid());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Match_CreateInvalidMatch3()
+        {
+            Match match = new Match(DateTime.Now, Guid.Empty, Guid.Empty);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Match_CreateInvalidMatch4()
+        {
+            Match match = new Match(DateTime.Now, Guid.NewGuid(), Guid.Empty);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Match_CreateInvalidMatch5()
+        {
+            Match match = new Match(DateTime.Now, Guid.Empty, Guid.NewGuid());
         }
     }
 }

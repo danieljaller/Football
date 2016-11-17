@@ -5,46 +5,73 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FootballEngine.Exceptions;
+using FootballEngineTests;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
     [TestClass()]
     public class SerieTests
     {
-        private Serie serie;
+        private Serie validSerie;
+        private ValueObjects.GeneralName validSerieName = new ValueObjects.GeneralName("Serie");
+        private List<Guid> validTeamTable = TestDataFactory.CreateListWithGuids(Serie.NumberOfTeams);
+        private List<Guid> validMatchTable = TestDataFactory.CreateListWithGuids(Serie.NumberOfMatches);
 
         [TestInitialize]
         public void Init()
         {
-            Serie_CreateNewSerie();
+            Serie_CreateNewValidSerie();
         }
 
         [TestMethod()]
-        public void Serie_CreateNewSerie()
+        public void Serie_CreateNewValidSerie()
         {
-            List<Guid> teamIds = new List<Guid>();
-            for (int i = 0; i < Serie.NumberOfTeams; i++)
-            {
-                teamIds.Add(Guid.NewGuid());
-            }
-            List<Guid> matchIds = new List<Guid>();
-            for (int i = 0; i < Serie.NumberOfMatches; i++)
-            {
-                matchIds.Add(Guid.NewGuid());
-            }
-            serie = new Serie(new ValueObjects.GeneralName("Serie"), teamIds, matchIds);
-            Assert.IsNotNull(serie);
+            validSerie = new Serie(validSerieName, validTeamTable, validMatchTable);
+            Assert.IsNotNull(validSerie);
         }
 
         [TestMethod]
         public void Serie_ValidateNewSerie()
         {
-            Assert.AreNotEqual(Guid.Empty, serie.Id);
-            Assert.IsNotNull(serie.Name);
-            Assert.IsNotNull(serie.MatchTable);
-            Assert.AreEqual(0, serie.MatchTable.Count);
-            Assert.IsNotNull(serie.TeamTable);
-            Assert.AreEqual(0, serie.TeamTable.Count);
+            Assert.AreNotEqual(Guid.Empty, validSerie.Id);
+            Assert.IsNotNull(validSerie.Name);
+            Assert.AreEqual(validSerieName, validSerie.Name);
+            Assert.IsNotNull(validSerie.MatchTable);
+            Assert.AreEqual(Serie.NumberOfMatches, validSerie.MatchTable.Count);
+            Assert.AreEqual(validTeamTable, validSerie.TeamTable);
+            Assert.IsNotNull(validSerie.TeamTable);
+            Assert.AreEqual(Serie.NumberOfTeams, validSerie.TeamTable.Count);
+            Assert.AreEqual(validMatchTable, validSerie.MatchTable);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Serie_CreateInvalidSerie1()
+        {
+            Serie serie = new Serie(null, validTeamTable, validMatchTable);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Serie_CreateInvalidSerie2()
+        {
+            Serie serie = new Serie(validSerieName, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Serie_CreateInvalidSerie3()
+        {
+            Serie serie = new Serie(validSerieName, null, validMatchTable);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Serie_CreateInvalidSerie4()
+        {
+            Serie serie = new Serie(validSerieName, validTeamTable, null);
         }
     }
 }

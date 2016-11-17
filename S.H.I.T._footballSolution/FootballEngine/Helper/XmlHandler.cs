@@ -26,7 +26,7 @@ namespace FootballEngine.Helper
             }
             catch (Exception innerException)
             {
-                throw new Exception($"Could not load {filePath}", innerException);
+                throw new LoadFailedException($"Could not load {filePath}", innerException);
             }
         }
 
@@ -61,7 +61,7 @@ namespace FootballEngine.Helper
                 }
                 else
                 {
-                    throw new Exception("Not a valid type to save");
+                    throw new ArgumentException("Not a valid type to save");
                 }
 
                 XmlSerializer xmlSerializer = new XmlSerializer(typeToSave);
@@ -72,7 +72,7 @@ namespace FootballEngine.Helper
             }
             catch (Exception innerException)
             {
-                throw new Exception("XML-serialization failed", innerException);
+                throw new SaveFailedException("XML-serialization failed", innerException);
             }
         }
     }

@@ -12,7 +12,12 @@ namespace FootballEngine.Services
     public class TeamService : IService<Team>
     {
         private readonly TeamRepository _teamRepository = TeamRepository.Instance;
-        PlayerService playerService = new PlayerService();
+        PlayerService playerService;
+        public TeamService()
+        {
+            playerService = new PlayerService(this);
+            
+        }
 
         public void Add(Team team)
         {
@@ -21,15 +26,19 @@ namespace FootballEngine.Services
 
         public void Delete(Guid id)
         {
-            foreach (var player in GetAllPlayersBy(id))
+            foreach (var player in GetAllPlayersByTeam(id))
             {
                 playerService.Delete(player.Id);
             }
             _teamRepository.Delete(id);
         }
-
-        public IEnumerable<Player> GetAllPlayersBy(Guid id)
+        public IEnumerable<Team> GetAllTeamsBySerie(Guid serieId)
         {
+            return GetAll().Where(t => t.SeriesIds.Contains(serieId));
+        }
+
+        public IEnumerable<Player> GetAllPlayersByTeam(Guid id)
+        {   
             return playerService.GetAll().Where(p => p.TeamId == id);
         }
 
@@ -53,49 +62,49 @@ namespace FootballEngine.Services
             _teamRepository.Save();
         }
 
-        public void OrderByTeamName()
+        public IEnumerable<Team> OrderByTeamName(Guid serieId)
         {
-            GetAll().OrderBy(t => t.Name.Value);
+            return GetAllTeamsBySerie(serieId).OrderBy(t => t.Name.Value);
         }
 
-        public IEnumerable<Team> OrderByPoints()
+        public IEnumerable<Team> OrderByPoints(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.Points);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Points);
         }
 
-        public IEnumerable<Team> OrderByNumberOfGoalsFor()
+        public IEnumerable<Team> OrderByNumberOfGoalsFor(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.GoalsFor);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.GoalsFor);
         }
 
-        public IEnumerable<Team> OrderByNumberOfGoalsAgainst()
+        public IEnumerable<Team> OrderByNumberOfGoalsAgainst(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.GoalsAgainst);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.GoalsAgainst);
         }
 
-        public IEnumerable<Team> OrderByNumberOfMatchesPlayed()
+        public IEnumerable<Team> OrderByNumberOfMatchesPlayed(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.MatchIds.Count());
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Count());
         }
 
-        public IEnumerable<Team> OrderByGoalDifference()
+        public IEnumerable<Team> OrderByGoalDifference(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.GoalDifference);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.GoalDifference);
         }
 
-        public IEnumerable<Team> OrderByNumberOfWins()
+        public IEnumerable<Team> OrderByNumberOfWins(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.Wins);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Wins);
         }
 
-        public IEnumerable<Team> OrderByNumberOfLosses()
+        public IEnumerable<Team> OrderByNumberOfLosses(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.Losses);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Losses);
         }
 
-        public IEnumerable<Team> OrderByNumberOfTies()
+        public IEnumerable<Team> OrderByNumberOfTies(Guid serieId)
         {
-            return GetAll().OrderByDescending(t => t.Ties);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Ties);
         }
     }
 }
