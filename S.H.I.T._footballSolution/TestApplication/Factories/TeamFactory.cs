@@ -30,7 +30,7 @@ namespace TestApplication.Factories
             return team;
         }
 
-        public static IEnumerable<Team> Create(IEnumerable<IEnumerable<Guid>> playerIds)
+        public static IEnumerable<Team> Create(List<List<Guid>> playerIds)
         {
             if (playerIds == null)
                 throw new Exception($"{nameof(playerIds)} is null");

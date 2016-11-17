@@ -118,6 +118,14 @@ namespace TestApplication
                 listOfPlayerLists.Add(PlayerFactory.Create(Convert.ToUInt32(rand.Next(24, 31))) as List<Player>);
             }
 
+            List<List<Guid>> listOfPlayerIdLists = new List<List<Guid>>();
+            foreach (List<Player> _playerList in listOfPlayerLists)
+            {
+                listOfPlayerIdLists.Add(_playerList.Select(p => p.Id) as List<Guid>);
+            }
+
+            List<Team> teamList = TeamFactory.Create(listOfPlayerIdLists) as List<Team>;
+
 
         }
 
