@@ -24,13 +24,6 @@ namespace TestApplication
         private static TeamService teamService;
         private static PlayerService playerService;
 
-        //private static readonly string directoryName = "Resources";
-        //private static readonly string matchesFileName = "Matches.xml";
-        //private static readonly string playerFileName = "Players.xml";
-        //private static readonly string seriesFileName = "Series.xml";
-        //private static readonly string teamFileName = "Teams.xml";
-
-
         public Program()
         {
 

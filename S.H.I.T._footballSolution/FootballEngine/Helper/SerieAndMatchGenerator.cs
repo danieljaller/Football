@@ -29,7 +29,7 @@ namespace FootballEngine.Helper
                 throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
             if (teams.Count > 16)
                 throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
-            if (startDate.Day < DateTime.Now.Day)
+            if (startDate < DateTime.Now)
                 throw new ArgumentOutOfRangeException($"{nameof(startDate)} ({startDate}) can not be earlier than today ({DateTime.Now}).");
 
             latestDate = startDate.AddDays(-1);

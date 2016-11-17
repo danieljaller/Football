@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AdminApp
+namespace UserApp.Views
 {
     /// <summary>
-    /// Interaction logic for AdministratePlayersPage.xaml
+    /// Interaction logic for PlayerInfoView.xaml
     /// </summary>
-    public partial class AdministratePlayersPage : Page
+    public partial class PlayerInfoView : UserControl
     {
-        public AdministratePlayersPage()
+        public PlayerInfoView()
         {
             InitializeComponent();
-            playerDoBPicker.DisplayDateEnd=DateTime.Today;
         }
     }
 }

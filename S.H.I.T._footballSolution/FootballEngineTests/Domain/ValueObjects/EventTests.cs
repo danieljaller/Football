@@ -31,7 +31,7 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         public void Event_ValidateNewEvent()
         {
             Assert.AreEqual(validGuid, validEvent.PlayerId);
-            // TimeOfEvent, max value?
+            Assert.AreEqual(Convert.ToUInt32(30), validEvent.TimeOfEvent);           
         }
 
         [TestMethod]
@@ -41,11 +41,11 @@ namespace FootballEngine.Domain.ValueObjects.Tests
             Event _event = new Event(Guid.Empty, 0);
         }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
-        //public void Event_CreateInvalidEvent2()
-        //{
-        //    // Create Event with large timeOfEvent
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Event_CreateInvalidEvent2()
+        {
+            Event _event = new Event(Guid.NewGuid(), Convert.ToUInt32(Event.TimeOfEventMaximumValue + 1));
+        }
     }
 }

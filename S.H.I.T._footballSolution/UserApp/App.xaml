@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:UserApp"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <local:ViewModelLocator x:Key="MainViewModelLocator"></local:ViewModelLocator>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

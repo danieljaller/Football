@@ -55,11 +55,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InformationHolders\ObjectHolder.cs" />
+    <Compile Include="Utilities\CustomCommand.cs" />
+    <Compile Include="Utilities\Messenger.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\PlayerInfoViewModel.cs" />
+    <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\SinglePlayerViewModel.cs" />
     <Compile Include="Views\MatchProtocol.xaml.cs">
       <DependentUpon>MatchProtocol.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlayerInfoPage.xaml.cs">
       <DependentUpon>PlayerInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerInfoView.xaml.cs">
+      <DependentUpon>PlayerInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlayerPage.xaml.cs">
       <DependentUpon>PlayerPage.xaml</DependentUpon>
@@ -99,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlayerInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayerInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,7 +172,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
+      <Project>{11603a52-1f43-48a5-9b41-ff02da7ac2ad}</Project>
+      <Name>FootballEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

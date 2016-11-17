@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:UserApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="SinglePlayerPage">
+      Title="SinglePlayerPage"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=SinglePlayerViewModel}">
 
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
@@ -20,9 +22,17 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <TextBlock Name="singlePlayerName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"  FontSize="15" FontWeight="Black" Text="Spelarnamn"/>
-        <Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Click="playerInfo_Click" Content="Spelarinfo" />
+        <!--<Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Click="playerInfo_Click" Content="Spelarinfo" />-->
+        <Button Grid.Row="1" Grid.Column="0" Content="Spelarinfo" Command="{Binding ViewPlayerInfoCommand}">
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:InvokeCommandAction Command="{Binding ViewPlayerInfo}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+        </Button>
         <Button Name="team" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Click="team_Click" Content="Lag" />
-        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="singlePlayerPageFrame" />
+        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="singlePlayerPageFrame" Visibility="Hidden" />
+        <local:PlayerInfoView Grid.Row="2" Grid.Column="0" Visibility="{Binding ViewPlayerInfoVisibility, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Name="serieSelector" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
             <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
             <DataTemplate>

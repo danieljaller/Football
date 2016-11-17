@@ -61,17 +61,17 @@ namespace FootballEngine.Domain.Entities.Tests
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch1()
-        {
+        {            
             Match match = new Match(DateTime.Now.AddDays(-1), Guid.NewGuid(), Guid.NewGuid());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch2()
         {
-            Match match = new Match(DateTime.Now.AddYears(2), Guid.NewGuid(), Guid.NewGuid());
+            Match match = new Match(Match.EndDateForMatchCreation.AddDays(1), Guid.NewGuid(), Guid.NewGuid());
         }
 
         [TestMethod]
