@@ -22,15 +22,15 @@ namespace FootballEngine.Helper
         public static List<Guid> SerieGenerator(List<Guid> teams, DateTime startDate)
         {
             if (teams == null)
-                throw new NullReferenceException($"{nameof(teams)} can not be null.");
+                throw new ArgumentNullException($"{nameof(teams)} can not be null.");
             if (teams.Count == 0)
-                throw new InvalidNumberOfPlayersException($"{nameof(teams)} can not be empty.");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
             if (teams.Count < 16)
-                throw new InvalidNumberOfPlayersException($"{nameof(teams)} can contain {NumberOfPlayerRequired} players.");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
             if (teams.Count > 16)
-                throw new InvalidNumberOfPlayersException($"{nameof(teams)} can contain {NumberOfPlayerRequired} players.");
-            if (DateTime.Compare(startDate, DateTime.Now) < 0)
-                throw new InvalidDateTimeException($"{nameof(startDate)} can not be earlier than today ({DateTime.Now}).");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
+            if (startDate.Day < DateTime.Now.Day)
+                throw new ArgumentOutOfRangeException($"{nameof(startDate)} ({startDate}) can not be earlier than today ({DateTime.Now}).");
 
             latestDate = startDate.AddDays(-1);
             matches = new List<Guid>();

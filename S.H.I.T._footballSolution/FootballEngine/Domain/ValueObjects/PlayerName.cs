@@ -29,26 +29,26 @@ namespace FootballEngine.Domain.ValueObjects
         public static bool IsValidName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new InvalidNameException("The name is either null, empty or consists only of white-space characters.");
+                throw new ArgumentException("The name is either null, empty or consists only of white-space characters.");
 
             if (name.StartsWith(" "))
-                throw new InvalidNameException("A name can not start with ' '.");
+                throw new ArgumentException("A name can not start with ' '.");
 
             if (name.EndsWith(" "))
-                throw new InvalidNameException("A name can not end with ' '.");
+                throw new ArgumentException("A name can not end with ' '.");
 
             if (name.Length > MaxLenght)
-                throw new InvalidNameException($"Name is too long. Maximum length is {MaxLenght} characters.");
+                throw new ArgumentException($"Name is too long. Maximum length is {MaxLenght} characters.");
 
             if (name.Length < MinLenght)
-                throw new InvalidNameException($"Name is too Short. Minimum length is {MinLenght} characters.");
+                throw new ArgumentException($"Name is too Short. Minimum length is {MinLenght} characters.");
 
             foreach (char character in name)
             {
                 if (char.IsLetter(character) || character == '-' || character == ' ')
                     continue;
                 else
-                    throw new InvalidNameException("Name contains illegal characters. Can only contain letters, '-' and white-spaces.");
+                    throw new ArgumentException("Name contains illegal characters. Can only contain letters, '-' and white-spaces.");
             }
 
             return true;
@@ -62,7 +62,7 @@ namespace FootballEngine.Domain.ValueObjects
                 result = new PlayerName(name);
                 return true;
             }
-            catch (InvalidNameException)
+            catch (ArgumentException)
             {
                 result = null;
                 return false;

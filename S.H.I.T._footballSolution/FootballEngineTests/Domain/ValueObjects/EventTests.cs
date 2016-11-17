@@ -11,16 +11,41 @@ namespace FootballEngine.Domain.ValueObjects.Tests
     [TestClass()]
     public class EventTests
     {
-        //[TestMethod()]
-        //public void EventTest()
-        //{
-        //    Assert.Fail();
-        //}
+        private Event validEvent;
+        private Guid validGuid = Guid.NewGuid();
 
-        //[TestMethod()]
-        //public void EventTest1()
+        [TestInitialize]
+        public void Init()
+        {
+            Event_CreateNewValidEvent();
+        }
+
+        [TestMethod]
+        public void Event_CreateNewValidEvent()
+        {
+            validEvent = new Event(validGuid, 30);
+            Assert.IsNotNull(validEvent);
+        }
+
+        [TestMethod]
+        public void Event_ValidateNewEvent()
+        {
+            Assert.AreEqual(validGuid, validEvent.PlayerId);
+            // TimeOfEvent, max value?
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Event_CreateInvalidEvent1()
+        {
+            Event _event = new Event(Guid.Empty, 0);
+        }
+
+        //[TestMethod]
+        //[ExpectedException(typeof(ArgumentException))]
+        //public void Event_CreateInvalidEvent2()
         //{
-        //    Assert.Fail();
+        //    // Create Event with large timeOfEvent
         //}
     }
 }

@@ -13,14 +13,14 @@ namespace FootballEngine.Domain.ValueObjects.Tests
     {
         #region Create invalid MatchGoals
         [TestMethod()]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void MatchGoals_CreateInvalidMatchGoals1()
         {
             MatchGoals m = new MatchGoals(-1);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void MatchGoals_CreateInvalidMatchGoals2()
         {
             MatchGoals m = new MatchGoals(51);

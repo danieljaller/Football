@@ -31,12 +31,12 @@ namespace FootballEngine.Domain.Entities
         private void ValidateInparameters(GeneralName name, List<Guid> teamTable, List<Guid> matchTable)
         {
             if (name == null)
-                throw new Exception($"{nameof(name)} can not be null.");
+                throw new ArgumentException($"{nameof(name)} can not be null.");
             try
             {
                 GeneralName generalName = new GeneralName(name.Value);
             }
-            catch (InvalidNameException ine)
+            catch (ArgumentException ine)
             {
                 throw ine;
             }
@@ -45,13 +45,13 @@ namespace FootballEngine.Domain.Entities
                 throw e;
             }
             if (teamTable == null)
-                throw new Exception($"{nameof(teamTable)} can not be null.");
+                throw new ArgumentNullException($"{nameof(teamTable)} can not be null.");
             if (teamTable.Count != NumberOfTeams)
-                throw new Exception($"Number of Guids in {nameof(teamTable)} must be {NumberOfTeams}.");
+                throw new ArgumentOutOfRangeException($"Number of Guids in {nameof(teamTable)} must be {NumberOfTeams}.");
             if (matchTable == null)
-                throw new Exception($"{nameof(matchTable)} can not be null.");
+                throw new ArgumentNullException($"{nameof(matchTable)} can not be null.");
             if (matchTable.Count != NumberOfMatches)
-                throw new Exception($"Number of Guids in {nameof(matchTable)} must be {NumberOfMatches}.");
+                throw new ArgumentOutOfRangeException($"Number of Guids in {nameof(matchTable)} must be {NumberOfMatches}.");
         }
     }
 }
