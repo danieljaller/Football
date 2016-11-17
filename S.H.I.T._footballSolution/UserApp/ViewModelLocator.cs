@@ -11,8 +11,8 @@ namespace UserApp
     public class ViewModelLocator
     {
         private static MatchService matchService = new MatchService();
-        private static PlayerService playerService = new PlayerService();
         private static TeamService teamService = new TeamService();
+        private static PlayerService playerService = new PlayerService(teamService);
         private static SerieService serieService = new SerieService();
 
         private static PlayerInfoViewModel _playerInfoViewModel = new PlayerInfoViewModel(teamService);
