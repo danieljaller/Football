@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Helper
 {
-    public static class StringUtil
+    public static class CharUtil
     {
         public static char ToUpper(this char c)
         {

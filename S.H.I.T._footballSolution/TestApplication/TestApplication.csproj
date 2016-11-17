@@ -47,7 +47,7 @@
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="Factories\TeamFactory.cs" />
     <Compile Include="Helper\IntUtil.cs" />
-    <Compile Include="Helper\StringUtil.cs" />
+    <Compile Include="Helper\CharUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
