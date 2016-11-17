@@ -14,13 +14,9 @@ namespace FootballEngine.Domain.ValueObjects
         public MatchGoals(int goals)
         {
             if (goals >= 0 && goals <=50)
-            {
                 Value = goals;
-            }
             else
-            {
-                throw new Exception("Invalid number of goals");
-            }
+                throw new ArgumentOutOfRangeException("Invalid number of goals");
         }
 
         public static bool TryParse(int goals, out MatchGoals result)
@@ -30,7 +26,7 @@ namespace FootballEngine.Domain.ValueObjects
                 result = new MatchGoals(goals);
                 return true;
             }
-            catch (ArgumentException)
+            catch (ArgumentOutOfRangeException)
             {
                 result = null;
                 return false;
