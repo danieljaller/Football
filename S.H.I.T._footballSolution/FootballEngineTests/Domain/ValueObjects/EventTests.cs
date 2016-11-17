@@ -30,7 +30,7 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         [TestMethod]
         public void Event_ValidateNewEvent()
         {
-            Assert.AreNotEqual(Guid.Empty, validEvent.PlayerId);
+            Assert.AreEqual(validGuid, validEvent.PlayerId);
             // TimeOfEvent, max value?
         }
 
