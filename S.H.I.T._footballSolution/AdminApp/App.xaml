@@ -4,7 +4,4 @@
              xmlns:local="clr-namespace:AdminApp"
              
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
 </Application>

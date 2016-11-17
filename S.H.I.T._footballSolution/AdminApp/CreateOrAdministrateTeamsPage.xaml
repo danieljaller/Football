@@ -33,11 +33,11 @@
 
         <Frame x:Name="CreateOrAdministrateTeamsPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" />
 
-        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Name="teamsOverview">
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Name="teamsOverview" Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -45,26 +45,26 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=teamsList, Path=SelectedItem}" FontWeight="Bold"/>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Grid.RowSpan="2">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:"/>
-
-                <TextBlock  FontWeight="Bold" Margin="5,5,0,0" Text="Serie:"/>
-
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serier:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Poäng:"/>
-
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Förluster"/>
-            
-            <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="gjorda mål"/>
-           
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="insl. mål"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Vinster:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Förluster:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Oavgjorda"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Gjorda mål:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Insläppta mål:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
+            
+            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="90" Margin="5"/>
+            
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="30,0,0,0">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelare"/>
-           
                 <TextBlock Margin="5,5,0,0" Text="Erika Erikson"/>
             </StackPanel>
             <TextBlock Grid.Row="2" Grid.ColumnSpan="5" Text="{Binding}"/>
         </Grid>
-        
+
     </Grid>
 </Page>

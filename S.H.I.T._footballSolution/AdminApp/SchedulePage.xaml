@@ -8,35 +8,40 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="SchedulePage">
 
-    <Grid Margin="40, 5, 0, 0">
+    <Grid Name="grid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" >Matcher</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="0" >Resultat</TextBlock>
-        <TextBlock Grid.Column="2" Grid.Row="0" >Datum</TextBlock>
+        <Rectangle Grid.ColumnSpan="4" Fill="LightBlue"/>
+        <TextBlock Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,25,0">Hemmalag</TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center">-</TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="25,0,0,0">Bortalag</TextBlock>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="25,0,0,0">Resultat</TextBlock>
+        <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="25,0,0,0">Datum</TextBlock>
 
-        <ListBox Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="0">
+        <ListBox Grid.Row="1" Grid.ColumnSpan="4" BorderThickness="0" Background="Transparent">
             <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Hemma - borta" />
                         <TextBlock Grid.Column="1" Text="Resultat" />
                         <TextBlock Grid.Column="2" Text="Datum" />
                     </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 </Page>

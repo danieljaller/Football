@@ -26,54 +26,20 @@ namespace AdminApp
             InitializeComponent();
         }
 
-        private void serieCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void schedule_Click(object sender, RoutedEventArgs e)
         {
-
+            seriePageFrame.Content = new SchedulePage();
         }
 
-        private void serieCheckBox_Unchecked(object sender, RoutedEventArgs e)
+
+        private void table_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-        private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void serie_Click(object sender, RoutedEventArgs e)
-        {
-            StatisticsPageFrame.Content = new SeriePage();
-        }
-
-        private void team_Click(object sender, RoutedEventArgs e)
-        {
-            StatisticsPageFrame.Content = new TeamPage();
+            seriePageFrame.Content = new TablePage();
         }
 
         private void player_Click(object sender, RoutedEventArgs e)
         {
-           StatisticsPageFrame.Content = new SinglePlayerPage();
-        }
-
-        private void playerinfo_Click(object sender, RoutedEventArgs e)
-        {
-            var matchWindow = new MatchProtocol();
-            var showMatch = matchWindow.ShowDialog();
+            seriePageFrame.Content = new PlayerPage();
         }
     }
 }
