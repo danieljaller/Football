@@ -30,36 +30,36 @@ namespace TestApplication.Factories
             return team;
         }
 
-        //public static IEnumerable<Team> Create(IEnumerable<IEnumerable<Guid>> playerIds)
-        //{
-        //    if (playerIds == null)
-        //        throw new Exception($"{nameof(playerIds)} is null");
-        //    if (playerIds.Count() == 0)
-        //        throw new Exception($"{nameof(playerIds)} is empty");
-        //    foreach (var collection in playerIds)
-        //    {
-        //        if (collection == null)
-        //            throw new Exception($"{nameof(collection)} is null");
-        //        if (collection.Count() == 0)
-        //            throw new Exception($"{nameof(collection)} is empty");
-        //        if (collection.Count() < 24)
-        //            throw new Exception($"Not enough Guid's in {nameof(collection)}");
-        //        if (collection.Count() > 30)
-        //            throw new Exception($"Too many Guid's in {nameof(collection)}");
-        //    }
+        public static IEnumerable<Team> Create(IEnumerable<IEnumerable<Guid>> playerIds)
+        {
+            if (playerIds == null)
+                throw new Exception($"{nameof(playerIds)} is null");
+            if (playerIds.Count() == 0)
+                throw new Exception($"{nameof(playerIds)} is empty");
+            foreach (var collection in playerIds)
+            {
+                if (collection == null)
+                    throw new Exception($"{nameof(collection)} is null");
+                if (collection.Count() == 0)
+                    throw new Exception($"{nameof(collection)} is empty");
+                if (collection.Count() < 24)
+                    throw new Exception($"Not enough Guid's in {nameof(collection)}");
+                if (collection.Count() > 30)
+                    throw new Exception($"Too many Guid's in {nameof(collection)}");
+            }
 
-        //    List<Team> teams = new List<Team>();
+            List<Team> teams = new List<Team>();
 
-        //    for (int i = 0; i < playerIds.Count(); i++)
-        //    {
-        //        GeneralName name = new GeneralName($"Team-{i + 1}");
-        //        GeneralName homeArena = new GeneralName($"Arena-{i + 1}");
-        //        Team team = new Team(name, homeArena);
-        //        team.PlayerIds = playerIds.ElementAt(i) as List<Guid>;
-        //        teams.Add(team);
-        //    }
+            for (int i = 0; i < playerIds.Count(); i++)
+            {
+                GeneralName name = new GeneralName($"Team-{i + 1}");
+                GeneralName homeArena = new GeneralName($"Arena-{i + 1}");
+                Team team = new Team(name, homeArena);
+                team.PlayerIds = playerIds.ElementAt(i) as List<Guid>;
+                teams.Add(team);
+            }
 
-        //    return teams;
-        //}
+            return teams;
+        }
     }
 }

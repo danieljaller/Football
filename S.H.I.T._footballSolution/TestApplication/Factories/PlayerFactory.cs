@@ -13,7 +13,7 @@ namespace TestApplication.Factories
     {
         public static IEnumerable<Player> Create(uint amount)
         {
-            amount = (amount > 30) ? 30 : amount;
+            //amount = (amount > 30) ? 30 : amount;
             List<Player> players = new List<Player>();
             Random rand = new Random();
             for (int i = 1; i <= amount; i++)

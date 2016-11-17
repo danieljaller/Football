@@ -80,6 +80,47 @@ namespace TestApplication
             }
         }
 
+        public static void CreateTestData_2()
+        {
+            const int maxInputAttempts = 5, maxNumberOfSeries = 20;
+            int inputAttempts = 0, numberOfSeries = 0;
+            Console.WriteLine($"Create test data. Maximum number of series to create: {maxNumberOfSeries}. Enter '0' to abort.");
+            
+            while (inputAttempts < maxInputAttempts)
+            {
+                Console.Write($"Enter the number of series that you want to create (Input attempts left: {maxInputAttempts - inputAttempts}): ");
+                Console.WriteLine();
+                string userInput = Console.ReadLine();
+                if (int.TryParse(userInput, out numberOfSeries))
+                {
+                    if (numberOfSeries == 0)
+                        return;
+                    if (numberOfSeries > maxNumberOfSeries)
+                    {
+                        Console.WriteLine("Will not create that many series. Try again.");
+                        continue;
+                    }
+                    break;
+                }
+                inputAttempts++;
+            }
+            if (inputAttempts == maxInputAttempts)
+            {
+                Console.WriteLine("Maximum input attempts reached! Returning to main menu.\nPress any key to continue...");
+                Console.ReadKey();
+                return;
+            }
+
+            Random rand = new Random();
+            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
+            for (int i = 0; i < numberOfSeries; i++)
+            {
+                listOfPlayerLists.Add(PlayerFactory.Create(Convert.ToUInt32(rand.Next(24, 31))) as List<Player>);
+            }
+
+
+        }
+
         public static void CreateTestData()
         {
 
@@ -245,16 +286,16 @@ namespace TestApplication
 
             foreach (var serie in serieList)
             {
-            
+
                 StringBuilder serieBuilder = new StringBuilder();
                 serieBuilder.AppendLine($"Name: {serie.Name.Value}");
                 serieBuilder.AppendLine($"Number of teams: {serie.TeamTable.Count}");
-                serieBuilder.AppendLine($"Matches:"); 
+                serieBuilder.AppendLine($"Matches:");
                 foreach (var match in serie.MatchTable)
                 {
                     serieBuilder.AppendLine($"{teamService.GetBy(matchService.GetBy(match).HomeTeamId).Name} - {teamService.GetBy(matchService.GetBy(match).VisitorTeamId).Name} - {matchService.GetBy(match).Location.ToString()} - {matchService.GetBy(match).Date.ToShortDateString()}");
                 }
-                
+
 
                 Console.WriteLine(serieBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
@@ -270,7 +311,7 @@ namespace TestApplication
                 playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Value}");
                 playerBuilder.AppendLine($"Total match time: {match.MatchTimeInMinutes}");
                 playerBuilder.AppendLine($"Goals:");
-                foreach(var goal in match.Goals)
+                foreach (var goal in match.Goals)
                 {
                     playerBuilder.AppendLine($"{playerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
                 }
@@ -280,17 +321,17 @@ namespace TestApplication
                     playerBuilder.AppendLine($"{playerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Red cards: ");
-                foreach(var card in match.RedCards)
+                foreach (var card in match.RedCards)
                 {
                     playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Yellow cards:");
-                foreach(var card in match.YellowCards)
+                foreach (var card in match.YellowCards)
                 {
                     playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Injuries: ");
-                foreach(var injury in match.Injuries)
+                foreach (var injury in match.Injuries)
                 {
                     playerBuilder.AppendLine($"{playerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
                 }
