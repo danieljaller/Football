@@ -14,7 +14,7 @@ namespace FootballEngine.Repositories
     public class MatchRepository : IRepository<Match>
     {
         private List<Match> matches;
-        public MatchRepository()
+        private MatchRepository()
         {
             Load();
         }
@@ -34,8 +34,8 @@ namespace FootballEngine.Repositories
         }
         public void Add(Match match)
         {
-            if(match == null)
-                    { throw new ArgumentNullException($"Match cannot be null."); }
+            if (match == null)
+            { throw new ArgumentNullException($"Match cannot be null."); }
             if (matches != null && match != null)
             {
                 if (!matches.Select(s => s.Id).Contains(match.Id))
@@ -43,7 +43,7 @@ namespace FootballEngine.Repositories
                     matches.Add(match);
                 }
             }
-            
+
         }
 
         public void Delete(Guid id)
@@ -91,15 +91,15 @@ namespace FootballEngine.Repositories
         {
             string path;
             try
-            {                
+            {
                 if (TryGetFilePath.InSolutionDirectory("Matches.xml", directories, false, out path))
                 {
                     matches = (List<Match>)XmlHandler.LoadFrom(path, typeof(List<Match>));
-                }                
+                }
             }
-            catch(LoadFailedException l)
+            catch (LoadFailedException)
             {
-                throw l;               
+                matches = new List<Match>();
             }
         }
 
@@ -108,17 +108,18 @@ namespace FootballEngine.Repositories
             try
             {
                 string path;
+
                 if (TryGetFilePath.InSolutionDirectory("Matches.xml", directories, true, out path))
                 {
                     XmlHandler.SaveTo(path, matches);
-                }                
+                }
             }
             catch (SaveFailedException s)
             {
                 throw s;
             }
             catch (ArgumentException a)
-            { throw a; } 
+            { throw a; }
         }
     }
 }

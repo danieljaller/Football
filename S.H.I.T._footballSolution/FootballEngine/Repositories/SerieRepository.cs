@@ -14,7 +14,7 @@ namespace FootballEngine.Repositories
     public class SerieRepository : IRepository<Serie>
     {
         private List<Serie> series;
-        public SerieRepository()
+        private SerieRepository()
         {
             Load();
         }
@@ -89,15 +89,15 @@ namespace FootballEngine.Repositories
             string path;
             try
             {
-                if (TryGetFilePath.InProjectDirectory("Series.xml", directories, false, out path))
+                if (TryGetFilePath.InSolutionDirectory("Series.xml", directories, false, out path))
                 {
                     series = (List<Serie>)XmlHandler.LoadFrom(path, typeof(List<Serie>));
                 }
                 
             }
-            catch(LoadFailedException l)
+            catch(LoadFailedException)
             {
-                throw l;
+                series = new List<Serie>();
             }
         }
 
@@ -106,7 +106,7 @@ namespace FootballEngine.Repositories
             try
             {
                 string path;
-                if (TryGetFilePath.InProjectDirectory("Series.xml", directories, true, out path))
+                if (TryGetFilePath.InSolutionDirectory("Series.xml", directories, true, out path))
                 {
                     XmlHandler.SaveTo(path, series);
                 }

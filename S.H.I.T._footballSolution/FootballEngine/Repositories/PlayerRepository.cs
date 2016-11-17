@@ -15,7 +15,7 @@ namespace FootballEngine.Repositories
     {
         private List<Player> players;
 
-        public PlayerRepository()
+        private PlayerRepository()
         {
             Load();
         }
@@ -90,15 +90,15 @@ namespace FootballEngine.Repositories
             string path;
             try
             {
-                if (TryGetFilePath.InProjectDirectory("Players.xml", directories, false, out path))
+                if (TryGetFilePath.InSolutionDirectory("Players.xml", directories, false, out path))
                 {
                     players = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
                 }
                
             }
-            catch(LoadFailedException l)
+            catch(LoadFailedException)
             {
-                throw l;               
+                players = new List<Player>();
             }
         }
 
@@ -107,7 +107,7 @@ namespace FootballEngine.Repositories
             try
             {
                 string path;
-                if (TryGetFilePath.InProjectDirectory("Players.xml", directories, true, out path))
+                if (TryGetFilePath.InSolutionDirectory("Players.xml", directories, true, out path))
                 {
                     XmlHandler.SaveTo(path, players);
                 }

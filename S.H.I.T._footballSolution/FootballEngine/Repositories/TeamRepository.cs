@@ -13,7 +13,7 @@ namespace FootballEngine.Repositories
 {
     public class TeamRepository : IRepository<Team>
     {
-        public TeamRepository()
+        private TeamRepository()
         {
             Load();
         }
@@ -88,14 +88,14 @@ namespace FootballEngine.Repositories
             string path;
             try
             {
-                if (TryGetFilePath.InProjectDirectory("Teams.xml", directories, false, out path))
+                if (TryGetFilePath.InSolutionDirectory("Teams.xml", directories, false, out path))
                 {
                     teams = (List<Team>)XmlHandler.LoadFrom(path, typeof(List<Team>));
                 }               
             }
-            catch(LoadFailedException l)
+            catch(LoadFailedException)
             {
-                throw l;
+                teams = new List<Team>();
             }
         }
 
@@ -104,7 +104,7 @@ namespace FootballEngine.Repositories
             try
             {
                 string path;
-                if (TryGetFilePath.InProjectDirectory("Teams.xml", directories, true, out path))
+                if (TryGetFilePath.InSolutionDirectory("Teams.xml", directories, true, out path))
                 {
                     XmlHandler.SaveTo(path, teams);
                 }                
