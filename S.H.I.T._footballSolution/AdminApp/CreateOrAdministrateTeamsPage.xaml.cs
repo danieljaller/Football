@@ -35,5 +35,16 @@ namespace AdminApp
             CreateOrAdministrateTeamsPageFrame.Content = new NewTeamPage();
             teamsOverview.Visibility = Visibility.Collapsed;
         }
+
+        private void addPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            var newPlayerWindow = new NewPlayerWindow();
+            var newPlayerWindowResult = newPlayerWindow.ShowDialog();
+        }
+
+        private void removePlayer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
