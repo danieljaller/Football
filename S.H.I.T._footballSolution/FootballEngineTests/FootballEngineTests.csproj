@@ -60,7 +60,9 @@
     <Compile Include="Domain\ValueObjects\MatchGoalsTests.cs" />
     <Compile Include="Domain\ValueObjects\PlayerNameTests.cs" />
     <Compile Include="Helper\SerieAndMatchGeneratorTests.cs" />
+    <Compile Include="Helper\XmlHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MatchRepositoryTests.cs" />
     <Compile Include="TestDataFactory.cs" />
   </ItemGroup>
   <ItemGroup>
