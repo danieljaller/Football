@@ -62,6 +62,12 @@
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="30,0,0,0">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelare"/>
                 <TextBlock Margin="5,5,0,0" Text="Erika Erikson"/>
+                <Button Name="addPlayer" Margin="5,10,0,0" Click="addPlayer_Click">
+                    <TextBlock  VerticalAlignment="Center">Lägg till spelare</TextBlock>
+                </Button>
+                <Button Name="removePlayer" Margin="5,10,0,0" Click="removePlayer_Click">
+                    <TextBlock  VerticalAlignment="Center">Ta bort spelare</TextBlock>
+                </Button>
             </StackPanel>
             <TextBlock Grid.Row="2" Grid.ColumnSpan="5" Text="{Binding}"/>
         </Grid>
