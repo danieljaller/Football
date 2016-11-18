@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserApp.Views;
 
 namespace AdminApp
 {
@@ -44,6 +45,9 @@ namespace AdminApp
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new StatisticsPage();
+           
+            
+            
         }
 
         private void PlayerButton_Click(object sender, RoutedEventArgs e)

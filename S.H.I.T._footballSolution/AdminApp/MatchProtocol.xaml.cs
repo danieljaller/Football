@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace AdminApp
 {
     /// <summary>
-    /// Interaction logic for AddPlayerWindow.xaml
+    /// Interaction logic for MatchProtocol.xaml
     /// </summary>
-    public partial class AddPlayerWindow : Window
+    public partial class MatchProtocol : Window
     {
-        public AddPlayerWindow()
+        public MatchProtocol()
         {
             InitializeComponent();
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

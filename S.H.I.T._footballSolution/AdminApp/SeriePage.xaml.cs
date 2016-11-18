@@ -13,15 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace AdminApp
 {
     /// <summary>
-    /// Interaction logic for StatisticsPage.xaml
+    /// Interaction logic for SeriePage.xaml
     /// </summary>
-    public partial class StatisticsPage : Page
+    public partial class SeriePage : Page
     {
-        public StatisticsPage()
+        public SeriePage()
         {
             InitializeComponent();
         }
@@ -31,7 +30,7 @@ namespace AdminApp
             seriePageFrame.Content = new SchedulePage();
         }
 
-
+       
         private void table_Click(object sender, RoutedEventArgs e)
         {
             seriePageFrame.Content = new TablePage();

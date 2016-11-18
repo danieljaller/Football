@@ -13,7 +13,7 @@ namespace FootballEngine.Repositories
 {
     public class TeamRepository : IRepository<Team>
     {
-        public TeamRepository()
+        private TeamRepository()
         {
             Load();
         }
@@ -82,22 +82,18 @@ namespace FootballEngine.Repositories
             }
             return null;
         }
-
+        string[] directories = new string[2] { "FootballEngine", "Resources" };
         public void Load()
         {
             string path;
             try
             {
-                if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", false, out path))
+                if (TryGetFilePath.InSolutionDirectory("Teams.xml", directories, false, out path))
                 {
                     teams = (List<Team>)XmlHandler.LoadFrom(path, typeof(List<Team>));
-                }
-                else
-                {
-                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Teams.xml\", \"Resources\", false, out path) failed");
-                }
+                }               
             }
-            catch
+            catch(LoadFailedException)
             {
                 teams = new List<Team>();
             }
@@ -108,19 +104,17 @@ namespace FootballEngine.Repositories
             try
             {
                 string path;
-                if (TryGetFilePath.InProjectDirectory("Teams.xml", "Resources", true, out path))
+                if (TryGetFilePath.InSolutionDirectory("Teams.xml", directories, true, out path))
                 {
                     XmlHandler.SaveTo(path, teams);
-                }
-                else
-                {
-                    throw new Exception("TryGetFilePath.InProjectDirectory(\"Teams.xml\", \"Resources\", true, out path) failed");
-                }
+                }                
             }
-            catch (Exception innerException)
+            catch (SaveFailedException s)
             {
-                throw new Exception("Could not save file", innerException);
+                throw s;
             }
+            catch(ArgumentException a)
+            { throw a; }
         }
     }
 }
