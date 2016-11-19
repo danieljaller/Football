@@ -38,7 +38,7 @@ namespace TestApplication
             serieService = new SerieService();
             searchService = new SearchService();
 
-            CreateTestData();
+            //CreateTestData();
 
             bool keepRunning = true;
             while (keepRunning)
@@ -46,11 +46,11 @@ namespace TestApplication
                 PrintMenu();
 
                 var key = Console.ReadKey().Key;
+                Console.WriteLine();
                 switch (key)
                 {
                     case ConsoleKey.D1:
                         PrintPlayers(playerService.GetAll().ToList());
-
                         break;
 
                     case ConsoleKey.D2:
@@ -72,10 +72,18 @@ namespace TestApplication
                     case ConsoleKey.D5:
                         FreeSearch();
                         break;
+
                     case ConsoleKey.D6:
                         CreateMatchTable();
                         break;
 
+                    case ConsoleKey.C:
+                        CreateTestData_2();
+                        break;
+
+                    case ConsoleKey.P:
+                        PrintObjectsCount();
+                        break;
                 }
             }
         }
@@ -84,8 +92,8 @@ namespace TestApplication
         {
             const int maxInputAttempts = 5, maxNumberOfSeries = 20;
             int inputAttempts = 0, numberOfSeries = 0;
-            Console.WriteLine($"Create test data. Maximum number of series to create: {maxNumberOfSeries}. Enter '0' to abort.");
-            
+            Console.WriteLine($"Create test data.\nMaximum number of series to create: {maxNumberOfSeries}. Enter '0' to abort.");
+
             while (inputAttempts < maxInputAttempts)
             {
                 Console.Write($"Enter the number of series that you want to create (Input attempts left: {maxInputAttempts - inputAttempts}): ");
@@ -112,21 +120,106 @@ namespace TestApplication
             }
 
             Random rand = new Random();
-            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
-            for (int i = 0; i < numberOfSeries; i++)
+            List<int> numberOfPlayersInEachTeam = new List<int>();
+            for (int i = 0; i < (numberOfSeries * 16); i++)
+                numberOfPlayersInEachTeam.Add(rand.Next(24, 31));
+
+            for (int s = 0; s < numberOfSeries; s++)
             {
-                listOfPlayerLists.Add(PlayerFactory.Create(Convert.ToUInt32(rand.Next(24, 31))) as List<Player>);
+                List<List<Player>> listOfPlayersInSerie = new List<List<Player>>();
+                for (int t = 0; t < 16; t++)
+                {
+                    listOfPlayersInSerie.Add(PlayerFactory.Create(Convert.ToUInt32(numberOfPlayersInEachTeam[0])) as List<Player>);
+                    numberOfPlayersInEachTeam.RemoveAt(0);
+                }
+                List<Team> listOfTeamsInSerie = TeamFactory.CreateTeamsAndSetPlayersTeamId(listOfPlayersInSerie);
+
+                foreach (List<Player> playerList in listOfPlayersInSerie)
+                    foreach (Player player in playerList)
+                        playerService.Add(player);
+
+                foreach (Team team in listOfTeamsInSerie)
+                    teamService.Add(team);
+
+                //List<Guid> teamIds = listOfTeamsInSerie.Select(t => t.Id) as List<Guid>;
+                List<Guid> teamIds = new List<Guid>();
+                foreach (Team team in listOfTeamsInSerie)
+                    teamIds.Add(team.Id);
+
+                List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds,
+                    GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
+                Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamIds, matchIds);
+                serieService.Add(serie);
             }
 
-            List<List<Guid>> listOfPlayerIdLists = new List<List<Guid>>();
-            foreach (List<Player> _playerList in listOfPlayerLists)
+            try
             {
-                listOfPlayerIdLists.Add(_playerList.Select(p => p.Id) as List<Guid>);
+                Console.Write("Players: ");
+                playerService.Save();
+                Console.WriteLine("save successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"failed\n{e}");
             }
 
-            List<Team> teamList = TeamFactory.Create(listOfPlayerIdLists) as List<Team>;
+            try
+            {
+                Console.Write("Teams: ");
+                teamService.Save();
+                Console.WriteLine("save successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"failed\n{e}");
+            }
 
+            try
+            {
+                Console.Write("Matches: ");
+                matchService.Save();
+                Console.WriteLine("save successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"failed\n{e}");
+            }
 
+            try
+            {
+                Console.Write("Series: ");
+                serieService.Save();
+                Console.WriteLine("save successful");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"failed\n{e}");
+            }
+        }
+
+        private static Random rand = new Random();
+
+        public static DateTime GetRandomDate(DateTime startDate, DateTime endDate)
+        {
+            int year = rand.Next(startDate.Year, endDate.Year + 1);
+
+            int month;
+            if (year == startDate.Year)
+                month = rand.Next(startDate.Month, 13);
+            else if (year == endDate.Year)
+                month = rand.Next(1, endDate.Month + 1);
+            else
+                month = rand.Next(1, 13);
+
+            int day;
+            if (year == startDate.Year && month == startDate.Month)
+                day = rand.Next(startDate.Day, DateTime.DaysInMonth(year, month) + 1);
+            else if (year == endDate.Year)
+                day = rand.Next(1, endDate.Day + 1);
+            else
+                day = rand.Next(1, DateTime.DaysInMonth(year, month) + 1);
+
+            return new DateTime(year, month, day);
         }
 
         public static void CreateTestData()
@@ -159,6 +252,7 @@ namespace TestApplication
             List<Guid> teamIds = teamList.Select(p => p.Id).ToList();
             List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds, DateTime.Now);
             Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
+            serieService.Add(serie);
 
             try
             {
@@ -264,6 +358,7 @@ namespace TestApplication
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
+            Console.WriteLine($"Total number of players: {listOfPlayers.Count}");
         }
 
         private static void PrintTeams(List<Team> teamList)
@@ -287,6 +382,7 @@ namespace TestApplication
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
+            Console.WriteLine($"Total number of teams: {teamList.Count}");
         }
 
         private static void PrintSerie(List<Serie> serieList)
@@ -308,6 +404,7 @@ namespace TestApplication
                 Console.WriteLine(serieBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
+            Console.WriteLine($"Total number of series: {serieList.Count}");
         }
 
         private static void PrintMatches(List<Match> matchList)
@@ -358,6 +455,7 @@ namespace TestApplication
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
+            Console.WriteLine($"Total number matches: {matchList.Count}");
         }
 
         private static void FreeSearch()
@@ -413,15 +511,23 @@ namespace TestApplication
 
         }
 
+        private static void PrintObjectsCount()
+        {
+            Console.WriteLine($"Total number of series: {serieService.GetAll().Count()}");
+            Console.WriteLine($"Total number of matches: {matchService.GetAll().Count()}");
+            Console.WriteLine($"Total number of teams: {teamService.GetAll().Count()}");
+            Console.WriteLine($"Total number of players: {playerService.GetAll().Count()}");
+            Console.WriteLine();
+        }
 
         private static void PrintMenu()
         {
             Console.WriteLine();
-            Console.WriteLine("+-----------------------------------------------------------------------+");
-            Console.WriteLine("|   [1] Print Players         [3] Print Series          [5] FreeSearch  |");
-            Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit        |");
-            Console.WriteLine("|   [6] Create Serie                                                    |");
-            Console.WriteLine("+-----------------------------------------------------------------------+");
+            Console.WriteLine("+--------------------------------------------------------------------------------+");
+            Console.WriteLine("|   [1] Print Players         [3] Print Series          [5] FreeSearch           |");
+            Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit                 |");
+            Console.WriteLine("|   [6] Create Serie          [c] Create test data      [p] Print objects count  |");
+            Console.WriteLine("+--------------------------------------------------------------------------------+");
             Console.WriteLine();
         }
 

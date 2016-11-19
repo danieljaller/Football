@@ -32,7 +32,7 @@ namespace FootballEngine.Domain.Entities
         public static DateTime EndDateForMatchCreation
         {
             get
-            { return DateTime.Now.AddYears(2); }
+            { return DateTime.Now.AddYears(5); }
         }
         public Match() { }
 
