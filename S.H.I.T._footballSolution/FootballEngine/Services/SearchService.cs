@@ -10,9 +10,20 @@ namespace FootballEngine.Services
 {
     public class SearchService
     {
-        public IEnumerable<object> Search(string searchText, bool ignoreCase, bool playerSearch, bool teamSearch, bool serieSearch)
+        public IEnumerable<object> Search(string searchText, bool ignoreCase, bool serieSearch, bool teamSearch, bool playerSearch)
         {
             IEnumerable<object> result = new List<object>();
+
+
+            if (serieSearch)
+            {
+                IEnumerable<object> serieResult = serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
+                                                        teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
+                                                            .Any(t => t.SeriesIds.Contains(s.Id))
+                                                        );
+                result = result.Concat(serieResult);
+            }
+
 
             if (playerSearch)
             {
@@ -42,14 +53,6 @@ namespace FootballEngine.Services
             }
 
 
-            if (serieSearch)
-            {
-                IEnumerable<object> serieResult = serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
-                                                        teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
-                                                            .Any(t => t.SeriesIds.Contains(s.Id))
-                                                        );
-                result = result.Concat(serieResult);
-            }
 
             return result;
         }
