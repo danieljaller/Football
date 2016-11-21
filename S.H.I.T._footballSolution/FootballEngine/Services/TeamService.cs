@@ -13,10 +13,11 @@ namespace FootballEngine.Services
     {
         private readonly TeamRepository _teamRepository = TeamRepository.Instance;
         PlayerService playerService;
+        MatchService matchService;
         public TeamService()
         {
             playerService = new PlayerService(this);
-            
+            matchService = new MatchService();
         }
 
         public void Add(Team team)
@@ -84,7 +85,7 @@ namespace FootballEngine.Services
 
         public IEnumerable<Team> OrderByNumberOfMatchesPlayed(Guid serieId)
         {
-            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Count());
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Where(m => matchService.GetBy(m).Date.Date < DateTime.Today).Count());
         }
 
         public IEnumerable<Team> OrderByGoalDifference(Guid serieId)
