@@ -22,18 +22,21 @@ namespace FootballEngine.Helper
                         if (_instance == null)
                         {
                             _instance = new ServiceLocator();
-
-                            matchService = MatchService.Default;
-                            playerService = PlayerService.Default;
-                            searchService = SearchService.Default;
-                            serieService = SerieService.Default;
-                            teamService = TeamService.Default;
                         }
                     }
                 }
 
                 return _instance;
             }
+        }
+
+        private ServiceLocator()
+        {
+            matchService = MatchService.Default;
+            playerService = PlayerService.Default;
+            searchService = SearchService.Default;
+            serieService = SerieService.Default;
+            teamService = TeamService.Default;
         }
 
         private static MatchService matchService = new MatchService();

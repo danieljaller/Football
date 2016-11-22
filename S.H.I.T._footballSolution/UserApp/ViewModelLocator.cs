@@ -11,6 +11,7 @@ namespace UserApp
 {
     public class ViewModelLocator
     {
+        private ServiceLocator serviceLocator = ServiceLocator.Default;
         //private static MatchService matchService = new MatchService();
         //private static TeamService teamService = new TeamService();
         //private static PlayerService playerService = new PlayerService();
