@@ -27,16 +27,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Tabellplats:" />
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Poäng:" />
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Målskillnad:" />
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Hemma-arena:" />
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Vinster:" />
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Förluster:" />
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Oavgjorda:" />
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Gjorda mål:" />
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Insläppta mål:" />
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="Röda kort:" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Tabellplats:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Poäng:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Målskillnad:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Hemma-arena:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Vinster:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Förluster:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Oavgjorda:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Gjorda mål:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Insläppta mål:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Röda kort:" Margin="0,0,0,5"/>
         <TextBlock Grid.Row="10" Grid.Column="0" Text="Gula kort:" />
     </Grid>
 </Page>

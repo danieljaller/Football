@@ -67,6 +67,7 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="NewPlayerWindow.xaml.cs">
       <DependentUpon>NewPlayerWindow.xaml</DependentUpon>
     </Compile>
@@ -215,12 +216,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
-      <Project>{11603A52-1F43-48A5-9B41-FF02DA7AC2AD}</Project>
+      <Project>{11603a52-1f43-48a5-9b41-ff02da7ac2ad}</Project>
       <Name>FootballEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserApp\UserApp.csproj">
-      <Project>{02BBC75A-6D8B-4D3F-883E-C419C0BEB5A2}</Project>
-      <Name>UserApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

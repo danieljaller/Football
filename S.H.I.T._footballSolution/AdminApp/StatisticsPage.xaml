@@ -12,36 +12,43 @@
         <ScrollViewer.Resources>
             <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">13</sys:Double>
         </ScrollViewer.Resources>
-    <Grid Margin="5" HorizontalAlignment="Center">
+    <Grid Margin="5" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Name="serieName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="4"  FontSize="15" FontWeight="Black" Text="Serienamn"/>
-        <ComboBox Name="serieSelector" Margin="10" Grid.Row="1" Width="85" Height="20" Text="Välj serie"/>
-        <TextBlock Text="Välj serie" Margin="18,12,12,12" Grid.Row="1" FontWeight="Bold" IsHitTestVisible="False">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Visibility" Value="Hidden"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=serieSelector,Path=SelectedItem}" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <Button Name="schedule" Margin="10" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Click="schedule_Click" Content="Spelschema" />
-        <Button Name="table" Margin="10" Grid.Row="1" Grid.Column="2" Width="85" Height="20" Click="table_Click" Content="Serietabell" />
-        <Button Name="player" Margin="10" Grid.Row="1" Grid.Column="3" Width="85" Height="20" Click="player_Click" Content="Spelare" />
-        <Frame Grid.Row="2" Margin="10" Grid.Column="0" Grid.ColumnSpan="4" x:Name="seriePageFrame" />
+            <TextBlock Name="serieName" HorizontalAlignment="Center" Grid.Row="0" FontSize="15" FontWeight="Black" Text="Serienamn"/>
+            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <ComboBox Name="serieSelector" Margin="10" Width="85" Height="20" Text="Välj serie"/>
+                <TextBlock Text="Välj serie" Margin="18,12,12,12" FontWeight="Bold" IsHitTestVisible="False">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=serieSelector,Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <Button Name="schedule" Margin="10" Grid.Column="1" Width="85" Height="20" Click="schedule_Click" Content="Spelschema" />
+                <Button Name="table" Margin="10" Grid.Column="2" Width="85" Height="20" Click="table_Click" Content="Serietabell" />
+                <Button Name="player" Margin="10" Grid.Column="3" Width="85" Height="20" Click="player_Click" Content="Spelare" />
+            </Grid>
+        
+        <Frame Grid.Row="2" Margin="20" x:Name="seriePageFrame" />
     </Grid>
     </ScrollViewer>
 </Page>
