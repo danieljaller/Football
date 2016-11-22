@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,13 @@ namespace AdminApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        SearchService searchService; 
         List<string> testList = new List<string> { "Item1", "Item2", "Item3", "Thing1", "Thing2", "Thing3", "Sak1", "Sak2", "Sak3" };
         public MainWindow()
         {
+            searchService = new SearchService();
             InitializeComponent();
+            
         }
 
         private void SeriesButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +59,7 @@ namespace AdminApp
         }
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchResult = testList.Where(i => i.ToLower().Contains(searchTextBox.Text.ToLower()));
+            var searchResult = searchService.Search(searchTextBox.Text, true, true, true, true);
             
             if (string.IsNullOrWhiteSpace(searchTextBox.Text) || searchResult == null)
             {
