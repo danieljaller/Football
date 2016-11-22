@@ -25,25 +25,24 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Lag:" />
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ålder:" />
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Födelsedatum:" />
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Gjorda mål:" />
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Assist:" />
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Röda kort:" />
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Gula kort:" />
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Lag:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ålder:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Födelsedatum:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Gjorda mål:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Assist:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Röda kort:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Gula kort:" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" Margin="0,0,0,5"/>
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Status:"/>
-        <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="9">
-            <TextBlock Text="{Binding Team, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding Goals, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding Assists, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding RedCards, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding YellowCards, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding MatchesPlayed, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="{Binding PlayerStatus, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
+
+        <TextBlock Text="{Binding Team, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding Goals, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding Assists, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding RedCards, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding YellowCards, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding MatchesPlayed, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,5"/>
+        <TextBlock Text="{Binding PlayerStatus, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1"/>
     </Grid>
 </Page>

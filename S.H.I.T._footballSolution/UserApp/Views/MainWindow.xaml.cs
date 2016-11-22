@@ -1,4 +1,5 @@
-﻿using FootballEngine.Services;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,66 +26,16 @@ namespace UserApp
     {
         SearchService searchService;
 
+
         public MainWindow()
         {
             InitializeComponent();
             searchService = new SearchService();
         }
 
-        private void serieCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void serieCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void serie_Click(object sender, RoutedEventArgs e)
-        {
-            MainPageFrame.Content = new SeriePage();
-        }
-
-        private void team_Click(object sender, RoutedEventArgs e)
-        {
-            MainPageFrame.Content = new TeamPage();
-        }
-
-        private void player_Click(object sender, RoutedEventArgs e)
-        {
-            MainPageFrame.Content = new SinglePlayerPage();
-        }
-
-        private void playerinfo_Click(object sender, RoutedEventArgs e)
-        {
-            var matchWindow = new MatchProtocol();
-            var showMatch = matchWindow.ShowDialog();
-        }
-
-        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var searchText = searchBox.Text;
-            var searchResults = searchService.Search(searchText, true, serieCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, playerCheckBox.IsChecked == true );
+        private void updateSearchCheckList(string searchText)
+        { 
+            var searchResults = searchService.Search(searchText, true, serieCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, playerCheckBox.IsChecked == true);
             if (searchText.Trim() == "")
             {
                 SearchCheckedList.ItemsSource = null;
@@ -94,5 +45,73 @@ namespace UserApp
                 SearchCheckedList.ItemsSource = searchResults;
             }
         }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void serieCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void serieCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            updateSearchCheckList(searchText);
+        }
+
+        private void SearchCheckedList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (SearchCheckedList.SelectedItem.GetType() == typeof(Serie))
+                {
+                    MainPageFrame.Content = new SeriePage();
+                }
+
+                if (SearchCheckedList.SelectedItem.GetType() == typeof(Team))
+                {
+                    MainPageFrame.Content = new TeamPage();
+                }
+
+                if (SearchCheckedList.SelectedItem.GetType() == typeof(Player))
+                {
+                    MainPageFrame.Content = new PlayerPage();
+                }
+            }
+            catch
+            {
+                MainPageFrame.Content = null;
+            }
+        }
+    
     }
 }

@@ -150,6 +150,9 @@ namespace TestApplication
                     GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
                 Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamIds, matchIds);
                 serieService.Add(serie);
+
+                foreach (Team team in listOfTeamsInSerie)
+                    team.SeriesIds.Add(serie.Id);
             }
 
             try
@@ -222,82 +225,86 @@ namespace TestApplication
             return new DateTime(year, month, day);
         }
 
-        public static void CreateTestData()
-        {
+        //public static void CreateTestData()
+        //{
 
-            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
-            for (int i = 0; i < 16; i++)
-            {
-                listOfPlayerLists.Add(CreatePlayerList());
-            }
-            List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
+        //    List<List<Player>> listOfPlayerLists = new List<List<Player>>();
+        //    for (int i = 0; i < 16; i++)
+        //    {
+        //        listOfPlayerLists.Add(CreatePlayerList());
+        //    }
+        //    List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
 
-            foreach (List<Player> playerList in listOfPlayerLists)
-            {
-                foreach (Player player in playerList)
-                {
-                    playerService.Add(player);
-                }
-            }
-            for (int i = 0; i < teamList.Count; i++)
-            {
-                List<Player> l = listOfPlayerLists[i];
-                teamList[i].PlayerIds = l.Select(p => p.Id).ToList();
-            }
-            foreach (Team team in teamList)
-            {
+        //    foreach (List<Player> playerList in listOfPlayerLists)
+        //    {
+        //        foreach (Player player in playerList)
+        //        {
+        //            playerService.Add(player);
+        //        }
+        //    }
+        //    for (int i = 0; i < teamList.Count; i++)
+        //    {
+        //        List<Player> l = listOfPlayerLists[i];
+        //        teamList[i].PlayerIds = l.Select(p => p.Id).ToList();
+        //    }
+       
+        //    List<Guid> teamIds = teamList.Select(p => p.Id).ToList();
+        //    List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds, DateTime.Now);
+        //    Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
+          
 
-                teamService.Add(team);
-            }
-            List<Guid> teamIds = teamList.Select(p => p.Id).ToList();
-            List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds, DateTime.Now);
-            Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
-            serieService.Add(serie);
+        //    serieService.Add(serie);
 
-            try
-            {
-                Console.Write("Players: ");
-                playerService.Save();
-                Console.WriteLine("successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
+        //    foreach (Team team in teamList)
+        //    {
+        //        team.SeriesIds.Add(serie.Id);
+        //        teamService.Add(team);
+        //    }
 
-            try
-            {
-                Console.Write("Teams: ");
-                teamService.Save();
-                Console.WriteLine("successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
+        //    try
+        //    {
+        //        Console.Write("Players: ");
+        //        playerService.Save();
+        //        Console.WriteLine("successful");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine($"failed\n{e}");
+        //    }
 
-            try
-            {
-                Console.Write("Matches: ");
-                matchService.Save();
-                Console.WriteLine("successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
+        //    try
+        //    {
+        //        Console.Write("Teams: ");
+        //        teamService.Save();
+        //        Console.WriteLine("successful");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine($"failed\n{e}");
+        //    }
 
-            try
-            {
-                Console.Write("Series: ");
-                serieService.Save();
-                Console.WriteLine("successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
-        }
+        //    try
+        //    {
+        //        Console.Write("Matches: ");
+        //        matchService.Save();
+        //        Console.WriteLine("successful");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine($"failed\n{e}");
+        //    }
+
+        //    try
+        //    {
+        //        Console.Write("Series: ");
+        //        serieService.Save();
+        //        Console.WriteLine("successful");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine($"failed\n{e}");
+        //    }
+        //}
         //private static void GetPlayers()
         //{
         //    var list = playerService.GetAllPlayersBySerie();

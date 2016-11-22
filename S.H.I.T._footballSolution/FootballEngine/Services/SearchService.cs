@@ -18,6 +18,7 @@ namespace FootballEngine.Services
             if (serieSearch)
             {
                 IEnumerable<object> serieResult = serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
+
                                                         teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
                                                             .Any(t => t.SeriesIds.Contains(s.Id))
                                                         );
