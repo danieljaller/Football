@@ -67,6 +67,7 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="NewPlayerPage.xaml.cs">
       <DependentUpon>NewPlayerPage.xaml</DependentUpon>
     </Compile>
@@ -221,9 +222,9 @@
     <Resource Include="Resources\football_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UserApp\UserApp.csproj">
-      <Project>{02BBC75A-6D8B-4D3F-883E-C419C0BEB5A2}</Project>
-      <Name>UserApp</Name>
+    <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
+      <Project>{11603a52-1f43-48a5-9b41-ff02da7ac2ad}</Project>
+      <Name>FootballEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
