@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,15 @@ namespace AdminApp
                 {"serie2", new List<TempMatch>() {match6, match7, match8, match9, match10 } }
             };
                     
+            seriesList.ItemsSource = seriesDictionary;
+        }
+
+        public CreateOrAdministrateSeriesPage(Serie selectedSerie)
+        {
+            Dictionary<string, List<TempMatch>> seriesDictionary = new Dictionary<string, List<TempMatch>>() {
+                {selectedSerie.Name.Value, new List<TempMatch>() }
+            };
+            InitializeComponent();
             seriesList.ItemsSource = seriesDictionary;
         }
 

@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/Administrera lag" FontSize="20" />
-        <ListBox Name="teamsList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
+        <ListBox Name="teamsList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

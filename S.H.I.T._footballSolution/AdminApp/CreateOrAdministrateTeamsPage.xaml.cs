@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,13 @@ namespace AdminApp
                                                          "Lag7", "Lag8", "Lag9", "Lag10", "Lag11", "Lag12",
                                                          "Lag13", "Lag14", "Lag15", "Lag16", "Lag17", "Lag18",
                                                          "Lag19", "Lag20"};
+            teamsList.ItemsSource = teamsListC;
+        }
+
+        public CreateOrAdministrateTeamsPage(Team selectedTeam)
+        {
+            InitializeComponent();
+            List<string> teamsListC = new List<string> {selectedTeam.Name.Value};
             teamsList.ItemsSource = teamsListC;
         }
 

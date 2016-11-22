@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp"
+        xmlns:converters="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
         Title="Football Administration App" Height="450" Width="725"
         Icon="Resources/football_icon.ico">
+    <Window.Resources>
+        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
+    </Window.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -43,7 +47,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <ListBox Name="searchResultList" Margin="10,0,5,5" Grid.Row="1" Panel.ZIndex="1" Width="158" HorizontalAlignment="Left" KeyDown="searchResultList_KeyDown" PreviewKeyDown="searchResultList_KeyDown">
+                <ListBox Name="searchResultList" Margin="10,0,5,5" Grid.Row="1" Panel.ZIndex="1" Width="158" Height="300" HorizontalAlignment="Left" KeyDown="searchResultList_KeyDown" PreviewKeyDown="searchResultList_KeyDown" SelectionChanged="searchResultList_SelectionChanged">
                     <ListBox.Style>
                         <Style TargetType="{x:Type ListBox}">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -60,7 +64,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock FontWeight="Bold" Text="{Binding}"/>
+                                <TextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
