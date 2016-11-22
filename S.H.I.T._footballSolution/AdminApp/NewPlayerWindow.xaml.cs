@@ -24,15 +24,19 @@ namespace AdminApp
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public Player player { get; set; }
         public List<Player> tempPlayersList = new List<Player>();
+        
 
         public NewPlayerWindow()
         {
+            
             InitializeComponent();
             DataContext = this;
             if (datePicker1.SelectedDate == null)
             { addPlayerButton.IsEnabled = false; }
-
+            
+            
         }
 
         private void cancel_Clicked(object sender, RoutedEventArgs e)
@@ -45,19 +49,24 @@ namespace AdminApp
         {
             
          DateOfBirth = (DateTime)datePicker1.SelectedDate;
-            Player player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
-            if(tempPlayersList.Count < 31)
-            {           
-            tempPlayersList.Add(player);
-            }
-            firstName.Text = "";
-            lastName.Text = "";
-            datePicker1.Text = "";
-            if(tempPlayersList == null)
-            { numberOfPlayers.Text = "0"; }
-            numberOfPlayers.Text = tempPlayersList.Count.ToString();
-            //DialogResult = true;
+            player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
+            DialogResult=true;
+            //if(tempPlayersList.Count < 31)
+            //{           
+            //tempPlayersList.Add(player);
+            //}
+            //firstName.Text = "";
+            //lastName.Text = "";
+            //datePicker1.Text = "";
+            //if(tempPlayersList == null)
+            //{ numberOfPlayers.Text = "0"; }
+            //numberOfPlayers.Text = player.Count.ToString();
+            ////DialogResult = true;
+            //if (datePicker1.SelectedDate == null)
+            //{ addPlayerButton.IsEnabled = false; }
 
+
+            
         }
 
         private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
