@@ -1,4 +1,5 @@
-﻿using FootballEngine.Services;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,6 @@ namespace AdminApp
     public partial class MainWindow : Window
     {
         SearchService searchService; 
-        List<string> testList = new List<string> { "Item1", "Item2", "Item3", "Thing1", "Thing2", "Thing3", "Sak1", "Sak2", "Sak3" };
         public MainWindow()
         {
             searchService = new SearchService();
@@ -105,6 +105,31 @@ namespace AdminApp
             if(e.Key == Key.Return)
             {
                 MainPageFrame.Focus();
+            }
+        }
+
+        private void searchResultList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (searchResultList.SelectedItem.GetType() == typeof(Serie))
+                {
+                    MainPageFrame.Content = new CreateOrAdministrateSeriesPage((Serie)searchResultList.SelectedItem);
+                }
+
+                if (searchResultList.SelectedItem.GetType() == typeof(Team))
+                {
+                    MainPageFrame.Content = new CreateOrAdministrateTeamsPage((Team)searchResultList.SelectedItem);
+                }
+
+                if (searchResultList.SelectedItem.GetType() == typeof(Player))
+                {
+                    MainPageFrame.Content = new AdministratePlayersPage((Player)searchResultList.SelectedItem);
+                }
+            }
+            catch
+            {
+                MainPageFrame.Content = null;
             }
         }
     }

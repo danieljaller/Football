@@ -47,7 +47,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <ListBox Name="searchResultList" Margin="10,0,5,5" Grid.Row="1" Panel.ZIndex="1" Width="158" Height="500" HorizontalAlignment="Left" KeyDown="searchResultList_KeyDown" PreviewKeyDown="searchResultList_KeyDown">
+                <ListBox Name="searchResultList" Margin="10,0,5,5" Grid.Row="1" Panel.ZIndex="1" Width="158" Height="300" HorizontalAlignment="Left" KeyDown="searchResultList_KeyDown" PreviewKeyDown="searchResultList_KeyDown" SelectionChanged="searchResultList_SelectionChanged">
                     <ListBox.Style>
                         <Style TargetType="{x:Type ListBox}">
                             <Setter Property="Visibility" Value="Visible"/>

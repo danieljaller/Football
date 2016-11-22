@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/administrera serie" FontSize="20" />
-        <ListBox Name="seriesList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
+        <ListBox Name="seriesList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,17 @@ namespace AdminApp
     {
         public AdministratePlayersPage()
         {
+       
             InitializeComponent();
             playerDoBPicker.DisplayDateEnd=DateTime.Today;
+        }
+
+        public AdministratePlayersPage(Player selectedPlayer)
+        {
+            InitializeComponent();
+            List<Player> player = new List<Player>() {selectedPlayer};
+            playersList.ItemsSource = player;
+            playerDoBPicker.DisplayDateEnd = DateTime.Today;
         }
     }
 }

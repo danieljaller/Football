@@ -20,11 +20,11 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Spelare" FontSize="20" />
-        <ListBox Name="playersList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
+        <ListBox Name="playersList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock FontWeight="Bold" Text="{Binding}"/>
+                        <TextBlock FontWeight="Bold" Text="{Binding Path=FullName}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -50,7 +50,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=playersList, Path=SelectedItem}" FontWeight="Bold"/>
+            <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=playersList, Path=SelectedItem.FullName}" FontWeight="Bold"/>
             <TextBlock Grid.Row="1" FontWeight="Bold" Margin="5,5,0,0" Text="Förnamn:"/>
 
             <TextBlock Grid.Row="2" FontWeight="Bold" Margin="5,5,0,0" Text="Efternamn:"/>
