@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UserApp.Views;
 
+
 namespace UserApp
 {
     /// <summary>
@@ -21,10 +23,13 @@ namespace UserApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        SearchService searchService;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            searchService = new SearchService();
         }
 
         private void serie_Click(object sender, RoutedEventArgs e)
@@ -57,6 +62,20 @@ namespace UserApp
         {
             var matchWindow = new MatchProtocol();
             var showMatch = matchWindow.ShowDialog();
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchText = searchBox.Text;
+            var searchResults = searchService.Search(searchText, true, serieCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, playerCheckBox.IsChecked == true );
+            if (searchText.Trim() == "")
+            {
+                SearchCheckedList.ItemsSource = null;
+            }
+            else
+            {
+                SearchCheckedList.ItemsSource = searchResults;
+            }
         }
     }
 }

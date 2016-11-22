@@ -9,31 +9,31 @@ namespace TestApplication.Helper
     public static class IntUtil
     {
         //http://stackoverflow.com/questions/2729752/converting-numbers-in-to-words-c-sharp
-        public static string NumberToWords(this int number, bool lowerCase = true, bool minusAsWord = true)
+        public static string NumberToWords(this int number)
         {
             if (number == 0)
-                return ((lowerCase) ? "z" : "Z") + "ero";
+                return "zero";
 
             if (number < 0)
-                return ((minusAsWord) ? "minus " : "-") + NumberToWords(Math.Abs(number));
+                return "minus " + NumberToWords(Math.Abs(number));
 
             string words = "";
 
             if ((number / 1000000) > 0)
             {
-                words += NumberToWords(number / 1000000) + ((lowerCase) ? " m" : " M") + "illion "; //" million ";
+                words += NumberToWords(number / 1000000) + " million ";
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                words += NumberToWords(number / 1000) + ((lowerCase) ? " t" : " T") + "housand ";   //" thousand ";
+                words += NumberToWords(number / 1000) + " thousand ";
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                words += NumberToWords(number / 100) + ((lowerCase) ? " h" : " H") + "undred "; //" hundred ";
+                words += NumberToWords(number / 100) + " hundred ";
                 number %= 100;
             }
 
@@ -43,25 +43,7 @@ namespace TestApplication.Helper
                     words += "and ";
 
                 var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
-                if (!lowerCase)
-                {
-                    string[] unitsMapUpperCase = new string[unitsMap.Length];
-                    for (int i = 0; i < unitsMap.Length; i++)
-                    {
-                        unitsMapUpperCase[i] = unitsMap[i].Replace(unitsMap[i][0], unitsMap[i][0].ToUpper());
-                    }
-                    unitsMap = unitsMapUpperCase;
-                }
                 var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
-                if (!lowerCase)
-                {
-                    string[] tensMapUppercase = new string[tensMap.Length];
-                    for (int i = 0; i < tensMap.Length; i++)
-                    {
-                        tensMapUppercase[i] = tensMap[i].Replace(tensMap[i][0], tensMap[i][0].ToUpper());
-                    }
-                    tensMap = tensMapUppercase;
-                }
 
                 if (number < 20)
                     words += unitsMap[number];

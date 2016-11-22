@@ -19,7 +19,7 @@ namespace TestApplication.Factories
             for (int i = 1; i <= amount; i++)
             {
                 PlayerName firstName = new PlayerName("Player");
-                PlayerName lastName = new PlayerName(i.NumberToWords());
+                PlayerName lastName = new PlayerName(i.NumberToWords().FirstToUpper());
                 
                 int year = rand.Next(DateTime.Now.Year - 50, DateTime.Now.Year - 17);
                 int month = rand.Next(1, 13);

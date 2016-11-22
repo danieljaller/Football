@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserApp"
+        xmlns:converters="clr-namespace:UserApp.Converters"
         mc:Ignorable="d"
         Title="User App" Height="450" Width="725">
 
+    <Window.Resources>
+        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -32,7 +36,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBox Name="searchBox" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Left"  Width="180" />
+            <TextBox Name="searchBox" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Left"  Width="180" TextChanged="searchBox_TextChanged" />
             <TextBlock IsHitTestVisible="False" Grid.Row="1" Text="Sök" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -58,7 +62,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBlock Text="SearchBinding"/>
+                            <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

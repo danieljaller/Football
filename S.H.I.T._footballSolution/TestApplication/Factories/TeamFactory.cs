@@ -30,32 +30,39 @@ namespace TestApplication.Factories
             return team;
         }
 
-        public static IEnumerable<Team> Create(List<List<Guid>> playerIds)
+        public static List<Team> CreateTeamsAndSetPlayersTeamId(List<List<Player>> playersLists)
         {
-            if (playerIds == null)
-                throw new Exception($"{nameof(playerIds)} is null");
-            if (playerIds.Count() == 0)
-                throw new Exception($"{nameof(playerIds)} is empty");
-            foreach (var collection in playerIds)
+            if (playersLists == null)
+                throw new ArgumentNullException($"{nameof(playersLists)} is null");
+            if (playersLists.Count() == 0)
+                throw new ArgumentException($"{nameof(playersLists)} is empty");
+            foreach (var list in playersLists)
             {
-                if (collection == null)
-                    throw new Exception($"{nameof(collection)} is null");
-                if (collection.Count() == 0)
-                    throw new Exception($"{nameof(collection)} is empty");
-                if (collection.Count() < 24)
-                    throw new Exception($"Not enough Guid's in {nameof(collection)}");
-                if (collection.Count() > 30)
-                    throw new Exception($"Too many Guid's in {nameof(collection)}");
+                if (list == null)
+                    throw new ArgumentNullException($"{nameof(list)} is null");
+                if (list.Count() == 0)
+                    throw new ArgumentException($"{nameof(list)} is empty");
+                if (list.Count() < 24)
+                    throw new ArgumentException($"Not enough Player's in {nameof(list)}");
+                if (list.Count() > 30)
+                    throw new ArgumentException($"Too many Player's in {nameof(list)}");
             }
 
             List<Team> teams = new List<Team>();
 
-            for (int i = 0; i < playerIds.Count(); i++)
+            for (int i = 0; i < playersLists.Count(); i++)
             {
                 GeneralName name = new GeneralName($"Team-{i + 1}");
                 GeneralName homeArena = new GeneralName($"Arena-{i + 1}");
                 Team team = new Team(name, homeArena);
-                team.PlayerIds = playerIds.ElementAt(i) as List<Guid>;
+                //team.PlayerIds = playersLists.ElementAt(i).Select(p => p.Id) as List<Guid>;
+                List<Guid> playerIds = new List<Guid>();
+                foreach (Player player in playersLists[i])
+                {
+                    player.TeamId = team.Id;
+                    playerIds.Add(player.Id);
+                }
+                team.PlayerIds = playerIds;
                 teams.Add(team);
             }
 
