@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,38 @@ namespace AdminApp
     /// </summary>
     public partial class CreateSchedulePage : Page
     {
+        MatchService matchService = new MatchService();
+        TeamService teamService = new TeamService();
         private List<Guid> matchSchedule = new List<Guid>();
+        private List<Match> matchList = new List<Match>();
+        private List<Team> homeTeamList = new List<Team>();
+        private List<Team> visitorTeamList = new List<Team>();
 
         public CreateSchedulePage(List<Guid> matchSchedule)
         {
             InitializeComponent();
             this.matchSchedule = matchSchedule;
-            GenerateGridRowsAndSetRowColor();
+            ConvertGuidList();
+            homeTeamListBox.ItemsSource = homeTeamList;
+            visitorTeamListBox.ItemsSource = visitorTeamList;
+            resultAndDateListBox.ItemsSource = matchList;
+            //GenerateGridRowsAndSetRowColor();
+            
+        }
+        public void ConvertGuidList()
+        {
+            foreach(var matchId in matchSchedule)
+            {
+                matchList.Add(matchService.GetBy(matchId));
+            }
+            foreach(var match in matchList)
+            {
+                homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
+            }
+            foreach(var match in matchList)
+            {
+                visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
+            }
         }
 
         private void GenerateGridRowsAndSetRowColor()

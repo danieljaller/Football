@@ -22,6 +22,7 @@ namespace FootballEngine.Domain.Entities
         public uint MatchTimeInMinutes { get; set; }
         public MatchGoals HomeGoals { get; set; }
         public MatchGoals VisitorGoals { get; set; }
+        public string Result { get { return $"{HomeGoals.Value} - {VisitorGoals.Value}"; } }
         public List<Guid> HomeLineup { get; set; }
         public List<Guid> VisitorLineup { get; set; }
         public List<Event> RedCards { get; set; }

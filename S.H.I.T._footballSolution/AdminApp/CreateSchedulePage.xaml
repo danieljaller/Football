@@ -7,7 +7,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="CreateSchedulePage">
-
+    <Page.Resources>
+        <Style  TargetType="{x:Type ListBoxItem}">
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="LightGray"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid Name="grid" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -17,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Rectangle Grid.ColumnSpan="4" Fill="LightBlue"/>
         <TextBlock Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,25,0">Hemmalag</TextBlock>
@@ -26,7 +37,7 @@
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="25,0,0,0">Resultat</TextBlock>
         <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="25,0,0,0">Datum</TextBlock>
 
-        <ListBox Grid.Row="1" Grid.ColumnSpan="4" BorderThickness="0" Background="Transparent">
+        <!--<ListBox Name="scheduleList" Grid.Row="1" Grid.RowSpan="240" Grid.ColumnSpan="4" BorderThickness="0" Panel.ZIndex="10" Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -36,9 +47,40 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Hemma - borta" />
-                        <TextBlock Grid.Column="1" Text="Resultat" />
-                        <TextBlock Grid.Column="2" Text="Datum" />
+                        <TextBlock Grid.Column="0" Text="{Binding Path=Name}" />
+                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="-" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="Bortalag"/>
+                        <TextBlock Grid.Column="2" Text="Resultat" />
+                        <TextBlock Grid.Column="3" Text="Datum" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+        <ListBox x:Name="homeTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="0"  BorderThickness="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                 </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <ListBox x:Name="visitorTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="1"  BorderThickness="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="resultAndDateListBox" AlternationCount="2" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  BorderThickness="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Result}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Path=Date}" Grid.Column="1"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
