@@ -24,13 +24,15 @@ namespace AdminApp
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public List<Player> tempPlayersList = new List<Player>();
 
         public NewPlayerWindow()
         {
             InitializeComponent();
-         
             DataContext = this;
-            
+            if (datePicker1.SelectedDate == null)
+            { addPlayerButton.IsEnabled = false; }
+
         }
 
         private void cancel_Clicked(object sender, RoutedEventArgs e)
@@ -39,14 +41,33 @@ namespace AdminApp
             Close();
         }
 
-        private void addContact_Clicked(object sender, RoutedEventArgs e)
+        private void addPlayer_Clicked(object sender, RoutedEventArgs e)
         {
-            var result = new DatePicker();
-            var dateOfBirth = datePicker1.SelectedDate;
-          
-            Player player = new Player( new PlayerName(FirstName),new PlayerName(LastName), (DateTime)dateOfBirth );
-            DialogResult = true;
-            Close();
+            
+         DateOfBirth = (DateTime)datePicker1.SelectedDate;
+            Player player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
+            if(tempPlayersList.Count < 31)
+            {           
+            tempPlayersList.Add(player);
+            }
+            firstName.Text = "";
+            lastName.Text = "";
+            datePicker1.Text = "";
+            if(tempPlayersList == null)
+            { numberOfPlayers.Text = "0"; }
+            numberOfPlayers.Text = tempPlayersList.Count.ToString();
+            //DialogResult = true;
+
+        }
+
+        private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
+
+        private void datePicker_selectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            addPlayerButton.IsEnabled = true;
         }
     }
 }
