@@ -71,9 +71,6 @@
     <Compile Include="CreateSchedulePage.xaml.cs">
       <DependentUpon>CreateSchedulePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NewPlayerPage.xaml.cs">
-      <DependentUpon>NewPlayerPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="NewPlayerWindow.xaml.cs">
       <DependentUpon>NewPlayerWindow.xaml</DependentUpon>
     </Compile>
@@ -149,10 +146,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MatchProtocolPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewPlayerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

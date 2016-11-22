@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp"
         mc:Ignorable="d"
-        Title="NewPlayerWindow" Height="250" Width="250">
+        Title="NewPlayerWindow" Height="250" Width="250" Closing="closingNewPlayerWindow">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,17 +24,18 @@
         <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Efternamn:"/>
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Date of birth:"/>
 
-        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" />
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" />    
-        <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5"  Name="Dob"/>
-
-       
-            <Button  Margin="10" HorizontalAlignment="Left" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
-                    VerticalAlignment="Bottom" Height="25" Content=" Klar " Click="cancel_Clicked"></Button>
-        <Button  Margin="10" HorizontalAlignment="Right" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
-                    VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addContact_Clicked"></Button>
+        <TextBox Name="firstName" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" Text="{Binding Path=FirstName}" />
+        <TextBox Name="lastName" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" Text="{Binding Path=LastName}" />
+        <DatePicker Name="datePicker1" SelectedDateChanged="datePicker_selectedDateChanged"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=selectedValue}"/>
         
-        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="5" Text="Lag X har X antal spelare."/>
-
+        <Button  Margin="10" HorizontalAlignment="Left" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
+                    VerticalAlignment="Bottom" Height="25" Content=" Avbryt " Click="cancel_Clicked"></Button>
+        <Button Name="addPlayerButton"  Margin="10" HorizontalAlignment="Right" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
+                    VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addPlayer_Clicked"></Button>
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+            <TextBlock  Text="Du har lagt till "/>
+            <TextBlock Name="numberOfPlayers" Text="{Binding Path=NumberOfPlayers}"/>
+            <TextBlock  Text=" spelare."/>
+        </StackPanel>
     </Grid>
 </Window>

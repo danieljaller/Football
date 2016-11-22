@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace UserApp
     /// </summary>
     public partial class SeriePage : Page
     {
+
         public SeriePage()
         {
             InitializeComponent();
+        }
+
+        public SeriePage(Serie selectedSerie)
+        {
+            Serie serie = selectedSerie;
+            InitializeComponent();
+            serieName.DataContext = serie;
         }
 
         private void schedule_Click(object sender, RoutedEventArgs e)

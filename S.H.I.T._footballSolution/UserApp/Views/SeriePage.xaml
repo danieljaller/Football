@@ -21,7 +21,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Name="serieName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"  FontSize="15" FontWeight="Black" Text="Serie namn"/>
+            <TextBlock Name="serieName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"  FontSize="15" FontWeight="Black" Text="{Binding Path=Name.Value}"/>
             <Grid Grid.Row="1" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>

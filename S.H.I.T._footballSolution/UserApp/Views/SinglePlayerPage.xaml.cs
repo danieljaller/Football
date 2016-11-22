@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace UserApp.Views
         public SinglePlayerPage()
         {
             InitializeComponent();
+        }
+
+        public SinglePlayerPage(Player selectedPlayer)
+        {
+            Player player = selectedPlayer;
+            InitializeComponent();
+            singlePlayerName.DataContext = player;
         }
 
         private void team_Click(object sender, RoutedEventArgs e)
