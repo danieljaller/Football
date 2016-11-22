@@ -19,26 +19,26 @@ namespace FootballEngine.Helper
         private static List<Guid> matches;
         public static readonly int NumberOfPlayerRequired = 16;
 
-        public static List<Guid> SerieGenerator(List<Guid> teams, DateTime startDate)
+        public static List<Guid> SerieGenerator(List<Guid> teamIds, DateTime startDate)
         {
-            if (teams == null)
-                throw new ArgumentNullException($"{nameof(teams)} can not be null.");
-            if (teams.Count == 0)
-                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
-            if (teams.Count < 16)
-                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
-            if (teams.Count > 16)
-                throw new ArgumentOutOfRangeException($"{nameof(teams)} must contain {NumberOfPlayerRequired} players.");
+            if (teamIds == null)
+                throw new ArgumentNullException($"{nameof(teamIds)} can not be null.");
+            if (teamIds.Count == 0)
+                throw new ArgumentOutOfRangeException($"{nameof(teamIds)} must contain {NumberOfPlayerRequired} players.");
+            if (teamIds.Count < 16)
+                throw new ArgumentOutOfRangeException($"{nameof(teamIds)} must contain {NumberOfPlayerRequired} players.");
+            if (teamIds.Count > 16)
+                throw new ArgumentOutOfRangeException($"{nameof(teamIds)} must contain {NumberOfPlayerRequired} players.");
             if (startDate.Date < DateTime.Now.Date)
                 throw new ArgumentOutOfRangeException($"{nameof(startDate)} ({startDate}) can not be earlier than today ({DateTime.Now}).");
 
             latestDate = startDate.AddDays(-1);
             matches = new List<Guid>();
 
-            for (int i = 0; i < 2*(teams.Count - 1); i++)
+            for (int i = 0; i < 2*(teamIds.Count - 1); i++)
             {
-                RoundGenerator(teams, i);
-                teams = ListShuffler(teams);
+                RoundGenerator(teamIds, i);
+                teamIds = ListShuffler(teamIds);
             }
             return matches;
         }
