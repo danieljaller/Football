@@ -34,6 +34,9 @@ namespace AdminApp
             _newPlayerWindow = new NewPlayerWindow();
             _teamService = new TeamService();
             _playerService = new PlayerService(_teamService);
+
+            var listOfPlayers = _playerService.GetAll().ToString();
+            playersList.ItemsSource = listOfPlayers;
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -51,8 +54,9 @@ namespace AdminApp
             //skicka med ett lag, en checkbox selecterad
             var newPlayerWindow = new NewPlayerWindow();
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
-            if (_newPlayerWindow.tempPlayersList.Count > 30)      
-            { NewPlayerButton.IsEnabled = false;     }    
+            if (_newPlayerWindow.tempPlayersList.Count > 30)
+            { NewPlayerButton.IsEnabled = false; }
+            playersList.Items.Refresh();
         }
 
 
@@ -63,7 +67,7 @@ namespace AdminApp
             {
                 team.PlayerIds.Add(item.Id);
                 item.TeamId = team.Id;
-                _playerService.Add(item);                                      
+                _playerService.Add(item);
             }
             _teamService.Add(team);
 
