@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <TextBox Name="searchTextBox" Grid.Row="0" Width="158" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="10, 5, 5, 0" TextChanged="searchTextBox_TextChanged" KeyDown="searchTextBox_KeyDown" PreviewKeyDown="searchTextBox_KeyDown"/>
-            <TextBlock IsHitTestVisible="False" Grid.Row="0" Text="Search" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="13,3,0,0" Foreground="DarkGray">
+            <TextBlock IsHitTestVisible="False" Grid.Row="0" Text="Sök" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="13,3,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>

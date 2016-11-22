@@ -21,43 +21,26 @@ namespace UserApp
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void serieCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void serieCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void serie_Click(object sender, RoutedEventArgs e)
         {
-            MainPageFrame.Content = new SeriePage();
+            if (serieCheckBox.IsChecked == true && teamCheckBox.IsChecked == false && playerCheckBox.IsChecked == false)
+            {
+                MainPageFrame.Content = new SeriePage();
+            }
+            if(teamCheckBox.IsChecked == true && serieCheckBox.IsChecked == false && playerCheckBox.IsChecked == false)
+            {
+                MainPageFrame.Content = new TeamPage();
+            }
+            if (playerCheckBox.IsChecked == true && serieCheckBox.IsChecked == false && teamCheckBox.IsChecked == false)
+            {
+                MainPageFrame.Content = new SinglePlayerPage();
+            }
         }
 
         private void team_Click(object sender, RoutedEventArgs e)

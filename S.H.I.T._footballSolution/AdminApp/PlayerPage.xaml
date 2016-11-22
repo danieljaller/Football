@@ -10,15 +10,15 @@
 
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
-            <ColumnDefinition Width="80" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -41,13 +41,13 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Height="auto" Width="auto"  Text="Namn" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Height="auto" Width="auto"  Text="L" />

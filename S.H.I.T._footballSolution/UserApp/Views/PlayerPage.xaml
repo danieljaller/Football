@@ -8,46 +8,46 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="PlayerPage">
 
-    <Grid>
+    <Grid Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <TextBlock Name="team" Grid.Column="0" Grid.Row="0" Height="auto" Width="auto" ToolTip="Namn" Text="Namn" />
-        <TextBlock Grid.Column="1" Grid.Row="0" Height="auto" Width="auto" ToolTip="Lag" Text="Lag" />
-        <TextBlock Grid.Column="2" Grid.Row="0" Height="auto" Width="auto" ToolTip="Ålder" Text="Å" />
-        <TextBlock Grid.Column="3" Grid.Row="0" Height="auto" Width="auto" ToolTip="Spelade matcher" Text="SM" />
-        <TextBlock Grid.Column="4" Grid.Row="0" Height="auto" Width="auto" ToolTip="Mål" Text="M" />
-        <TextBlock Grid.Column="5" Grid.Row="0" Height="auto" Width="auto" ToolTip="Assist" Text="A" />
-        <TextBlock Grid.Column="6" Grid.Row="0" Height="auto" Width="auto" ToolTip="Gula Kort" Text="GK" />
-        <TextBlock Grid.Column="7" Grid.Row="0" Height="auto" Width="auto" ToolTip="Röda kort" Text="RK" />
-        <TextBlock Grid.Column="8" Grid.Row="0" Height="auto" Width="auto" ToolTip="Status" Text="S" />
 
-        <ListBox Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" >
+        <Rectangle Grid.ColumnSpan="9" Fill="LightBlue" Panel.ZIndex="1"/>
+        <TextBlock Name="team" Margin="10,0,0,0" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Height="auto" Width="auto" ToolTip="Namn" Text="Namn" />
+        <TextBlock Grid.Column="1" Grid.Row="0" Panel.ZIndex="2" Margin="10,0,0,0" ToolTip="Lag" Text="Lag" />
+        <TextBlock Grid.Column="2" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Ålder" Text="Å" />
+        <TextBlock Grid.Column="3" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Spelade matcher" Text="SM" />
+        <TextBlock Grid.Column="4" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Mål" Text="M" />
+        <TextBlock Grid.Column="5" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Assist" Text="A" />
+        <TextBlock Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Gula Kort" Text="GK" />
+        <TextBlock Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Röda kort" Text="RK" />
+        <TextBlock Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Status" Text="S" />
+        <ListBox Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Height="auto" Width="auto"  Text="Namn" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Height="auto" Width="auto"  Text="L" />
@@ -62,5 +62,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
     </Grid>
 </Page>
