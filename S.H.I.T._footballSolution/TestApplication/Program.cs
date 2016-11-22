@@ -32,11 +32,11 @@ namespace TestApplication
         static void Main(string[] args)
         {
 
-            matchService = new MatchService();
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);
-            serieService = new SerieService();
-            searchService = new SearchService();
+            matchService = ServiceLocator.Default.MatchService;
+            teamService = ServiceLocator.Default.TeamService;
+            playerService = ServiceLocator.Default.PlayerService;
+            serieService = ServiceLocator.Default.SerieService;
+            searchService = ServiceLocator.Default.SearchService;
 
             //CreateTestData();
 
@@ -150,6 +150,9 @@ namespace TestApplication
                     GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
                 Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamIds, matchIds);
                 serieService.Add(serie);
+
+                foreach (Team team in listOfTeamsInSerie)
+                    team.SeriesIds.Add(serie.Id);
             }
 
             try
@@ -463,7 +466,7 @@ namespace TestApplication
             Console.Write("Enter text:");
             string userInput = Console.ReadLine();
 
-            var searchResult = searchService.Search(userInput, true, true, true, false);
+            var searchResult = searchService.Search(userInput, true, true, true, false, true);
 
             foreach (var item in searchResult)
             {

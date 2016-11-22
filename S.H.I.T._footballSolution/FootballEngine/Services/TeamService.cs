@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
 using FootballEngine.Interfaces;
 using FootballEngine.Repositories;
 using System;
@@ -12,12 +13,30 @@ namespace FootballEngine.Services
     public class TeamService : IService<Team>
     {
         private readonly TeamRepository _teamRepository = TeamRepository.Instance;
-        PlayerService playerService;
-        MatchService matchService;
-        public TeamService()
+        private static PlayerService playerService;
+        private static MatchService matchService;
+
+        private static readonly object CreationLock = new object();
+        private static TeamService _instance;
+        public static TeamService Default
         {
-            playerService = new PlayerService(this);
-            matchService = new MatchService();
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (CreationLock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new TeamService();
+                            playerService = ServiceLocator.Default.PlayerService;
+                            matchService = ServiceLocator.Default.MatchService;
+                        }
+                    }
+                }
+
+                return _instance;
+            }
         }
 
         public void Add(Team team)

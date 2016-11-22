@@ -13,6 +13,27 @@ namespace FootballEngine.Services
     {
         private readonly SerieRepository _serieRepository = SerieRepository.Instance;
 
+        private static readonly object CreationLock = new object();
+        private static SerieService _instance;
+        public static SerieService Default
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (CreationLock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new SerieService();
+                        }
+                    }
+                }
+
+                return _instance;
+            }
+        }
+
         public void Add(Serie serie)
         {
             _serieRepository.Add(serie);

@@ -55,6 +55,7 @@
     <Compile Include="Exceptions\InvalidNumberOfPlayersException.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
     <Compile Include="Exceptions\SaveFailedException.cs" />
+    <Compile Include="Helper\ServiceLocator.cs" />
     <Compile Include="Helper\XmlHandler.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
     <Compile Include="Helper\SerieAndMatchGenerator.cs" />

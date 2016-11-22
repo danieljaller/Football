@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace FootballEngine.Domain.Entities
 {
     public class Match
     {
-        private TeamService teamService = new TeamService();
+        private TeamService teamService = ServiceLocator.Default.TeamService;
         public Guid Id { get; set; }
         public GeneralName Location
         {

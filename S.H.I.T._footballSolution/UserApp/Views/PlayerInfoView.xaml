@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:UserApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=PlayerInfoViewModel}">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=PlayerInfoViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>

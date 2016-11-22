@@ -1,4 +1,5 @@
-﻿using FootballEngine.Services;
+﻿using FootballEngine.Helper;
+using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,19 @@ namespace UserApp
 {
     public class ViewModelLocator
     {
-        private static MatchService matchService = new MatchService();
-        private static TeamService teamService = new TeamService();
-        private static PlayerService playerService = new PlayerService(teamService);
-        private static SerieService serieService = new SerieService();
+        //private static MatchService matchService = new MatchService();
+        //private static TeamService teamService = new TeamService();
+        //private static PlayerService playerService = new PlayerService();
+        //private static SerieService serieService = new SerieService();
 
-        private static PlayerInfoViewModel _playerInfoViewModel = new PlayerInfoViewModel(teamService);
+        private static MainViewModel _mainViewModel = new MainViewModel();
+        //private static PlayerInfoViewModel _playerInfoViewModel = new PlayerInfoViewModel(ServiceLocator.Default.TeamService);
         private static PlayerViewModel _playerViewModel = new PlayerViewModel();
-        private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel(teamService);
+        //private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel(ServiceLocator.Default.TeamService);
 
-        static PlayerInfoViewModel PlayerInfoViewModle { get { return _playerInfoViewModel; } }
-        static PlayerViewModel PlayerViewModel { get { return _playerViewModel; } }
-        static SinglePlayerViewModel SinglePlayerViewModel { get { return _singlePlayerViewModel; } }
+        public static MainViewModel MainViewModel { get { return _mainViewModel; } }
+        //public static PlayerInfoViewModel PlayerInfoViewModel { get { return _playerInfoViewModel; } }
+        public static PlayerViewModel PlayerViewModel { get { return _playerViewModel; } }
+        //public static SinglePlayerViewModel SinglePlayerViewModel { get { return _singlePlayerViewModel; } }
     }
 }

@@ -10,7 +10,7 @@ using UserApp.Utilities;
 
 namespace UserApp.ViewModels
 {
-    class PlayerViewModel : INotifyPropertyChanged
+    public class PlayerViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

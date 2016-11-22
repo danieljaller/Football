@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="SinglePlayerPage"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=SinglePlayerViewModel}">
+      DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SinglePlayerViewModel}">
 
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
