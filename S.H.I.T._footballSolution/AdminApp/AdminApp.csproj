@@ -68,6 +68,9 @@
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
+    <Compile Include="CreateSchedulePage.xaml.cs">
+      <DependentUpon>CreateSchedulePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewPlayerPage.xaml.cs">
       <DependentUpon>NewPlayerPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateOrAdministrateTeamsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateSchedulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

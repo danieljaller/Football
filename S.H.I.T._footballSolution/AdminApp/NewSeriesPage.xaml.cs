@@ -51,13 +51,14 @@ namespace AdminApp
             var teamIds = teamList.Select(x => x.Id).ToList();
             var matchSchedule = SerieAndMatchGenerator.SerieGenerator(teamIds, Convert.ToDateTime(serieDatePicker.SelectedDate));
             var newSerie = new Serie(new GeneralName(serieName.Text), teamIds, matchSchedule);
-            serieService.Add(newSerie);
-            foreach (var team in teamList)
-            {
-                team.SeriesIds.Add(newSerie.Id);
-            }
-            serieService.Save();
-            teamService.Save();
+            newSerieFrame.Content = new CreateSchedulePage(matchSchedule);
+            //serieService.Add(newSerie);
+            //foreach (var team in teamList)
+            //{
+            //    team.SeriesIds.Add(newSerie.Id);
+            //}
+            //serieService.Save();
+            //teamService.Save();
         }
 
         private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
