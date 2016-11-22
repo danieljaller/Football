@@ -21,7 +21,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Name="teamName" HorizontalAlignment="Center" FontSize="15" FontWeight="Black" Text="Lagnamn"/>
+            <TextBlock Name="teamName" HorizontalAlignment="Center" FontSize="15" FontWeight="Black" Text="{Binding Path=Name.Value}"/>
             <Grid Grid.Row="1" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />

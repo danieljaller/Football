@@ -94,17 +94,17 @@ namespace UserApp
             {
                 if (SearchCheckedList.SelectedItem.GetType() == typeof(Serie))
                 {
-                    MainPageFrame.Content = new SeriePage();
+                    MainPageFrame.Content = new SeriePage((Serie)SearchCheckedList.SelectedItem);
                 }
 
                 if (SearchCheckedList.SelectedItem.GetType() == typeof(Team))
                 {
-                    MainPageFrame.Content = new TeamPage();
+                    MainPageFrame.Content = new TeamPage((Team)SearchCheckedList.SelectedItem);
                 }
 
                 if (SearchCheckedList.SelectedItem.GetType() == typeof(Player))
                 {
-                    MainPageFrame.Content = new PlayerPage();
+                    MainPageFrame.Content = new SinglePlayerPage((Player)SearchCheckedList.SelectedItem);
                 }
             }
             catch

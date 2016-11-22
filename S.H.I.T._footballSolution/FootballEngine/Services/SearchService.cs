@@ -14,6 +14,12 @@ namespace FootballEngine.Services
         {
             IEnumerable<object> result = new List<object>();
 
+            if (!serieSearch && !teamSearch && !playerSearch )
+            {
+                serieSearch = true;
+                teamSearch = true;
+                playerSearch = true;
+            }
 
             if (serieSearch)
             {
