@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,16 @@ namespace AdminApp
     /// </summary>
     public partial class NewPlayerWindow : Window
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
         public NewPlayerWindow()
         {
             InitializeComponent();
+         
+            DataContext = this;
+            
         }
 
         private void cancel_Clicked(object sender, RoutedEventArgs e)
@@ -32,6 +41,10 @@ namespace AdminApp
 
         private void addContact_Clicked(object sender, RoutedEventArgs e)
         {
+            var result = new DatePicker();
+            var dateOfBirth = datePicker1.SelectedDate;
+          
+            Player player = new Player( new PlayerName(FirstName),new PlayerName(LastName), (DateTime)dateOfBirth );
             DialogResult = true;
             Close();
         }
