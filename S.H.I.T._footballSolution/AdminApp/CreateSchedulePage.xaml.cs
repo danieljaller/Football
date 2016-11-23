@@ -37,7 +37,6 @@ namespace AdminApp
             homeTeamListBox.ItemsSource = homeTeamList;
             visitorTeamListBox.ItemsSource = visitorTeamList;
             resultAndDateListBox.ItemsSource = matchList;
-            //GenerateGridRowsAndSetRowColor();
             
         }
         public void ConvertGuidList()

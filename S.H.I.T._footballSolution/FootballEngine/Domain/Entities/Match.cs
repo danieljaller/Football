@@ -12,6 +12,7 @@ namespace FootballEngine.Domain.Entities
     {
         private TeamService teamService = new TeamService();
         public Guid Id { get; set; }
+        public bool IsPlayed { get; set; }
         public GeneralName Location
         {
             get { return teamService.GetBy(HomeTeamId).HomeArena; }
@@ -22,7 +23,16 @@ namespace FootballEngine.Domain.Entities
         public uint MatchTimeInMinutes { get; set; }
         public MatchGoals HomeGoals { get; set; }
         public MatchGoals VisitorGoals { get; set; }
-        public string Result { get { return $"{HomeGoals.Value} - {VisitorGoals.Value}"; } }
+        public string Result
+        {
+            get
+            {
+                if (IsPlayed)
+                    return $"{HomeGoals.Value} - {VisitorGoals.Value}";
+                else
+                    return "-";
+            }
+        }
         public List<Guid> HomeLineup { get; set; }
         public List<Guid> VisitorLineup { get; set; }
         public List<Event> RedCards { get; set; }

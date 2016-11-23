@@ -137,5 +137,22 @@ namespace AdminApp
                 CreateMatchScheduleButton.IsEnabled = false;
             }
         }
+        private void AutoFill()
+        {
+            teamList = teamService.GetAll().Take(16).ToList();
+            teamsCheckedList.ItemsSource = teamList;
+            serieName.Text = "AutoSerie";
+            serieDatePicker.SelectedDate = DateTime.Today.AddDays(2);
+
+            teamsAreValid = true;
+            nameIsValid = true;
+            dateIsValid = true;
+            ToggleCreateMatchScheduleButton();
+        }
+
+        private void AutoFillButton_Click(object sender, RoutedEventArgs e)
+        {
+            AutoFill();
+        }
     }
 }

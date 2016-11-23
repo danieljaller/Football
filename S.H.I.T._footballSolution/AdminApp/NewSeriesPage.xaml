@@ -44,7 +44,7 @@
                     <DatePicker Name="serieDatePicker" Text="Välj datum" Grid.Row="1" Grid.Column="2" Margin="5" Width="120" SelectedDateChanged="serieDatePicker_SelectedDateChanged"/>
                 </StackPanel>
 
-                <ListBox Name="teamsList" Grid.Row="1" Margin="5" MinWidth="150" Height="200">
+                <ListBox Name="teamsList" Grid.Row="1" Margin="5" MinWidth="150" Height="260">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -53,11 +53,12 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Grid.Row="2" Grid.Column="0"  Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click">SKAPA NYTT LAG</Button>
+                <Button Grid.Row="2" Grid.Column="0"  Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click" HorizontalAlignment="Right">SKAPA NYTT LAG</Button>
+                <Button Grid.Row="2" Grid.Column="0" Margin="10" Name="AutoFillButton" Content="Auto" HorizontalAlignment="Left" Click="AutoFillButton_Click"/>
                 <Button Grid.Row="2" Grid.Column="1" Margin="10" Name="CreateMatchScheduleButton" Click="CreateMatchScheduleButton_Click" IsEnabled="False">SKAPA SPELSCHEMA</Button>
                 <!--<TextBlock Grid.Row="2" Grid.Column="2" IsEnabled="{Binding ElementName=teamCheckBox, Path=IsChecked}"/>-->
 
-                <ListBox Name="teamsCheckedList"  Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="100" MinHeight="200" BorderThickness="0">
+                <ListBox Name="teamsCheckedList"  Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="100" Height="260" BorderThickness="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
