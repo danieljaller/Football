@@ -13,196 +13,168 @@ using FootballEngine.Domain.ValueObjects;
 using TestApplication.Factories;
 using static FootballEngine.Domain.Entities.Player;
 using System.Windows.Input;
+using TestApplication.Helper;
 
 namespace TestApplication
 {
-    class Program
+    class Program : ConsoleApp
     {
-        private static SearchService searchService;
-        private static MatchService matchService;
-        private static SerieService serieService;
-        private static TeamService teamService;
-        private static PlayerService playerService;
+        private static Random rand = new Random();
 
-        public Program()
-        {
-
-
-        }
         static void Main(string[] args)
         {
-
-            matchService = ServiceLocator.Default.MatchService;
-            teamService = ServiceLocator.Default.TeamService;
-            playerService = ServiceLocator.Default.PlayerService;
-            serieService = ServiceLocator.Default.SerieService;
-            searchService = ServiceLocator.Default.SearchService;
-
-            //CreateTestData();
-
-            bool keepRunning = true;
-            while (keepRunning)
-            {
-                PrintMenu();
-
-                var key = Console.ReadKey().Key;
-                Console.WriteLine();
-                switch (key)
-                {
-                    case ConsoleKey.D1:
-                        PrintPlayers(playerService.GetAll().ToList());
-                        break;
-
-                    case ConsoleKey.D2:
-                        PrintTeams(teamService.GetAll().ToList());
-                        break;
-
-                    case ConsoleKey.Q:
-                        keepRunning = false;
-                        break;
-
-                    case ConsoleKey.D3:
-                        PrintSerie(serieService.GetAll().ToList());
-                        break;
-
-                    case ConsoleKey.D4:
-                        PrintMatches(matchService.GetAll().ToList());
-                        break;
-
-                    case ConsoleKey.D5:
-                        FreeSearch();
-                        break;
-
-                    case ConsoleKey.D6:
-                        CreateMatchTable();
-                        break;
-
-                    case ConsoleKey.C:
-                        CreateTestData_2();
-                        break;
-
-                    case ConsoleKey.P:
-                        PrintObjectsCount();
-                        break;
-                }
-            }
+            new Program();
         }
 
-        public static void CreateTestData_2()
+        protected override void Initialize()
         {
-            const int maxInputAttempts = 5, maxNumberOfSeries = 20;
-            int inputAttempts = 0, numberOfSeries = 0;
-            Console.WriteLine($"Create test data.\nMaximum number of series to create: {maxNumberOfSeries}. Enter '0' to abort.");
+            AddCommand(ConsoleKey.D1, "Print all players", PrintAllPlayers);
+            AddCommand(ConsoleKey.D2, "Print all teams", PrintAllTeams);
+            AddCommand(ConsoleKey.D3, "Print all matches", PrintAllMatches);
+            AddCommand(ConsoleKey.D4, "Print all series", PrintAllSeries);
+            AddCommand(ConsoleKey.D5, "Print objects count", PrintObjectsCount);
+            AddCommand(ConsoleKey.S, "Free search", FreeSearch);
+            AddCommand(ConsoleKey.C, "Create test data", CreateTestData);
+            AddCommand(ConsoleKey.Q, "Quit", Quit);
+        }
 
-            while (inputAttempts < maxInputAttempts)
+        private void CreateTestData()
+        {
+            string message;
+            bool createTestData;
+            if (DataAlreadyExist(out message))
             {
-                Console.Write($"Enter the number of series that you want to create (Input attempts left: {maxInputAttempts - inputAttempts}): ");
-                Console.WriteLine();
-                string userInput = Console.ReadLine();
-                if (int.TryParse(userInput, out numberOfSeries))
+                Console.WriteLine(message);
+                AskFor(out createTestData, "Do you want to continue?");
+            }
+            else
+            {
+                createTestData = false;
+                Console.WriteLine(message);
+            }
+
+            if (createTestData)
+            {
+                int maxInputAttempts = DefaultMaxInputAttempts,
+                    maxNumberOfSeries = 20,
+                    inputAttempts = 0;
+                uint numberOfSeries = 0;
+                Console.WriteLine($"Create test data.\nMaximum number of series to create: {maxNumberOfSeries}.\nEnter '0' to abort.");
+                
+                while (inputAttempts < maxInputAttempts)
                 {
+                    AskFor(out numberOfSeries, "Enter the number of series that you want to create: ");
                     if (numberOfSeries == 0)
-                        return;
+                    {
+                        Console.WriteLine("Creating test data was aborted. No test data was created.");
+                        inputAttempts = maxInputAttempts;
+                        break;
+                    }
                     if (numberOfSeries > maxNumberOfSeries)
                     {
                         Console.WriteLine("Will not create that many series. Try again.");
                         continue;
                     }
-                    break;
+                    inputAttempts++;
                 }
-                inputAttempts++;
-            }
-            if (inputAttempts == maxInputAttempts)
-            {
-                Console.WriteLine("Maximum input attempts reached! Returning to main menu.\nPress any key to continue...");
-                Console.ReadKey();
-                return;
-            }
-
-            Random rand = new Random();
-            List<int> numberOfPlayersInEachTeam = new List<int>();
-            for (int i = 0; i < (numberOfSeries * 16); i++)
-                numberOfPlayersInEachTeam.Add(rand.Next(24, 31));
-
-            for (int s = 0; s < numberOfSeries; s++)
-            {
-                List<List<Player>> listOfPlayersInSerie = new List<List<Player>>();
-                for (int t = 0; t < 16; t++)
+                if (inputAttempts == maxInputAttempts)
                 {
-                    listOfPlayersInSerie.Add(PlayerFactory.Create(Convert.ToUInt32(numberOfPlayersInEachTeam[0])) as List<Player>);
-                    numberOfPlayersInEachTeam.RemoveAt(0);
+                    Console.WriteLine("Returning to main menu.\nPress any key to continue...");
+                    Console.ReadKey();
+                    return;
                 }
-                List<Team> listOfTeamsInSerie = TeamFactory.CreateTeamsAndSetPlayersTeamId(listOfPlayersInSerie);
 
-                foreach (List<Player> playerList in listOfPlayersInSerie)
-                    foreach (Player player in playerList)
-                        playerService.Add(player);
+                Random rand = new Random();
+                List<int> numberOfPlayersInEachTeam = new List<int>();
+                for (int i = 0; i < (numberOfSeries * 16); i++)
+                    numberOfPlayersInEachTeam.Add(rand.Next(24, 31));
 
-                foreach (Team team in listOfTeamsInSerie)
-                    teamService.Add(team);
+                for (int s = 0; s < numberOfSeries; s++)
+                {
+                    List<List<Player>> listOfPlayersInSerie = new List<List<Player>>();
+                    for (int t = 0; t < 16; t++)
+                    {
+                        listOfPlayersInSerie.Add(PlayerFactory.Create(Convert.ToUInt32(numberOfPlayersInEachTeam[0])) as List<Player>);
+                        numberOfPlayersInEachTeam.RemoveAt(0);
+                    }
+                    List<Team> listOfTeamsInSerie = TeamFactory.CreateTeamsAndSetPlayersTeamId(listOfPlayersInSerie);
 
-                //List<Guid> teamIds = listOfTeamsInSerie.Select(t => t.Id) as List<Guid>;
-                List<Guid> teamIds = new List<Guid>();
-                foreach (Team team in listOfTeamsInSerie)
-                    teamIds.Add(team.Id);
+                    foreach (List<Player> playerList in listOfPlayersInSerie)
+                        foreach (Player player in playerList)
+                            ServiceLocator.Default.PlayerService.Add(player);
 
-                List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds,
-                    GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
-                Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamIds, matchIds);
-                serieService.Add(serie);
+                    foreach (Team team in listOfTeamsInSerie)
+                        ServiceLocator.Default.TeamService.Add(team);
 
-                foreach (Team team in listOfTeamsInSerie)
-                    team.SeriesIds.Add(serie.Id);
-            }
+                    //List<Guid> teamIds = listOfTeamsInSerie.Select(t => t.Id) as List<Guid>;
+                    List<Guid> teamIds = new List<Guid>();
+                    foreach (Team team in listOfTeamsInSerie)
+                        teamIds.Add(team.Id);
 
-            try
-            {
-                Console.Write("Players: ");
-                playerService.Save();
-                Console.WriteLine("save successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
+                    List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds,
+                        GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
+                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamIds, matchIds);
+                    ServiceLocator.Default.SerieService.Add(serie);
 
-            try
-            {
-                Console.Write("Teams: ");
-                teamService.Save();
-                Console.WriteLine("save successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
+                    foreach (Team team in listOfTeamsInSerie)
+                        team.SeriesIds.Add(serie.Id);
+                }
 
-            try
-            {
-                Console.Write("Matches: ");
-                matchService.Save();
-                Console.WriteLine("save successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
-            }
-
-            try
-            {
-                Console.Write("Series: ");
-                serieService.Save();
-                Console.WriteLine("save successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"failed\n{e}");
+                SaveTestData();
             }
         }
 
-        private static Random rand = new Random();
+        private bool DataAlreadyExist(out string message)
+        {
+            bool dataExist = true;
+            if (ServiceLocator.Default.PlayerService.GetAll().Count() != 0)
+            {
+                dataExist = true;
+                message = "Player data already exist.";
+            }
+            else
+            {
+                dataExist = false;
+                message = "Player data do not exist.";
+            }
 
-        public static DateTime GetRandomDate(DateTime startDate, DateTime endDate)
+            if (ServiceLocator.Default.TeamService.GetAll().Count() != 0)
+            {
+                dataExist = true;
+                message += "\nTeam data already exist.";
+            }
+            else
+            {
+                dataExist = false;
+                message += "\nTeam data do not exist.";
+            }
+
+            if (ServiceLocator.Default.MatchService.GetAll().Count() != 0)
+            {
+                dataExist = true;
+                message += "\nMatch data already exist.";
+            }
+            else
+            {
+                dataExist = false;
+                message += "\nMatch data do not exist.";
+            }
+
+            if (ServiceLocator.Default.SerieService.GetAll().Count() != 0)
+            {
+                dataExist = true;
+                message += "\nSerie data already exist.";
+            }
+            else
+            {
+                dataExist = false;
+                message += "\nSerie data do not exist.";
+            }
+
+            return dataExist;
+        }
+
+        private DateTime GetRandomDate(DateTime startDate, DateTime endDate)
         {
             int year = rand.Next(startDate.Year, endDate.Year + 1);
 
@@ -225,127 +197,59 @@ namespace TestApplication
             return new DateTime(year, month, day);
         }
 
-        public static void CreateTestData()
+        private void SaveTestData()
         {
-
-            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
-            for (int i = 0; i < 16; i++)
-            {
-                listOfPlayerLists.Add(CreatePlayerList());
-            }
-            List<Team> teamList = CreateTeamsWithPlayers(listOfPlayerLists);
-
-            foreach (List<Player> playerList in listOfPlayerLists)
-            {
-                foreach (Player player in playerList)
-                {
-                    playerService.Add(player);
-                }
-            }
-            for (int i = 0; i < teamList.Count; i++)
-            {
-                List<Player> l = listOfPlayerLists[i];
-                teamList[i].PlayerIds = l.Select(p => p.Id).ToList();
-            }
-            foreach (Team team in teamList)
-            {
-
-                teamService.Add(team);
-            }
-            List<Guid> teamIds = teamList.Select(p => p.Id).ToList();
-            List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds, DateTime.Now);
-            Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
-            serieService.Add(serie);
-
             try
             {
                 Console.Write("Players: ");
-                playerService.Save();
-                Console.WriteLine("successful");
+                ServiceLocator.Default.PlayerService.Save();
+                Console.WriteLine("Save successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"failed\n{e}");
+                Console.WriteLine($"Save failed\n{e}");
             }
 
             try
             {
                 Console.Write("Teams: ");
-                teamService.Save();
-                Console.WriteLine("successful");
+                ServiceLocator.Default.TeamService.Save();
+                Console.WriteLine("Save successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"failed\n{e}");
+                Console.WriteLine($"Save failed\n{e}");
             }
 
             try
             {
                 Console.Write("Matches: ");
-                matchService.Save();
-                Console.WriteLine("successful");
+                ServiceLocator.Default.MatchService.Save();
+                Console.WriteLine("Save successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"failed\n{e}");
+                Console.WriteLine($"Save failed\n{e}");
             }
 
             try
             {
                 Console.Write("Series: ");
-                serieService.Save();
-                Console.WriteLine("successful");
+                ServiceLocator.Default.SerieService.Save();
+                Console.WriteLine("Save successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"failed\n{e}");
+                Console.WriteLine($"Save failed\n{e}");
             }
         }
-        //private static void GetPlayers()
-        //{
-        //    var list = playerService.GetAllPlayersBySerie();
-        //}
 
-
-
-        public static List<Player> CreatePlayerList()
+        public void PrintAllPlayers()
         {
-            Random rand = new Random();
-            uint numberOfPlayers = Convert.ToUInt32(rand.Next(24, 31));
-
-            return PlayerFactory.Create(numberOfPlayers) as List<Player>;
-        }
-
-        public static List<Team> CreateTeamsWithPlayers(List<List<Player>> players)
-        {
-            List<Team> teams = new List<Team>();
-            for (int i = 0; i < players.Count; i++)
+            var allPlayers = ServiceLocator.Default.PlayerService.GetAll();
+            foreach (Player player in allPlayers)
             {
-                try
-                {
-                    Team team = TeamFactory.Create($"Team{i + 1}", $"Arena-{i + 1}", players[i].Select(p => p.Id));
-
-                    foreach (Player player in players[i])
-                    {
-                        player.TeamId = team.Id;
-                    }
-
-                    teams.Add(team);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-
-            return teams;
-        }
-
-        public static void PrintPlayers(List<Player> listOfPlayers)
-        {
-            foreach (Player player in listOfPlayers)
-            {
-                Team playersTeam = teamService.GetBy(player.TeamId);
+                Team playersTeam = ServiceLocator.Default.TeamService.GetBy(player.TeamId);
                 string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
                 StringBuilder playerBuilder = new StringBuilder();
                 playerBuilder.AppendLine($"Name: {player.FullName}");
@@ -361,15 +265,14 @@ namespace TestApplication
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
-            Console.WriteLine($"Total number of players: {listOfPlayers.Count}");
+            Console.WriteLine($"Total number of players: {allPlayers.Count()}");
         }
 
-        private static void PrintTeams(List<Team> teamList)
+        private void PrintAllTeams()
         {
-            foreach (Team team in teamList)
+            var allTeams = ServiceLocator.Default.TeamService.GetAll();
+            foreach (Team team in allTeams)
             {
-                //Team playersTeam = teamService.GetBy(player.TeamId);
-                //string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
                 StringBuilder playerBuilder = new StringBuilder();
                 playerBuilder.AppendLine($"Name: {team.Name.Value}");
                 playerBuilder.AppendLine($"HomeArena: {team.HomeArena.Value}");
@@ -381,92 +284,93 @@ namespace TestApplication
                 playerBuilder.AppendLine($"Matches Played: {team.MatchIds.Count}");
                 playerBuilder.AppendLine($"Players: {team.PlayerIds.Count}");
 
-
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
-            Console.WriteLine($"Total number of teams: {teamList.Count}");
+            Console.WriteLine($"Total number of teams: {allTeams.Count()}");
         }
 
-        private static void PrintSerie(List<Serie> serieList)
+        private void PrintAllMatches()
         {
-
-            foreach (var serie in serieList)
-            {
-
-                StringBuilder serieBuilder = new StringBuilder();
-                serieBuilder.AppendLine($"Name: {serie.Name.Value}");
-                serieBuilder.AppendLine($"Number of teams: {serie.TeamTable.Count}");
-                serieBuilder.AppendLine($"Matches:");
-                foreach (var match in serie.MatchTable)
-                {
-                    serieBuilder.AppendLine($"{teamService.GetBy(matchService.GetBy(match).HomeTeamId).Name} - {teamService.GetBy(matchService.GetBy(match).VisitorTeamId).Name} - {matchService.GetBy(match).Location.ToString()} - {matchService.GetBy(match).Date.ToShortDateString()}");
-                }
-
-
-                Console.WriteLine(serieBuilder.ToString());
-                Console.WriteLine("----------------------------------------------------------");
-            }
-            Console.WriteLine($"Total number of series: {serieList.Count}");
-        }
-
-        private static void PrintMatches(List<Match> matchList)
-        {
-            foreach (var match in matchList)
+            var allMatches = ServiceLocator.Default.MatchService.GetAll();
+            foreach (var match in allMatches)
             {
                 StringBuilder playerBuilder = new StringBuilder();
-                playerBuilder.AppendLine($"Home team: {teamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Value}");
-                playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Value}");
+                playerBuilder.AppendLine($"Home team: {ServiceLocator.Default.TeamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Value}");
+                playerBuilder.AppendLine($"Visitor team: {ServiceLocator.Default.TeamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Value}");
                 playerBuilder.AppendLine($"Total match time: {match.MatchTimeInMinutes}");
                 playerBuilder.AppendLine($"Goals:");
                 foreach (var goal in match.Goals)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine($"Assists:");
                 foreach (var assist in match.Assists)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Red cards: ");
                 foreach (var card in match.RedCards)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Yellow cards:");
                 foreach (var card in match.YellowCards)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Injuries: ");
                 foreach (var injury in match.Injuries)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine($"Location: {match.Location.Value}  ");
                 playerBuilder.AppendLine($"Date: {match.Date.Date.ToShortDateString()} ");
                 playerBuilder.AppendLine($"Home team lineup:");
                 foreach (var player in match.HomeLineup)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(player).FullName}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(player).FullName}");
                 }
                 playerBuilder.AppendLine($"Visitor team lineup:");
                 foreach (var player in match.VisitorLineup)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(player).FullName}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Default.PlayerService.GetBy(player).FullName}");
                 }
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
             }
-            Console.WriteLine($"Total number matches: {matchList.Count}");
+            Console.WriteLine($"Total number matches: {allMatches.Count()}");
         }
 
-        private static void FreeSearch()
+        private void PrintAllSeries()
+        {
+            var allSeries = ServiceLocator.Default.SerieService.GetAll();
+            foreach (var serie in allSeries)
+            {
+                StringBuilder serieBuilder = new StringBuilder();
+                serieBuilder.AppendLine($"Name: {serie.Name.Value}");
+                serieBuilder.AppendLine($"Number of teams: {serie.TeamTable.Count}");
+                serieBuilder.AppendLine($"Matches:");
+                foreach (var match in serie.MatchTable)
+                {
+                    serieBuilder.Append($"{ServiceLocator.Default.TeamService.GetBy(ServiceLocator.Default.MatchService.GetBy(match).HomeTeamId).Name} - ");
+                    serieBuilder.Append($"{ServiceLocator.Default.TeamService.GetBy(ServiceLocator.Default.MatchService.GetBy(match).VisitorTeamId).Name} - ");
+                    serieBuilder.Append($"{ServiceLocator.Default.MatchService.GetBy(match).Location.ToString()} - ");
+                    serieBuilder.AppendLine($"{ServiceLocator.Default.MatchService.GetBy(match).Date.ToShortDateString()}");
+                }
+
+                Console.WriteLine(serieBuilder.ToString());
+                Console.WriteLine("----------------------------------------------------------");
+            }
+            Console.WriteLine($"Total number of series: {allSeries.Count()}");
+        }
+
+        private void FreeSearch()
         {
             Console.Write("Enter text:");
             string userInput = Console.ReadLine();
 
-            var searchResult = searchService.Search(userInput, true, true, true, false, true);
+            var searchResult = ServiceLocator.Default.SearchService.Search(userInput, true, true, true, false, true);
 
             foreach (var item in searchResult)
             {
@@ -484,56 +388,22 @@ namespace TestApplication
             }
         }
 
-        private static void CreateMatchTable()
+        private void PrintObjectsCount()
         {
-            Console.Write("Namn på serie: ");
-            string serieName = Console.ReadLine();
-            DateTime startDate = new DateTime();
-            while (true)
-            {
-                Console.Write("Startdatum: ");
-                try
-                {
-                    startDate = DateTime.Parse(Console.ReadLine());
-                    break;
-                }
-                catch
-                {
-                    Console.WriteLine("Felaktigt format");
-                }
-            }
-
-            List<Guid> teams = new List<Guid>();
-            teams = teamService.GetAll().Select(t => t.Id).ToList().GetRange(0, 16);
-            List<Guid> matchTable = SerieAndMatchGenerator.SerieGenerator(teams, startDate);
-            foreach (var match in matchTable)
-            {
-                matchService.Add(matchService.GetBy(match));
-            }
-            serieService.Add(new Serie(new GeneralName(serieName), teams, matchTable));
-
-        }
-
-        private static void PrintObjectsCount()
-        {
-            Console.WriteLine($"Total number of series: {serieService.GetAll().Count()}");
-            Console.WriteLine($"Total number of matches: {matchService.GetAll().Count()}");
-            Console.WriteLine($"Total number of teams: {teamService.GetAll().Count()}");
-            Console.WriteLine($"Total number of players: {playerService.GetAll().Count()}");
+            Console.WriteLine($"Total number of players: {ServiceLocator.Default.PlayerService.GetAll().Count()}");
+            Console.WriteLine($"Total number of teams: {ServiceLocator.Default.TeamService.GetAll().Count()}");
+            Console.WriteLine($"Total number of matches: {ServiceLocator.Default.MatchService.GetAll().Count()}");
+            Console.WriteLine($"Total number of series: {ServiceLocator.Default.SerieService.GetAll().Count()}");
             Console.WriteLine();
         }
 
-        private static void PrintMenu()
+        private void Quit()
         {
-            Console.WriteLine();
-            Console.WriteLine("+--------------------------------------------------------------------------------+");
-            Console.WriteLine("|   [1] Print Players         [3] Print Series          [5] FreeSearch           |");
-            Console.WriteLine("|   [2] Print Teams           [4] Print Matches         [q] Quit                 |");
-            Console.WriteLine("|   [6] Create Serie          [c] Create test data      [p] Print objects count  |");
-            Console.WriteLine("+--------------------------------------------------------------------------------+");
-            Console.WriteLine();
+            bool quit;
+            AskFor(out quit, "Do you really want to quit?");
+            if (quit)
+                EndLoop();
         }
-
     }
 }
 
