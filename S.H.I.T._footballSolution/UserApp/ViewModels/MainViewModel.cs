@@ -29,10 +29,10 @@ namespace UserApp.ViewModels
             return true;
         }
 
-        private string _searchTextBox;
-        public string SearchTextBox
+        private string _searchText;
+        public string SearchText
         {
-            get { return _searchTextBox; }
+            get { return _searchText; }
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -44,7 +44,7 @@ namespace UserApp.ViewModels
                 {
                     SearchResultItems = new ObservableCollection<object>(ServiceLocator.Default.SearchService.Search(value, matchDateSearch, playerSearch, serieSearch, teamSearch, true).Take(10).ToList().Take(10).ToList());
                 }
-                SetField(ref _searchTextBox, value);
+                SetField(ref _searchText, value);
             }
         }
         private ObservableCollection<object> _searchResultItems;
@@ -86,37 +86,28 @@ namespace UserApp.ViewModels
         public void ToogleMatchDateSearch(object obj)
         {
             matchDateSearch = (matchDateSearch) ? false : true;
-            //if (matchDateSearch)
-            //    matchDateSearch = false;
-            //else
-            //    matchDateSearch = true;
+            SearchText = _searchText;
         }
         private bool CanToogleMatchDateSearch(object obj) { return true; }
 
         public void TooglePlayerSearch()
         {
-            if (playerSearch)
-                playerSearch = false;
-            else
-                playerSearch = true;
+            playerSearch = (playerSearch) ? false : true;
+            SearchText = _searchText;
         }
         private bool CanTooglePlayerSearch(object obj) { return true; }
 
         public void ToogleSerieSearch(object obj)
         {
-            if (serieSearch)
-                serieSearch = false;
-            else
-                serieSearch = true;
+            serieSearch = (serieSearch) ? false : true;
+            SearchText = _searchText;
         }
         private bool CanToogleSerieSearch(object obj) { return true; }
 
         public void ToogleTeamSearch(object obj)
         {
-            if (teamSearch)
-                teamSearch = false;
-            else
-                teamSearch = true;
+            teamSearch = (teamSearch) ? false : true;
+            SearchText = _searchText;
         }
         private bool CanToogleTeamSearch(object obj) { return true; }
     }
