@@ -27,9 +27,10 @@ namespace AdminApp
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
         NewPlayerWindow _newPlayerWindow;
-        PlayerService _playerService;
+        PlayerService _playerService;   
         TeamService _teamService;
         List<Player> listOfPlayers;
+        Team team;
         public NewTeamPage()
         {
             listOfPlayers = new List<Player>();
@@ -72,11 +73,12 @@ namespace AdminApp
         }
 
         private void ToggleCreateTeamButton()
-        {
-
-            if (listOfPlayers.Count() >= 2)
+        {           if(team != null)
+            { 
+            if (_teamService.GetAllPlayersByTeam(team.Id).Count() > 2)//25
             {
                 CreateTeamButton.IsEnabled = true;
+            }
             }
             else
             {
@@ -87,7 +89,7 @@ namespace AdminApp
 
         private void CreateTeamButton_Click(object sender, RoutedEventArgs e)
         {
-            Team team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName));
+            team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName));
             foreach (Player item in _newPlayerWindow.tempPlayersList)
             {
                 team.PlayerIds.Add(item.Id);
