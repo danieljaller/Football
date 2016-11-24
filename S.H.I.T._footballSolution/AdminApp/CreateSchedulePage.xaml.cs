@@ -76,13 +76,11 @@ namespace AdminApp
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            var p = sender;
-            var x = dateListBox.SelectedItem;
-            var s = (Match)x;
-            var o = (DatePicker)sender;
+            var selectedItem = (Match)dateListBox.SelectedItem;
+            var datePicker = (DatePicker)sender;
+            selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
+            //Visibility = Visibility.Hidden;
             
-
-            s.Date.EditMatchDate(Convert.ToDateTime(o.SelectedDate));
         }
     }
 }
