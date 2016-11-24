@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace AdminApp
         TeamService teamService;
         public Player player;
         public Team team;
+        public Event result { get; set; }
+        public uint timeOfEvent;
         IEnumerable<Player> playerList;
         public AddEvent(Team team)
         {
@@ -32,8 +35,20 @@ namespace AdminApp
             playerService = new PlayerService(teamService);        
             InitializeComponent();
             playerList = teamService.GetAllPlayersByTeam(team.Id);
-            playerListbox.ItemsSource = playerList;
-            
+            playerListbox.ItemsSource = playerList;           
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            player = (Player)playerListbox.SelectedItem;          
+            uint.TryParse(timeBox.Text, out timeOfEvent);
+            result = new Event(player.Id, timeOfEvent);
+            DialogResult = true;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

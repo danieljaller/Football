@@ -56,10 +56,10 @@ namespace AdminApp
         {
             var addEventWindow = new AddEvent(homeTeam);
             var addEvent = addEventWindow.ShowDialog();
-            //if (addEvent)
-            //{
-            //    match.HomeGoals.Add(addEvent);
-            //}
+            if (addEvent == true)
+            {
+                match.HomeGoals.Add(addEventWindow.result);
+            }
         }
 
         private void addGoalAway_Click(object sender, RoutedEventArgs e)
