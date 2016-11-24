@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,19 @@ namespace AdminApp
     /// </summary>
     public partial class AddEvent : Window
     {
-        public AddEvent()
+        PlayerService playerService;
+        TeamService teamService;
+        public Player player;
+        public Team team;
+        IEnumerable<Player> playerList;
+        public AddEvent(Team team)
         {
+            teamService = new TeamService();
+            playerService = new PlayerService(teamService);        
             InitializeComponent();
+            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            playerListbox.ItemsSource = playerList;
+            
         }
     }
 }

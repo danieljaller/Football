@@ -21,14 +21,14 @@ namespace FootballEngine.Domain.Entities
         public Guid VisitorTeamId { get; set; }
         public DateTime Date { get; set; }
         public uint MatchTimeInMinutes { get; set; }
-        public MatchGoals HomeGoals { get; set; }
-        public MatchGoals VisitorGoals { get; set; }
+        public List<Event> HomeGoals { get; set; }
+        public List<Event> VisitorGoals { get; set; }
         public string Result
         {
             get
             {
                 if (IsPlayed)
-                    return $"{HomeGoals.Value} - {VisitorGoals.Value}";
+                    return $"{HomeGoals.Count} - {VisitorGoals.Count}";
                 else
                     return "-";
             }
@@ -54,15 +54,15 @@ namespace FootballEngine.Domain.Entities
             Date = date;
             MatchTimeInMinutes = 0;
             HomeTeamId = homeTeamId;
-            VisitorTeamId = visitorTeamId;            
-            HomeGoals = new MatchGoals(0);
-            VisitorGoals = new MatchGoals(0);
+            VisitorTeamId = visitorTeamId;
+            HomeGoals = new List<Event>();
+            VisitorGoals = new List<Event>();
             HomeLineup = new List<Guid>();
             VisitorLineup = new List<Guid>();
             RedCards = new List<Event>();
             YellowCards = new List<Event>();
             Assists = new List<Event>();
-            Goals = new List<Event>();
+            //Goals = new List<Event>();
             Injuries = new List<Event>();
         }
         private bool IsValidInparameter(DateTime date, Guid homeTeamId, Guid visitorTeamId)
@@ -80,7 +80,7 @@ namespace FootballEngine.Domain.Entities
 
         public string GetMatchResultAsString()
         {
-            return $"{HomeGoals.Value} - {VisitorGoals.Value}";
+            return $"{HomeGoals.Count} - {VisitorGoals.Count}";
         }
     }
            

@@ -18,25 +18,8 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="20,0,0,0">Spelare:</TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,0,0">Matchminut:</TextBlock>
-        <ListBox Grid.Row="0" Grid.Column="1" Margin="5">
-            <ListBoxItem>
-                <RadioButton GroupName="playerSelection" >Spelare 1</RadioButton>
-            </ListBoxItem>
-            <ListBoxItem>
-                <RadioButton GroupName="playerSelection">Spelare 2</RadioButton>
-            </ListBoxItem>
-            <ListBoxItem>
-                <RadioButton GroupName="playerSelection">Spelare 3</RadioButton>
-            </ListBoxItem>
-            <ListBoxItem>
-                <RadioButton GroupName="playerSelection">Spelare 4</RadioButton>
-            </ListBoxItem>
-            <ListBoxItem>
-                <RadioButton GroupName="playerSelection">Spelare 5</RadioButton>
-            </ListBoxItem>
-            <ListBoxItem>
-                <RadioButton GroupName="playerSelection">Spelare 6</RadioButton>
-            </ListBoxItem>
+        <ListBox Name="playerListbox" Grid.Row="0" Grid.Column="1" Margin="5">
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <RadioButton GroupName="playerSelection"/>

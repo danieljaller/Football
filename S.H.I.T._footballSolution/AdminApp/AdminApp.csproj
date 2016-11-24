@@ -67,6 +67,7 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="CreateSchedulePage.xaml.cs">
       <DependentUpon>CreateSchedulePage.xaml</DependentUpon>

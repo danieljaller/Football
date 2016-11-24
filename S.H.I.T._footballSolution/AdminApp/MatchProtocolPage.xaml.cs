@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +23,30 @@ namespace AdminApp
     /// </summary>
     public partial class MatchProtocolPage : Page
     {
+        MatchService matchService;
+        TeamService teamService;
+        PlayerService playerService;
+        Match match;
+        Team homeTeam;
+        Team visitorTeam;
+        int homeScore;
+        int visitorScore;
+        bool isPlayed;
+        List<Event> homeGoals;
+        List<Event> visitorGoals;
+
+
         public MatchProtocolPage()
         {
+            matchService = new MatchService();
+            teamService = new TeamService();
+            playerService = new PlayerService(teamService);
             InitializeComponent();
             matchDatePicker.DisplayDateStart = DateTime.Today;
+            matchesList.ItemsSource = matchService.GetAll();
+                        
         }
-
+       
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
 
@@ -33,13 +54,17 @@ namespace AdminApp
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(homeTeam);
             var addEvent = addEventWindow.ShowDialog();
+            //if (addEvent)
+            //{
+            //    match.HomeGoals.Add(addEvent);
+            //}
         }
 
         private void addGoalAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(visitorTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
@@ -55,13 +80,13 @@ namespace AdminApp
 
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(homeTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
         private void addAssistAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(visitorTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
@@ -77,13 +102,13 @@ namespace AdminApp
 
         private void addRedCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(homeTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
         private void addRedCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(visitorTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
@@ -99,13 +124,13 @@ namespace AdminApp
 
         private void addYellowCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(homeTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
         private void addYellowCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent();
+            var addEventWindow = new AddEvent(visitorTeam);
             var addEvent = addEventWindow.ShowDialog();
         }
 
@@ -158,6 +183,36 @@ namespace AdminApp
 
         }
 
-        
+        private void matchesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            convertListsToObjects();
+            homeTeamNameBlock.DataContext = homeTeam;
+            visitorTeamNameBlock.DataContext = visitorTeam;
+            if (isPlayed)
+            {
+                homeTeamScoreBlock.DataContext = homeScore;
+                visitorTeamScoreBlock.DataContext = visitorScore;
+            }
+            else
+            {
+                homeTeamScoreBlock.DataContext = " ";
+                visitorTeamScoreBlock.DataContext = " ";    
+            }
+            homeGoalsList.ItemsSource = homeGoals;
+            visitorGoalsList.ItemsSource = visitorGoals;
+                       
+        }
+        private void convertListsToObjects()
+        {
+            
+            match = (Match)matchesList.SelectedItem;
+            isPlayed = match.IsPlayed;
+            homeTeam = teamService.GetBy(match.HomeTeamId);
+            visitorTeam = teamService.GetBy(match.VisitorTeamId);
+            homeScore = match.HomeGoals.Count();
+            visitorScore = match.VisitorGoals.Count();
+            homeGoals = match.HomeGoals;
+            visitorGoals = match.VisitorGoals;
+        }
     }
 }

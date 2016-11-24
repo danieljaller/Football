@@ -12,6 +12,7 @@ namespace AdminApp.Converters
 {
     public class SearchResultToStringConverter : IValueConverter
     {
+        TeamService teamService;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value.GetType() == typeof(Player))
@@ -28,6 +29,14 @@ namespace AdminApp.Converters
             {
                 var serie = (Serie)value;
                 return serie.Name;
+            }
+            if (value.GetType() == typeof(Match))
+            {
+                var match = (Match)value;
+                teamService = new TeamService();
+                var teamHome = teamService.GetBy(match.HomeTeamId);
+                var teamVisitor = teamService.GetBy(match.VisitorTeamId);
+                return $"{teamHome.Name} - {teamVisitor.Name}";
             }
             return null;
         }

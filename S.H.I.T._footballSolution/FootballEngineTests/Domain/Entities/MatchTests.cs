@@ -55,7 +55,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod()]
         public void Match_GetMatchResultAsStringTest()
         {
-            Assert.AreEqual($"{match.HomeGoals.Value} - {match.VisitorGoals.Value}", match.GetMatchResultAsString());
+            Assert.AreEqual($"{match.HomeGoals.Count()} - {match.VisitorGoals.Count()}", match.GetMatchResultAsString());
         }
 
 

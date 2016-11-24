@@ -419,8 +419,8 @@ namespace TestApplication
             foreach (var match in matchList)
             {
                 StringBuilder playerBuilder = new StringBuilder();
-                playerBuilder.AppendLine($"Home team: {teamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Value}");
-                playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Value}");
+                playerBuilder.AppendLine($"Home team: {teamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Count()}");
+                playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Count()}");
                 playerBuilder.AppendLine($"Total match time: {match.MatchTimeInMinutes}");
                 playerBuilder.AppendLine($"Goals:");
                 foreach (var goal in match.Goals)

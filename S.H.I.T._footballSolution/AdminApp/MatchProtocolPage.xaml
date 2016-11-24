@@ -4,16 +4,22 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
+      xmlns:converters="clr-namespace:AdminApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
-      Title="MatchProtocolPage">
+      Title="MatchProtocolPage" >
+    <Page.Resources>
+        <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
+        <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
+    </Page.Resources>
+
 
     <Grid>
         <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -22,12 +28,10 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Matcher" FontSize="20" />
-            <ListBox Name="playersList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
+            <ListBox Name="matchesList" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250" SelectionChanged="matchesList_SelectionChanged"  >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <TextBlock FontWeight="Bold" Text="{Binding}"/>
-                        </Grid>
+                        <TextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource searchResaultToStringConverter}}"  />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -54,14 +58,14 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock FontSize="20" FontWeight="Bold">Lagnamn</TextBlock>
-                    <TextBlock Margin="10,0,10,0" FontSize="20" FontWeight="Bold">0</TextBlock>
-                    
+                    <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
+                    <TextBlock Name="homeTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
+
                 </StackPanel>
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">-</TextBlock>
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock Margin="10,0,10,0" FontSize="20" FontWeight="Bold">0</TextBlock>
-                    <TextBlock FontSize="20" FontWeight="Bold">Lagnamn</TextBlock>
+                    <TextBlock Name="visitorTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
+                    <TextBlock Name="visitorTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
                 </StackPanel>
                 <DatePicker Name="matchDatePicker" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5" />
                 <TextBlock Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Mål</TextBlock>
@@ -143,7 +147,7 @@
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
                 </Button>
 
-                <ListBox Grid.Row="3" Grid.Column="0">
+                <ListBox Name="homeGoalsList" Grid.Row="3" Grid.Column="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -151,13 +155,13 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Spelare" />
+                                <TextBlock Grid.Column="0" Text="{Binding Path=playerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Match minut"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <ListBox Grid.Row="3" Grid.Column="1">
+                <ListBox Name="visitorGoalsList" Grid.Row="3" Grid.Column="1">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -322,5 +326,5 @@
         </Grid>
 
     </Grid>
-    
-</Page>
+</Page> 
+
