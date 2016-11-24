@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,8 @@ namespace AdminApp
             ConvertGuidList();
             homeTeamListBox.ItemsSource = homeTeamList;
             visitorTeamListBox.ItemsSource = visitorTeamList;
-            resultAndDateListBox.ItemsSource = matchList;
+            dateListBox.ItemsSource = matchList;
+            resultListBox.ItemsSource = matchList;
             
         }
         public void ConvertGuidList()
@@ -70,6 +72,17 @@ namespace AdminApp
                 Grid.SetColumnSpan(rect, 9);
                 Grid.SetRow(rect, i);
             }
+        }
+
+        private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var p = sender;
+            var x = dateListBox.SelectedItem;
+            var s = (Match)x;
+            var o = (DatePicker)sender;
+            
+
+            s.Date.EditMatchDate(Convert.ToDateTime(o.SelectedDate));
         }
     }
 }

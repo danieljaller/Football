@@ -85,7 +85,7 @@ namespace FootballEngine.Services
 
         public IEnumerable<Team> OrderByNumberOfMatchesPlayed(Guid serieId)
         {
-            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Where(m => matchService.GetBy(m).Date.Date < DateTime.Today).Count());
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Where(m => matchService.GetBy(m).Date.Value.Date < DateTime.Now.Date).Count());
         }
 
         public IEnumerable<Team> OrderByGoalDifference(Guid serieId)
