@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FootballEngine.Exceptions;
+using FootballEngine.Domain.ValueObjects;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
@@ -23,7 +24,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod]
         public void Match_CreateNewValidMatch()
         {
-            match = new Match(DateTime.Now, Guid.NewGuid(), Guid.NewGuid());
+            match = new Match(new MatchDate(DateTime.Now), Guid.NewGuid(), Guid.NewGuid());
             Assert.IsNotNull(match);
         }
 
@@ -55,7 +56,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod()]
         public void Match_GetMatchResultAsStringTest()
         {
-            Assert.AreEqual($"{match.HomeGoals.Value} - {match.VisitorGoals.Value}", match.GetMatchResultAsString());
+            Assert.AreEqual($"{match.HomeGoals.Count()} - {match.VisitorGoals.Count()}", match.GetMatchResultAsString());
         }
 
 
@@ -64,35 +65,35 @@ namespace FootballEngine.Domain.Entities.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch1()
         {            
-            Match match = new Match(DateTime.Now.AddDays(-1), Guid.NewGuid(), Guid.NewGuid());
+            Match match = new Match(new MatchDate(DateTime.Now.AddDays(-1)), Guid.NewGuid(), Guid.NewGuid());
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch2()
         {
-            Match match = new Match(Match.EndDateForMatchCreation.AddDays(1), Guid.NewGuid(), Guid.NewGuid());
+            Match match = new Match(new MatchDate(Match.EndDateForMatchCreation.AddDays(1)), Guid.NewGuid(), Guid.NewGuid());
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Match_CreateInvalidMatch3()
         {
-            Match match = new Match(DateTime.Now, Guid.Empty, Guid.Empty);
+            Match match = new Match(new MatchDate(DateTime.Now), Guid.Empty, Guid.Empty);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Match_CreateInvalidMatch4()
         {
-            Match match = new Match(DateTime.Now, Guid.NewGuid(), Guid.Empty);
+            Match match = new Match(new MatchDate(DateTime.Now), Guid.NewGuid(), Guid.Empty);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Match_CreateInvalidMatch5()
         {
-            Match match = new Match(DateTime.Now, Guid.Empty, Guid.NewGuid());
+            Match match = new Match(new MatchDate(DateTime.Now), Guid.Empty, Guid.NewGuid());
         }
     }
 }
