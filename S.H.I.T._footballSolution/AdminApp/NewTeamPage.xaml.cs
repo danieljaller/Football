@@ -61,6 +61,7 @@ namespace AdminApp
             //skicka med ett lag, en checkbox selecterad
             var newPlayerWindow = new NewPlayerWindow();
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
+           
             if (newPlayerWindowResult == true)
             {
                 foreach (var player in newPlayerWindow.tempPlayersList)
