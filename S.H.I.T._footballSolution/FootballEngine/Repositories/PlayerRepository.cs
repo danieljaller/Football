@@ -87,10 +87,13 @@ namespace FootballEngine.Repositories
         string[] directories = new string[2] { "FootballEngine", "Resources" };
         public void Load()
         {
-            string path;
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            path = Path.Combine(path, "Resources");
+            path = Path.Combine(path, "Players.xml");
             try
             {
-                if (TryGetFilePath.InSolutionDirectory("Players.xml", directories, false, out path))
+                //if (TryGetFilePath.InSolutionDirectory("Players.xml", "Resources", false, out path))
+                if( true)
                 {
                     players = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
                 }
