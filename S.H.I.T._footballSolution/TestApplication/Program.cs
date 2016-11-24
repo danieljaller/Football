@@ -404,7 +404,7 @@ namespace TestApplication
                 serieBuilder.AppendLine($"Matches:");
                 foreach (var match in serie.MatchTable)
                 {
-                    serieBuilder.AppendLine($"{teamService.GetBy(matchService.GetBy(match).HomeTeamId).Name} - {teamService.GetBy(matchService.GetBy(match).VisitorTeamId).Name} - {matchService.GetBy(match).Location.ToString()} - {matchService.GetBy(match).Date.ToShortDateString()}");
+                    serieBuilder.AppendLine($"{teamService.GetBy(matchService.GetBy(match).HomeTeamId).Name} - {teamService.GetBy(matchService.GetBy(match).VisitorTeamId).Name} - {matchService.GetBy(match).Location.ToString()} - {matchService.GetBy(match).Date.ToString()}");
                 }
 
 
@@ -448,7 +448,7 @@ namespace TestApplication
                     playerBuilder.AppendLine($"{playerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine($"Location: {match.Location.Value}  ");
-                playerBuilder.AppendLine($"Date: {match.Date.Date.ToShortDateString()} ");
+                playerBuilder.AppendLine($"Date: {match.Date.ToString()} ");
                 playerBuilder.AppendLine($"Home team lineup:");
                 foreach (var player in match.HomeLineup)
                 {

@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Exceptions;
 using FootballEngine.Services;
 using System;
@@ -71,7 +72,7 @@ namespace FootballEngine.Helper
 
                 date = latestDate;
 
-                match = new Match(date, pairing[0], pairing[1]);
+                match = new Match(new MatchDate(date), pairing[0], pairing[1]);
                 matchService.Add(match);
                 matches.Add(match.Id);
             }

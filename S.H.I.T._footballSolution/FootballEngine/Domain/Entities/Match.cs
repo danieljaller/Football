@@ -19,7 +19,7 @@ namespace FootballEngine.Domain.Entities
         }
         public Guid HomeTeamId { get; set; }
         public Guid VisitorTeamId { get; set; }
-        public DateTime Date { get; set; }
+        public MatchDate Date { get; set; }
         public uint MatchTimeInMinutes { get; set; }
         public MatchGoals HomeGoals { get; set; }
         public MatchGoals VisitorGoals { get; set; }
@@ -47,7 +47,7 @@ namespace FootballEngine.Domain.Entities
         }
         public Match() { }
 
-        public Match(DateTime date, Guid homeTeamId, Guid visitorTeamId)
+        public Match(MatchDate date, Guid homeTeamId, Guid visitorTeamId)
         {
             Id = Guid.NewGuid();
             IsValidInparameter(date, homeTeamId, visitorTeamId);
@@ -65,11 +65,11 @@ namespace FootballEngine.Domain.Entities
             Goals = new List<Event>();
             Injuries = new List<Event>();
         }
-        private bool IsValidInparameter(DateTime date, Guid homeTeamId, Guid visitorTeamId)
+        private bool IsValidInparameter(MatchDate date, Guid homeTeamId, Guid visitorTeamId)
         {
-            if(date.Date < DateTime.Now.Date )
+            if(date.Value.Date < DateTime.Now.Date )
             { throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and two years from now."); }
-            if (date > EndDateForMatchCreation)
+            if (date.Value.Date > EndDateForMatchCreation.Date)
             { throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and two years from now."); }
             if (Guid.Empty == homeTeamId)
             { throw new ArgumentException($"The homeTeramId cannot be null."); }
