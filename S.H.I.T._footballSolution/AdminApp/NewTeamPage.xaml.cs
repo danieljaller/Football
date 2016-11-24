@@ -41,13 +41,13 @@ namespace AdminApp
 
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
-            
-           
+
+
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ToggleCreateTeamButton();            
+            ToggleCreateTeamButton();
         }
 
         private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -61,14 +61,19 @@ namespace AdminApp
             var newPlayerWindow = new NewPlayerWindow();
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
             if (newPlayerWindowResult == true)
-            { listOfPlayers.Add(newPlayerWindow.player); }
+            {
+                foreach (var player in newPlayerWindow.tempPlayersList)
+                {
+                    listOfPlayers.Add(player);
+                }
+            }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
         }
 
         private void ToggleCreateTeamButton()
         {
-            
+
             if (listOfPlayers.Count() >= 2)
             {
                 CreateTeamButton.IsEnabled = true;
@@ -88,11 +93,11 @@ namespace AdminApp
                 team.PlayerIds.Add(item.Id);
                 item.TeamId = team.Id;
                 _playerService.Add(item);
-               
+
             }
             _teamService.Add(team);
 
         }
-        
+
     }
 }
