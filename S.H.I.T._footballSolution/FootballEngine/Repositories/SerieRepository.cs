@@ -5,17 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
     public class SerieRepository : IRepository<Serie>
     {
+        private readonly string path;
         private List<Serie> series;
+
         private SerieRepository()
         {
+            path = AppDomain.CurrentDomain.BaseDirectory;
+            path = Path.Combine(path, "Resources");
+            path = Path.Combine(path, "Series.xml");
             Load();
         }
 
@@ -86,16 +88,12 @@ namespace FootballEngine.Repositories
         string[] directories = new string[2] { "FootballEngine", "Resources" };
         public void Load()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Series.xml");
             try
             {
                 //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", false, out path))
-                if (true)
-                {
+                //{
                     series = (List<Serie>)XmlHandler.LoadFrom(path, typeof(List<Serie>));
-                }
+                //}
                 
             }
             catch(LoadFailedException)
@@ -108,11 +106,10 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                string path;
-                if (TryGetFilePath.InSolutionDirectory("Series.xml", directories, true, out path))
-                {
+                //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", true, out path))
+                //{
                     XmlHandler.SaveTo(path, series);
-                }
+                //}
                
             }
             catch (SaveFailedException s)

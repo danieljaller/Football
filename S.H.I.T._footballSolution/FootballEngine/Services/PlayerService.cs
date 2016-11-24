@@ -4,12 +4,10 @@ using FootballEngine.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
-  public  class PlayerService : IService<Player>
+    public  class PlayerService : IService<Player>
     {
         private readonly PlayerRepository _playerRepository = PlayerRepository.Instance;
         TeamService teamService;

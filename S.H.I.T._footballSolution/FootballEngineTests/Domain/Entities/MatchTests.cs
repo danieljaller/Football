@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FootballEngine.Exceptions;
 using FootballEngine.Domain.ValueObjects;
 
 namespace FootballEngine.Domain.Entities.Tests

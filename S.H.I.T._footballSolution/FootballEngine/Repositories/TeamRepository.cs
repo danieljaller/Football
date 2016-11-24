@@ -5,20 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
     public class TeamRepository : IRepository<Team>
     {
+        private readonly string path;
+        private List<Team> teams;
+
         private TeamRepository()
         {
+            path = AppDomain.CurrentDomain.BaseDirectory;
+            path = Path.Combine(path, "Resources");
+            path = Path.Combine(path, "Teams.xml");
             Load();
         }
-
-        private List<Team> teams;
 
         private static TeamRepository _instance;
 
@@ -82,19 +83,15 @@ namespace FootballEngine.Repositories
             }
             return null;
         }
-        string[] directories = new string[2] { "FootballEngine", "Resources" };
+        
         public void Load()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Teams.xml");
             try
             {
                 //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", false, out path))
-                if(true)
-                {
+                //{
                     teams = (List<Team>)XmlHandler.LoadFrom(path, typeof(List<Team>));
-                }               
+                //}               
             }
             catch(LoadFailedException)
             {
@@ -106,11 +103,10 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                string path;
-                if (TryGetFilePath.InSolutionDirectory("Teams.xml", directories, true, out path))
-                {
+                //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", true, out path))
+                //{
                     XmlHandler.SaveTo(path, teams);
-                }                
+                //}                
             }
             catch (SaveFailedException s)
             {

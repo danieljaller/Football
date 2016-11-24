@@ -2,9 +2,6 @@
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
@@ -62,15 +59,14 @@ namespace FootballEngine.Domain.Entities
             RedCards = new List<Event>();
             YellowCards = new List<Event>();
             Assists = new List<Event>();
-            //Goals = new List<Event>();
             Injuries = new List<Event>();
         }
         private bool IsValidInparameter(MatchDate date, Guid homeTeamId, Guid visitorTeamId)
         {
             if(date.Value.Date < DateTime.Now.Date )
-            { throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and two years from now."); }
+            { throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and {EndDateForMatchCreation} years from now."); }
             if (date.Value.Date > EndDateForMatchCreation.Date)
-            { throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and two years from now."); }
+            { throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and {EndDateForMatchCreation} years from now."); }
             if (Guid.Empty == homeTeamId)
             { throw new ArgumentException($"The homeTeramId cannot be null."); }
             if (Guid.Empty == visitorTeamId)

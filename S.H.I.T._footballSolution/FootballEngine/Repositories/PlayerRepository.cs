@@ -5,18 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
     class PlayerRepository : IRepository<Player>
     {
+        private readonly string path;
         private List<Player> players;
 
         private PlayerRepository()
         {
+            path = AppDomain.CurrentDomain.BaseDirectory;
+            path = Path.Combine(path, "Resources");
+            path = Path.Combine(path, "Players.xml");
             Load();
         }
         private static PlayerRepository _instance;
@@ -83,20 +84,16 @@ namespace FootballEngine.Repositories
 
             return null;
         }
-
-        string[] directories = new string[2] { "FootballEngine", "Resources" };
+        
         public void Load()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Players.xml");
             try
             {
                 //if (TryGetFilePath.InSolutionDirectory("Players.xml", "Resources", false, out path))
-                if( true)
-                {
+                //if( true)
+                //{
                     players = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
-                }
+                //}
                
             }
             catch(LoadFailedException)
@@ -109,11 +106,10 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                string path;
-                if (TryGetFilePath.InSolutionDirectory("Players.xml", directories, true, out path))
-                {
+                //if (TryGetFilePath.InSolutionDirectory("Players.xml", "Resources", true, out path))
+                //{
                     XmlHandler.SaveTo(path, players);
-                }
+                //}
                 
             }
             catch (SaveFailedException s)
