@@ -9,8 +9,8 @@ namespace FootballEngine.Domain.ValueObjects
 {
     public class Event
     {
-        public Guid PlayerId;
-        public uint TimeOfEvent;
+        public Guid PlayerId { get; set; }
+        public uint TimeOfEvent { get; set; }
         public static readonly int TimeOfEventMaximumValue = 110;
 
         public Event()

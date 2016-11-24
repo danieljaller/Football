@@ -3,6 +3,7 @@ using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,8 +33,8 @@ namespace AdminApp
         int homeScore;
         int visitorScore;
         bool isPlayed;
-        List<Event> homeGoals;
-        List<Event> visitorGoals;
+        ObservableCollection<Event> homeGoals;
+        ObservableCollection<Event> visitorGoals;
 
 
         public MatchProtocolPage()
@@ -49,7 +50,9 @@ namespace AdminApp
        
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
-
+            match.HomeGoals.Remove((Event)homeGoalsList.SelectedItem);
+            homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+            homeGoalsList.ItemsSource = homeGoals;
         }
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
@@ -59,13 +62,22 @@ namespace AdminApp
             if (addEvent == true)
             {
                 match.HomeGoals.Add(addEventWindow.result);
+                homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+                homeGoalsList.ItemsSource = homeGoals;
             }
+
         }
 
         private void addGoalAway_Click(object sender, RoutedEventArgs e)
         {
             var addEventWindow = new AddEvent(visitorTeam);
             var addEvent = addEventWindow.ShowDialog();
+            if (addEvent == true)
+            {
+                match.VisitorGoals.Add(addEventWindow.result);
+                visitorGoals = new ObservableCollection<Event>(match.HomeGoals);
+                homeGoalsList.ItemsSource = homeGoals;
+            }
         }
 
         private void removeGoalAway_Click(object sender, RoutedEventArgs e)
@@ -211,7 +223,7 @@ namespace AdminApp
             visitorTeam = teamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
             visitorScore = match.VisitorGoals.Count();
-            homeGoals = match.HomeGoals;
+            homeGoals = new ObservableCollection<Event>(match.HomeGoals);
             visitorGoals = match.VisitorGoals;
         }
     }
