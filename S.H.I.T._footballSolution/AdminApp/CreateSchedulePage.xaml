@@ -67,7 +67,8 @@
                         <DatePicker 
                         x:Name="matchDatePicker"
                         Height="23"
-                        Text="{Binding Path=Date}">
+                        Text="{Binding Path=Date}"
+                        SelectedDateChanged="matchDatePicker_SelectedDateChanged">
                         <DatePicker.Style>
                             <Style TargetType="{x:Type DatePicker}">
                                     <Setter Property="HorizontalAlignment" Value="Center"/>

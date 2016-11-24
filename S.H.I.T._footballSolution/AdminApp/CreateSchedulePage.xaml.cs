@@ -39,19 +39,19 @@ namespace AdminApp
             visitorTeamListBox.ItemsSource = visitorTeamList;
             dateListBox.ItemsSource = matchList;
             resultListBox.ItemsSource = matchList;
-            
+
         }
         public void ConvertGuidList()
         {
-            foreach(var matchId in matchSchedule)
+            foreach (var matchId in matchSchedule)
             {
                 matchList.Add(matchService.GetBy(matchId));
             }
-            foreach(var match in matchList)
+            foreach (var match in matchList)
             {
                 homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
             }
-            foreach(var match in matchList)
+            foreach (var match in matchList)
             {
                 visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
             }
@@ -76,11 +76,11 @@ namespace AdminApp
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedItem = (Match)dateListBox.SelectedItem;
-            var datePicker = (DatePicker)sender;
-            selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
-            //Visibility = Visibility.Hidden;
-            
+                var selectedItem = (Match)dateListBox.SelectedItem;
+                var datePicker = (DatePicker)sender;
+                selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
+                dateListBox.Items.Refresh();
         }
+
     }
 }
