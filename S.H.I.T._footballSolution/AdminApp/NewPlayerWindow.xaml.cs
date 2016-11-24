@@ -26,17 +26,17 @@ namespace AdminApp
         public DateTime DateOfBirth { get; set; }
         public Player player { get; set; }
         public List<Player> tempPlayersList = new List<Player>();
-        
+
 
         public NewPlayerWindow()
         {
-            
+
             InitializeComponent();
             DataContext = this;
             if (datePicker1.SelectedDate == null)
             { addPlayerButton.IsEnabled = false; }
-            
-            
+
+            AllowedDates();
         }
 
         private void cancel_Clicked(object sender, RoutedEventArgs e)
@@ -47,10 +47,10 @@ namespace AdminApp
 
         private void addPlayer_Clicked(object sender, RoutedEventArgs e)
         {
-            
-         DateOfBirth = (DateTime)datePicker1.SelectedDate;
+
+            DateOfBirth = (DateTime)datePicker1.SelectedDate;
             player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
-            DialogResult=true;
+            DialogResult = true;
             //if(tempPlayersList.Count < 31)
             //{           
             //tempPlayersList.Add(player);
@@ -66,17 +66,24 @@ namespace AdminApp
             //{ addPlayerButton.IsEnabled = false; }
 
 
-            
+
         }
 
         private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
+
         }
 
         private void datePicker_selectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             addPlayerButton.IsEnabled = true;
+        }
+
+        private void AllowedDates()
+        {
+            datePicker1.BlackoutDates.Add(new CalendarDateRange(new DateTime((DateTime.Today.Year - 18), 1, 1), DateTime.Now.AddDays(-1)));
+            datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, new DateTime(1950, 1, 1)));
+            datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.MaxValue));
         }
     }
 }

@@ -60,6 +60,7 @@ namespace AdminApp
             //skicka med ett lag, en checkbox selecterad
             var newPlayerWindow = new NewPlayerWindow();
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
+           
             if (newPlayerWindowResult == true)
             { listOfPlayers.Add(newPlayerWindow.player); }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);

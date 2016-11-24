@@ -36,9 +36,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <CheckBox Name="playerCheckBox" IsChecked="True" Checked="playerCheckBox_Checked" Unchecked="playerCheckBox_Unchecked">
-                            <!--<TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>-->
-                            <TextBlock>text</TextBlock>
+                        <CheckBox Name="playerCheckBox" IsChecked="True" Checked="playerCheckBox_Checked" Content="{Binding Converter={StaticResource searchResultToStringConverter}}" Unchecked="playerCheckBox_Unchecked">
+                            
+                          
                         </CheckBox>
                     </Grid>
                 </DataTemplate>
