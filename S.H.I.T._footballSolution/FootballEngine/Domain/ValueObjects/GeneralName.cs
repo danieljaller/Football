@@ -25,10 +25,13 @@ namespace FootballEngine.Domain.ValueObjects
                 Value = name;
         }
 
-        public static bool IsValidName(string name)
+        private static bool IsValidName(string name)
         {
+            if (name == null)
+                throw new ArgumentNullException("The name can not be null.");
+
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("The name is either null, empty or consists only of white-space characters.");
+                throw new ArgumentException("The name is either empty or consists only of white-space characters.");
 
             if (name.StartsWith(" "))
                 throw new ArgumentException("A name can not start with ' '.");
@@ -59,6 +62,11 @@ namespace FootballEngine.Domain.ValueObjects
             {
                 result = new GeneralName(name);
                 return true;
+            }
+            catch (ArgumentNullException)
+            {
+                result = null;
+                return false;
             }
             catch (ArgumentException)
             {
