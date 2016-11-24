@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
-       xmlns:converters="clr-namespace:AdminApp.Converters"
+      xmlns:converters="clr-namespace:AdminApp.Converters"      
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="NewTeamPage">
@@ -24,11 +24,27 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
+        <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
+
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Namn:"/>
-            <TextBox Name="teamName"  Margin="5" Width="100" Text="{Binding Path=TeamName}" />
+
+
+            <TextBox Name="teamName"   Margin="5" Width="100" 
+                 ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="TeamName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <converters:GeneralNameValitationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+
             <TextBlock  Text="Arena:" Margin="5"/>
+
             <TextBox Name="arenaName" Grid.Row="1" Grid.Column="2" Margin="5" Width="100" Text="{Binding Path=ArenaName}"/>
         </StackPanel>
 
