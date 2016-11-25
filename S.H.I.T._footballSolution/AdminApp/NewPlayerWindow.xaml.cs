@@ -81,9 +81,10 @@ namespace AdminApp
 
         private void AllowedDates()
         {
-            datePicker1.BlackoutDates.Add(new CalendarDateRange(new DateTime((DateTime.Today.Year - 18), 1, 1), DateTime.Now.AddDays(-1)));
+            datePicker1.BlackoutDates.Add(new CalendarDateRange(new DateTime((DateTime.Today.Year - 16), 1, 1), DateTime.Now.AddDays(-1)));
             datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, new DateTime(1950, 1, 1)));
             datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.MaxValue));
+            datePicker1.DisplayDate = new DateTime((DateTime.Today.Year - 17), 1, 1); 
         }
     }
 }

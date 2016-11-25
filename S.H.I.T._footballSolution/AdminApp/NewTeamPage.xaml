@@ -12,7 +12,7 @@
     <Page.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
     </Page.Resources>
-    <Grid Background="White" FocusManager.FocusedElement="{Binding ElementName=teamName}">
+    <Grid Background="white" FocusManager.FocusedElement="{Binding ElementName=teamName}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -27,7 +27,16 @@
         <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Namn:"/>
-            <TextBox Name="teamName"  Margin="5" Width="100" Text="{Binding Path=TeamName}" />
+            <TextBox Name="teamName" Margin="5" Width="100" ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <converters:GeneralNameValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+            </TextBox>
             <TextBlock  Text="Arena:" Margin="5"/>
             <TextBox Name="arenaName" Grid.Row="1" Grid.Column="2" Margin="5" Width="100" Text="{Binding Path=ArenaName}"/>
         </StackPanel>
