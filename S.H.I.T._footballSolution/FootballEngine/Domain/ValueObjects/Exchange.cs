@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class Exchange
+    public class Exchange
     {
         public Guid PlayerOutId;
         public Guid PlayerInId;
