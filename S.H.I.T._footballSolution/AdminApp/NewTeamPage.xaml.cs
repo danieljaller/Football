@@ -27,9 +27,13 @@ namespace AdminApp
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
         NewPlayerWindow _newPlayerWindow;
-        PlayerService _playerService;
+        PlayerService _playerService;   
         TeamService _teamService;
         List<Player> listOfPlayers;
+        List<Player> listPlayers = new List<Player>();
+        bool playersAreValid;
+        Team team;
+
         public NewTeamPage()
         {
             listOfPlayers = new List<Player>();
@@ -41,38 +45,91 @@ namespace AdminApp
 
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
-            
-           
+            ToggleNewPlayerButton();
+
+
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ToggleCreateTeamButton();            
+            var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
+            listPlayers.Add(player);
+            playersList.ItemsSource = listPlayers;
+            playersCheckedList.ItemsSource = listPlayers;
+            if (listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 25 && listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 31)
+            {
+                playersAreValid = true;
+            }
+            else
+            {
+                playersAreValid = false;
+            }
+            playersList.Items.Refresh();
+
+            ToggleCreateTeamButton();
+            ToggleNewPlayerButton();
         }
 
         private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
+
+        { 
+            var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
+            listPlayers.Remove(player);
+            playersList.ItemsSource = listPlayers;
+            if (listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2 && listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 3)//25 och 31
+            {
+                playersAreValid = true;
+            }
+            else
+            {
+                playersAreValid = false;
+            }
+            playersList.Items.Refresh();
+           
             ToggleCreateTeamButton();
+            ToggleNewPlayerButton();
         }
 
         private void NewPlayerButton_Click(object sender, RoutedEventArgs e)
         {
-            //skicka med ett lag, en checkbox selecterad
+
+            if (team != null)
+            { team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName)); }
+            
             var newPlayerWindow = new NewPlayerWindow();
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
            
             if (newPlayerWindowResult == true)
-            { listOfPlayers.Add(newPlayerWindow.player); }
+            {
+                foreach (var player in newPlayerWindow.tempPlayersList)
+                {
+                    listOfPlayers.Add(player);
+                }
+            }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
+            ToggleNewPlayerButton();
+        }
+
+        private void ToggleNewPlayerButton()
+        {
+            if (TeamName != null && ArenaName != null)
+            {
+                NewPlayerButton.IsEnabled = true;
+            }
+            else
+            {
+                NewPlayerButton.IsEnabled = false;
+            }
         }
 
         private void ToggleCreateTeamButton()
-        {
-            
-            if (listOfPlayers.Count() >= 2)
+        {           if(team != null && playersAreValid)
+            { 
+            if (listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2)//25
             {
                 CreateTeamButton.IsEnabled = true;
+            }
             }
             else
             {
@@ -83,17 +140,17 @@ namespace AdminApp
 
         private void CreateTeamButton_Click(object sender, RoutedEventArgs e)
         {
-            Team team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName));
+            
             foreach (Player item in _newPlayerWindow.tempPlayersList)
             {
                 team.PlayerIds.Add(item.Id);
                 item.TeamId = team.Id;
                 _playerService.Add(item);
-               
+
             }
             _teamService.Add(team);
 
         }
-        
+
     }
 }

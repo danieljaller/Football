@@ -50,22 +50,24 @@ namespace AdminApp
 
             DateOfBirth = (DateTime)datePicker1.SelectedDate;
             player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
-            DialogResult = true;
-            //if(tempPlayersList.Count < 31)
-            //{           
-            //tempPlayersList.Add(player);
-            //}
-            //firstName.Text = "";
-            //lastName.Text = "";
-            //datePicker1.Text = "";
-            //if(tempPlayersList == null)
-            //{ numberOfPlayers.Text = "0"; }
-            //numberOfPlayers.Text = player.Count.ToString();
-            ////DialogResult = true;
-            //if (datePicker1.SelectedDate == null)
-            //{ addPlayerButton.IsEnabled = false; }
+            
 
+            if (tempPlayersList.Count < 3)//31
+            {
+                tempPlayersList.Add(player);
+            }
+            firstName.Text = "";
+            lastName.Text = "";
+            datePicker1.Text = "";
+            if (tempPlayersList == null)
+            { numberOfPlayers.Text = "0"; }
+            numberOfPlayers.Text = tempPlayersList.Count.ToString();
+            
+            if (datePicker1.SelectedDate == null)
+            { addPlayerButton.IsEnabled = false; }
 
+            if (tempPlayersList.Count > 2)//24
+            { DialogResult = true; }
 
         }
 
