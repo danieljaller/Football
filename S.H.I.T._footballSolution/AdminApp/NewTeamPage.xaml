@@ -24,13 +24,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
+        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Namn:"/>
             <TextBox Name="teamName" Margin="5" Width="100" ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}">
                 <TextBox.Text>
-                    <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="TeamName" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <converters:GeneralNameValidationRule/>
                         </Binding.ValidationRules>
@@ -38,8 +38,7 @@
                 </TextBox.Text>
 
             </TextBox>
-                </TextBox.Text>
-            </TextBox>
+              
 
 
 
