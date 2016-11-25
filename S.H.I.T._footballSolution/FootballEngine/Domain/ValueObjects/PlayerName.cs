@@ -23,29 +23,28 @@ namespace FootballEngine.Domain.ValueObjects
         private static bool IsValidName(string name)
         {
             if (name == null)
-                throw new ArgumentNullException("The name can not be null.");
-
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("The name is either empty or consists only of white-space characters.");
-
-            if (name.StartsWith(" "))
-                throw new ArgumentException("A name can not start with ' '.");
-
-            if (name.EndsWith(" "))
-                throw new ArgumentException("A name can not end with ' '.");
+                throw new ArgumentNullException(nameof(name));
 
             if (name.Length > MaxLenght)
-                throw new ArgumentException($"Name is too long. Maximum length is {MaxLenght} characters.");
+                throw new ArgumentOutOfRangeException($"{nameof(name)} is too long. Maximum length is {MaxLenght} characters.");
 
             if (name.Length < MinLenght)
-                throw new ArgumentException($"Name is too Short. Minimum length is {MinLenght} characters.");
+                throw new ArgumentOutOfRangeException($"{nameof(name)} is too Short. Minimum length is {MinLenght} characters.");
+
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException($"{nameof(name)} is either empty or consists only of white-space characters.");
+
+            if (name.StartsWith(" "))
+                throw new ArgumentException($"{nameof(name)} cannot start with a white-space character.");
+
+            if (name.EndsWith(" "))
+                throw new ArgumentException($"{nameof(name)} cannot end with a white-space character.");
 
             foreach (char character in name)
             {
-                if (char.IsLetter(character) || character == '-' || character == ' ')
+                if (char.IsLetter(character) || character == '-' || character == '\'' || character == ' ')
                     continue;
-                else
-                    throw new ArgumentException("Name contains illegal characters. Can only contain letters, '-' and white-spaces.");
+                throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, '-', ''' and white-space characters.");
             }
 
             return true;
@@ -59,6 +58,11 @@ namespace FootballEngine.Domain.ValueObjects
                 return true;
             }
             catch (ArgumentNullException)
+            {
+                result = null;
+                return false;
+            }
+            catch (ArgumentOutOfRangeException)
             {
                 result = null;
                 return false;
