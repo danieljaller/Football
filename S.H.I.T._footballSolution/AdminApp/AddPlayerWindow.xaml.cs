@@ -26,15 +26,13 @@ namespace AdminApp
         PlayerService playerService;
         TeamService teamService;
         public Player player { get; set; }
-        public Team team;
-        IEnumerable<Player> playerList;
 
         public AddPlayerWindow(Team team, ObservableCollection<Guid> lineup)
         {
             teamService = new TeamService();
             playerService = new PlayerService(teamService);
             InitializeComponent();
-            playerList = teamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
+            IEnumerable<Player> playerList = teamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
             playerListbox.ItemsSource = playerList;
             InitializeComponent();
         }

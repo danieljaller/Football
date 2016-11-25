@@ -24,11 +24,10 @@ namespace AdminApp
     {
         PlayerService playerService;
         TeamService teamService;
-        public Player player;
-        public Team team;
         public Event result { get; set; }
         public uint timeOfEvent;
         IEnumerable<Player> playerList;
+
         public AddEvent(Team team)
         {
             teamService = new TeamService();
@@ -40,7 +39,7 @@ namespace AdminApp
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            player = (Player)playerListbox.SelectedItem;          
+            Player player = (Player)playerListbox.SelectedItem;          
             uint.TryParse(timeBox.Text, out timeOfEvent);
             result = new Event(player.Id, timeOfEvent);
             DialogResult = true;

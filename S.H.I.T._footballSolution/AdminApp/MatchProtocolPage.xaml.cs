@@ -212,7 +212,9 @@ namespace AdminApp
 
         private void removePlayerHome_Click(object sender, RoutedEventArgs e)
         {
-
+            match.HomeLineup.Remove((Guid)homeLineupList.SelectedItem);
+            homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
+            homeLineupList.ItemsSource = homeLineup;
         }
 
         private void addPlayerHome_Click(object sender, RoutedEventArgs e)
@@ -231,6 +233,7 @@ namespace AdminApp
         {
             var addPlayerWindow = new AddPlayerWindow(visitorTeam, visitorLineup);
             var addPlayer = addPlayerWindow.ShowDialog();
+            if (addPlayer == true)
             {
                 match.VisitorLineup.Add(addPlayerWindow.player.Id);
                 visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
@@ -240,29 +243,47 @@ namespace AdminApp
 
         private void removePlayerAway_Click(object sender, RoutedEventArgs e)
         {
-
+            match.VisitorLineup.Remove((Guid)visitorLineupList.SelectedItem);
+            visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
+            visitorLineupList.ItemsSource = visitorLineup;
         }
 
         private void removeExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-
+            match.HomeExchanges.Remove((Exchange)homeExchangesList.SelectedItem);
+            homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
+            homeExchangesList.ItemsSource = homeExchanges;
         }
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow();
+            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup);
             var addExchange = addExchangeWindow.ShowDialog();
+            if (addExchange == true)
+            {
+                match.HomeExchanges.Add(addExchangeWindow.result);
+                homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
+                homeExchangesList.ItemsSource = homeExchanges;
+            }
         }
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow();
+            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup);
             var addExchange = addExchangeWindow.ShowDialog();
+            if (addExchange == true)
+            {
+                match.VisitorExchanges.Add(addExchangeWindow.result);
+                visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
+                visitorExchangesList.ItemsSource = visitorExchanges;
+            }
         }
 
         private void removeExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-
+            match.VisitorExchanges.Remove((Exchange)visitorExchangesList.SelectedItem);
+            visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
+            visitorExchangesList.ItemsSource = visitorExchanges;
         }
 
         private void matchesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
