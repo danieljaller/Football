@@ -53,6 +53,16 @@ namespace AdminApp
             seriesList.ItemsSource = serieService.GetAll();
 
         }
+
+        public CreateOrAdministrateSeriesPage(Serie selectedSerie)
+        {
+            Dictionary<string, List<TempMatch>> seriesDictionary = new Dictionary<string, List<TempMatch>>() {
+                {selectedSerie.Name.Value, new List<TempMatch>() }
+            };
+            InitializeComponent();
+            seriesList.ItemsSource = seriesDictionary;
+        }
+
         public void ConvertFromGuid()
         {
             matchScheduleWithMatches.Clear();
@@ -70,15 +80,6 @@ namespace AdminApp
             {
                 visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
             }
-        }
-
-        public CreateOrAdministrateSeriesPage(Serie selectedSerie)
-        {
-            Dictionary<string, List<TempMatch>> seriesDictionary = new Dictionary<string, List<TempMatch>>() {
-                {selectedSerie.Name.Value, new List<TempMatch>() }
-            };
-            InitializeComponent();
-            seriesList.ItemsSource = seriesDictionary;
         }
 
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
