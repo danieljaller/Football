@@ -154,9 +154,11 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="0" Width="135" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -168,9 +170,11 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Spelare" />
-                                <TextBlock Grid.Column="1" Text="Match minut"/>
+                                <TextBlock Grid.Column="0" Width="135" Text="Spelare" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="Match minut"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

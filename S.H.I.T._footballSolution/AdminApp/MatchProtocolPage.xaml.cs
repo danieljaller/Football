@@ -224,7 +224,7 @@ namespace AdminApp
             homeScore = match.HomeGoals.Count();
             visitorScore = match.VisitorGoals.Count();
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
-            visitorGoals = match.VisitorGoals;
+            visitorGoals = new ObservableCollection<Event> (match.VisitorGoals);
         }
     }
 }
