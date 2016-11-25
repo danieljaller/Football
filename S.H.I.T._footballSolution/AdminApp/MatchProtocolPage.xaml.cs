@@ -62,6 +62,8 @@ namespace AdminApp
         {
             match.HomeGoals.Remove((Event)homeGoalsList.SelectedItem);
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+            homeScore--;
+            homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
         }
 
@@ -73,6 +75,8 @@ namespace AdminApp
             {
                 match.HomeGoals.Add(addEventWindow.result);
                 homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+                homeScore++;
+                homeTeamScoreBlock.DataContext = homeScore;
                 homeGoalsList.ItemsSource = homeGoals;
             }
         }
@@ -85,6 +89,8 @@ namespace AdminApp
             {
                 match.VisitorGoals.Add(addEventWindow.result);
                 visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
+                visitorScore++;
+                visitorTeamScoreBlock.DataContext = visitorScore;
                 visitorGoalsList.ItemsSource = visitorGoals;
             }
         }
@@ -93,6 +99,8 @@ namespace AdminApp
         {
             match.VisitorGoals.Remove((Event)visitorGoalsList.SelectedItem);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
+            visitorScore--;
+            visitorTeamScoreBlock.DataContext = visitorScore;
             visitorGoalsList.ItemsSource = visitorGoals;
         }
 
