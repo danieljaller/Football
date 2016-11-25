@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
 using FootballEngine.Interfaces;
 using FootballEngine.Repositories;
 using System;
@@ -7,16 +8,35 @@ using System.Linq;
 
 namespace FootballEngine.Services
 {
-    public  class PlayerService : IService<Player>
+    public class PlayerService : IService<Player>
     {
         private readonly PlayerRepository _playerRepository = PlayerRepository.Instance;
-        TeamService teamService;
-        public PlayerService(TeamService teamService)
+        //private static SerieService serieService;
+        //private static TeamService teamService;
+
+        private static readonly object CreationLock = new object();
+        private static PlayerService _instance;
+        public static PlayerService Instance
         {
-            this.teamService = teamService;    
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (CreationLock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new PlayerService();
+                            //serieService = ServiceLocator.Instance.SerieService;
+                            //teamService = ServiceLocator.Instance.TeamService;
+                        }
+                    }
+                }
+
+                return _instance;
+            }
         }
-        
-        SerieService serieService = new SerieService();
+
         public void Add(Player player)
         {
             _playerRepository.Add(player);
@@ -57,7 +77,7 @@ namespace FootballEngine.Services
 
         public IEnumerable<Player> GetAllPlayersBySerie(Guid serieId)
         {
-            return teamService.GetAllTeamsBySerie(serieId).SelectMany(t => teamService.GetAllPlayersByTeam(t.Id));
+            return ServiceLocator.Instance.TeamService.GetAllTeamsBySerie(serieId).SelectMany(t => ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(t.Id));
         }
 
         public IEnumerable<Player> OrderByFirstName(Guid serieId)
@@ -74,7 +94,7 @@ namespace FootballEngine.Services
         }
         public IEnumerable<Player> OrderByTeamName(Guid serieId)
         {
-            return GetAllPlayersBySerie(serieId).OrderBy(p => teamService.GetBy(p.TeamId).Name);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => ServiceLocator.Instance.TeamService.GetBy(p.TeamId).Name);
         }
         public IEnumerable<Player> OrderByNumberOfMatchesPlayed(Guid serieId)
         {

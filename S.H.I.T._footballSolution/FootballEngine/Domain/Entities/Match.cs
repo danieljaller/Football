@@ -2,17 +2,17 @@
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
+using FootballEngine.Helper;
 
 namespace FootballEngine.Domain.Entities
 {
     public class Match
     {
-        private TeamService teamService = new TeamService();
         public Guid Id { get; set; }
         public bool IsPlayed { get; set; }
         public GeneralName Location
         {
-            get { return teamService.GetBy(HomeTeamId).HomeArena; }
+            get { return ServiceLocator.Instance.TeamService.GetBy(HomeTeamId).HomeArena; }
         }
         public Guid HomeTeamId { get; set; }
         public Guid VisitorTeamId { get; set; }
@@ -26,8 +26,8 @@ namespace FootballEngine.Domain.Entities
             {
                 if (IsPlayed)
                     return $"{HomeGoals.Count} - {VisitorGoals.Count}";
-                else
-                    return "-";
+
+                return "-";
             }
         }
         public List<Guid> HomeLineup { get; set; }
@@ -35,7 +35,6 @@ namespace FootballEngine.Domain.Entities
         public List<Event> RedCards { get; set; }
         public List<Event> YellowCards { get; set; }
         public List<Event> Assists { get; set; }
-        public List<Event> Goals { get; set; }
         public List<Event> Injuries { get; set; }
         public static DateTime EndDateForMatchCreation
         {

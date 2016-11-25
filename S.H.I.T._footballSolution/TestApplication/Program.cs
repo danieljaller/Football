@@ -18,11 +18,11 @@ namespace TestApplication
 {
     class Program
     {
-        private static SearchService searchService;
-        private static MatchService matchService;
-        private static SerieService serieService;
-        private static TeamService teamService;
-        private static PlayerService playerService;
+        //private static SearchService ServiceLocator.Instance.SearchService;
+        //private static MatchService ServiceLocator.Instance.MatchService;
+        //private static SerieService ServiceLocator.Instance.SerieService;
+        //private static TeamService ServiceLocator.Instance.TeamService;
+        //private static PlayerService ServiceLocator.Instance.PlayerService;
 
         public Program()
         {
@@ -32,11 +32,11 @@ namespace TestApplication
         static void Main(string[] args)
         {
 
-            matchService = new MatchService();
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);
-            serieService = new SerieService();
-            searchService = new SearchService();
+            //ServiceLocator.Instance.MatchService = new MatchService();
+            //ServiceLocator.Instance.TeamService = new TeamService();
+            //ServiceLocator.Instance.PlayerService = new PlayerService(ServiceLocator.Instance.TeamService);
+            //ServiceLocator.Instance.SerieService = new SerieService();
+            //ServiceLocator.Instance.SearchService = new SearchService();
 
             //CreateTestData();
 
@@ -50,11 +50,11 @@ namespace TestApplication
                 switch (key)
                 {
                     case ConsoleKey.D1:
-                        PrintPlayers(playerService.GetAll().ToList());
+                        PrintPlayers(ServiceLocator.Instance.PlayerService.GetAll().ToList());
                         break;
 
                     case ConsoleKey.D2:
-                        PrintTeams(teamService.GetAll().ToList());
+                        PrintTeams(ServiceLocator.Instance.TeamService.GetAll().ToList());
                         break;
 
                     case ConsoleKey.Q:
@@ -62,11 +62,11 @@ namespace TestApplication
                         break;
 
                     case ConsoleKey.D3:
-                        PrintSerie(serieService.GetAll().ToList());
+                        PrintSerie(ServiceLocator.Instance.SerieService.GetAll().ToList());
                         break;
 
                     case ConsoleKey.D4:
-                        PrintMatches(matchService.GetAll().ToList());
+                        PrintMatches(ServiceLocator.Instance.MatchService.GetAll().ToList());
                         break;
 
                     case ConsoleKey.D5:
@@ -136,10 +136,10 @@ namespace TestApplication
 
                 foreach (List<Player> playerList in listOfPlayersInSerie)
                     foreach (Player player in playerList)
-                        playerService.Add(player);
+                        ServiceLocator.Instance.PlayerService.Add(player);
 
                 foreach (Team team in listOfTeamsInSerie)
-                    teamService.Add(team);
+                    ServiceLocator.Instance.TeamService.Add(team);
 
                 //List<Guid> teamIds = listOfTeamsInSerie.Select(t => t.Id) as List<Guid>;
                 List<Guid> teamIds = new List<Guid>();
@@ -149,7 +149,7 @@ namespace TestApplication
                 List<Guid> matchIds = SerieAndMatchGenerator.SerieGenerator(teamIds,
                     GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
                 Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamIds, matchIds);
-                serieService.Add(serie);
+                ServiceLocator.Instance.SerieService.Add(serie);
 
                 foreach (Team team in listOfTeamsInSerie)
                     team.SeriesIds.Add(serie.Id);
@@ -158,7 +158,7 @@ namespace TestApplication
             try
             {
                 Console.Write("Players: ");
-                playerService.Save();
+                ServiceLocator.Instance.PlayerService.Save();
                 Console.WriteLine("save successful");
             }
             catch (Exception e)
@@ -169,7 +169,7 @@ namespace TestApplication
             try
             {
                 Console.Write("Teams: ");
-                teamService.Save();
+                ServiceLocator.Instance.TeamService.Save();
                 Console.WriteLine("save successful");
             }
             catch (Exception e)
@@ -180,7 +180,7 @@ namespace TestApplication
             try
             {
                 Console.Write("Matches: ");
-                matchService.Save();
+                ServiceLocator.Instance.MatchService.Save();
                 Console.WriteLine("save successful");
             }
             catch (Exception e)
@@ -191,7 +191,7 @@ namespace TestApplication
             try
             {
                 Console.Write("Series: ");
-                serieService.Save();
+                ServiceLocator.Instance.SerieService.Save();
                 Console.WriteLine("save successful");
             }
             catch (Exception e)
@@ -239,7 +239,7 @@ namespace TestApplication
         //    {
         //        foreach (Player player in playerList)
         //        {
-        //            playerService.Add(player);
+        //            ServiceLocator.Instance.PlayerService.Add(player);
         //        }
         //    }
         //    for (int i = 0; i < teamList.Count; i++)
@@ -253,18 +253,18 @@ namespace TestApplication
         //    Serie serie = new Serie(new GeneralName("Serie1"), teamIds, matchIds);
           
 
-        //    serieService.Add(serie);
+        //    ServiceLocator.Instance.SerieService.Add(serie);
 
         //    foreach (Team team in teamList)
         //    {
         //        team.SeriesIds.Add(serie.Id);
-        //        teamService.Add(team);
+        //        ServiceLocator.Instance.TeamService.Add(team);
         //    }
 
         //    try
         //    {
         //        Console.Write("Players: ");
-        //        playerService.Save();
+        //        ServiceLocator.Instance.PlayerService.Save();
         //        Console.WriteLine("successful");
         //    }
         //    catch (Exception e)
@@ -275,7 +275,7 @@ namespace TestApplication
         //    try
         //    {
         //        Console.Write("Teams: ");
-        //        teamService.Save();
+        //        ServiceLocator.Instance.TeamService.Save();
         //        Console.WriteLine("successful");
         //    }
         //    catch (Exception e)
@@ -286,7 +286,7 @@ namespace TestApplication
         //    try
         //    {
         //        Console.Write("Matches: ");
-        //        matchService.Save();
+        //        ServiceLocator.Instance.MatchService.Save();
         //        Console.WriteLine("successful");
         //    }
         //    catch (Exception e)
@@ -297,7 +297,7 @@ namespace TestApplication
         //    try
         //    {
         //        Console.Write("Series: ");
-        //        serieService.Save();
+        //        ServiceLocator.Instance.SerieService.Save();
         //        Console.WriteLine("successful");
         //    }
         //    catch (Exception e)
@@ -307,7 +307,7 @@ namespace TestApplication
         //}
         //private static void GetPlayers()
         //{
-        //    var list = playerService.GetAllPlayersBySerie();
+        //    var list = ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie();
         //}
 
 
@@ -349,7 +349,7 @@ namespace TestApplication
         {
             foreach (Player player in listOfPlayers)
             {
-                Team playersTeam = teamService.GetBy(player.TeamId);
+                Team playersTeam = ServiceLocator.Instance.TeamService.GetBy(player.TeamId);
                 string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
                 StringBuilder playerBuilder = new StringBuilder();
                 playerBuilder.AppendLine($"Name: {player.FullName}");
@@ -372,7 +372,7 @@ namespace TestApplication
         {
             foreach (Team team in teamList)
             {
-                //Team playersTeam = teamService.GetBy(player.TeamId);
+                //Team playersTeam = ServiceLocator.Instance.TeamService.GetBy(player.TeamId);
                 //string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
                 StringBuilder playerBuilder = new StringBuilder();
                 playerBuilder.AppendLine($"Name: {team.Name.Value}");
@@ -404,7 +404,7 @@ namespace TestApplication
                 serieBuilder.AppendLine($"Matches:");
                 foreach (var match in serie.MatchTable)
                 {
-                    serieBuilder.AppendLine($"{teamService.GetBy(matchService.GetBy(match).HomeTeamId).Name} - {teamService.GetBy(matchService.GetBy(match).VisitorTeamId).Name} - {matchService.GetBy(match).Location.ToString()} - {matchService.GetBy(match).Date.ToString()}");
+                    serieBuilder.AppendLine($"{ServiceLocator.Instance.TeamService.GetBy(ServiceLocator.Instance.MatchService.GetBy(match).HomeTeamId).Name} - {ServiceLocator.Instance.TeamService.GetBy(ServiceLocator.Instance.MatchService.GetBy(match).VisitorTeamId).Name} - {ServiceLocator.Instance.MatchService.GetBy(match).Location.ToString()} - {ServiceLocator.Instance.MatchService.GetBy(match).Date.ToString()}");
                 }
 
 
@@ -419,45 +419,41 @@ namespace TestApplication
             foreach (var match in matchList)
             {
                 StringBuilder playerBuilder = new StringBuilder();
-                playerBuilder.AppendLine($"Home team: {teamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Count()}");
-                playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Count()}");
+                playerBuilder.AppendLine($"Home team: {ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId).Name} - Goals: {match.HomeGoals.Count()}");
+                playerBuilder.AppendLine($"Visitor team: {ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Count()}");
                 playerBuilder.AppendLine($"Total match time: {match.MatchTimeInMinutes}");
-                playerBuilder.AppendLine($"Goals:");
-                foreach (var goal in match.Goals)
-                {
-                    playerBuilder.AppendLine($"{playerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
-                }
-                playerBuilder.AppendLine($"Assists:");
+                playerBuilder.AppendLine($"Result: {match.Result}");
+                playerBuilder.AppendLine($"Assists: ");
                 foreach (var assist in match.Assists)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Instance.PlayerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Red cards: ");
                 foreach (var card in match.RedCards)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Instance.PlayerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Yellow cards:");
                 foreach (var card in match.YellowCards)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Instance.PlayerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine("Injuries: ");
                 foreach (var injury in match.Injuries)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Instance.PlayerService.GetBy(injury.PlayerId)} - {injury.TimeOfEvent}");
                 }
                 playerBuilder.AppendLine($"Location: {match.Location.Value}  ");
                 playerBuilder.AppendLine($"Date: {match.Date.ToString()} ");
                 playerBuilder.AppendLine($"Home team lineup:");
                 foreach (var player in match.HomeLineup)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(player).FullName}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Instance.PlayerService.GetBy(player).FullName}");
                 }
                 playerBuilder.AppendLine($"Visitor team lineup:");
                 foreach (var player in match.VisitorLineup)
                 {
-                    playerBuilder.AppendLine($"{playerService.GetBy(player).FullName}");
+                    playerBuilder.AppendLine($"{ServiceLocator.Instance.PlayerService.GetBy(player).FullName}");
                 }
                 Console.WriteLine(playerBuilder.ToString());
                 Console.WriteLine("----------------------------------------------------------");
@@ -470,7 +466,7 @@ namespace TestApplication
             Console.Write("Enter text:");
             string userInput = Console.ReadLine();
 
-            var searchResult = searchService.Search(userInput, true, true, true, false);
+            var searchResult = ServiceLocator.Instance.SearchService.Search(userInput, true, true, true, true, true);
 
             foreach (var item in searchResult)
             {
@@ -508,22 +504,22 @@ namespace TestApplication
             }
 
             List<Guid> teams = new List<Guid>();
-            teams = teamService.GetAll().Select(t => t.Id).ToList().GetRange(0, 16);
+            teams = ServiceLocator.Instance.TeamService.GetAll().Select(t => t.Id).ToList().GetRange(0, 16);
             List<Guid> matchTable = SerieAndMatchGenerator.SerieGenerator(teams, startDate);
             foreach (var match in matchTable)
             {
-                matchService.Add(matchService.GetBy(match));
+                ServiceLocator.Instance.MatchService.Add(ServiceLocator.Instance.MatchService.GetBy(match));
             }
-            serieService.Add(new Serie(new GeneralName(serieName), teams, matchTable));
+            ServiceLocator.Instance.SerieService.Add(new Serie(new GeneralName(serieName), teams, matchTable));
 
         }
 
         private static void PrintObjectsCount()
         {
-            Console.WriteLine($"Total number of series: {serieService.GetAll().Count()}");
-            Console.WriteLine($"Total number of matches: {matchService.GetAll().Count()}");
-            Console.WriteLine($"Total number of teams: {teamService.GetAll().Count()}");
-            Console.WriteLine($"Total number of players: {playerService.GetAll().Count()}");
+            Console.WriteLine($"Total number of series: {ServiceLocator.Instance.SerieService.GetAll().Count()}");
+            Console.WriteLine($"Total number of matches: {ServiceLocator.Instance.MatchService.GetAll().Count()}");
+            Console.WriteLine($"Total number of teams: {ServiceLocator.Instance.TeamService.GetAll().Count()}");
+            Console.WriteLine($"Total number of players: {ServiceLocator.Instance.PlayerService.GetAll().Count()}");
             Console.WriteLine();
         }
 

@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
 using FootballEngine.Interfaces;
 using FootballEngine.Repositories;
 using System;
@@ -10,12 +11,30 @@ namespace FootballEngine.Services
     public class TeamService : IService<Team>
     {
         private readonly TeamRepository _teamRepository = TeamRepository.Instance;
-        PlayerService playerService;
-        MatchService matchService;
-        public TeamService()
+        //private static PlayerService playerService;
+        //private static MatchService matchService;
+
+        private static readonly object CreationLock = new object();
+        private static TeamService _instance;
+        public static TeamService Default
         {
-            playerService = new PlayerService(this);
-            matchService = new MatchService();
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (CreationLock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new TeamService();
+                            //playerService = ServiceLocator.Instance.PlayerService;
+                            //matchService = ServiceLocator.Instance.MatchService;
+                        }
+                    }
+                }
+
+                return _instance;
+            }
         }
 
         public void Add(Team team)
@@ -27,7 +46,7 @@ namespace FootballEngine.Services
         {
             foreach (var player in GetAllPlayersByTeam(id))
             {
-                playerService.Delete(player.Id);
+                ServiceLocator.Instance.PlayerService.Delete(player.Id);
             }
             _teamRepository.Delete(id);
         }
@@ -38,7 +57,7 @@ namespace FootballEngine.Services
 
         public IEnumerable<Player> GetAllPlayersByTeam(Guid id)
         {   
-            return playerService.GetAll().Where(p => p.TeamId == id);
+            return ServiceLocator.Instance.PlayerService.GetAll().Where(p => p.TeamId == id);
         }
 
         public IEnumerable<Team> GetAll()
@@ -83,7 +102,7 @@ namespace FootballEngine.Services
 
         public IEnumerable<Team> OrderByNumberOfMatchesPlayed(Guid serieId)
         {
-            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Where(m => matchService.GetBy(m).Date.Value.Date < DateTime.Now.Date).Count());
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.MatchIds.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).Date.Value < DateTime.Today).Count());
         }
 
         public IEnumerable<Team> OrderByGoalDifference(Guid serieId)

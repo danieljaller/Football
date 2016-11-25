@@ -8,5 +8,18 @@
             str2 = (ignoreCase) ? str2.ToLower() : str2;
             return str.Contains(str2);
         }
+
+        public static bool ContainsOnlyDigits(this string str)
+        {
+            foreach (char c in str)
+            {
+                if (char.IsDigit(c))
+                    continue;
+
+                return false;
+            }
+
+            return true;
+        }
     }
 }

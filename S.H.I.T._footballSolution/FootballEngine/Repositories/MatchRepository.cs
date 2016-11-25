@@ -10,14 +10,14 @@ namespace FootballEngine.Repositories
 {
     public class MatchRepository : IRepository<Match>
     {
-        private readonly string path;
-        private List<Match> matches;
+        private readonly string _path;
+        private List<Match> _matches;
 
         private MatchRepository()
         {
-            path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Matches.xml");
+            _path = AppDomain.CurrentDomain.BaseDirectory;
+            _path = Path.Combine(_path, "Resources");
+            _path = Path.Combine(_path, "Matches.xml");
             Load();
         }
 
@@ -27,9 +27,7 @@ namespace FootballEngine.Repositories
             get
             {
                 if (_instance == null)
-                {
                     _instance = new MatchRepository();
-                }
 
                 return _instance;
             }
@@ -37,70 +35,46 @@ namespace FootballEngine.Repositories
         public void Add(Match match)
         {
             if (match == null)
-            { throw new ArgumentNullException($"Match cannot be null."); }
-            if (matches != null && match != null)
-            {
-                if (!matches.Select(s => s.Id).Contains(match.Id))
-                {
-                    matches.Add(match);
-                }
-            }
-
+                throw new ArgumentNullException($"Match cannot be null.");
+            if (!_matches.Select(s => s.Id).Contains(match.Id))
+                _matches.Add(match);
         }
 
         public void Delete(Guid id)
         {
-            if (matches != null)
+            if (_matches.Select(s => s.Id).Contains(id))
             {
-                if (matches.Select(s => s.Id).Contains(id))
-                {
-                    matches.Remove(matches.Find(s => s.Id == id));
-                }
+                _matches.Remove(_matches.Find(s => s.Id == id));
             }
         }
 
         public IEnumerable<Match> GetAll()
         {
-            if (matches != null)
-            {
-                return matches as IEnumerable<Match>;
-            }
-
-            return null;
+            return _matches;
         }
 
         public Match GetBy(Guid id)
         {
-            if (matches != null)
-            {
-                return matches.Find(s => s.Id == id);
-            }
-
-            return null;
+            return _matches.Find(s => s.Id == id);
         }
 
         public Match GetBy(string name)
         {
-            if (matches != null)
-            {
-                return matches.Find(s => s.Location.Value == name);
-            }
-
-            return null;
+            return _matches.Find(s => s.Location.Value == name);
         }
-        
+
         public void Load()
         {
             try
             {
                 //if (TryGetFilePath.InSolutionDirectory("Matches.xml", "Resources", false, out path))
                 //{
-                    matches = (List<Match>)XmlHandler.LoadFrom(path, typeof(List<Match>));
+                _matches = (List<Match>)XmlHandler.LoadFrom(_path, typeof(List<Match>));
                 //}
             }
             catch (LoadFailedException)
             {
-                matches = new List<Match>();
+                _matches = new List<Match>();
             }
         }
 
@@ -110,7 +84,7 @@ namespace FootballEngine.Repositories
             {
                 //if (TryGetFilePath.InSolutionDirectory("Matches.xml", "Resources", true, out path))
                 //{
-                    XmlHandler.SaveTo(path, matches);
+                XmlHandler.SaveTo(_path, _matches);
                 //}
             }
             catch (SaveFailedException s)

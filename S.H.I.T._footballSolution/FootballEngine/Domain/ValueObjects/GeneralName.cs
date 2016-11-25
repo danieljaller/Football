@@ -1,4 +1,5 @@
 ﻿using System;
+using FootballEngine.Helper;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -39,18 +40,15 @@ namespace FootballEngine.Domain.ValueObjects
 
             if (name.EndsWith(" "))
                 throw new ArgumentException($"{nameof(name)} cannot end with a white-space character.");
-
-            foreach (char character in name)
-            {
-                if (char.IsDigit(character))
-                    continue;
+            
+            if (name.ContainsOnlyDigits())
                 throw new ArgumentException($"{nameof(name)} cannot only consist of digits.");
-            }
             
             foreach (char character in name)
             {
                 if (char.IsLetterOrDigit(character) || character == '-' || character == '&' || character == ' ')
                     continue;
+
                 throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, digits, '-', '&' and white-space characters.");
             }
 

@@ -44,6 +44,7 @@ namespace FootballEngine.Domain.ValueObjects
             {
                 if (char.IsLetter(character) || character == '-' || character == '\'' || character == ' ')
                     continue;
+
                 throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, '-', ''' and white-space characters.");
             }
 

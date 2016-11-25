@@ -1,14 +1,14 @@
 ﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
+using FootballEngine.Domain.ValueObjects;
 
 namespace FootballEngine.Helper
 {
     public static class SerieAndMatchGenerator
     {
-        private static MatchService matchService = new MatchService();
+        //private static MatchService matchService = new MatchService();
         private static Guid[] pairing;
         private static DateTime date;
         private static Match match;
@@ -69,7 +69,7 @@ namespace FootballEngine.Helper
                 date = latestDate;
 
                 match = new Match(new MatchDate(date), pairing[0], pairing[1]);
-                matchService.Add(match);
+                ServiceLocator.Instance.MatchService.Add(match);
                 matches.Add(match.Id);
             }
         }

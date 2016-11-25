@@ -8,16 +8,16 @@ using System.Linq;
 
 namespace FootballEngine.Repositories
 {
-    class PlayerRepository : IRepository<Player>
+    public class PlayerRepository : IRepository<Player>
     {
-        private readonly string path;
-        private List<Player> players;
+        private readonly string _path;
+        private List<Player> _players;
 
         private PlayerRepository()
         {
-            path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Players.xml");
+            _path = AppDomain.CurrentDomain.BaseDirectory;
+            _path = Path.Combine(_path, "Resources");
+            _path = Path.Combine(_path, "Players.xml");
             Load();
         }
         private static PlayerRepository _instance;
@@ -26,65 +26,40 @@ namespace FootballEngine.Repositories
             get
             {
                 if (_instance == null)
-                {
                     _instance = new PlayerRepository();
-                }
 
                 return _instance;
             }
         }
         public void Add(Player player)
         {
-            if (players != null && player != null)
-            {
-                if (!players.Select(s => s.Id).Contains(player.Id))
-                {
-                    players.Add(player);
-                }
-            }
+            if (player == null)
+                return;
+            if (!_players.Select(s => s.Id).Contains(player.Id))
+                _players.Add(player);
         }
 
         public void Delete(Guid id)
         {
-            if (players != null)
-            {
-                if (players.Select(s => s.Id).Contains(id))
-                {
-                    players.Remove(players.Find(s => s.Id == id));
-                }
-            }
+            if (_players.Select(s => s.Id).Contains(id))
+                _players.Remove(_players.Find(s => s.Id == id));
         }
 
         public IEnumerable<Player> GetAll()
         {
-            if (players != null)
-            {
-                return players as IEnumerable<Player>;
-            }
-
-            return null;
+            return _players;
         }
 
         public Player GetBy(Guid id)
         {
-            if (players != null)
-            {
-                return players.Find(s => s.Id == id);
-            }
-
-            return null;
+            return _players.Find(s => s.Id == id);
         }
 
         public Player GetBy(string name)
         {
-            if (players != null)
-            {
-                return players.Find(s => s.FullName == name);
-            }
-
-            return null;
+            return _players.Find(s => s.FullName == name);
         }
-        
+
         public void Load()
         {
             try
@@ -92,13 +67,13 @@ namespace FootballEngine.Repositories
                 //if (TryGetFilePath.InSolutionDirectory("Players.xml", "Resources", false, out path))
                 //if( true)
                 //{
-                    players = (List<Player>)XmlHandler.LoadFrom(path, typeof(List<Player>));
+                _players = (List<Player>)XmlHandler.LoadFrom(_path, typeof(List<Player>));
                 //}
-               
+
             }
-            catch(LoadFailedException)
+            catch (LoadFailedException)
             {
-                players = new List<Player>();
+                _players = new List<Player>();
             }
         }
 
@@ -108,15 +83,15 @@ namespace FootballEngine.Repositories
             {
                 //if (TryGetFilePath.InSolutionDirectory("Players.xml", "Resources", true, out path))
                 //{
-                    XmlHandler.SaveTo(path, players);
+                XmlHandler.SaveTo(_path, _players);
                 //}
-                
+
             }
             catch (SaveFailedException s)
             {
                 throw s;
             }
-            catch(ArgumentException a)
+            catch (ArgumentException a)
             { throw a; }
         }
     }

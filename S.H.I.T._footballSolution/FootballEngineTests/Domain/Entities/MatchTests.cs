@@ -34,8 +34,6 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.IsNotNull(match.Assists);
             Assert.AreEqual(0, match.Assists.Count);
             // Date?
-            Assert.IsNotNull(match.Goals);
-            Assert.AreEqual(0, match.Goals.Count);
             Assert.IsNotNull(match.HomeGoals);
             Assert.IsNotNull(match.HomeLineup);
             Assert.AreEqual(0, match.HomeLineup.Count);
