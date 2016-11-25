@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp"
+        xmlns:Converters ="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
         Title="NewPlayerWindow" Height="250" Width="250" Closing="closingNewPlayerWindow">
+    <Window.Resources>
+        <Converters:IsEnabledConverter x:Key="isEnabledConverter" />
+    </Window.Resources>
+       
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,14 +29,49 @@
         <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Efternamn:"/>
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Date of birth:"/>
 
-        <TextBox Name="firstName" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" Text="{Binding Path=FirstName}" />
-        <TextBox Name="lastName" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" Text="{Binding Path=LastName}" />
+        <TextBox Name="firstName" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" 
+                 ToolTip="{Binding ElementName=firstName, Path=(Validation.Errors)[0].ErrorContent}">
+            <TextBox.Text>
+                <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Converters:NameValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox Name="lastName" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95"
+                ToolTip="{Binding ElementName=lastName, Path=(Validation.Errors)[0].ErrorContent}">
+            <TextBox.Text>
+                <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Converters:NameValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+            
+            
         <DatePicker Name="datePicker1" SelectedDateChanged="datePicker_selectedDateChanged"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=selectedValue}"/>
         
         <Button  Margin="10" HorizontalAlignment="Left" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
                     VerticalAlignment="Bottom" Height="25" Content=" Avbryt " Click="cancel_Clicked"></Button>
+        
         <Button Name="addPlayerButton"  Margin="10" HorizontalAlignment="Right" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
-                    VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addPlayer_Clicked"></Button>
+                    VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addPlayer_Clicked">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource isEnabledConverter}">
+                    <Binding ElementName="firstName" Path="(Validation.Errors)[0]" />
+                    <Binding ElementName="lastName" Path="(Validation.Errors)[0]" />
+                    <Binding ElementName="datePicker1" Path="Text" />
+                </MultiBinding>
+            </Button.IsEnabled>
+                                    
+        </Button>
+        
+        
+        
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
             <TextBlock  Text="Du har lagt till "/>
             <TextBlock Name="numberOfPlayers" Text="{Binding Path=NumberOfPlayers}"/>
