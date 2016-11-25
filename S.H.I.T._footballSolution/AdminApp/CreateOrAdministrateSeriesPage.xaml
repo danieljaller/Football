@@ -26,7 +26,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock FontWeight="Bold" Text="{Binding Path=Key}"/>
+                        <TextBlock FontWeight="Bold" Text="{Binding Path=Name}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

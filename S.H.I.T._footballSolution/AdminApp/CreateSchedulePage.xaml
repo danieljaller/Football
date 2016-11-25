@@ -20,7 +20,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid Name="grid" Background="White">
+    <Grid Background="White" Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -29,14 +29,15 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Rectangle Grid.ColumnSpan="4" Fill="LightBlue"/>
-        <TextBlock Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,25,0">Hemmalag</TextBlock>
+        <TextBlock Grid.Column="0" HorizontalAlignment="Center" >Hemmalag</TextBlock>
         <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center">-</TextBlock>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="25,0,0,0">Bortalag</TextBlock>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="25,0,0,0">Resultat</TextBlock>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="25,0,0,0">Datum</TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" >Bortalag</TextBlock>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" >Resultat</TextBlock>
+        <TextBlock Grid.Column="3" HorizontalAlignment="Center" >Datum</TextBlock>
 
         <ListBox x:Name="homeTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="0"  BorderThickness="0" IsHitTestVisible="False">
             <ListBox.ItemTemplate>
@@ -67,8 +68,10 @@
                         <DatePicker 
                         x:Name="matchDatePicker"
                         Height="23"
+                        Width="100"
                         Text="{Binding Path=Date}"
-                        SelectedDateChanged="matchDatePicker_SelectedDateChanged">
+                        SelectedDateChanged="matchDatePicker_SelectedDateChanged"
+                        GotFocus="matchDatePicker_GotFocus">
                         <DatePicker.Style>
                             <Style TargetType="{x:Type DatePicker}">
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -87,7 +90,7 @@
                             </Style>
                         </DatePicker.Style>
                     </DatePicker>
-                        <TextBlock Text="{Binding Path=Date}">
+                        <TextBlock Text="{Binding ElementName=matchDatePicker, Path=SelectedDate, StringFormat='yyyy-MM-dd'}">
                             <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -110,5 +113,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Name="createSerieButton" Content="Skapa serie" Grid.Row="2" Grid.Column="3" Margin="0,20,0,0" Click="createSerieButton_Click"/>
     </Grid>
 </Page>

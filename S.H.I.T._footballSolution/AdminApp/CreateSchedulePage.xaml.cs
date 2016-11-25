@@ -25,62 +25,81 @@ namespace AdminApp
     {
         MatchService matchService = new MatchService();
         TeamService teamService = new TeamService();
-        private List<Guid> matchSchedule = new List<Guid>();
-        private List<Match> matchList = new List<Match>();
+        SerieService serieService = new SerieService();
+        private List<Guid> matchScheduleWithIds = new List<Guid>();
+        private List<Team> teamList = new List<Team>();
+        private string serieName;
+        private List<Match> matchScheduleWithMatches = new List<Match>();
         private List<Team> homeTeamList = new List<Team>();
         private List<Team> visitorTeamList = new List<Team>();
+        private bool datePickerIsDisabled;
 
-        public CreateSchedulePage(List<Guid> matchSchedule)
+        public CreateSchedulePage(List<Guid> matchSchedule, string serieName, List<Team> teamList)
         {
             InitializeComponent();
-            this.matchSchedule = matchSchedule;
-            ConvertGuidList();
+            matchScheduleWithIds = matchSchedule;
+            this.serieName = serieName;
+            this.teamList = teamList;
+            ConvertFromGuid();
             homeTeamListBox.ItemsSource = homeTeamList;
             visitorTeamListBox.ItemsSource = visitorTeamList;
-            dateListBox.ItemsSource = matchList;
-            resultListBox.ItemsSource = matchList;
+            dateListBox.ItemsSource = matchScheduleWithMatches;
+            resultListBox.ItemsSource = matchScheduleWithMatches;
 
         }
-        public void ConvertGuidList()
+        public void ConvertFromGuid()
         {
-            foreach (var matchId in matchSchedule)
+            foreach (var matchId in matchScheduleWithIds)
             {
-                matchList.Add(matchService.GetBy(matchId));
+                matchScheduleWithMatches.Add(matchService.GetBy(matchId));
             }
-            foreach (var match in matchList)
+            foreach (var match in matchScheduleWithMatches)
             {
                 homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
             }
-            foreach (var match in matchList)
+            foreach (var match in matchScheduleWithMatches)
             {
                 visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
             }
         }
 
-        private void GenerateGridRowsAndSetRowColor()
-        {
-            foreach (var match in matchSchedule)
-            {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto, MinHeight = 20 });
-            }
-
-            for (int i = 2; i < grid.RowDefinitions.Count(); i += 2)
-            {
-                Rectangle rect = new Rectangle();
-                rect.Fill = new SolidColorBrush(Colors.LightGray);
-                grid.Children.Add(rect);
-                Grid.SetColumnSpan(rect, 9);
-                Grid.SetRow(rect, i);
-            }
-        }
-
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-                var selectedItem = (Match)dateListBox.SelectedItem;
-                var datePicker = (DatePicker)sender;
-                selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
-                dateListBox.Items.Refresh();
+
+            var selectedItem = (Match)dateListBox.SelectedItem;
+            var datePicker = (DatePicker)sender;
+            selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
+
         }
 
+        private void createSerieButton_Click(object sender, RoutedEventArgs e)
+        {
+            Serie newSerie = new Serie(new GeneralName(serieName), teamList.Select(t => t.Id).ToList(), matchScheduleWithIds);
+            serieService.Add(newSerie);
+            foreach (var team in teamList)
+            {
+                team.SeriesIds.Add(newSerie.Id);
+            }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                matchService.Add(match);
+            }
+            serieService.Save();
+            teamService.Save();
+            matchService.Save();
+            MessageBox.Show($"Serien {serieName} är skapad");
+            createSerieButton.IsEnabled = false;
+            datePickerIsDisabled = true;
+
+        }
+
+        private void matchDatePicker_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (datePickerIsDisabled)
+            {
+                var datePicker = (DatePicker)sender;
+                datePicker.IsEnabled = false;
+            }
+        }
     }
 }

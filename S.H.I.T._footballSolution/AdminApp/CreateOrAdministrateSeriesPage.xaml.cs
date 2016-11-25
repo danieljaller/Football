@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateSeriesPage : Page
     {
+        SerieService serieService = new SerieService();
         public CreateOrAdministrateSeriesPage()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace AdminApp
                 {"serie2", new List<TempMatch>() {match6, match7, match8, match9, match10 } }
             };
                     
-            seriesList.ItemsSource = seriesDictionary;
+            seriesList.ItemsSource = serieService.GetAll();
         }
 
         public CreateOrAdministrateSeriesPage(Serie selectedSerie)
