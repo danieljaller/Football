@@ -33,8 +33,8 @@ namespace AdminApp
 
             InitializeComponent();
             DataContext = this;
-            if (datePicker1.SelectedDate == null)
-            { addPlayerButton.IsEnabled = false; }
+            //if (datePicker1.SelectedDate == null)
+            //{ addPlayerButton.IsEnabled = false; }
 
             AllowedDates();
         }
@@ -49,8 +49,9 @@ namespace AdminApp
         {
 
             DateOfBirth = (DateTime)datePicker1.SelectedDate;
+
             player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
-            
+
 
             if (tempPlayersList.Count < 3)//31
             {
@@ -62,9 +63,13 @@ namespace AdminApp
             if (tempPlayersList == null)
             { numberOfPlayers.Text = "0"; }
             numberOfPlayers.Text = tempPlayersList.Count.ToString();
-            
-            if (datePicker1.SelectedDate == null)
-            { addPlayerButton.IsEnabled = false; }
+
+
+            //if (datePicker1.SelectedDate == null)
+            //{ addPlayerButton.IsEnabled = false; }
+
+            //if (firstName.Text.GetType() == typeof(ValidationError) || lastName.Text.GetType() == typeof(ValidationError))
+            //{ addPlayerButton.IsEnabled = false; }
 
             if (tempPlayersList.Count > 2)//24
             { DialogResult = true; }
@@ -78,7 +83,7 @@ namespace AdminApp
 
         private void datePicker_selectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            addPlayerButton.IsEnabled = true;
+            //addPlayerButton.IsEnabled = true;
         }
 
         private void AllowedDates()
@@ -86,7 +91,7 @@ namespace AdminApp
             datePicker1.BlackoutDates.Add(new CalendarDateRange(new DateTime((DateTime.Today.Year - 16), 1, 1), DateTime.Now.AddDays(-1)));
             datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, new DateTime(1950, 1, 1)));
             datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.MaxValue));
-            datePicker1.DisplayDate = new DateTime((DateTime.Today.Year - 17), 1, 1); 
+            datePicker1.DisplayDate = new DateTime((DateTime.Today.Year - 17), 1, 1);
         }
     }
 }

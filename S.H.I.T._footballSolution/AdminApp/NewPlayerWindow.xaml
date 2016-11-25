@@ -7,7 +7,9 @@
         xmlns:Converters ="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
         Title="NewPlayerWindow" Height="250" Width="250" Closing="closingNewPlayerWindow">
-        
+    <Window.Resources>
+        <Converters:IsEnabledConverter x:Key="isEnabledConverter" />
+    </Window.Resources>
        
     <Grid Margin="5">
         <Grid.RowDefinitions>
@@ -55,8 +57,21 @@
         
         <Button  Margin="10" HorizontalAlignment="Left" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
                     VerticalAlignment="Bottom" Height="25" Content=" Avbryt " Click="cancel_Clicked"></Button>
+        
         <Button Name="addPlayerButton"  Margin="10" HorizontalAlignment="Right" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
-                    VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addPlayer_Clicked"></Button>
+                    VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addPlayer_Clicked">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource isEnabledConverter}">
+                    <Binding ElementName="firstName" Path="(Validation.Errors)[0]" />
+                    <Binding ElementName="lastName" Path="(Validation.Errors)[0]" />
+                    <Binding ElementName="datePicker1" Path="Text" />
+                </MultiBinding>
+            </Button.IsEnabled>
+                                    
+        </Button>
+        
+        
+        
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
             <TextBlock  Text="Du har lagt till "/>
             <TextBlock Name="numberOfPlayers" Text="{Binding Path=NumberOfPlayers}"/>

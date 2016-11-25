@@ -41,8 +41,10 @@ namespace AdminApp
             _newPlayerWindow = new NewPlayerWindow();
             _teamService = new TeamService();
             _playerService = new PlayerService(_teamService);
-
-
+            //TeamName = teamName.Text;
+            //ArenaName = arenaName.Text;
+            TeamName = "Team";
+            ArenaName = "Arena";
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
             ToggleNewPlayerButton();
@@ -55,8 +57,8 @@ namespace AdminApp
             var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
             listPlayers.Add(player);
             playersList.ItemsSource = listPlayers;
-            playersCheckedList.ItemsSource = listPlayers;
-            if (listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 25 && listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 31)
+            //playersCheckedList.ItemsSource = listPlayers;
+            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 25 && _newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 31)
             {
                 playersAreValid = true;
             }
@@ -76,7 +78,7 @@ namespace AdminApp
             var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
             listPlayers.Remove(player);
             playersList.ItemsSource = listPlayers;
-            if (listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2 && listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 3)//25 och 31
+            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2 && _newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 3)//25 och 31
             {
                 playersAreValid = true;
             }
@@ -126,7 +128,7 @@ namespace AdminApp
         private void ToggleCreateTeamButton()
         {           if(team != null && playersAreValid)
             { 
-            if (listPlayers.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2)//25
+            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2)//25
             {
                 CreateTeamButton.IsEnabled = true;
             }
