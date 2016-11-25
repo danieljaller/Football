@@ -26,9 +26,9 @@ namespace AdminApp
         MatchService matchService = new MatchService();
         TeamService teamService = new TeamService();
         SerieService serieService = new SerieService();
+        private string serieName;
         private List<Guid> matchScheduleWithIds = new List<Guid>();
         private List<Team> teamList = new List<Team>();
-        private string serieName;
         private List<Match> matchScheduleWithMatches = new List<Match>();
         private List<Team> homeTeamList = new List<Team>();
         private List<Team> visitorTeamList = new List<Team>();
