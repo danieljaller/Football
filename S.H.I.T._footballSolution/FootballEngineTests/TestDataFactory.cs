@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FootballEngineTests
+namespace FootballEngine
 {
     public static class TestDataFactory
     {

@@ -61,16 +61,16 @@ namespace FootballEngine.Domain.Entities
         private bool IsValidInparameter(MatchDate date, Guid homeTeamId, Guid visitorTeamId)
         {
             if (date.Value.Date < DateTime.Now.Date)
-                throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and {EndDateForMatchCreation} years from now.");
+                throw new ArgumentOutOfRangeException($"{nameof(date)} is out of range can only be between now and {EndDateForMatchCreation} years from now.");
 
             if (date.Value.Date > EndDateForMatchCreation.Date)
-                throw new ArgumentOutOfRangeException($"Date is out of range can only be between now and {EndDateForMatchCreation} years from now.");
+                throw new ArgumentOutOfRangeException($"{nameof(date)} is out of range can only be between now and {EndDateForMatchCreation} years from now.");
 
-            if (Guid.Empty == homeTeamId)
-                throw new ArgumentException($"The homeTeramId cannot be null.");
+            if (homeTeamId == Guid.Empty)
+                throw new ArgumentException($"{nameof(homeTeamId)} cannot be a empty Guid.");
 
-            if (Guid.Empty == visitorTeamId)
-                throw new ArgumentException($"The visitorTeamId cannot be null.");
+            if (visitorTeamId == Guid.Empty)
+                throw new ArgumentException($"{nameof(visitorTeamId)} cannot be a empty Guid.");
 
             return true;
         }

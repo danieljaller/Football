@@ -21,5 +21,10 @@
 
             return true;
         }
+
+        public static string FirstToUpper(this string str)
+        {
+            return str[0].ToUpper() + str.Substring(1);
+        }
     }
 }

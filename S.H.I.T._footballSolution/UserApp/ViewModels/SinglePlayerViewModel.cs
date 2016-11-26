@@ -14,7 +14,7 @@ using UserApp.Utilities;
 
 namespace UserApp.ViewModels
 {
-    class SinglePlayerViewModel : INotifyPropertyChanged
+    public class SinglePlayerViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -97,7 +97,7 @@ namespace UserApp.ViewModels
             return false;
         }
 
-        public void OnObjectHolderRecived(ObjectHolder<Player, Team> playerAndTeamHolder)
+        private void OnObjectHolderRecived(ObjectHolder<Player, Team> playerAndTeamHolder)
         {
             LoadCommands();
             SelectedPlayer = playerAndTeamHolder.FirstObject;

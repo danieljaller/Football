@@ -52,10 +52,14 @@
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
     <Compile Include="Exceptions\SaveFailedException.cs" />
+    <Compile Include="Factories\PlayerFactory.cs" />
+    <Compile Include="Factories\TeamFactory.cs" />
+    <Compile Include="Helper\CharUtil.cs" />
+    <Compile Include="Helper\IntUtil.cs" />
     <Compile Include="Helper\ServiceLocator.cs" />
     <Compile Include="Helper\XmlHandler.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
-    <Compile Include="Helper\SerieAndMatchGenerator.cs" />
+    <Compile Include="Factories\MatchTableFactory.cs" />
     <Compile Include="Helper\StringUtil.cs" />
     <Compile Include="Helper\TryGetFilePath.cs" />
     <Compile Include="Interfaces\IRepository.cs" />

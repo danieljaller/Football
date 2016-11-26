@@ -46,10 +46,10 @@ namespace FootballEngine.Domain.ValueObjects
             
             foreach (char character in name)
             {
-                if (char.IsLetterOrDigit(character) || character == '-' || character == '&' || character == ' ')
+                if (char.IsLetterOrDigit(character) || character == '-' || character == '&' || character == '\'' || character == ' ')
                     continue;
 
-                throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, digits, '-', '&' and white-space characters.");
+                throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, digits, '-', '&', ''' and white-space characters.");
             }
 
             return true;

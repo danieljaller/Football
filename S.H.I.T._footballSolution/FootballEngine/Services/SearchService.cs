@@ -68,7 +68,7 @@ namespace FootballEngine.Services
                 IEnumerable<object> serieResult = _serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
 
                                                         _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
-                                                            .Any(t => t.SeriesIds.Contains(s.Id))
+                                                            .Any(t => t.SerieIds.Contains(s.Id))
                                                         );
                 result = result.Concat(serieResult);
             }

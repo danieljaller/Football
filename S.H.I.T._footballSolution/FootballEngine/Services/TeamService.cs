@@ -52,7 +52,7 @@ namespace FootballEngine.Services
         }
         public IEnumerable<Team> GetAllTeamsBySerie(Guid serieId)
         {
-            return GetAll().Where(t => t.SeriesIds.Contains(serieId));
+            return GetAll().Where(t => t.SerieIds.Contains(serieId));
         }
 
         public IEnumerable<Player> GetAllPlayersByTeam(Guid id)

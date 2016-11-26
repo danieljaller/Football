@@ -7,7 +7,7 @@ namespace FootballEngine.Domain.ValueObjects
         public string Value { get; set; }
         public static int MaxLenght
         {
-            get { return 25; }
+            get { return 50; }
         }
         public static int MinLenght
         {
