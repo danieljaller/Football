@@ -252,6 +252,50 @@ namespace TestApplication
             PrintMaxInputAttemptsMessage(maxInputAttempts, errorMessage);
         }
 
+        /// <summary>
+        /// Returns false if maximum input attempts is reached.
+        /// </summary>
+        /// <param name="answer"></param>
+        /// <param name="prompt"></param>
+        /// <param name="answerKey1"></param>
+        /// <param name="answerKey2"></param>
+        /// <param name="enterAsDefaultAnswerKey"></param>
+        /// <param name="errorMessage"></param>
+        /// <param name="maxInputAttempts"></param>
+        protected void AskFor(out bool answer, string prompt, ConsoleKey answerKey1, ConsoleKey answerKey2, bool enterAsDefaultAnswerKey = true, string errorMessage = "", int maxInputAttempts = defaultMaxInputAttempts)
+        {
+            int counter = 0;
+
+            while (counter < maxInputAttempts)
+            {
+                Console.Write($"{prompt} ({(enterAsDefaultAnswerKey ? answerKey1.ToString() : answerKey1.ToString().ToLower())}/{answerKey2.ToString().ToLower()}): ");
+                ConsoleKey inputKey = Console.ReadKey().Key;
+                Console.WriteLine();
+                if (enterAsDefaultAnswerKey)
+                {
+                    if (inputKey == ConsoleKey.Enter)
+                    {
+                        answer = true;
+                        return;
+                    }
+                }
+                if (inputKey == answerKey1)
+                {
+                    answer = true;
+                    return;
+                }
+                if (inputKey == answerKey2)
+                {
+                    answer = false;
+                    return;
+                }
+                counter++;
+            }
+
+            answer = false;
+            PrintMaxInputAttemptsMessage(maxInputAttempts, errorMessage);
+        }
+
         private void PrintMaxInputAttemptsMessage(int maxInputAttempts, string errorMessage = "")
         {
             Console.WriteLine($"Maximum input attempts ({maxInputAttempts}) reached.");

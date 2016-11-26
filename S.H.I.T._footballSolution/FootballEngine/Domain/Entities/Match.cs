@@ -35,10 +35,11 @@ namespace FootballEngine.Domain.Entities
         public Match(MatchDate date, Guid homeTeamId, Guid visitorTeamId, GeneralName location)
         {
             Id = Guid.NewGuid();
-            if (IsValidInparameter(date, homeTeamId, visitorTeamId))
+            if (IsValidInparameter(date, homeTeamId, visitorTeamId, location))
             {
                 Date = date;
                 MatchTimeInMinutes = 0;
+                Location = location;
 
                 HomeAssists = new List<Event>();
                 HomeExchanges = new List<Exchange>();
@@ -58,7 +59,7 @@ namespace FootballEngine.Domain.Entities
             }
         }
 
-        private bool IsValidInparameter(MatchDate date, Guid homeTeamId, Guid visitorTeamId)
+        private bool IsValidInparameter(MatchDate date, Guid homeTeamId, Guid visitorTeamId, GeneralName location)
         {
             if (date.Value.Date < DateTime.Now.Date)
                 throw new ArgumentOutOfRangeException($"{nameof(date)} is out of range can only be between now and {EndDateForMatchCreation} years from now.");
@@ -71,6 +72,9 @@ namespace FootballEngine.Domain.Entities
 
             if (visitorTeamId == Guid.Empty)
                 throw new ArgumentException($"{nameof(visitorTeamId)} cannot be a empty Guid.");
+
+            if (location == null)
+                throw new ArgumentNullException($"{nameof(location)} cannot be null.");
 
             return true;
         }

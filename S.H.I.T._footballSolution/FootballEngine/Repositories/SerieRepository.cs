@@ -17,6 +17,8 @@ namespace FootballEngine.Repositories
         {
             _path = AppDomain.CurrentDomain.BaseDirectory;
             _path = Path.Combine(_path, "Resources");
+            if (!Directory.Exists(_path))
+                Directory.CreateDirectory(_path);
             _path = Path.Combine(_path, "Series.xml");
             Load();
         }

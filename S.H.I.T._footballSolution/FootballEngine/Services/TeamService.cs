@@ -11,8 +11,6 @@ namespace FootballEngine.Services
     public class TeamService : IService<Team>
     {
         private readonly TeamRepository _teamRepository = TeamRepository.Instance;
-        //private static PlayerService playerService;
-        //private static MatchService matchService;
 
         private static readonly object CreationLock = new object();
         private static TeamService _instance;
@@ -27,8 +25,6 @@ namespace FootballEngine.Services
                         if (_instance == null)
                         {
                             _instance = new TeamService();
-                            //playerService = ServiceLocator.Instance.PlayerService;
-                            //matchService = ServiceLocator.Instance.MatchService;
                         }
                     }
                 }

@@ -1,17 +1,10 @@
 ﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Services;
 using System;
-using FootballEngine.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using FootballEngine.Helper;
-using System.Xml.Serialization;
-using System.IO;
 using FootballEngine.Domain.ValueObjects;
-using static FootballEngine.Domain.Entities.Player;
-using System.Windows.Input;
 using FootballEngine.Factories;
 
 namespace TestApplication
@@ -47,16 +40,20 @@ namespace TestApplication
                 Console.WriteLine(message);
                 Console.WriteLine("-------------------------");
                 AskFor(out createTestData, "Do you want to continue?");
+                bool replaceData;
+                AskFor(out replaceData, "Do you want to replace or add to existing data?", ConsoleKey.R, ConsoleKey.A, false);
+                if (replaceData)
+                    RemoveCurrentData();
             }
             else
             {
-                createTestData = false;
+                createTestData = true;
                 Console.WriteLine("-------------------------");
                 Console.WriteLine(message);
                 Console.WriteLine("-------------------------");
             }
-
-            if (!createTestData)
+            
+            if (createTestData)
             {
                 int maxInputAttempts = DefaultMaxInputAttempts,
                     maxNumberOfSeries = 20,
@@ -92,8 +89,7 @@ namespace TestApplication
                 for (int i = 0; i < numberOfPlayersInEachTeam.Length; i++)
                     numberOfPlayersInEachTeam[i] = _Random.Next(24, 31);
 
-                int intArrayCounter = 0,
-                    playerCounter = 1,
+                int playerCounter = 1,
                     teamCounter = 1;
 
                 List<Player> players = new List<Player>();
@@ -112,8 +108,6 @@ namespace TestApplication
                         int amount = _Random.Next(24, 31);
                         playerLists.Add(PlayerFactory.CreateListOfPlayerLists(amount, playerCounter));
                         playerCounter += amount;
-                        //intArrayCounter++;
-                        //playerCounter += numberOfPlayersInEachTeam[intArrayCounter];
                     }
                     teamList = TeamFactory.CreateTeamsAndSetPlayersTeamId(playerLists, teamCounter);
                     teamCounter++;
@@ -186,6 +180,26 @@ namespace TestApplication
             }
 
             return dataExist;
+        }
+
+        private void RemoveCurrentData()
+        {
+            List<Guid> matchIds = ServiceLocator.Instance.MatchService.GetAll().Select(match => match.Id).ToList();
+            List<Guid> playerIds = ServiceLocator.Instance.PlayerService.GetAll().Select(player => player.Id).ToList();
+            List<Guid> serieIds = ServiceLocator.Instance.SerieService.GetAll().Select(serie => serie.Id).ToList();
+            List<Guid> teamIds = ServiceLocator.Instance.TeamService.GetAll().Select(team => team.Id).ToList();
+
+            foreach (Guid matchId in matchIds)
+                ServiceLocator.Instance.MatchService.Delete(matchId);
+            
+            foreach (Guid playerId in playerIds)
+                ServiceLocator.Instance.PlayerService.Delete(playerId);
+            
+            foreach (Guid serieId in serieIds)
+                ServiceLocator.Instance.SerieService.Delete(serieId);
+            
+            foreach (Guid teamId in teamIds)
+                ServiceLocator.Instance.TeamService.Delete(teamId);
         }
 
         private DateTime GetRandomDate(DateTime startDate, DateTime endDate)
