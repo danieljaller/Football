@@ -11,7 +11,7 @@ namespace FootballEngine.Repositories
     public class TeamRepository : IRepository<Team>
     {
         private readonly string _path;
-        private List<Team> _teams;
+        private HashSet<Team> _teams;
 
         private TeamRepository()
         {
@@ -53,13 +53,14 @@ namespace FootballEngine.Repositories
             if (teams.Contains(null))
                 throw new ArgumentException($"{nameof(teams)} cannot contain null elements.");
 
-            _teams.AddRange(teams);
+            _teams.UnionWith(teams);
         }
 
         public void Delete(Guid id)
         {
             if (_teams.Select(t => t.Id).Contains(id))
-                _teams.Remove(_teams.Find(t => t.Id == id));
+                _teams.Select(team => team).Where(team => team.Id == id);
+            //_teams.Remove(_teams.Find(t => t.Id == id));
         }
 
         public IEnumerable<Team> GetAll()
@@ -69,13 +70,15 @@ namespace FootballEngine.Repositories
 
         public Team GetBy(Guid id)
         {
-            return _teams.Find(t => t.Id == id);
+            return _teams.Select(team => team).Where(team => team.Id == id).ElementAt(0);
+            //return _teams.Find(t => t.Id == id);
         }
 
         public Team GetBy(string name)
         {
             if (name != null)
-                return _teams.Find(t => t.Name.Value == name);
+                _teams.Select(team => team).Where(team => team.Name.Value == name).ElementAt(0);
+            //return _teams.Find(t => t.Name.Value == name);
             return null;
         }
 
@@ -85,12 +88,12 @@ namespace FootballEngine.Repositories
             {
                 //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", false, out path))
                 //{
-                _teams = (List<Team>)XmlHandler.LoadFrom(_path, typeof(List<Team>));
+                _teams = (HashSet<Team>)XmlHandler.LoadFrom(_path, typeof(HashSet<Team>));
                 //}               
             }
             catch (LoadFailedException)
             {
-                _teams = new List<Team>();
+                _teams = new HashSet<Team>();
             }
         }
 

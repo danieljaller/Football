@@ -1,20 +1,10 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Helper;
 
 namespace AdminApp
@@ -30,8 +20,8 @@ namespace AdminApp
         int homeScore;
         int visitorScore;
         bool isPlayed;
-        List<Event> homeGoals;
-        List<Event> visitorGoals;
+        HashSet<Event> homeGoals;
+        HashSet<Event> visitorGoals;
 
 
         public MatchProtocolPage()
@@ -206,8 +196,8 @@ namespace AdminApp
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
             visitorScore = match.VisitorGoals.Count();
-            homeGoals = match.HomeGoals;
-            visitorGoals = match.VisitorGoals;
+            homeGoals = match.HomeGoals.ToHashSet();
+            visitorGoals = match.VisitorGoals.ToHashSet();
         }
     }
 }

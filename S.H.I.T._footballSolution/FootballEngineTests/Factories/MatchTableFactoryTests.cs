@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FootballEngine.Domain.Entities;
 using FootballEngine.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,9 +18,9 @@ namespace FootballEngine.Factories
 
         }
 
-        private List<List<Player>> GetValidListOfPlayerLists()
+        private HashSet<HashSet<Player>> GetValidListOfPlayerLists()
         {
-            List<List<Player>> listOfPlayerLists = new List<List<Player>>();
+            HashSet<HashSet<Player>> listOfPlayerLists = new HashSet<HashSet<Player>>();
             for (int i = 0; i < TeamFactory.NumberOfPlayerListsRequired; i++)
             {
                 listOfPlayerLists.Add(PlayerFactory.CreateListOfPlayerLists(PlayerFactory.MinPlayersRequired, PlayerFactory.MinPlayerNameStartValue));
@@ -27,15 +28,16 @@ namespace FootballEngine.Factories
             return listOfPlayerLists;
         }
 
-        private List<Team> GetValidTeamList()
+        private HashSet<Team> GetValidTeamList()
         {
             return TeamFactory.CreateTeamsAndSetPlayersTeamId(GetValidListOfPlayerLists(), TeamFactory.MinTeamNameStartValue);
         }
 
-        private List<Team> GetInvalidTeamList()
+        private HashSet<Team> GetInvalidTeamList()
         {
-            List<Team> teamList = GetValidTeamList();
-            teamList[7] = null;
+            HashSet<Team> teamList = GetValidTeamList();
+            teamList.Remove(teamList.ElementAt(7));
+            teamList.Add(null);
             return teamList;
         }
 
@@ -70,8 +72,8 @@ namespace FootballEngine.Factories
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CreateMatchTable_TestInparam1_3_Invalid()
         {
-            List<Team> teamList = GetValidTeamList();
-            teamList.RemoveAt(5);
+            HashSet<Team> teamList = GetValidTeamList();
+            teamList.Remove(teamList.ElementAt(5));
             MatchTableFactory.CreateMatchTable(teamList, DateTime.Now);
         }
 
@@ -79,8 +81,8 @@ namespace FootballEngine.Factories
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CreateMatchTable_TestInparam1_4_Invalid()
         {
-            List<Team> teamList = GetValidTeamList();
-            teamList.AddRange(GetValidTeamList());
+            HashSet<Team> teamList = GetValidTeamList();
+            teamList.UnionWith(GetValidTeamList());
             MatchTableFactory.CreateMatchTable(teamList, DateTime.Now);
         }
 

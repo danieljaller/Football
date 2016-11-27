@@ -95,16 +95,16 @@ namespace TestApplication
                 int playerCounter = 1,
                     teamCounter = 1;
 
-                List<Player> players = new List<Player>();
-                List<Team> teams = new List<Team>();
-                List<Match> matches = new List<Match>();
-                List<Serie> series = new List<Serie>();
+                HashSet<Player> players = new HashSet<Player>();
+                HashSet<Team> teams = new HashSet<Team>();
+                HashSet<Match> matches = new HashSet<Match>();
+                HashSet<Serie> series = new HashSet<Serie>();
 
                 for (int s = 0; s < numberOfSeries; s++)
                 {
-                    List<List<Player>> playerLists = new List<List<Player>>();
-                    List<Team> teamList = new List<Team>();
-                    List<Match> matchList = new List<Match>();
+                    HashSet<HashSet<Player>> playerLists = new HashSet<HashSet<Player>>();
+                    HashSet<Team> teamList = new HashSet<Team>();
+                    HashSet<Match> matchList = new HashSet<Match>();
 
                     for (int t = 0; t < 16; t++)
                     {
@@ -123,11 +123,11 @@ namespace TestApplication
                     foreach (Team team in teamList)
                         team.SerieIds.Add(serie.Id);
 
-                    foreach (List<Player> playerList in playerLists)
-                        players.AddRange(playerList);
+                    foreach (HashSet<Player> playerList in playerLists)
+                        players.UnionWith(playerList);
 
-                    teams.AddRange(teamList);
-                    matches.AddRange(matchList);
+                    teams.UnionWith(teamList);
+                    matches.UnionWith(matchList);
                     series.Add(serie);
                 }
 
@@ -187,10 +187,10 @@ namespace TestApplication
 
         private void RemoveCurrentData()
         {
-            List<Guid> matchIds = ServiceLocator.Instance.MatchService.GetAll().Select(match => match.Id).ToList();
-            List<Guid> playerIds = ServiceLocator.Instance.PlayerService.GetAll().Select(player => player.Id).ToList();
-            List<Guid> serieIds = ServiceLocator.Instance.SerieService.GetAll().Select(serie => serie.Id).ToList();
-            List<Guid> teamIds = ServiceLocator.Instance.TeamService.GetAll().Select(team => team.Id).ToList();
+            HashSet<Guid> matchIds = ServiceLocator.Instance.MatchService.GetAll().Select(match => match.Id).ToHashSet();
+            HashSet<Guid> playerIds = ServiceLocator.Instance.PlayerService.GetAll().Select(player => player.Id).ToHashSet();
+            HashSet<Guid> serieIds = ServiceLocator.Instance.SerieService.GetAll().Select(serie => serie.Id).ToHashSet();
+            HashSet<Guid> teamIds = ServiceLocator.Instance.TeamService.GetAll().Select(team => team.Id).ToHashSet();
 
             foreach (Guid matchId in matchIds)
                 ServiceLocator.Instance.MatchService.Delete(matchId);
@@ -228,7 +228,7 @@ namespace TestApplication
             return new DateTime(year, month, day);
         }
 
-        private void SaveTestData(List<Player> players, List<Team> teams, List<Match> matches, List<Serie> series)
+        private void SaveTestData(HashSet<Player> players, HashSet<Team> teams, HashSet<Match> matches, HashSet<Serie> series)
         {
             foreach (Player player in players)
                 ServiceLocator.Instance.PlayerService.Add(player);

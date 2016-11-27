@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FootballEngine.Helper;
 
 namespace TestApplication.Factories
 {
@@ -25,7 +26,7 @@ namespace TestApplication.Factories
             GeneralName _homeArena = new GeneralName(homeArena);
 
             Team team = new Team(_name, _homeArena);
-            team.PlayerIds = playerIds as List<Guid>;
+            team.PlayerIds = playerIds.ToHashSet();
 
             return team;
         }
@@ -56,7 +57,7 @@ namespace TestApplication.Factories
                 GeneralName homeArena = new GeneralName($"Arena-{i + 1}");
                 Team team = new Team(name, homeArena);
                 //team.PlayerIds = playersLists.ElementAt(i).Select(p => p.Id) as List<Guid>;
-                List<Guid> playerIds = new List<Guid>();
+                HashSet<Guid> playerIds = new HashSet<Guid>();
                 foreach (Player player in playersLists[i])
                 {
                     player.TeamId = team.Id;

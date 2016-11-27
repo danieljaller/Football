@@ -11,7 +11,7 @@ namespace FootballEngine.Repositories
     public class MatchRepository : IRepository<Match>
     {
         private readonly string _path;
-        private List<Match> _matches;
+        private HashSet<Match> _matches;
 
         private MatchRepository()
         {
@@ -51,14 +51,15 @@ namespace FootballEngine.Repositories
             if (matches.Contains(null))
                 throw new ArgumentException($"{nameof(matches)} cannot contain null elements.");
 
-            _matches.AddRange(matches);
+            _matches.UnionWith(matches);
         }
 
         public void Delete(Guid id)
         {
             if (_matches.Select(s => s.Id).Contains(id))
             {
-                _matches.Remove(_matches.Find(s => s.Id == id));
+                _matches.Remove(_matches.Select(match => match).Where(match => match.Id == id).ElementAt(0));
+                //_matches.Remove(_matches.Find(s => s.Id == id));
             }
         }
 
@@ -69,12 +70,14 @@ namespace FootballEngine.Repositories
 
         public Match GetBy(Guid id)
         {
-            return _matches.Find(s => s.Id == id);
+            return _matches.Select(match => match).Where(match => match.Id == id).ElementAt(0);
+            //return _matches.Find(s => s.Id == id);
         }
 
-        public Match GetBy(string name)
+        public Match GetBy(string location)
         {
-            return _matches.Find(s => s.Location.Value == name);
+            return _matches.Select(match => match).Where(match => match.Location.Value == location).ElementAt(0);
+            //return _matches.Find(s => s.Location.Value == location);
         }
 
         public void Load()
@@ -83,12 +86,12 @@ namespace FootballEngine.Repositories
             {
                 //if (TryGetFilePath.InSolutionDirectory("Matches.xml", "Resources", false, out path))
                 //{
-                _matches = (List<Match>)XmlHandler.LoadFrom(_path, typeof(List<Match>));
+                _matches = (HashSet<Match>)XmlHandler.LoadFrom(_path, typeof(HashSet<Match>));
                 //}
             }
             catch (LoadFailedException)
             {
-                _matches = new List<Match>();
+                _matches = new HashSet<Match>();
             }
         }
 

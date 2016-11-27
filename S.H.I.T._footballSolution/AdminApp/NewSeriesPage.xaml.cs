@@ -1,21 +1,11 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Helper;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Factories;
 
 namespace AdminApp
@@ -25,7 +15,7 @@ namespace AdminApp
     /// </summary>
     public partial class NewSeriesPage : Page
     {
-        List<Team> teamList = new List<Team> { };
+        HashSet<Team> teamList = new HashSet<Team> { };
         bool teamsAreValid;
         bool nameIsValid;
         bool dateIsValid;
@@ -51,7 +41,7 @@ namespace AdminApp
             foreach (Match match in matchSchedule)
                 ServiceLocator.Instance.MatchService.Add(match);
 
-            newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(ms => ms.Id).ToList(), serieName.Text, teamList);
+            newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(ms => ms.Id).ToHashSet(), serieName.Text, teamList);
         }
 
         private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -132,7 +122,7 @@ namespace AdminApp
         }
         private void AutoFill()
         {
-            teamList = ServiceLocator.Instance.TeamService.GetAll().Take(16).ToList();
+            teamList = ServiceLocator.Instance.TeamService.GetAll().Take(16).ToHashSet();
             teamsCheckedList.ItemsSource = teamList;
             serieName.Text = "AutoSerie";
             serieDatePicker.SelectedDate = DateTime.Today.AddDays(2);

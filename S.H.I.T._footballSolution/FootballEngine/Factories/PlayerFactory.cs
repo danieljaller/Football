@@ -18,14 +18,14 @@ namespace FootballEngine.Factories
         public static readonly int MaxPlayersRequired = 30;
         public static readonly int MinPlayerNameStartValue = 1;
 
-        public static List<Player> CreateListOfPlayerLists(int amount, int playerNameStartValue)
+        public static HashSet<Player> CreateListOfPlayerLists(int amount, int playerNameStartValue)
         {
             if (MinPlayersRequired > amount || amount > MaxPlayersRequired)
                 throw new ArgumentOutOfRangeException($"{nameof(amount)} must be between 24 and 30.");
             if (playerNameStartValue < MinPlayerNameStartValue)
                 throw new ArgumentOutOfRangeException($"{nameof(playerNameStartValue)} must be larger than {MinPlayerNameStartValue}.");
 
-            List<Player> players = new List<Player>();
+            HashSet<Player> players = new HashSet<Player>();
             for (int i = playerNameStartValue; i <= (amount + playerNameStartValue - 1); i++)
             {
                 PlayerName firstName = new PlayerName("Player");

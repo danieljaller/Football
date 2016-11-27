@@ -36,29 +36,53 @@ namespace FootballEngine.Helper
             {
                 Type typeToSave;
 
-                if (objectToSave.GetType() == typeof(List<Match>))
+                if (objectToSave == null)
+                    throw new ArgumentNullException($"{nameof(objectToSave)} cannot be null.");
+
+                //if (objectToSave.GetType() == typeof(List<Match>))
+                //{
+                //    objectToSave = objectToSave as List<Match>;
+                //    typeToSave = objectToSave.GetType();
+                //}
+                if (objectToSave.GetType() == typeof(HashSet<Match>))
                 {
-                    objectToSave = objectToSave as List<Match>;
+                    objectToSave = objectToSave as HashSet<Match>;
                     typeToSave = objectToSave.GetType();
                 }
 
-                else if (objectToSave.GetType() == typeof(List<Player>))
+                //else if (objectToSave.GetType() == typeof(List<Player>))
+                //{
+                //    objectToSave = objectToSave as List<Player>;
+                //    typeToSave = objectToSave.GetType();
+                //}
+                else if (objectToSave.GetType() == typeof(HashSet<Player>))
                 {
-                    objectToSave = objectToSave as List<Player>;
+                    objectToSave = objectToSave as HashSet<Player>;
                     typeToSave = objectToSave.GetType();
                 }
 
-                else if (objectToSave.GetType() == typeof(List<Serie>))
+                //else if (objectToSave.GetType() == typeof(List<Serie>))
+                //{
+                //    objectToSave = objectToSave as List<Serie>;
+                //    typeToSave = objectToSave.GetType();
+                //}
+                else if (objectToSave.GetType() == typeof(HashSet<Serie>))
                 {
-                    objectToSave = objectToSave as List<Serie>;
+                    objectToSave = objectToSave as HashSet<Serie>;
                     typeToSave = objectToSave.GetType();
                 }
 
-                else if (objectToSave.GetType() == typeof(List<Team>))
+                //else if (objectToSave.GetType() == typeof(List<Team>))
+                //{
+                //    objectToSave = objectToSave as List<Team>;
+                //    typeToSave = objectToSave.GetType();
+                //}
+                else if (objectToSave.GetType() == typeof(HashSet<Team>))
                 {
-                    objectToSave = objectToSave as List<Team>;
+                    objectToSave = objectToSave as HashSet<Team>;
                     typeToSave = objectToSave.GetType();
                 }
+
                 else
                 {
                     throw new ArgumentException("Not a valid type to save");

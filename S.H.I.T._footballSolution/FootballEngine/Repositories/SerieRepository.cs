@@ -11,7 +11,7 @@ namespace FootballEngine.Repositories
     public class SerieRepository : IRepository<Serie>
     {
         private readonly string _path;
-        private List<Serie> _series;
+        private HashSet<Serie> _series;
 
         private SerieRepository()
         {
@@ -51,14 +51,15 @@ namespace FootballEngine.Repositories
             if (series.Contains(null))
                 throw new ArgumentException($"{nameof(series)} cannot contain null elements.");
 
-            _series.AddRange(series);
+            _series.UnionWith(series);
         }
 
         public void Delete(Guid id)
         {
             if (_series.Select(s => s.Id).Contains(id))
             {
-                _series.Remove(_series.Find(s => s.Id == id));
+                _series.Remove(_series.Select(serie => serie).Where(serie => serie.Id == id).ElementAt(0));
+                //_series.Remove(_series.Find(s => s.Id == id));
             }
         }
 
@@ -69,12 +70,14 @@ namespace FootballEngine.Repositories
 
         public Serie GetBy(Guid id)
         {
-            return _series.Find(s => s.Id == id);
+            return _series.Select(serie => serie).Where(serie => serie.Id == id).ElementAt(0);
+            //return _series.Find(s => s.Id == id);
         }
 
         public Serie GetBy(string name)
         {
-            return _series.Find(s => s.Name.Value == name);
+            return _series.Select(serie => serie).Where(serie => serie.Name.Value == name).ElementAt(0);
+            //return _series.Find(s => s.Name.Value == name);
         }
 
         public void Load()
@@ -83,13 +86,13 @@ namespace FootballEngine.Repositories
             {
                 //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", false, out path))
                 //{
-                _series = (List<Serie>)XmlHandler.LoadFrom(_path, typeof(List<Serie>));
+                _series = (HashSet<Serie>)XmlHandler.LoadFrom(_path, typeof(HashSet<Serie>));
                 //}
 
             }
             catch (LoadFailedException)
             {
-                _series = new List<Serie>();
+                _series = new HashSet<Serie>();
             }
         }
 

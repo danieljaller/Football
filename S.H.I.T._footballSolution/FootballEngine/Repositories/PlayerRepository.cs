@@ -11,7 +11,7 @@ namespace FootballEngine.Repositories
     public class PlayerRepository : IRepository<Player>
     {
         private readonly string _path;
-        private List<Player> _players;
+        private HashSet<Player> _players;
 
         private PlayerRepository()
         {
@@ -50,13 +50,14 @@ namespace FootballEngine.Repositories
             if (players.Contains(null))
                 throw new ArgumentException($"{nameof(players)} cannot contain null elements.");
 
-            _players.AddRange(players);
+            _players.UnionWith(players);
         }
 
         public void Delete(Guid id)
         {
             if (_players.Select(s => s.Id).Contains(id))
-                _players.Remove(_players.Find(s => s.Id == id));
+                _players.Remove(_players.Select(player => player).Where(player => player.Id == id).ElementAt(0));
+            //_players.Remove(_players.Find(s => s.Id == id));
         }
 
         public IEnumerable<Player> GetAll()
@@ -66,12 +67,14 @@ namespace FootballEngine.Repositories
 
         public Player GetBy(Guid id)
         {
-            return _players.Find(s => s.Id == id);
+            return _players.Select(player => player).Where(player => player.Id == id).ElementAt(0);
+            //return _players.Find(s => s.Id == id);
         }
 
         public Player GetBy(string name)
         {
-            return _players.Find(s => s.FullName == name);
+            return _players.Select(player => player).Where(player => player.FullName == name).ElementAt(0);
+            //return _players.Find(s => s.FullName == name);
         }
 
         public void Load()
@@ -81,13 +84,13 @@ namespace FootballEngine.Repositories
                 //if (TryGetFilePath.InSolutionDirectory("Players.xml", "Resources", false, out path))
                 //if( true)
                 //{
-                _players = (List<Player>)XmlHandler.LoadFrom(_path, typeof(List<Player>));
+                _players = (HashSet<Player>)XmlHandler.LoadFrom(_path, typeof(HashSet<Player>));
                 //}
 
             }
             catch (LoadFailedException)
             {
-                _players = new List<Player>();
+                _players = new HashSet<Player>();
             }
         }
 

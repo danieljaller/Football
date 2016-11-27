@@ -1,19 +1,8 @@
 ﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Helper;
 
 namespace AdminApp
@@ -23,39 +12,39 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateSeriesPage : Page
     {
-        private List<Guid> matchScheduleWithIds = new List<Guid>();
-        private List<Team> teamList = new List<Team>();
-        private List<Match> matchScheduleWithMatches = new List<Match>();
-        private List<Team> homeTeamList = new List<Team>();
-        private List<Team> visitorTeamList = new List<Team>();
+        private HashSet<Guid> matchScheduleWithIds = new HashSet<Guid>();
+        private HashSet<Team> teamList = new HashSet<Team>();
+        private HashSet<Match> matchScheduleWithMatches = new HashSet<Match>();
+        private HashSet<Team> homeTeamList = new HashSet<Team>();
+        private HashSet<Team> visitorTeamList = new HashSet<Team>();
 
         public CreateOrAdministrateSeriesPage()
         {
             InitializeComponent();
 
-            var match1 = new TempMatch("16-09-12", "Lag1", "Lag2", "Plats", "2-1");
-            var match2 = new TempMatch("16-09-24", "Lag1", "Lag2", "Plats", "1-5");
-            var match3 = new TempMatch("16-10-11", "Lag1", "Lag2", "Plats", "4-2");
-            var match4 = new TempMatch("16-11-02", "Lag1", "Lag2", "Plats", "5-1");
-            var match5 = new TempMatch("16-11-23", "Lag1", "Lag2", "Plats", "");
-            var match6 = new TempMatch("16-09-22", "Lag1", "Lag2", "Plats", "5-2");
-            var match7 = new TempMatch("16-10-12", "Lag1", "Lag2", "Plats", "8-1");
-            var match8 = new TempMatch("16-10-22", "Lag1", "Lag2", "Plats", "9-1");
-            var match9 = new TempMatch("16-11-12", "Lag1", "Lag2", "Plats", "");
-            var match10 = new TempMatch("16-11-19", "Lag1", "Lag2", "Plats", "");
+            //var match1 = new TempMatch("16-09-12", "Lag1", "Lag2", "Plats", "2-1");
+            //var match2 = new TempMatch("16-09-24", "Lag1", "Lag2", "Plats", "1-5");
+            //var match3 = new TempMatch("16-10-11", "Lag1", "Lag2", "Plats", "4-2");
+            //var match4 = new TempMatch("16-11-02", "Lag1", "Lag2", "Plats", "5-1");
+            //var match5 = new TempMatch("16-11-23", "Lag1", "Lag2", "Plats", "");
+            //var match6 = new TempMatch("16-09-22", "Lag1", "Lag2", "Plats", "5-2");
+            //var match7 = new TempMatch("16-10-12", "Lag1", "Lag2", "Plats", "8-1");
+            //var match8 = new TempMatch("16-10-22", "Lag1", "Lag2", "Plats", "9-1");
+            //var match9 = new TempMatch("16-11-12", "Lag1", "Lag2", "Plats", "");
+            //var match10 = new TempMatch("16-11-19", "Lag1", "Lag2", "Plats", "");
 
-            Dictionary<string, List<TempMatch>> seriesDictionary = new Dictionary<string, List<TempMatch>>() {
-                {"serie1", new List<TempMatch>() {match1, match2, match3, match4, match5 } },
-                {"serie2", new List<TempMatch>() {match6, match7, match8, match9, match10 } }
-            };
+            //Dictionary<string, HashSet<TempMatch>> seriesDictionary = new Dictionary<string, HashSet<TempMatch>>() {
+            //    {"serie1", new HashSet<TempMatch>() {match1, match2, match3, match4, match5 } },
+            //    {"serie2", new HashSet<TempMatch>() {match6, match7, match8, match9, match10 } }
+            //};
             seriesList.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
 
         }
 
         public CreateOrAdministrateSeriesPage(Serie selectedSerie)
         {
-            Dictionary<string, List<TempMatch>> seriesDictionary = new Dictionary<string, List<TempMatch>>() {
-                {selectedSerie.Name.Value, new List<TempMatch>() }
+            Dictionary<string, HashSet<TempMatch>> seriesDictionary = new Dictionary<string, HashSet<TempMatch>>() {
+                {selectedSerie.Name.Value, new HashSet<TempMatch>() }
             };
             InitializeComponent();
             seriesList.ItemsSource = seriesDictionary;

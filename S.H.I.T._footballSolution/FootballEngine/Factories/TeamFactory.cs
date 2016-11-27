@@ -13,12 +13,12 @@ namespace FootballEngine.Factories
         public static readonly int NumberOfPlayerListsRequired = 16;
         public static readonly int MinTeamNameStartValue = 1;
 
-        public static List<Team> CreateTeamsAndSetPlayersTeamId(List<List<Player>> playersLists, int teamNameStartValue)
+        public static HashSet<Team> CreateTeamsAndSetPlayersTeamId(HashSet<HashSet<Player>> playersLists, int teamNameStartValue)
         {
             if (playersLists == null)
                 throw new ArgumentNullException($"{nameof(playersLists)} is null");
             if (playersLists.Count != NumberOfPlayerListsRequired)
-                throw new ArgumentOutOfRangeException($"{nameof(playersLists)} must contain {NumberOfPlayerListsRequired} List<Player>'s.");
+                throw new ArgumentOutOfRangeException($"{nameof(playersLists)} must contain {NumberOfPlayerListsRequired} HashSet<Player>'s.");
             foreach (var playerList in playersLists)
             {
                 if (playerList == null)
@@ -29,7 +29,7 @@ namespace FootballEngine.Factories
             if (teamNameStartValue < MinTeamNameStartValue)
                 throw new ArgumentOutOfRangeException($"{nameof(teamNameStartValue)} must be larger than {MinTeamNameStartValue}.");
 
-            List<Team> teams = new List<Team>();
+            HashSet<Team> teams = new HashSet<Team>();
 
             for (int i = teamNameStartValue; i < (playersLists.Count() + teamNameStartValue); i++)
             {
@@ -37,7 +37,7 @@ namespace FootballEngine.Factories
                 GeneralName homeArena = new GeneralName($"{name.Value}'s Arena");
                 Team team = new Team(name, homeArena);
                 HashSet<Guid> playerIds = new HashSet<Guid>();
-                foreach (Player player in playersLists[i - teamNameStartValue])
+                foreach (Player player in playersLists.ElementAt(i - teamNameStartValue))
                 {
                     player.TeamId = team.Id;
                     playerIds.Add(player.Id);

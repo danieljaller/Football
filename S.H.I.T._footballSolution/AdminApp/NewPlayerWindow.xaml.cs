@@ -2,17 +2,8 @@
 using FootballEngine.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AdminApp
 {
@@ -25,7 +16,7 @@ namespace AdminApp
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Player player { get; set; }
-        public List<Player> tempPlayersList = new List<Player>();
+        public HashSet<Player> tempPlayersList = new HashSet<Player>();
         
 
         public NewPlayerWindow()

@@ -1,20 +1,10 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Helper;
 
 namespace AdminApp
@@ -25,14 +15,14 @@ namespace AdminApp
     public partial class CreateSchedulePage : Page
     {
         private string serieName;
-        private List<Guid> matchScheduleWithIds = new List<Guid>();
-        private List<Team> teamList = new List<Team>();
-        private List<Match> matchScheduleWithMatches = new List<Match>();
-        private List<Team> homeTeamList = new List<Team>();
-        private List<Team> visitorTeamList = new List<Team>();
+        private HashSet<Guid> matchScheduleWithIds = new HashSet<Guid>();
+        private HashSet<Team> teamList = new HashSet<Team>();
+        private HashSet<Match> matchScheduleWithMatches = new HashSet<Match>();
+        private HashSet<Team> homeTeamList = new HashSet<Team>();
+        private HashSet<Team> visitorTeamList = new HashSet<Team>();
         private bool datePickerIsDisabled;
 
-        public CreateSchedulePage(List<Guid> matchSchedule, string serieName, List<Team> teamList)
+        public CreateSchedulePage(HashSet<Guid> matchSchedule, string serieName, HashSet<Team> teamList)
         {
             InitializeComponent();
             matchScheduleWithIds = matchSchedule;
@@ -72,7 +62,7 @@ namespace AdminApp
 
         private void createSerieButton_Click(object sender, RoutedEventArgs e)
         {
-            Serie newSerie = new Serie(new GeneralName(serieName), teamList.Select(t => t.Id).ToList(), matchScheduleWithIds);
+            Serie newSerie = new Serie(new GeneralName(serieName), teamList.Select(t => t.Id).ToHashSet(), matchScheduleWithIds.ToHashSet());
             ServiceLocator.Instance.SerieService.Add(newSerie);
             foreach (var team in teamList)
             {
