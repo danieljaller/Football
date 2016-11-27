@@ -5,20 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
     public class TeamRepository : IRepository<Team>
     {
+        private readonly string _path;
+        private List<Team> _teams;
+
         private TeamRepository()
         {
+            _path = AppDomain.CurrentDomain.BaseDirectory;
+            _path = Path.Combine(_path, "Resources");
+            if (!Directory.Exists(_path))
+                Directory.CreateDirectory(_path);
+            _path = Path.Combine(_path, "Teams.xml");
             Load();
         }
-
-        private List<Team> teams;
 
         private static TeamRepository _instance;
 
@@ -27,78 +30,55 @@ namespace FootballEngine.Repositories
             get
             {
                 if (_instance == null)
-                {
                     _instance = new TeamRepository();
-                }
+
                 return _instance;
             }
         }
 
         public void Add(Team team)
         {
-            if (teams != null && team != null)
-            {
-                if (!teams.Select(t => t.Id).Contains(team.Id) && !teams.Select(t => t.Name).Contains(team.Name))
-                {
-                    teams.Add(team);
-                }
-            }
+            if (team == null)
+                return;
+            if (!_teams.Select(t => t.Id).Contains(team.Id) && !_teams.Select(t => t.Name).Contains(team.Name)) // Checking for name does not work!
+                _teams.Add(team);
         }
 
         public void Delete(Guid id)
         {
-            if (teams != null)
-            {
-                if (teams.Select(t => t.Id).Contains(id))
-                {
-                    teams.Remove(teams.Find(t => t.Id == id));
-                }
-            }
+            if (_teams.Select(t => t.Id).Contains(id))
+                _teams.Remove(_teams.Find(t => t.Id == id));
         }
 
         public IEnumerable<Team> GetAll()
         {
-            if (teams != null)
-            {
-                return teams as IEnumerable<Team>;
-            }
-            return null;
+            return _teams;
         }
 
         public Team GetBy(Guid id)
         {
-            if (teams != null)
-            {
-                return teams.Find(t => t.Id == id);
-            }
-            return null;
+            return _teams.Find(t => t.Id == id);
         }
 
         public Team GetBy(string name)
         {
             if (name != null)
-            {
-                return teams.Find(t => t.Name.Value == name);
-            }
+                return _teams.Find(t => t.Name.Value == name);
             return null;
         }
-        string[] directories = new string[2] { "FootballEngine", "Resources" };
+
         public void Load()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Teams.xml");
             try
             {
                 //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", false, out path))
-                if(true)
-                {
-                    teams = (List<Team>)XmlHandler.LoadFrom(path, typeof(List<Team>));
-                }               
+                //{
+                _teams = (List<Team>)XmlHandler.LoadFrom(_path, typeof(List<Team>));
+                //}               
             }
-            catch(LoadFailedException)
+            catch (LoadFailedException)
             {
-                teams = new List<Team>();
+                _teams = new List<Team>();
             }
         }
 
@@ -106,17 +86,16 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                string path;
-                if (TryGetFilePath.InSolutionDirectory("Teams.xml", directories, true, out path))
-                {
-                    XmlHandler.SaveTo(path, teams);
-                }                
+                //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", true, out path))
+                //{
+                XmlHandler.SaveTo(_path, _teams);
+                //}                
             }
             catch (SaveFailedException s)
             {
                 throw s;
             }
-            catch(ArgumentException a)
+            catch (ArgumentException a)
             { throw a; }
         }
     }
