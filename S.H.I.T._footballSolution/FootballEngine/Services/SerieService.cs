@@ -36,6 +36,11 @@ namespace FootballEngine.Services
             _serieRepository.Add(serie);
         }
 
+        public void AddRange(IEnumerable<Serie> series)
+        {
+            _serieRepository.AddRange(series);
+        }
+
         public void Delete(Guid id)
         {
             _serieRepository.Delete(id);

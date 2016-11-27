@@ -41,6 +41,18 @@ namespace FootballEngine.Repositories
                 _players.Add(player);
         }
 
+        public void AddRange(IEnumerable<Player> players)
+        {
+            if (players == null)
+                throw new ArgumentNullException($"{nameof(players)} cannot be null.");
+            if (players.Count() == 0)
+                throw new ArgumentOutOfRangeException($"{nameof(players)} cannot be null.");
+            if (players.Contains(null))
+                throw new ArgumentException($"{nameof(players)} cannot contain null elements.");
+
+            _players.AddRange(players);
+        }
+
         public void Delete(Guid id)
         {
             if (_players.Select(s => s.Id).Contains(id))

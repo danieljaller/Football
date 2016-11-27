@@ -37,9 +37,21 @@ namespace FootballEngine.Repositories
         public void Add(Match match)
         {
             if (match == null)
-                throw new ArgumentNullException($"Match cannot be null.");
+                throw new ArgumentNullException($"{nameof(match)} cannot be null.");
             if (!_matches.Select(s => s.Id).Contains(match.Id))
                 _matches.Add(match);
+        }
+
+        public void AddRange(IEnumerable<Match> matches)
+        {
+            if (matches == null)
+                throw new ArgumentNullException($"{nameof(matches)} cannot be null.");
+            if (matches.Count() == 0)
+                throw new ArgumentOutOfRangeException($"{nameof(matches)} cannot be null.");
+            if (matches.Contains(null))
+                throw new ArgumentException($"{nameof(matches)} cannot contain null elements.");
+
+            _matches.AddRange(matches);
         }
 
         public void Delete(Guid id)

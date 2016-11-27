@@ -36,6 +36,11 @@ namespace FootballEngine.Services
             _matchRepository.Add(match);
         }
 
+        public void AddRange(IEnumerable<Match> matches)
+        {
+            _matchRepository.AddRange(matches);
+        }
+
         public void Delete(Guid id)
         {
             _matchRepository.Delete(id);

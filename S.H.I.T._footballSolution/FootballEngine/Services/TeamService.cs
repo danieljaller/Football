@@ -38,6 +38,11 @@ namespace FootballEngine.Services
             _teamRepository.Add(team);
         }
 
+        public void AddRange(IEnumerable<Team> teams)
+        {
+            _teamRepository.AddRange(teams);
+        }
+
         public void Delete(Guid id)
         {
             foreach (var player in GetAllPlayersByTeam(id))

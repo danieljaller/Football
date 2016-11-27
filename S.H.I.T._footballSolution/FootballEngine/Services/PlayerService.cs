@@ -38,6 +38,11 @@ namespace FootballEngine.Services
             _playerRepository.Add(player);
         }
 
+        public void AddRange(IEnumerable<Player> players)
+        {
+            _playerRepository.AddRange(players);
+        }
+
         public void Add(IEnumerable<Player> players)
         {
             foreach (Player player in players)
