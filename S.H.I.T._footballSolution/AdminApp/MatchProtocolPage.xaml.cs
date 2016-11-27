@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -23,9 +24,6 @@ namespace AdminApp
     /// </summary>
     public partial class MatchProtocolPage : Page
     {
-        MatchService matchService;
-        TeamService teamService;
-        PlayerService playerService;
         Match match;
         Team homeTeam;
         Team visitorTeam;
@@ -38,12 +36,9 @@ namespace AdminApp
 
         public MatchProtocolPage()
         {
-            matchService = new MatchService();
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);
             InitializeComponent();
             matchDatePicker.DisplayDateStart = DateTime.Today;
-            matchesList.ItemsSource = matchService.GetAll();
+            matchesList.ItemsSource = ServiceLocator.Instance.MatchService.GetAll();
                         
         }
        
@@ -207,8 +202,8 @@ namespace AdminApp
             
             match = (Match)matchesList.SelectedItem;
             isPlayed = match.IsPlayed;
-            homeTeam = teamService.GetBy(match.HomeTeamId);
-            visitorTeam = teamService.GetBy(match.VisitorTeamId);
+            homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
+            visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
             visitorScore = match.VisitorGoals.Count();
             homeGoals = match.HomeGoals;

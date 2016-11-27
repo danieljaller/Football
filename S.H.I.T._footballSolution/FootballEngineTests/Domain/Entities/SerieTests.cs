@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FootballEngine;
+using FootballEngineTests;
 
 namespace FootballEngine.Domain.Entities.Tests
 {

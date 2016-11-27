@@ -123,11 +123,6 @@ namespace TestApplication
                     foreach (Team team in teamList)
                     {
                         team.SerieIds.Add(serie.Id);
-                        foreach (Match match in matchList)
-                        {
-                            if (match.HomeTeamId == team.Id || match.VisitorTeamId == team.Id)
-                                team.MatchIds.Add(match.Id);
-                        }
                     }
 
                     foreach (List<Player> playerList in playerLists)

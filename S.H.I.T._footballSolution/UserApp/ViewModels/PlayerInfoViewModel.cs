@@ -29,8 +29,6 @@ namespace UserApp.ViewModels
             return true;
         }
 
-        private TeamService teamService;
-
         private Player _selectedPlayer;
         public Player SelectedPlayer
         {
@@ -52,9 +50,8 @@ namespace UserApp.ViewModels
         public string MatchesPlayed { get { return (SelectedPlayer != null) ? SelectedPlayer.MatchesPlayed.ToString() : ""; } }
         public string PlayerStatus { get { return (SelectedPlayer != null) ? SelectedPlayer.PlayerStatus.ToSwedishString() : ""; } }
 
-        public PlayerInfoViewModel(TeamService teamService)
+        public PlayerInfoViewModel()
         {
-            this.teamService = teamService;
             Messenger.Default.Register<ObjectHolder<Player, string>>(this, OnInformationHolderRecived);
         }
 

@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballEngine.Factories;
 
 namespace AdminApp
 {
@@ -24,8 +25,6 @@ namespace AdminApp
     /// </summary>
     public partial class NewSeriesPage : Page
     {
-        TeamService teamService;
-        SerieService serieService;
         List<Team> teamList = new List<Team> { };
         bool teamsAreValid;
         bool nameIsValid;
@@ -34,9 +33,7 @@ namespace AdminApp
         public NewSeriesPage()
         {
             InitializeComponent();
-            teamService = new TeamService();
-            serieService = new SerieService();
-            teamsList.ItemsSource = teamService.GetAll();
+            teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll();
             serieDatePicker.BlackoutDates.AddDatesInPast();
         }
 
@@ -49,14 +46,17 @@ namespace AdminApp
         private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)
         {
             var teamIds = teamList.Select(x => x.Id).ToList();
-            var matchSchedule = SerieAndMatchGenerator.SerieGenerator(teamIds, Convert.ToDateTime(serieDatePicker.SelectedDate));
-            
-            newSerieFrame.Content = new CreateSchedulePage(matchSchedule, serieName.Text, teamList);
+            var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, Convert.ToDateTime(serieDatePicker.SelectedDate));
+
+            foreach (Match match in matchSchedule)
+                ServiceLocator.Instance.MatchService.Add(match);
+
+            newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(ms => ms.Id).ToList(), serieName.Text, teamList);
         }
 
         private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            var team = teamService.GetBy(((CheckBox)sender).Content.ToString());
+            var team = ServiceLocator.Instance.TeamService.GetBy(((CheckBox)sender).Content.ToString());
             teamList.Add(team);
             teamsCheckedList.ItemsSource = teamList;
             if (teamList.Count == 16)
@@ -73,7 +73,7 @@ namespace AdminApp
 
         private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            var team = teamService.GetBy(((CheckBox)sender).Content.ToString());
+            var team = ServiceLocator.Instance.TeamService.GetBy(((CheckBox)sender).Content.ToString());
             teamList.Remove(team);
             teamsCheckedList.ItemsSource = teamList;
             if (teamList.Count < 16)
@@ -132,7 +132,7 @@ namespace AdminApp
         }
         private void AutoFill()
         {
-            teamList = teamService.GetAll().Take(16).ToList();
+            teamList = ServiceLocator.Instance.TeamService.GetAll().Take(16).ToList();
             teamsCheckedList.ItemsSource = teamList;
             serieName.Text = "AutoSerie";
             serieDatePicker.SelectedDate = DateTime.Today.AddDays(2);

@@ -65,7 +65,11 @@ namespace FootballEngine.Factories
                     _latestDate = _latestDate.AddDays((int)DayOfWeek.Saturday - (int)_latestDate.DayOfWeek);
                 }
 
-                matches.Add(new Match(new MatchDate(_latestDate), pairing[0].Id, pairing[1].Id, pairing[0].HomeArena));
+                Match match = new Match(new MatchDate(_latestDate), pairing[0].Id, pairing[1].Id, pairing[0].HomeArena);
+                pairing[0].MatchIds.Add(match.Id);
+                pairing[1].MatchIds.Add(match.Id);
+
+                matches.Add(match);
             }
 
             return matches;

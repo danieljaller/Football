@@ -16,6 +16,7 @@ using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
 using System.Collections.ObjectModel;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -27,16 +28,12 @@ namespace AdminApp
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
         NewPlayerWindow _newPlayerWindow;
-        PlayerService _playerService;
-        TeamService _teamService;
         List<Player> listOfPlayers;
         public NewTeamPage()
         {
             listOfPlayers = new List<Player>();
             InitializeComponent();
             _newPlayerWindow = new NewPlayerWindow();
-            _teamService = new TeamService();
-            _playerService = new PlayerService(_teamService);
 
 
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
@@ -83,14 +80,14 @@ namespace AdminApp
         private void CreateTeamButton_Click(object sender, RoutedEventArgs e)
         {
             Team team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName));
-            foreach (Player item in _newPlayerWindow.tempPlayersList)
+            foreach (Player player in _newPlayerWindow.tempPlayersList)
             {
-                team.PlayerIds.Add(item.Id);
-                item.TeamId = team.Id;
-                _playerService.Add(item);
+                team.PlayerIds.Add(player.Id);
+                player.TeamId = team.Id;
+                ServiceLocator.Instance.PlayerService.Add(player);
                
             }
-            _teamService.Add(team);
+            ServiceLocator.Instance.TeamService.Add(team);
 
         }
         

@@ -12,7 +12,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static MatchService _instance;
-        public static MatchService Instance
+        internal static MatchService Instance
         {
             get
             {
@@ -30,6 +30,8 @@ namespace FootballEngine.Services
                 return _instance;
             }
         }
+
+        internal MatchService() { }
 
         public void Add(Match match)
         {

@@ -14,7 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static SearchService _instance;
-        public static SearchService Instance
+        internal static SearchService Instance
         {
             get
             {
@@ -32,6 +32,8 @@ namespace FootballEngine.Services
                 return _instance;
             }
         }
+
+        internal SearchService() { }
 
         public IEnumerable<object> Search(string searchText, bool matchDateSearch, bool playerSearch, bool serieSearch, bool teamSearch, bool ignoreCase)
         {

@@ -14,7 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static TeamService _instance;
-        public static TeamService Default
+        internal static TeamService Default
         {
             get
             {
@@ -32,6 +32,8 @@ namespace FootballEngine.Services
                 return _instance;
             }
         }
+
+        internal TeamService() { }
 
         public void Add(Team team)
         {

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -22,9 +23,6 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateSeriesPage : Page
     {
-        SerieService serieService = new SerieService();
-        TeamService teamService = new TeamService();
-        MatchService matchService = new MatchService();
         private List<Guid> matchScheduleWithIds = new List<Guid>();
         private List<Team> teamList = new List<Team>();
         private List<Match> matchScheduleWithMatches = new List<Match>();
@@ -50,7 +48,7 @@ namespace AdminApp
                 {"serie1", new List<TempMatch>() {match1, match2, match3, match4, match5 } },
                 {"serie2", new List<TempMatch>() {match6, match7, match8, match9, match10 } }
             };
-            seriesList.ItemsSource = serieService.GetAll();
+            seriesList.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
 
         }
 
@@ -70,15 +68,15 @@ namespace AdminApp
             visitorTeamList.Clear();
             foreach (var matchId in matchScheduleWithIds)
             {
-                matchScheduleWithMatches.Add(matchService.GetBy(matchId));
+                matchScheduleWithMatches.Add(ServiceLocator.Instance.MatchService.GetBy(matchId));
             }
             foreach (var match in matchScheduleWithMatches)
             {
-                homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
+                homeTeamList.Add(ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId));
             }
             foreach (var match in matchScheduleWithMatches)
             {
-                visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
+                visitorTeamList.Add(ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId));
             }
         }
 

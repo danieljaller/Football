@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -23,9 +24,6 @@ namespace AdminApp
     /// </summary>
     public partial class CreateSchedulePage : Page
     {
-        MatchService matchService = new MatchService();
-        TeamService teamService = new TeamService();
-        SerieService serieService = new SerieService();
         private string serieName;
         private List<Guid> matchScheduleWithIds = new List<Guid>();
         private List<Team> teamList = new List<Team>();
@@ -51,15 +49,15 @@ namespace AdminApp
         {
             foreach (var matchId in matchScheduleWithIds)
             {
-                matchScheduleWithMatches.Add(matchService.GetBy(matchId));
+                matchScheduleWithMatches.Add(ServiceLocator.Instance.MatchService.GetBy(matchId));
             }
             foreach (var match in matchScheduleWithMatches)
             {
-                homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
+                homeTeamList.Add(ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId));
             }
             foreach (var match in matchScheduleWithMatches)
             {
-                visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
+                visitorTeamList.Add(ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId));
             }
         }
 
@@ -75,18 +73,14 @@ namespace AdminApp
         private void createSerieButton_Click(object sender, RoutedEventArgs e)
         {
             Serie newSerie = new Serie(new GeneralName(serieName), teamList.Select(t => t.Id).ToList(), matchScheduleWithIds);
-            serieService.Add(newSerie);
+            ServiceLocator.Instance.SerieService.Add(newSerie);
             foreach (var team in teamList)
             {
-                team.SeriesIds.Add(newSerie.Id);
+                team.SerieIds.Add(newSerie.Id);
             }
-            foreach (var match in matchScheduleWithMatches)
-            {
-                matchService.Add(match);
-            }
-            serieService.Save();
-            teamService.Save();
-            matchService.Save();
+            ServiceLocator.Instance.SerieService.Save();
+            ServiceLocator.Instance.TeamService.Save();
+            ServiceLocator.Instance.MatchService.Save();
             MessageBox.Show($"Serien {serieName} är skapad");
             createSerieButton.IsEnabled = false;
             datePickerIsDisabled = true;

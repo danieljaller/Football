@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 using UserApp.Views;
 
 
@@ -24,18 +25,14 @@ namespace UserApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        SearchService searchService;
-
-
         public MainWindow()
         {
             InitializeComponent();
-            searchService = new SearchService();
         }
 
         private void updateSearchCheckList(string searchText)
         { 
-            var searchResults = searchService.Search(searchText, true, serieCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, playerCheckBox.IsChecked == true);
+            var searchResults = ServiceLocator.Instance.SearchService.Search(searchText, true, playerCheckBox.IsChecked == true, serieCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, true);
             if (searchText.Trim() == "")
             {
                 SearchCheckedList.ItemsSource = null;

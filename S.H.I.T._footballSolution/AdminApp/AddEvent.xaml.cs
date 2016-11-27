@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -21,17 +22,13 @@ namespace AdminApp
     /// </summary>
     public partial class AddEvent : Window
     {
-        PlayerService playerService;
-        TeamService teamService;
         public Player player;
         public Team team;
         IEnumerable<Player> playerList;
         public AddEvent(Team team)
-        {
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);        
+        {      
             InitializeComponent();
-            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
             playerListbox.ItemsSource = playerList;
             
         }
