@@ -43,8 +43,8 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.IsNotNull(team.PlayerIds);
             Assert.AreEqual(0, team.PlayerIds.Count);
             Assert.AreEqual(0, team.Points);
-            Assert.IsNotNull(team.SeriesIds);
-            Assert.AreEqual(0, team.SeriesIds.Count);
+            Assert.IsNotNull(team.SerieIds);
+            Assert.AreEqual(0, team.SerieIds.Count);
             Assert.AreEqual(0, team.Ties);
             Assert.AreEqual(0, team.Wins);
         }
