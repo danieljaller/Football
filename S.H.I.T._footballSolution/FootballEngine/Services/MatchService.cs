@@ -12,7 +12,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static MatchService _instance;
-        internal static MatchService Instance
+        public static MatchService Instance
         {
             get
             {
@@ -31,11 +31,14 @@ namespace FootballEngine.Services
             }
         }
 
-        internal MatchService() { }
-
         public void Add(Match match)
         {
             _matchRepository.Add(match);
+        }
+
+        public void AddRange(IEnumerable<Match> matches)
+        {
+            _matchRepository.AddRange(matches);
         }
 
         public void Delete(Guid id)

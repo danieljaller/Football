@@ -14,7 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static TeamService _instance;
-        internal static TeamService Default
+        public static TeamService Default
         {
             get
             {
@@ -33,11 +33,14 @@ namespace FootballEngine.Services
             }
         }
 
-        internal TeamService() { }
-
         public void Add(Team team)
         {
             _teamRepository.Add(team);
+        }
+
+        public void AddRange(IEnumerable<Team> teams)
+        {
+            _teamRepository.AddRange(teams);
         }
 
         public void Delete(Guid id)

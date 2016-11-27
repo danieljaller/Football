@@ -12,7 +12,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static SerieService _instance;
-        internal static SerieService Instance
+        public static SerieService Instance
         {
             get
             {
@@ -31,11 +31,14 @@ namespace FootballEngine.Services
             }
         }
 
-        internal SerieService() { }
-
         public void Add(Serie serie)
         {
             _serieRepository.Add(serie);
+        }
+
+        public void AddRange(IEnumerable<Serie> series)
+        {
+            _serieRepository.AddRange(series);
         }
 
         public void Delete(Guid id)

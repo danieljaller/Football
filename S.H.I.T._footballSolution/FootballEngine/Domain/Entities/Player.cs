@@ -26,9 +26,9 @@ namespace FootballEngine.Domain.Entities
         public List<Guid> YellowCards { get; set; }
         public List<Guid> Assists { get; set; }
         public List<Guid> Goals { get; set; }
-        public int MatchesPlayed { get { return MatchesPlayedIds.Count; } }
+        public int MatchesPlayed{ get { return MatchesPlayedIds.Count; } }
         public Guid TeamId { get; set; }
-        public List<Guid> MatchesPlayedIds { get; set; }
+        public HashSet<Guid> MatchesPlayedIds { get; set; }
         public bool Playable { get { return (PlayerStatus == Status.Available); } }
 
         public Player() { }
@@ -41,7 +41,7 @@ namespace FootballEngine.Domain.Entities
             LastName = lastName;
             DateOfBirth = dateOfBirth;
             PlayerStatus = Status.Available;
-            MatchesPlayedIds = new List<Guid>();
+            MatchesPlayedIds = new HashSet<Guid>();
             YellowCards = new List<Guid>();
             RedCards = new List<Guid>();
             Assists = new List<Guid>();

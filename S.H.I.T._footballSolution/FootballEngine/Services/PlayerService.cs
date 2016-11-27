@@ -14,7 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static PlayerService _instance;
-        internal static PlayerService Instance
+        public static PlayerService Instance
         {
             get
             {
@@ -33,11 +33,14 @@ namespace FootballEngine.Services
             }
         }
 
-        internal PlayerService() { }
-
         public void Add(Player player)
         {
             _playerRepository.Add(player);
+        }
+
+        public void AddRange(IEnumerable<Player> players)
+        {
+            _playerRepository.AddRange(players);
         }
 
         public void Add(IEnumerable<Player> players)

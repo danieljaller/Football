@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FootballEngineTests
+namespace FootballEngine
 {
     public static class TestDataFactory
     {
-        public static List<Guid> CreateListWithGuids(int numberOfGuids)
+        public static IEnumerable<Guid> CreateListWithGuids(int numberOfGuids)
         {
             List<Guid> guidList = new List<Guid>();
             for (int i = 0; i < numberOfGuids; i++)
