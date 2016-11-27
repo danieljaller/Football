@@ -1,9 +1,5 @@
-﻿using FootballEngine.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using FootballEngine.Helper;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -25,29 +21,35 @@ namespace FootballEngine.Domain.ValueObjects
                 Value = name;
         }
 
-        public static bool IsValidName(string name)
+        private static bool IsValidName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("The name is either null, empty or consists only of white-space characters.");
-
-            if (name.StartsWith(" "))
-                throw new ArgumentException("A name can not start with ' '.");
-
-            if (name.EndsWith(" "))
-                throw new ArgumentException("A name can not end with ' '.");
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
 
             if (name.Length > MaxLenght)
-                throw new ArgumentException($"Name is too long. Maximum length is {MaxLenght} characters.");
+                throw new ArgumentOutOfRangeException($"{nameof(name)} is too long. Maximum length is {MaxLenght} characters.");
 
             if (name.Length < MinLenght)
-                throw new ArgumentException($"Name is too Short. Minimum length is {MinLenght} characters.");
+                throw new ArgumentOutOfRangeException($"{nameof(name)} is too Short. Minimum length is {MinLenght} characters.");
 
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException($"{nameof(name)} is either empty or consists only of white-space characters.");
+
+            if (name.StartsWith(" "))
+                throw new ArgumentException($"{nameof(name)} cannot start with a white-space character.");
+
+            if (name.EndsWith(" "))
+                throw new ArgumentException($"{nameof(name)} cannot end with a white-space character.");
+            
+            if (name.ContainsOnlyDigits())
+                throw new ArgumentException($"{nameof(name)} cannot only consist of digits.");
+            
             foreach (char character in name)
             {
-                if (char.IsLetterOrDigit(character) || character == '-' || character == ' ')
+                if (char.IsLetterOrDigit(character) || character == '-' || character == '&' || character == '\'' || character == ' ')
                     continue;
-                else
-                    throw new ArgumentException("Name contains illegal characters. Can only contain letters, digits, '-' and white-spaces.");
+
+                throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, digits, '-', '&', ''' and white-space characters.");
             }
 
             return true;
@@ -59,6 +61,16 @@ namespace FootballEngine.Domain.ValueObjects
             {
                 result = new GeneralName(name);
                 return true;
+            }
+            catch (ArgumentNullException)
+            {
+                result = null;
+                return false;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                result = null;
+                return false;
             }
             catch (ArgumentException)
             {

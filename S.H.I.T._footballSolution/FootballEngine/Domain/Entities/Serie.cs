@@ -1,10 +1,6 @@
 ﻿using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
@@ -31,18 +27,18 @@ namespace FootballEngine.Domain.Entities
         private void ValidateInparameters(GeneralName name, List<Guid> teamTable, List<Guid> matchTable)
         {
             if (name == null)
-                throw new ArgumentException($"{nameof(name)} can not be null.");
+                throw new ArgumentNullException($"{nameof(name)} can not be null.");
             try
             {
                 GeneralName generalName = new GeneralName(name.Value);
             }
-            catch (ArgumentException ine)
+            catch (ArgumentNullException ANE)
             {
-                throw ine;
+                throw ANE;
             }
-            catch (Exception e)
+            catch (ArgumentException AE)
             {
-                throw e;
+                throw AE;
             }
             if (teamTable == null)
                 throw new ArgumentNullException($"{nameof(teamTable)} can not be null.");
