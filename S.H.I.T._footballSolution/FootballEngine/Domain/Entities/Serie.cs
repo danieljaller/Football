@@ -10,12 +10,12 @@ namespace FootballEngine.Domain.Entities
         public static readonly int NumberOfMatches = 240;
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }
-        public List<Guid> TeamTable { get; set; }
-        public List<Guid> MatchTable { get; set; }
+        public HashSet<Guid> TeamTable { get; set; }
+        public HashSet<Guid> MatchTable { get; set; }
 
         public Serie() { }
 
-        public Serie(GeneralName name, List<Guid> teamTable, List<Guid> matchTable)
+        public Serie(GeneralName name, HashSet<Guid> teamTable, HashSet<Guid> matchTable)
         {
             ValidateInparameters(name, teamTable, matchTable);
             Id = Guid.NewGuid();
@@ -24,7 +24,7 @@ namespace FootballEngine.Domain.Entities
             MatchTable = matchTable;
         }
 
-        private void ValidateInparameters(GeneralName name, List<Guid> teamTable, List<Guid> matchTable)
+        private void ValidateInparameters(GeneralName name, HashSet<Guid> teamTable, HashSet<Guid> matchTable)
         {
             if (name == null)
                 throw new ArgumentNullException($"{nameof(name)} can not be null.");

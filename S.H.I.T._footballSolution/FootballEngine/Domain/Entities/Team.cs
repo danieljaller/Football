@@ -16,9 +16,9 @@ namespace FootballEngine.Domain.Entities
             IsValidParameter(name, homeArena);
             Name = name;
             HomeArena = homeArena;
-            PlayerIds = new List<Guid>();
-            MatchIds = new List<Guid>();
-            SerieIds = new List<Guid>();
+            PlayerIds = new HashSet<Guid>();
+            MatchIds = new HashSet<Guid>();
+            SerieIds = new HashSet<Guid>();
             Wins = 0;
             Losses = 0;
             Ties = 0;
@@ -49,9 +49,9 @@ namespace FootballEngine.Domain.Entities
         }
         public int GoalsFor { get; set; }
         public int GoalsAgainst { get; set; }
-        public List<Guid> PlayerIds { get; set; }
-        public List<Guid> MatchIds { get; set; }
-        public List<Guid> SerieIds { get; set; }
+        public HashSet<Guid> PlayerIds { get; set; }
+        public HashSet<Guid> MatchIds { get; set; }
+        public HashSet<Guid> SerieIds { get; set; }
         public int GoalDifference { get; set; }
     }
 }

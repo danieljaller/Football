@@ -36,7 +36,7 @@ namespace FootballEngine.Factories
                 GeneralName name = new GeneralName($"Team-{i}");
                 GeneralName homeArena = new GeneralName($"{name.Value}'s Arena");
                 Team team = new Team(name, homeArena);
-                List<Guid> playerIds = new List<Guid>();
+                HashSet<Guid> playerIds = new HashSet<Guid>();
                 foreach (Player player in playersLists[i - teamNameStartValue])
                 {
                     player.TeamId = team.Id;

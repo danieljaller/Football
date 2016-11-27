@@ -18,14 +18,14 @@ namespace FootballEngine.Domain.Entities
         public List<Exchange> HomeExchanges { get; set; }
         public List<Event> HomeGoals { get; set; }
         public Guid HomeTeamId { get; set; }
-        public List<Guid> HomeLineup { get; set; }
+        public HashSet<Guid> HomeLineup { get; set; }
         public List<Event> HomeRedCards { get; set; }
         public List<Event> HomeYellowCards { get; set; }
         public List<Event> VisitorAssists { get; set; }
         public List<Exchange> VisitorExchanges { get; set; }
         public List<Event> VisitorGoals { get; set; }
         public Guid VisitorTeamId { get; set; }
-        public List<Guid> VisitorLineup { get; set; }
+        public HashSet<Guid> VisitorLineup { get; set; }
         public List<Event> VisitorRedCards { get; set; }
         public List<Event> VisitorYellowCards { get; set; }
         public static DateTime EndDateForMatchCreation { get { return DateTime.Now.AddYears(5); } }
@@ -45,7 +45,7 @@ namespace FootballEngine.Domain.Entities
                 HomeExchanges = new List<Exchange>();
                 HomeGoals = new List<Event>();
                 HomeTeamId = homeTeamId;
-                HomeLineup = new List<Guid>();
+                HomeLineup = new HashSet<Guid>();
                 HomeRedCards = new List<Event>();
                 HomeYellowCards = new List<Event>();
 
@@ -53,7 +53,7 @@ namespace FootballEngine.Domain.Entities
                 VisitorExchanges = new List<Exchange>();
                 VisitorGoals = new List<Event>();
                 VisitorTeamId = visitorTeamId;
-                VisitorLineup = new List<Guid>();
+                VisitorLineup = new HashSet<Guid>();
                 VisitorRedCards = new List<Event>();
                 VisitorYellowCards = new List<Event>();
             }
