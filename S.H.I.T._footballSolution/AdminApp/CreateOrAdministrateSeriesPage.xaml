@@ -14,10 +14,10 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Style.Triggers>
                 <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                    <Setter Property="Background" Value="White"></Setter>
+                    <Setter Property="Background" Value="White"/>
                 </Trigger>
                 <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                    <Setter Property="Background" Value="LightGray"></Setter>
+                    <Setter Property="Background" Value="LightGray"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -61,16 +61,16 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Column="1" Grid.ColumnSpan="4" Fill="LightBlue"/>
-                <TextBlock Grid.Column="1" HorizontalAlignment="Center" >Hemmalag</TextBlock>
-                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">-</TextBlock>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Center" >Bortalag</TextBlock>
-                <TextBlock Grid.Column="3" HorizontalAlignment="Center" >Resultat</TextBlock>
-                <TextBlock Grid.Column="4" HorizontalAlignment="Center" >Datum</TextBlock>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="Hemmalag" />
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="-"/>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Bortalag"></TextBlock>
+                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="Resultat"></TextBlock>
+                <TextBlock Grid.Column="4" HorizontalAlignment="Center" Text="Datum"></TextBlock>
 
                 <ListBox x:Name="matchProtocolList" Grid.Row="1" Grid.Column="0" BorderThickness="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <!--<Image Source="Resources/matchprotocol_icon.ico" Height="23" Width="20" MouseLeftButtonDown="Image_MouseLeftButtonDown" />-->
+                            <Image Source="Resources/matchprotocol_icon.ico" Height="23" Width="20" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
