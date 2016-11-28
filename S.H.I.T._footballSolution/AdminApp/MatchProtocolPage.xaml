@@ -38,8 +38,8 @@
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="190"/>
-                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="195"/>
+                    <ColumnDefinition Width="195"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -309,9 +309,17 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Spelare" />
-                                <TextBlock Grid.Column="1" Text="Match minut"/>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Foreground="Red" Text="←" />
+                                <TextBlock Grid.Column="0" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
+                                <TextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
+                                <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
+                                <TextBlock Grid.Column="0" Width="135" Grid.Row="1" Text="{Binding Path=PlayerInId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

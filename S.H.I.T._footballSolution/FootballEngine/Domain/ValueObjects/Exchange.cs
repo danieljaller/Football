@@ -8,9 +8,9 @@ namespace FootballEngine.Domain.ValueObjects
 {
     public class Exchange
     {
-        public Guid PlayerOutId;
-        public Guid PlayerInId;
-        public uint TimeOfExchange;
+        public Guid PlayerOutId { get; set; }
+        public Guid PlayerInId { get; set; }
+        public uint TimeOfExchange { get; set; }
 
         public Exchange()
         { }
