@@ -4,15 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
-       xmlns:converters="clr-namespace:AdminApp.Converters"
+      xmlns:converters="clr-namespace:AdminApp.Converters"      
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="NewTeamPage">
 
     <Page.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
+        <converters:GeneralNameValidationRule x:Key="generalNameValidationRule"/>
     </Page.Resources>
-    <Grid Background="White" FocusManager.FocusedElement="{Binding ElementName=teamName}">
+    <Grid Background="white" FocusManager.FocusedElement="{Binding ElementName=teamName}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -25,20 +26,42 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
+
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Namn:"/>
-            <TextBox Name="teamName"  Margin="5" Width="100" Text="{Binding Path=TeamName}" />
+            <TextBox Name="teamName" Margin="5" Width="100" ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="TeamName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <converters:GeneralNameValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+            </TextBox>
+              
+
+
+
             <TextBlock  Text="Arena:" Margin="5"/>
-            <TextBox Name="arenaName" Grid.Row="1" Grid.Column="2" Margin="5" Width="100" Text="{Binding Path=ArenaName}"/>
+
+           
+            <TextBox Name="arenaName" Margin="5"  Grid.Row="1" Grid.Column="2" Width="100" ToolTip="{Binding ElementName=arenaName, Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="ArenaName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <converters:GeneralNameValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </StackPanel>
 
         <ListBox Name="playersList" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <CheckBox Name="playerCheckBox" IsChecked="True" Checked="playerCheckBox_Checked" Unchecked="playerCheckBox_Unchecked">
-                            <!--<TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>-->
-                            <TextBlock>text</TextBlock>
+                        <CheckBox Name="playerCheckBox" IsChecked="True" Content="{Binding Converter={StaticResource searchResultToStringConverter}}" Checked="playerCheckBox_Checked" Unchecked="playerCheckBox_Unchecked">
                         </CheckBox>
                     </Grid>
                 </DataTemplate>
@@ -47,7 +70,7 @@
         <Frame x:Name="AdministratePlayersPageFrame" Grid.Column="2" Grid.Row="2" />
         <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="10" Name="NewPlayerButton" Click="NewPlayerButton_Click">SKAPA NY SPELARE</Button>
         <Button Grid.Row="3" Grid.Column="2" Margin="10" Name="CreateTeamButton" Click="CreateTeamButton_Click" >SKAPA LAG</Button>
-        <ListBox Name="playersCheckedList"  Grid.Row="2" Grid.Column="2" Margin="5" MinWidth="100" MinHeight="200">
+        <!--<ListBox Name="playersCheckedList"  Grid.Row="2" Grid.Column="2" Margin="5" MinWidth="100" MinHeight="200">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -56,7 +79,7 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
 
     </Grid>
 </Page>

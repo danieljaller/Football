@@ -54,14 +54,20 @@ namespace AdminApp
             playerService = new PlayerService(teamService);
             InitializeComponent();
             matchDatePicker.DisplayDateStart = DateTime.Today;
-            matchesList.ItemsSource = matchService.GetAll();
-                        
+            matchesList.ItemsSource = matchService.GetAll(); 
         }
-       
+
+        private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            match.Date.Value = (DateTime)matchDatePicker.SelectedDate;
+        }
+
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
             match.HomeGoals.Remove((Event)homeGoalsList.SelectedItem);
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+            homeScore--;
+            homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
         }
 
@@ -73,6 +79,8 @@ namespace AdminApp
             {
                 match.HomeGoals.Add(addEventWindow.result);
                 homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+                homeScore++;
+                homeTeamScoreBlock.DataContext = homeScore;
                 homeGoalsList.ItemsSource = homeGoals;
             }
         }
@@ -85,6 +93,8 @@ namespace AdminApp
             {
                 match.VisitorGoals.Add(addEventWindow.result);
                 visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
+                visitorScore++;
+                visitorTeamScoreBlock.DataContext = visitorScore;
                 visitorGoalsList.ItemsSource = visitorGoals;
             }
         }
@@ -93,6 +103,8 @@ namespace AdminApp
         {
             match.VisitorGoals.Remove((Event)visitorGoalsList.SelectedItem);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
+            visitorScore--;
+            visitorTeamScoreBlock.DataContext = visitorScore;
             visitorGoalsList.ItemsSource = visitorGoals;
         }
 
@@ -301,6 +313,7 @@ namespace AdminApp
                 homeTeamScoreBlock.DataContext = " ";
                 visitorTeamScoreBlock.DataContext = " ";    
             }
+            matchDatePicker.SelectedDate = match.Date.Value;
             homeGoalsList.ItemsSource = homeGoals;
             visitorGoalsList.ItemsSource = visitorGoals;
             homeAssistsList.ItemsSource = homeAssists;
