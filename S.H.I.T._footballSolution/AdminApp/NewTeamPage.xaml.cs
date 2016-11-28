@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
@@ -58,7 +48,7 @@ namespace AdminApp
             listPlayers.Add(player);
             playersList.ItemsSource = listPlayers;
             //playersCheckedList.ItemsSource = listPlayers;
-            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 25 && _newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 31)
+            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2 && _newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 3)//25 och 31
             {
                 playersAreValid = true;
             }
@@ -78,10 +68,20 @@ namespace AdminApp
             var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
             listPlayers.Remove(player);
             playersList.ItemsSource = listPlayers;
-            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2 && _newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 3)//25 och 31
+            int allPlayers = 0;
+            if (team == null)
+            {
+                allPlayers = 0;
+            }
+            else
+            {
+                allPlayers = _teamService.GetAllPlayersByTeam(team.Id).Count();
+            }
+            if (_newPlayerWindow.tempPlayersList.Count + allPlayers > 2 && _newPlayerWindow.tempPlayersList.Count + allPlayers < 3)//25 och 31
             {
                 playersAreValid = true;
             }
+            
             else
             {
                 playersAreValid = false;
@@ -106,6 +106,7 @@ namespace AdminApp
                 foreach (var player in newPlayerWindow.tempPlayersList)
                 {
                     listOfPlayers.Add(player);
+                    ToggleCreateTeamButton();
                 }
             }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
@@ -125,7 +126,7 @@ namespace AdminApp
             }
         }
 
-        private void ToggleCreateTeamButton()
+        public void ToggleCreateTeamButton()
         {           if(team != null && playersAreValid)
             { 
             if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2)//25

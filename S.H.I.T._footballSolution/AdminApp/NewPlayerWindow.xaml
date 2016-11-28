@@ -50,11 +50,15 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
+        <!--SelectedDateChanged="datePicker_selectedDateChanged"-->
+        <DatePicker Name="datePicker1"   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=selectedValue}">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
 
-            
-            
-        <DatePicker Name="datePicker1" SelectedDateChanged="datePicker_selectedDateChanged"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=selectedValue}"/>
-        
         <Button  Margin="10" HorizontalAlignment="Left" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
                     VerticalAlignment="Bottom" Height="25" Content=" Avbryt " Click="cancel_Clicked"></Button>
         
@@ -69,6 +73,8 @@
             </Button.IsEnabled>
                                     
         </Button>
+        <Button Name="addPlayersNowButton" IsEnabled="False"  Margin="10" HorizontalAlignment="Right" Grid.Row="5" Grid.ColumnSpan="2" FontWeight="Bold"
+                    VerticalAlignment="Bottom" Height="25" Content=" Klar " Click="addPlayersNow_Clicked"></Button>
         
         
         
