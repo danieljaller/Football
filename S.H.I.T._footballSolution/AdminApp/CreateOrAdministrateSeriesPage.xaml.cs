@@ -61,26 +61,6 @@ namespace AdminApp
             seriesList.ItemsSource = seriesDictionary;
         }
 
-        public void ConvertFromGuid(ref HashSet<Guid> matchScheduleWithIds, ref HashSet<Match> matchScheduleWithMatches, ref List<Team> homeTeamList, ref List<Team> visitorTeamList)
-        {
-            
-            //matchScheduleWithMatches.Clear();
-            //    homeTeamList.Clear();
-            //    visitorTeamList.Clear();
-            foreach (var matchId in matchScheduleWithIds)
-            {
-                matchScheduleWithMatches.Add(matchService.GetBy(matchId));
-            }
-            foreach (var match in matchScheduleWithMatches)
-            {
-                homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
-            }
-            foreach (var match in matchScheduleWithMatches)
-            {
-                visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
-            }
-        }
-
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
         {
             CreateOrAdministrateSeriesPageFrame.Content = new NewSeriesPage();
@@ -99,33 +79,68 @@ namespace AdminApp
 
         private void seriesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            HashSet<Match> matchScheduleWithMatches = new HashSet<Match>();
-            List<Team> homeTeamList = new List<Team>();
-            List<Team> visitorTeamList = new List<Team>();
-            HashSet<Guid> matchScheduleWithIds = new HashSet<Guid>();
             var selectedSerie = (Serie)seriesList.SelectedItem;
-            matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
+            HashSet<Guid> matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
+            HashSet<Match> matchScheduleWithMatches;
+            List<Team> homeTeamList, visitorTeamList;
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
 
-
-            ConvertFromGuid(ref matchScheduleWithIds, ref matchScheduleWithMatches, ref homeTeamList, ref visitorTeamList);
-
+        private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList)
+        {
             matchProtocolList.ItemsSource = matchScheduleWithMatches;
             homeTeamListBox.ItemsSource = homeTeamList;
             visitorTeamListBox.ItemsSource = visitorTeamList;
             dateListBox.ItemsSource = matchScheduleWithMatches;
             resultListBox.ItemsSource = matchScheduleWithMatches;
+        }
 
-            //matchProtocolList.Items.Refresh();
-            //homeTeamListBox.Items.Refresh();
-            //visitorTeamListBox.Items.Refresh();
-            //dateListBox.Items.Refresh();
-            //resultListBox.Items.Refresh();
+        private void CreateAndConvertLists(HashSet<Guid> matchScheduleWithIds, out HashSet<Match> matchScheduleWithMatches, out List<Team> homeTeamList, out List<Team> visitorTeamList)
+        {
+            matchScheduleWithMatches = new HashSet<Match>();
+            homeTeamList = new List<Team>();
+            visitorTeamList = new List<Team>();
+            
+
+            foreach (var matchId in matchScheduleWithIds)
+            {
+                matchScheduleWithMatches.Add(matchService.GetBy(matchId));
+            }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
+            }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
+            }
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var matchProtocolWindow = new MatchProtocol();
             matchProtocolWindow.ShowDialog();
+        }
+
+        private void homeTeamSorter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var selectedSerie = (Serie)seriesList.SelectedItem;
+            HashSet<Guid> matchScheduleWithIds = selectedSerie.MatchTable.Select(m => matchService.GetBy(m)).OrderBy();
+
+            HashSet<Match> matchScheduleWithMatches;
+            List<Team> homeTeamList, visitorTeamList;
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+        }
+
+        private void visitorTeamSorter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void dateSorter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
     public class TempMatch
