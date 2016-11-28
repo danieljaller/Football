@@ -8,8 +8,8 @@ namespace FootballEngine.Domain.ValueObjects
 {
     public class Exchange
     {
-        public Guid PlayerOutId;
-        public Guid PlayerInId;
+        public Guid PlayerOutId { get; set; }
+        public Guid PlayerInId { get; set; }
         public MatchMinute TimeOfExchange;
 
         public Exchange()

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         xmlns:converters="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
-        Title="Football Administration App" Height="450" Width="725"
+        Title="Football Administration App" Height="450" Width="800"
         Icon="Resources/football_icon.ico">
     <Window.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
