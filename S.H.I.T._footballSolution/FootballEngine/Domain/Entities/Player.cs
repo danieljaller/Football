@@ -20,7 +20,7 @@ namespace FootballEngine.Domain.Entities
         public PlayerName FirstName { get; set; }
         public PlayerName LastName { get; set; }
         public string FullName { get { return $"{FirstName.Value} {LastName.Value}"; } }
-        public DateTime DateOfBirth { get; set; }
+        public DateOfBirth DateOfBirth { get; set; }
         public Status PlayerStatus { get; set; }
         public List<Guid> RedCards { get; set; }
         public List<Guid> YellowCards { get; set; }
@@ -34,7 +34,7 @@ namespace FootballEngine.Domain.Entities
         public Player() { }
 
 
-        public Player(PlayerName firstName, PlayerName lastName, DateTime dateOfBirth)
+        public Player(PlayerName firstName, PlayerName lastName, DateOfBirth dateOfBirth)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;

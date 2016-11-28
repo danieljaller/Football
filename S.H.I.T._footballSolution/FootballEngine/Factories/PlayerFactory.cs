@@ -36,7 +36,7 @@ namespace FootballEngine.Factories
                 int day = random.Next(1, DateTime.DaysInMonth(year, month) + 1);
                 DateTime dateOfBirth = new DateTime(year, month, day);
                 
-                players.Add(new Player(firstName, lastName, dateOfBirth));
+                players.Add(new Player(firstName, lastName, new DateOfBirth(dateOfBirth)));
             }
 
             return players;

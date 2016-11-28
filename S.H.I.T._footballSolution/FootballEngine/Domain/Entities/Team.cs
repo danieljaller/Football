@@ -12,21 +12,23 @@ namespace FootballEngine.Domain.Entities
         }
         public Team(GeneralName name, GeneralName homeArena)
         {
-            Id = Guid.NewGuid();
-            IsValidParameter(name, homeArena);
-            Name = name;
-            HomeArena = homeArena;
-            PlayerIds = new HashSet<Guid>();
-            MatchIds = new HashSet<Guid>();
-            SerieIds = new HashSet<Guid>();
-            Wins = 0;
-            Losses = 0;
-            Ties = 0;
-            GoalsFor = 0;
-            GoalsAgainst = 0;
-            GoalDifference = 0;
+            if (IsValidParameters(name, homeArena))
+            {
+                Id = Guid.NewGuid();
+                Name = name;
+                HomeArena = homeArena;
+                PlayerIds = new HashSet<Guid>();
+                MatchIds = new HashSet<Guid>();
+                SerieIds = new HashSet<Guid>();
+                Wins = 0;
+                Losses = 0;
+                Ties = 0;
+                GoalsFor = 0;
+                GoalsAgainst = 0;
+                GoalDifference = 0;
+            }
         }
-        private bool IsValidParameter(GeneralName name, GeneralName homeArena)
+        private bool IsValidParameters(GeneralName name, GeneralName homeArena)
         {
             if(name == null)
             { throw new ArgumentNullException($"{nameof(name)} cannot be null"); }

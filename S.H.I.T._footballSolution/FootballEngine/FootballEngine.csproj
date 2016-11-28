@@ -44,10 +44,12 @@
     <Compile Include="Domain\Entities\Player.cs" />
     <Compile Include="Domain\Entities\Serie.cs" />
     <Compile Include="Domain\Entities\Team.cs" />
+    <Compile Include="Domain\ValueObjects\DateOfBirth.cs" />
     <Compile Include="Domain\ValueObjects\Event.cs" />
     <Compile Include="Domain\ValueObjects\Exchange.cs" />
     <Compile Include="Domain\ValueObjects\MatchDate.cs" />
     <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
+    <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />

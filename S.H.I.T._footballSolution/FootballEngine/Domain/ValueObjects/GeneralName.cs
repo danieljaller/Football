@@ -62,16 +62,6 @@ namespace FootballEngine.Domain.ValueObjects
                 result = new GeneralName(name);
                 return true;
             }
-            catch (ArgumentNullException)
-            {
-                result = null;
-                return false;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                result = null;
-                return false;
-            }
             catch (ArgumentException)
             {
                 result = null;

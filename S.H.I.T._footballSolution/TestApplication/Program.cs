@@ -296,7 +296,7 @@ namespace TestApplication
                 string teamName = (playersTeam == null) ? "-" : playersTeam.Name.Value;
                 StringBuilder playerBuilder = new StringBuilder();
                 playerBuilder.AppendLine($"Name: {player.FullName}");
-                playerBuilder.AppendLine($"Date of birth: {player.DateOfBirth.ToShortDateString()}");
+                playerBuilder.AppendLine($"Date of birth: {player.DateOfBirth}");
                 playerBuilder.AppendLine($"Team: {teamName}");
                 playerBuilder.AppendLine($"Assists: {player.Assists.Count}");
                 playerBuilder.AppendLine($"Goals: {player.Goals.Count}");

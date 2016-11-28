@@ -54,7 +54,7 @@ namespace FootballEngine.Services
             if (playerSearch)
             {
                 IEnumerable<object> playerResult = _playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase) ||
-                                                         p.DateOfBirth.ToShortDateString().Contains(searchText, ignoreCase) ||
+                                                         p.DateOfBirth.ToString().Contains(searchText, ignoreCase) ||
 
                                                          _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
                                                             .Any(t => t.PlayerIds.Contains(p.Id))
