@@ -101,7 +101,6 @@ namespace AdminApp
             matchScheduleWithMatches = new HashSet<Match>();
             homeTeamList = new List<Team>();
             visitorTeamList = new List<Team>();
-            
 
             foreach (var matchId in matchScheduleWithIds)
             {
@@ -122,26 +121,7 @@ namespace AdminApp
             var matchProtocolWindow = new MatchProtocol();
             matchProtocolWindow.ShowDialog();
         }
-
-        private void homeTeamSorter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var selectedSerie = (Serie)seriesList.SelectedItem;
-            HashSet<Guid> matchScheduleWithIds = selectedSerie.MatchTable.Select(m => matchService.GetBy(m)).OrderBy();
-
-            HashSet<Match> matchScheduleWithMatches;
-            List<Team> homeTeamList, visitorTeamList;
-            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-        }
-
-        private void visitorTeamSorter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void dateSorter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+        
     }
     public class TempMatch
     {
