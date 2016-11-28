@@ -15,14 +15,14 @@ namespace FootballEngine.Domain.Entities
         public uint MatchTimeInMinutes { get; set; }
         public string Result { get { return IsPlayed ? $"{HomeGoals.Count} - {VisitorGoals.Count}" : "-"; } }
         public List<Event> HomeAssists { get; set; }
-        public List<Exchange> HomeExchanges { get; set; }
+        public HashSet<Exchange> HomeExchanges { get; set; }
         public List<Event> HomeGoals { get; set; }
         public Guid HomeTeamId { get; set; }
         public HashSet<Guid> HomeLineup { get; set; }
         public List<Event> HomeRedCards { get; set; }
         public List<Event> HomeYellowCards { get; set; }
         public List<Event> VisitorAssists { get; set; }
-        public List<Exchange> VisitorExchanges { get; set; }
+        public HashSet<Exchange> VisitorExchanges { get; set; }
         public List<Event> VisitorGoals { get; set; }
         public Guid VisitorTeamId { get; set; }
         public HashSet<Guid> VisitorLineup { get; set; }
@@ -42,7 +42,7 @@ namespace FootballEngine.Domain.Entities
                 Location = location;
 
                 HomeAssists = new List<Event>();
-                HomeExchanges = new List<Exchange>();
+                HomeExchanges = new HashSet<Exchange>();
                 HomeGoals = new List<Event>();
                 HomeTeamId = homeTeamId;
                 HomeLineup = new HashSet<Guid>();
@@ -50,7 +50,7 @@ namespace FootballEngine.Domain.Entities
                 HomeYellowCards = new List<Event>();
 
                 VisitorAssists = new List<Event>();
-                VisitorExchanges = new List<Exchange>();
+                VisitorExchanges = new HashSet<Exchange>();
                 VisitorGoals = new List<Event>();
                 VisitorTeamId = visitorTeamId;
                 VisitorLineup = new HashSet<Guid>();
