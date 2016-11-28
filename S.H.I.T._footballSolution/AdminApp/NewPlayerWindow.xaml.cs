@@ -80,7 +80,6 @@ namespace AdminApp
         private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
         { }
 
-        private void datePicker_selectedDateChanged(object sender, SelectionChangedEventArgs e)
-        { }
+        
     }
 }

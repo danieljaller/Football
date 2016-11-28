@@ -17,10 +17,10 @@ namespace AdminApp
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
         NewPlayerWindow _newPlayerWindow;
-        PlayerService _playerService;   
+        PlayerService _playerService;
         TeamService _teamService;
         List<Player> listOfPlayers;
-        List<Player> listPlayers = new List<Player>();
+        List<Player> listOfPlayersUnChecked;
         bool playersAreValid;
         Team team;
 
@@ -35,20 +35,21 @@ namespace AdminApp
             //ArenaName = arenaName.Text;
             TeamName = "Team";
             ArenaName = "Arena";
-            playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
+            playersList.ItemsSource = _newPlayerWindow.tempPlayersList;
             ToggleCreateTeamButton();
             ToggleNewPlayerButton();
-
+            listOfPlayersUnChecked = listOfPlayers;
 
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
-            listPlayers.Add(player);
-            playersList.ItemsSource = listPlayers;
-            //playersCheckedList.ItemsSource = listPlayers;
-            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2 && _newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() < 3)//25 och 31
+            Player sentPlayer = listOfPlayers.Find(p => p.FullName == ((CheckBox)sender).Content.ToString());
+
+            listOfPlayersUnChecked.Add(sentPlayer);
+            //playersList.ItemsSource = listOfPlayers;
+
+            if (listOfPlayersUnChecked.Count > 2 && listOfPlayersUnChecked.Count < 3)//25 och 31
             {
                 playersAreValid = true;
             }
@@ -59,48 +60,36 @@ namespace AdminApp
             playersList.Items.Refresh();
 
             ToggleCreateTeamButton();
-            ToggleNewPlayerButton();
         }
 
         private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Player sentPlayer = listOfPlayers.Find(p => p.FullName == ((CheckBox)sender).Content.ToString());
 
-        { 
-            var player = _playerService.GetBy(((CheckBox)sender).Content.ToString());
-            listPlayers.Remove(player);
-            playersList.ItemsSource = listPlayers;
-            int allPlayers = 0;
-            if (team == null)
-            {
-                allPlayers = 0;
-            }
-            else
-            {
-                allPlayers = _teamService.GetAllPlayersByTeam(team.Id).Count();
-            }
-            if (_newPlayerWindow.tempPlayersList.Count + allPlayers > 2 && _newPlayerWindow.tempPlayersList.Count + allPlayers < 3)//25 och 31
+            listOfPlayersUnChecked.Remove(sentPlayer);
+            //playersList.ItemsSource = listOfPlayers;
+
+            if (listOfPlayersUnChecked.Count >= 2 && listOfPlayersUnChecked.Count <= 3)//25 och 31
             {
                 playersAreValid = true;
             }
-            
             else
             {
                 playersAreValid = false;
             }
             playersList.Items.Refresh();
-           
+
             ToggleCreateTeamButton();
-            ToggleNewPlayerButton();
         }
 
         private void NewPlayerButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (team != null)
+            if (team == null)
             { team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName)); }
-            
+
             var newPlayerWindow = new NewPlayerWindow();
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
-           
+
             if (newPlayerWindowResult == true)
             {
                 foreach (var player in newPlayerWindow.tempPlayersList)
@@ -111,7 +100,7 @@ namespace AdminApp
             }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
-            ToggleNewPlayerButton();
+            NewPlayerButton.IsEnabled = false;
         }
 
         private void ToggleNewPlayerButton()
@@ -127,12 +116,10 @@ namespace AdminApp
         }
 
         public void ToggleCreateTeamButton()
-        {           if(team != null && playersAreValid)
-            { 
-            if (_newPlayerWindow.tempPlayersList.Count + _teamService.GetAllPlayersByTeam(team.Id).Count() > 2)//25
+        {
+            if (playersAreValid)
             {
                 CreateTeamButton.IsEnabled = true;
-            }
             }
             else
             {
@@ -140,20 +127,15 @@ namespace AdminApp
             }
         }
 
-
         private void CreateTeamButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            foreach (Player item in _newPlayerWindow.tempPlayersList)
+            foreach (Player item in listOfPlayersUnChecked)
             {
                 team.PlayerIds.Add(item.Id);
                 item.TeamId = team.Id;
                 _playerService.Add(item);
-
             }
             _teamService.Add(team);
-
         }
-
     }
 }
