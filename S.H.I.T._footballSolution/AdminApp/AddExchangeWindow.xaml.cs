@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -23,8 +24,8 @@ namespace AdminApp
     /// </summary>
     public partial class AddExchangeWindow : Window
     {
-        PlayerService playerService;
-        TeamService teamService;
+        //PlayerService playerService;
+        //TeamService teamService;
         public Exchange result { get; set; }
         public MatchMinute timeOfEvent;
         IEnumerable<Player> playerInList;
@@ -37,11 +38,11 @@ namespace AdminApp
 
         public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, int matchLength)
         {
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);
+            //teamService = new TeamService();
+            //playerService = new PlayerService(teamService);
             InitializeComponent();
-            playerInList = teamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
-            playerOutList = teamService.GetAllPlayersByTeam(team.Id).Where(p => lineup.Contains(p.Id));
+            playerInList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
+            playerOutList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => lineup.Contains(p.Id));
             string[] minutes = new string[matchLength];
             for (int i = 1; i <= matchLength; i++)
             {

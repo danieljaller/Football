@@ -11,6 +11,7 @@
     <AssemblyName>FootballEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,7 +50,6 @@
     <Compile Include="Domain\ValueObjects\Event.cs" />
     <Compile Include="Domain\ValueObjects\Exchange.cs" />
     <Compile Include="Domain\ValueObjects\MatchDate.cs" />
-    <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
     <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />

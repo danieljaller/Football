@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -23,16 +24,16 @@ namespace AdminApp
     /// </summary>
     public partial class AddPlayerWindow : Window
     {
-        PlayerService playerService;
-        TeamService teamService;
+        //PlayerService playerService;
+        //TeamService teamService;
         public List<Player> selectedPlayers { get; set; }
 
         public AddPlayerWindow(Team team, ObservableCollection<Guid> lineup)
         {
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);
+            //teamService = new TeamService();
+            //playerService = new PlayerService(teamService);
             InitializeComponent();
-            IEnumerable<Player> playerList = teamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
+            IEnumerable<Player> playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
             playerListbox.ItemsSource = playerList;
             InitializeComponent();
         }

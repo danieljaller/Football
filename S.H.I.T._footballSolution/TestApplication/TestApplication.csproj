@@ -52,16 +52,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
-      <Project>{11603a52-1f43-48a5-9b41-ff02da7ac2ad}</Project>
-      <Name>FootballEngine</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Factories\" />
     <Folder Include="Helper\" />
     <Folder Include="Resources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
+      <Project>{11603a52-1f43-48a5-9b41-ff02da7ac2ad}</Project>
+      <Name>FootballEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

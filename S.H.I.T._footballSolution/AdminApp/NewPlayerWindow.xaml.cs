@@ -35,7 +35,7 @@ namespace AdminApp
         private void addPlayer_Clicked(object sender, RoutedEventArgs e)
         {
             DateOfBirth = (DateTime)datePicker1.SelectedDate;
-            player = new Player(new PlayerName(FirstName), new PlayerName(LastName), DateOfBirth);
+            player = new Player(new PlayerName(FirstName), new PlayerName(LastName), new DateOfBirth(DateOfBirth));
 
             if (tempPlayersList.Count < 3)//31
             {

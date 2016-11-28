@@ -4,7 +4,7 @@ using FootballEngine.Domain.Entities;
 using FootballEngine.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FootballEngine.Factories
+namespace FootballEngineTests.Factories
 {
     [TestClass()]
     public class MatchTableFactoryTests

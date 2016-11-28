@@ -5,7 +5,7 @@ using FootballEngine.Factories;
 using FootballEngine.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FootballEngine.Factories
+namespace FootballEngineTests.Factories
 {
     [TestClass()]
     public class PlayerFactoryTests
@@ -231,7 +231,7 @@ namespace FootballEngine.Factories
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CreateListOfPlayerLists_TestInparam2_2_Invalid()
         {
-            List<Player> listOfPlayerLists = PlayerFactory.CreateListOfPlayerLists(PlayerFactory.MaxPlayersRequired, - 1);
+            List<Player> listOfPlayerLists = PlayerFactory.CreateListOfPlayerLists(PlayerFactory.MaxPlayersRequired, -1);
         }
     }
 }

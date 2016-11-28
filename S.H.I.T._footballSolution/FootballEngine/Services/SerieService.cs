@@ -12,7 +12,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static SerieService _instance;
-        public static SerieService Instance
+        internal static SerieService Instance
         {
             get
             {
@@ -30,6 +30,8 @@ namespace FootballEngine.Services
                 return _instance;
             }
         }
+
+        internal SerieService() { }
 
         public void Add(Serie serie)
         {

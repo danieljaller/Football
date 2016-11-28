@@ -14,7 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static SearchService _instance;
-        public static SearchService Instance
+        internal static SearchService Instance
         {
             get
             {
@@ -33,38 +33,18 @@ namespace FootballEngine.Services
             }
         }
 
-        public IEnumerable<object> Search(string searchText, bool matchDateSearch, bool playerSearch, bool serieSearch, bool teamSearch, bool ignoreCase)
+        internal SearchService() { }
+
+        public IEnumerable<object> Search(string searchText, bool serieSearch, bool playerSearch, bool teamSearch, bool matchDateSearch, bool ignoreCase)
         {
             IEnumerable<object> result = new List<object>();
 
-            if (!matchDateSearch && !playerSearch && !serieSearch && !teamSearch)
+            if (!serieSearch && !playerSearch && !teamSearch && !matchDateSearch)
             {
-                matchDateSearch = true;
-                playerSearch = true;
                 serieSearch = true;
+                playerSearch = true;
                 teamSearch = true;
-            }
-
-            if (matchDateSearch)
-            {
-                IEnumerable<object> matchResult = _matchRepository.GetAll().Where(m => m.Date.Value.ToShortDateString().Contains(searchText, ignoreCase));
-                result = result.Concat(matchResult);
-            }
-
-                result = result.Concat(serieResult);
-            }
-
-
-            if (playerSearch)
-            {
-                IEnumerable<object> playerResult = _playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase) ||
-                                                         p.DateOfBirth.ToString().Contains(searchText, ignoreCase) ||
-
-                                                         _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
-                                                            .Any(t => t.PlayerIds.Contains(p.Id))
-                                                        );
-
-                result = result.Concat(playerResult);
+                matchDateSearch = true;
             }
 
             if (serieSearch)
@@ -76,7 +56,19 @@ namespace FootballEngine.Services
                                                         );
                 result = result.Concat(serieResult);
             }
+            
+            if (playerSearch)
+            {
+                IEnumerable<object> playerResult = _playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase) ||
+                                                         p.DateOfBirth.ToString().Contains(searchText, ignoreCase) ||
 
+                                                         _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
+                                                            .Any(t => t.PlayerIds.Contains(p.Id))
+                                                        );
+
+                result = result.Concat(playerResult);
+            }
+            
             if (teamSearch)
             {
                 IEnumerable<object> teamResult = _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase) ||
@@ -91,7 +83,11 @@ namespace FootballEngine.Services
                 result = result.Concat(teamResult);
             }
 
-
+            if (matchDateSearch)
+            {
+                IEnumerable<object> matchResult = _matchRepository.GetAll().Where(m => m.Date.Value.ToShortDateString().Contains(searchText));
+                result = result.Concat(matchResult);
+            }
 
             return result;
         }

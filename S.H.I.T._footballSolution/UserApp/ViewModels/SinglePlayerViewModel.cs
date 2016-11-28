@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using FootballEngine.Helper;
 using UserApp.InformationHolders;
 using UserApp.Utilities;
 
@@ -36,8 +37,6 @@ namespace UserApp.ViewModels
         public Visibility ViewPlayerInfoVisibility { get; set; }
         public Visibility ViewPlayersTeamInfoVisibility { get; set; }
 
-        private TeamService teamService;
-
         private Player _selectedPlayer;
         public Player SelectedPlayer
         {
@@ -52,10 +51,8 @@ namespace UserApp.ViewModels
         }
         public string PlayerName { get { return (SelectedPlayer != null) ? SelectedPlayer.FullName : ""; } }
 
-        public SinglePlayerViewModel(TeamService teamService)
+        public SinglePlayerViewModel()
         {
-            this.teamService = teamService;
-
             LoadCommands();
 
             Messenger.Default.Register<ObjectHolder<Player, Team>>(this, OnObjectHolderRecived);
@@ -101,7 +98,7 @@ namespace UserApp.ViewModels
         {
             LoadCommands();
             SelectedPlayer = playerAndTeamHolder.FirstObject;
-            PlayersTeam = teamService.GetBy(SelectedPlayer.TeamId);
+            PlayersTeam = ServiceLocator.Instance.TeamService.GetBy(SelectedPlayer.TeamId);
         }
     }
 }

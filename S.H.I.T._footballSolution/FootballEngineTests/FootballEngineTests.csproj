@@ -64,7 +64,6 @@
     <Compile Include="Factories\TeamFactoryTests.cs" />
     <Compile Include="Helper\XmlHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\MatchRepositoryTests.cs" />
     <Compile Include="TestDataFactory.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +71,9 @@
       <Project>{11603A52-1F43-48A5-9B41-FF02DA7AC2AD}</Project>
       <Name>FootballEngine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

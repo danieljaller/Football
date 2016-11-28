@@ -21,13 +21,13 @@ namespace FootballEngine.Domain.ValueObjects
             }
         }
 
-        private bool IsValidInparameters(Guid playerOutId, Guid playerInId, int timeOfExchange)
+        private bool IsValidInparameters(Guid playerOutId, Guid playerInId, MatchMinute timeOfExchange)
         {
             if (playerOutId == Guid.Empty)
                 throw new ArgumentException($"{nameof(playerOutId)} cannot be an empty Guid.");
             if (playerInId == Guid.Empty)
                 throw new ArgumentException($"{nameof(playerOutId)} cannot be an empty Guid.");
-            if (0 > timeOfExchange && timeOfExchange > MatchMinute.MaxValue)
+            if (0 > timeOfExchange.Value && timeOfExchange.Value > MatchMinute.MaxValue)
                 throw new ArgumentOutOfRangeException($"{nameof(timeOfExchange)} must be between 0 and {MatchMinute.MaxValue}");
 
             return true;

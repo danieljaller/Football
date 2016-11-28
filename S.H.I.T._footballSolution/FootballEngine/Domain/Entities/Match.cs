@@ -29,11 +29,7 @@ namespace FootballEngine.Domain.Entities
         public List<Event> VisitorRedCards { get; set; }
         public List<Event> VisitorYellowCards { get; set; }
         public static DateTime EndDateForMatchCreation { get { return DateTime.Now.AddYears(5); } }
-
-        public List<Event> HomeAssists { get; set; }
-        public List<Event> VisitorAssists { get; set; }
-        public List<Exchange> HomeExchanges { get; set; }
-        public List<Exchange> VisitorExchanges { get; set; }
+        
         public Match() { }
 
         public Match(MatchDate date, Guid homeTeamId, Guid visitorTeamId, GeneralName location)

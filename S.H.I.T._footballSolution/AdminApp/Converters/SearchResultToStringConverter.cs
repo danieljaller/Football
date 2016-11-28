@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using FootballEngine.Helper;
 
 namespace AdminApp.Converters
 {
     public class SearchResultToStringConverter : IValueConverter
     {
-        TeamService teamService;
+        //TeamService teamService;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value.GetType() == typeof(Player))
@@ -33,9 +34,9 @@ namespace AdminApp.Converters
             if (value.GetType() == typeof(Match))
             {
                 var match = (Match)value;
-                teamService = new TeamService();
-                var teamHome = teamService.GetBy(match.HomeTeamId);
-                var teamVisitor = teamService.GetBy(match.VisitorTeamId);
+                //teamService = new TeamService();
+                var teamHome = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
+                var teamVisitor = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
                 return $"{teamHome.Name} - {teamVisitor.Name}";
             }
             return null;

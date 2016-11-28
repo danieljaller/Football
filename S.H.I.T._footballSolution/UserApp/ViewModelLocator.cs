@@ -11,14 +11,9 @@ namespace UserApp
 {
     public class ViewModelLocator
     {
-        //private static MatchService matchService = new MatchService();
-        //private static TeamService teamService = new TeamService();
-        //private static PlayerService playerService = new PlayerService(teamService);
-        //private static SerieService serieService = new SerieService();
-
-        private static PlayerInfoViewModel _playerInfoViewModel = new PlayerInfoViewModel(ServiceLocator.Instance.TeamService);
+        private static PlayerInfoViewModel _playerInfoViewModel = new PlayerInfoViewModel();
         private static PlayerViewModel _playerViewModel = new PlayerViewModel();
-        private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel(ServiceLocator.Instance.TeamService);
+        private static SinglePlayerViewModel _singlePlayerViewModel = new SinglePlayerViewModel();
 
         static PlayerInfoViewModel PlayerInfoViewModle { get { return _playerInfoViewModel; } }
         static PlayerViewModel PlayerViewModel { get { return _playerViewModel; } }

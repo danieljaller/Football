@@ -53,7 +53,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch1()
-        {            
+        {
             Match match = new Match(new MatchDate(DateTime.Now.AddDays(-1)), Guid.NewGuid(), Guid.NewGuid(), new GeneralName("Location"));
         }
 

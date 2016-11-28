@@ -6,6 +6,7 @@ using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Services;
 using System.Collections.ObjectModel;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -17,8 +18,8 @@ namespace AdminApp
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
         NewPlayerWindow _newPlayerWindow;
-        PlayerService _playerService;
-        TeamService _teamService;
+        //PlayerService _playerService;
+        //TeamService _teamService;
         List<Player> listOfPlayers;
         List<Player> listOfPlayersUnChecked;
         bool playersAreValid;
@@ -29,8 +30,8 @@ namespace AdminApp
             listOfPlayers = new List<Player>();
             InitializeComponent();
             _newPlayerWindow = new NewPlayerWindow();
-            _teamService = new TeamService();
-            _playerService = new PlayerService(_teamService);
+            //_teamService = new TeamService();
+            //_playerService = new PlayerService(_teamService);
             //TeamName = teamName.Text;
             //ArenaName = arenaName.Text;
             TeamName = "Team";
@@ -133,9 +134,9 @@ namespace AdminApp
             {
                 team.PlayerIds.Add(item.Id);
                 item.TeamId = team.Id;
-                _playerService.Add(item);
+                ServiceLocator.Instance.PlayerService.Add(item);
             }
-            _teamService.Add(team);
+            ServiceLocator.Instance.TeamService.Add(team);
         }
     }
 }

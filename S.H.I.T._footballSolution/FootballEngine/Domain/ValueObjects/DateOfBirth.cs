@@ -23,7 +23,7 @@ namespace FootballEngine.Domain.ValueObjects
 
         private bool IsValidInparameter(DateTime dateOfBirth)
         {
-            if (MinDateOfBirth.Date > dateOfBirth.Date && dateOfBirth.Date > MaxDateOfBirth.Date)
+            if (dateOfBirth.Date > MinDateOfBirth.Date && dateOfBirth.Date < MaxDateOfBirth.Date)
                 throw new ArgumentException(
                     $"{nameof(dateOfBirth)} must be between {MinDateOfBirth.ToShortDateString()} and {MaxDateOfBirth.ToShortDateString()}");
 

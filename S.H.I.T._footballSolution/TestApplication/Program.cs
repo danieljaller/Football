@@ -1,11 +1,11 @@
-﻿using FootballEngine.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FootballEngine.Helper;
+using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Factories;
+using FootballEngine.Helper;
 
 namespace TestApplication
 {

@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -22,8 +23,8 @@ namespace AdminApp
     /// </summary>
     public partial class AddEvent : Window
     {
-        PlayerService playerService;
-        TeamService teamService;
+        //PlayerService playerService;
+        //TeamService teamService;
         public Event result { get; set; }
         public MatchMinute timeOfEvent;
         IEnumerable<Player> playerList;
@@ -35,10 +36,10 @@ namespace AdminApp
 
         public AddEvent(Team team, int matchLength)
         {
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);        
+            //teamService = new TeamService();
+            //playerService = new PlayerService(teamService);        
             InitializeComponent();
-            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
             MatchMinute[] minutes = new MatchMinute[matchLength];
             for(int i=1; i<=matchLength; i++)
             {
@@ -52,10 +53,10 @@ namespace AdminApp
 
         public AddEvent(Team team, MatchMinute[] matchMinutes)
         {
-            teamService = new TeamService();
-            playerService = new PlayerService(teamService);
+            //teamService = new TeamService();
+            //playerService = new PlayerService(teamService);
             InitializeComponent();
-            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
             playerListbox.ItemsSource = playerList;
             timeBox.ItemsSource = matchMinutes;
         }

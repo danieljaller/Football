@@ -13,7 +13,7 @@ using UserApp.Utilities;
 
 namespace UserApp.ViewModels
 {
-    class PlayerInfoViewModel : INotifyPropertyChanged
+    public class PlayerInfoViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -28,8 +28,6 @@ namespace UserApp.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        private TeamService teamService;
 
         private Player _selectedPlayer;
         public Player SelectedPlayer
@@ -52,13 +50,12 @@ namespace UserApp.ViewModels
         public string MatchesPlayed { get { return (SelectedPlayer != null) ? SelectedPlayer.MatchesPlayed.ToString() : ""; } }
         public string PlayerStatus { get { return (SelectedPlayer != null) ? SelectedPlayer.PlayerStatus.ToSwedishString() : ""; } }
 
-        public PlayerInfoViewModel(TeamService teamService)
+        public PlayerInfoViewModel()
         {
-            this.teamService = teamService;
             Messenger.Default.Register<ObjectHolder<Player, string>>(this, OnInformationHolderRecived);
         }
 
-        public void OnInformationHolderRecived(ObjectHolder<Player, string> playerAndTeamNameHolder)
+        private void OnInformationHolderRecived(ObjectHolder<Player, string> playerAndTeamNameHolder)
         {
             SelectedPlayer = playerAndTeamNameHolder.FirstObject;
             Team = playerAndTeamNameHolder.SecondObject;

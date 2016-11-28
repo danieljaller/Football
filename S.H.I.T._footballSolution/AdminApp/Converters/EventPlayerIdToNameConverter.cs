@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using FootballEngine.Helper;
 
 namespace AdminApp.Converters
 {
     public class EventPlayerIdToNameConverter : IValueConverter
     {
-        PlayerService playerService = new PlayerService(new TeamService());
+        //PlayerService playerService = new PlayerService(new TeamService());
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Guid playerId = (Guid)value;
-            Player player = playerService.GetBy(playerId);
+            Player player = ServiceLocator.Instance.PlayerService.GetBy(playerId);
             return player.FullName;
         }
 
