@@ -58,7 +58,7 @@
         <ComboBox Name="timeBox" Width="50" Grid.Row="1" Grid.Column="1" Margin="5,20,0,0" ItemContainerStyle="{StaticResource radioComboBoxItem}" SelectionChanged="timeBox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }"/>
+                    <TextBlock Text="{Binding Path=Value}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

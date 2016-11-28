@@ -39,13 +39,25 @@ namespace AdminApp
             playerService = new PlayerService(teamService);        
             InitializeComponent();
             playerList = teamService.GetAllPlayersByTeam(team.Id);
-            string[] minutes = new string[matchLength];
+            MatchMinute[] minutes = new MatchMinute[matchLength];
             for(int i=1; i<=matchLength; i++)
             {
-                minutes[i-1] = i.ToString();
+                MatchMinute min = new MatchMinute();
+                min.Value = i;
+                minutes[i-1] = min;
             }           
             playerListbox.ItemsSource = playerList;
             timeBox.ItemsSource = minutes;
+        }
+
+        public AddEvent(Team team, MatchMinute[] matchMinutes)
+        {
+            teamService = new TeamService();
+            playerService = new PlayerService(teamService);
+            InitializeComponent();
+            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            playerListbox.ItemsSource = playerList;
+            timeBox.ItemsSource = matchMinutes;
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)

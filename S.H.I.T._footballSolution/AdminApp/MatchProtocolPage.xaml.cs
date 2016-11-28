@@ -117,7 +117,8 @@ namespace AdminApp
 
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            //MatchMinute[] minutes = new MatchMinute[homeGoals.Count()](homeGoals.Select)
+            var addEventWindow = new AddEvent(homeTeam );
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
