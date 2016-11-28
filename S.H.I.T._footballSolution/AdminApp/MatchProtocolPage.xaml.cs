@@ -235,7 +235,8 @@ namespace AdminApp
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
-                match.HomeLineup.Add(addPlayerWindow.player.Id);
+                foreach(var player in addPlayerWindow.selectedPlayers)
+                    match.HomeLineup.Add(player.Id);
                 homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
                 homeLineupList.ItemsSource = homeLineup;
             }
@@ -247,7 +248,8 @@ namespace AdminApp
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
-                match.VisitorLineup.Add(addPlayerWindow.player.Id);
+                foreach (var player in addPlayerWindow.selectedPlayers)
+                    match.VisitorLineup.Add(player.Id);
                 visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
                 visitorLineupList.ItemsSource = visitorLineup;
             }

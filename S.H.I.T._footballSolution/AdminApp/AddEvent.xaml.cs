@@ -25,22 +25,33 @@ namespace AdminApp
         PlayerService playerService;
         TeamService teamService;
         public Event result { get; set; }
-        public uint timeOfEvent;
+        public MatchMinute timeOfEvent;
         IEnumerable<Player> playerList;
 
         public AddEvent(Team team)
+            :this(team, 90)
+        {
+        }
+
+        public AddEvent(Team team, int matchLength)
         {
             teamService = new TeamService();
             playerService = new PlayerService(teamService);        
             InitializeComponent();
             playerList = teamService.GetAllPlayersByTeam(team.Id);
-            playerListbox.ItemsSource = playerList;           
+            string[] minutes = new string[matchLength];
+            for(int i=1; i<=matchLength; i++)
+            {
+                minutes[i-1] = i.ToString();
+            }           
+            playerListbox.ItemsSource = playerList;
+            timeBox.ItemsSource = minutes;
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            Player player = (Player)playerListbox.SelectedItem;          
-            uint.TryParse(timeBox.Text, out timeOfEvent);
+            Player player = (Player)playerListbox.SelectedItem;
+            MatchMinute.TryParse(timeBox.SelectedIndex+1, out timeOfEvent);          
             result = new Event(player.Id, timeOfEvent);
             DialogResult = true;
         }
@@ -48,6 +59,11 @@ namespace AdminApp
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void timeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            timeBox.IsDropDownOpen = false;
         }
     }
 }

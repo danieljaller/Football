@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class MatchMinute
+    public class MatchMinute
     {
         public int Value { get; set; }
         public int matchLength{ get; set; }
@@ -56,11 +56,9 @@ namespace FootballEngine.Domain.ValueObjects
            
         }
 
-        public static bool TryParse(string stringMinute, out MatchMinute result)
+        public static bool TryParse(int minute, out MatchMinute result)
         {
-            int minute;
-            if (int.TryParse(stringMinute, out minute))
-            {
+           
                 try
                 {
                     result = new MatchMinute(minute);
@@ -72,16 +70,12 @@ namespace FootballEngine.Domain.ValueObjects
                     return false;
                 }
             }
-            else
-            {
-                result = null;
-                return false;
-            }
-        }
-
+           
         public override string ToString()
         {
             return Value.ToString();
         }
+        }
+
     }
-}
+

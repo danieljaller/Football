@@ -6,19 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         mc:Ignorable="d"
         Title="AddPlayerWindow" Height="300" Width="300">
-    <Window.Resources>
-        <Style x:Key="radioListBoxItem" TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <RadioButton Content="{Binding Path=FullName}"
-                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -31,11 +19,11 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="20,0,0,0">Spelare:</TextBlock>
 
-        <ListBox Name="playerListbox" Grid.Row="0" Grid.Column="1" Margin="5" ItemContainerStyle="{StaticResource radioListBoxItem}">
+        <ListBox Name="playerListbox" Grid.Row="0" Grid.Column="1" Margin="5" SelectionMode="Multiple">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="{Binding Path=FullName}" />
+                        <TextBlock Text="{Binding Path=FullName}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -43,6 +31,15 @@
         
         <Button Name="Ok" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Height="23" Width="50" Click="Ok_Click">
             <TextBlock>Skapa</TextBlock>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=playerListbox, Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button Name="Cancel" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="20" Height="23" Width="50" Click="Cancel_Click">
             <TextBlock>Avbryt</TextBlock>

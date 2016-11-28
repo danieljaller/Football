@@ -25,7 +25,7 @@ namespace AdminApp
     {
         PlayerService playerService;
         TeamService teamService;
-        public Player player { get; set; }
+        public List<Player> selectedPlayers { get; set; }
 
         public AddPlayerWindow(Team team, ObservableCollection<Guid> lineup)
         {
@@ -39,7 +39,9 @@ namespace AdminApp
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            player = (Player)playerListbox.SelectedItem;
+            selectedPlayers = new List<Player>();
+            foreach(var player in playerListbox.SelectedItems)
+                selectedPlayers.Add((Player)player);
             DialogResult = true;
         }
 
