@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp"
+        xmlns:converters="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
         Title="MatchProtocol" Height="300" Width="300">
+    <Window.Resources>
+        <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
+        <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -29,184 +34,216 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock FontSize="20" FontWeight="Bold">Lagnamn</TextBlock>
-            <TextBlock Margin="10,0,10,0" FontSize="20" FontWeight="Bold">0</TextBlock>
+            <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
+            <TextBlock Name="homeTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-            <TextBlock Margin="10,0,10,0" FontSize="20" FontWeight="Bold">0</TextBlock>
-            <TextBlock FontSize="20" FontWeight="Bold">Lagnamn</TextBlock>
+            <TextBlock Name="visitorTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
+            <TextBlock Name="visitorTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
         </StackPanel>
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2">Matchdatum</TextBlock>
+        <TextBlock Name="matchDateBlock" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2" Text="{Binding}" />
         <TextBlock Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Mål</TextBlock>
-        <ListBox Grid.Row="3" Grid.Column="0">
+        <ListBox Name="homeGoalsList" Grid.Row="3" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter }}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="3" Grid.Column="1">
+        <ListBox Name="visitorGoalsList" Grid.Row="3" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center">Assist</TextBlock>
-        <ListBox Grid.Row="5" Grid.Column="0">
+        <ListBox Name="homeAssistsList" Grid.Row="5" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="5" Grid.Column="1">
+        <ListBox Name="visitorAssistsList" Grid.Row="5" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center">Röda kort</TextBlock>
-        <ListBox Grid.Row="7" Grid.Column="0">
+        <ListBox Name="homeRedCardsList" Grid.Row="7" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOFEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="7" Grid.Column="1">
+        <ListBox Name="visitorRedCardsList" Grid.Row="7" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center">Gula kort</TextBlock>
-        <ListBox Grid.Row="9" Grid.Column="0">
+        <ListBox Name="homeYellowCardsList" Grid.Row="9" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="9" Grid.Column="1">
+        <ListBox Name="visitorYellowCardsList" Grid.Row="9" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        <TextBlock Grid.Column="1" Text="Min: " />
+                        <TextBlock Grid.Column="2" Text="TimeOfEvent"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Center">Laguppställning</TextBlock>
-        <ListBox Grid.Row="11" Grid.Column="0">
+        <ListBox Name="HomeLineupList" Grid.Row="11" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="11" Grid.Column="1">
+        <ListBox Name="visitorLineupList" Grid.Row="11" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock Grid.Row="12" Grid.ColumnSpan="2" HorizontalAlignment="Center">Byten</TextBlock>
-        <ListBox Grid.Row="13" Grid.Column="0">
+        <ListBox Name="homeExchangesList" Grid.Row="13" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
+                        <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
+                        <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
+                        <TextBlock Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Foreground="GreenYellow" Text="⬅" />
+                        <TextBlock Grid.Column="1" Width="135" Grid.Row="1" Foreground="GreenYellow" Text="{Binding Path=PlayerInId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="13" Grid.Column="1">
+        <ListBox Name="visitorExchangesList" Grid.Row="13" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Spelare" />
-                        <TextBlock Grid.Column="1" Text="Match minut"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
+                        <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
+                        <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
+                        <TextBlock Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Foreground="GreenYellow" Text="⬅" />
+                        <TextBlock Grid.Column="1" Width="135" Grid.Row="1" Foreground="GreenYellow" Text="{Binding Path=PlayerInId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
