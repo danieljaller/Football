@@ -10,12 +10,12 @@ namespace FootballEngine.Domain.ValueObjects
     {
         public Guid PlayerOutId;
         public Guid PlayerInId;
-        public uint TimeOfExchange;
+        public MatchMinute TimeOfExchange;
 
         public Exchange()
         { }
 
-        public Exchange(Guid playerOutId, Guid playerInId, uint timeOfExchange)
+        public Exchange(Guid playerOutId, Guid playerInId, MatchMinute timeOfExchange)
         {
             PlayerOutId = playerOutId;
             PlayerInId = playerInId;
