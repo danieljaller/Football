@@ -7,27 +7,29 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="SinglePlayerPage"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=SinglePlayerViewModel}">
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
 
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Name="singlePlayerName" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"  FontSize="15" FontWeight="Black" Text="Spelarnamn"/>
-        <Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Click="playerInfo_Click" Content="Spelarinfo" />
-       
-        <Button Name="team" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Click="team_Click" Content="Lag" />
-        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="singlePlayerPageFrame" Visibility="Hidden" />
-        <local:PlayerInfoView Grid.Row="2" Grid.Column="0" Visibility="{Binding ViewPlayerInfoVisibility, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox Name="serieSelector" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
+        <TextBlock Name="singlePlayerName" HorizontalAlignment="Center" FontSize="15" FontWeight="Black" Text="{Binding Path=FullName}"/>
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Margin="10" Click="playerInfo_Click" Content="Spelarinfo" />
+            <Button Name="team" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Margin="10" Click="team_Click" Content="Lag" />
+        </Grid>
+
+        <Frame Grid.Row="2" x:Name="singlePlayerPageFrame" Margin="20,20,20,50"/>
+        <ComboBox Name="serieSelector" Grid.Row="2" Margin="10, 10, 20, 10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="20" Width="95">
             <ComboBoxItem IsSelected="True">Serieväljare</ComboBoxItem>
             <DataTemplate>
                 <TextBox Name="comboBoxSeries" Text="serie X"  />

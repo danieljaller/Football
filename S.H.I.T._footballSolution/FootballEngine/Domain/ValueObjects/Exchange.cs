@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
-    class Exchange
+    public class Exchange
     {
-        public Guid PlayerOutId;
-        public Guid PlayerInId;
-        public uint TimeOfExchange;
+        public Guid PlayerOutId { get; set; }
+        public Guid PlayerInId { get; set; }
+        public MatchMinute TimeOfExchange;
 
         public Exchange()
         { }
 
-        public Exchange(Guid playerOutId, Guid playerInId, uint timeOfExchange)
+        public Exchange(Guid playerOutId, Guid playerInId, MatchMinute timeOfExchange)
         {
             PlayerOutId = playerOutId;
             PlayerInId = playerInId;

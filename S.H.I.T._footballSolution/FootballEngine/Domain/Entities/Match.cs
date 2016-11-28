@@ -35,10 +35,14 @@ namespace FootballEngine.Domain.Entities
         }
         public List<Guid> HomeLineup { get; set; }
         public List<Guid> VisitorLineup { get; set; }
-        public List<Event> RedCards { get; set; }
-        public List<Event> YellowCards { get; set; }
-        public List<Event> Assists { get; set; }
-        public List<Event> Goals { get; set; }
+        public List<Event> HomeRedCards { get; set; }
+        public List<Event> VisitorRedCards { get; set; }
+        public List<Event> HomeYellowCards { get; set; }
+        public List<Event> VisitorYellowCards { get; set; }
+        public List<Event> HomeAssists { get; set; }
+        public List<Event> VisitorAssists { get; set; }
+        public List<Exchange> HomeExchanges { get; set; }
+        public List<Exchange> VisitorExchanges { get; set; }
         public List<Event> Injuries { get; set; }
         public static DateTime EndDateForMatchCreation
         {
@@ -57,12 +61,14 @@ namespace FootballEngine.Domain.Entities
             VisitorTeamId = visitorTeamId;
             HomeGoals = new List<Event>();
             VisitorGoals = new List<Event>();
+            HomeAssists = new List<ValueObjects.Event>();
+            VisitorAssists = new List<ValueObjects.Event>();
             HomeLineup = new List<Guid>();
             VisitorLineup = new List<Guid>();
-            RedCards = new List<Event>();
-            YellowCards = new List<Event>();
-            Assists = new List<Event>();
-            //Goals = new List<Event>();
+            HomeRedCards = new List<Event>();
+            VisitorRedCards = new List<Event>();
+            HomeYellowCards = new List<Event>();
+            VisitorYellowCards = new List<Event>();
             Injuries = new List<Event>();
         }
         private bool IsValidInparameter(MatchDate date, Guid homeTeamId, Guid visitorTeamId)

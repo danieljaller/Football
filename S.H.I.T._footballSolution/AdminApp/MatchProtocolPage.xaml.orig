@@ -1,0 +1,331 @@
+﻿<Page x:Class="AdminApp.MatchProtocolPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdminApp"
+      xmlns:converters="clr-namespace:AdminApp.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="400"
+      Title="MatchProtocolPage" >
+    <Page.Resources>
+        <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
+        <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Matcher" FontSize="20" />
+            <ListBox Name="matchesList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250" SelectionChanged="matchesList_SelectionChanged"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource searchResaultToStringConverter}}"  />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
+                    <TextBlock Name="homeTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
+
+                </StackPanel>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">-</TextBlock>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Name="visitorTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
+                    <TextBlock Name="visitorTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
+                </StackPanel>
+                <DatePicker Name="matchDatePicker" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5" />
+                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Mål</TextBlock>
+                <Button Name="removeGoalHome" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="15" Width="15" Click="removeGoalHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+                <Button Name="addGoalHome" Grid.Row="2" Grid.Column="0" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addGoalHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="addGoalAway" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Height="15" Width="15" Click="addGoalAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="removeGoalAway" Grid.Row="2" Grid.Column="1" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeGoalAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+
+                <Button Name="removeAssistHome" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="15" Width="15" Click="removeAssistHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+                <Button Name="addAssistHome" Grid.Row="4" Grid.Column="0" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addAssistHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="addAssistAway" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Height="15" Width="15" Click="addAssistAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="removeAssistAway" Grid.Row="4" Grid.Column="1" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeAssistAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+
+                <Button Name="removeRedCardsHome" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Height="15" Width="15" Click="removeRedCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+                <Button Name="addRedCardsHome" Grid.Row="6" Grid.Column="0" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addRedCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="addRedCardsAway" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" Height="15" Width="15" Click="addRedCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="removeRedCardsAway" Grid.Row="6" Grid.Column="1" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeRedCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+
+                <Button Name="removeYellowCardsHome" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Height="15" Width="15" Click="removeYellowCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+                <Button Name="addYellowCardsHome" Grid.Row="8" Grid.Column="0" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addYellowCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="addYellowCardsAway" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" Height="15" Width="15" Click="addYellowCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="removeYellowCardsAway" Grid.Row="8" Grid.Column="1" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeYellowCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+
+                <Button Name="removePlayerHome" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Left" Height="15" Width="15" Click="removePlayerHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+                <Button Name="addPlayerHome" Grid.Row="10" Grid.Column="0" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addPlayerHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="addPlayerAway" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Right" Height="15" Width="15" Click="addPlayerAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="removePlayerAway" Grid.Row="10" Grid.Column="1" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removePlayerAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+
+                <Button Name="removeExchangeHome" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left" Height="15" Width="15" Click="removeExchangeHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+                <Button Name="addExchangeHome" Grid.Row="12" Grid.Column="0" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addExchangeHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="addExchangeAway" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Right" Height="15" Width="15" Click="addExchangeAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                </Button>
+                <Button Name="removeExchangeAway" Grid.Row="12" Grid.Column="1" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeExchangeAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                </Button>
+
+                <ListBox Name="homeGoalsList" Grid.Row="3" Grid.Column="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="135" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorGoalsList" Grid.Row="3" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+<<<<<<< HEAD
+                                <TextBlock Grid.Column="0" Width="135" Text="Spelare" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="Match minut"/>
+=======
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+>>>>>>> origin/admin_matchprotocol_branch
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center">Assist</TextBlock>
+                <ListBox Name="homeAssistsList" Grid.Row="5" Grid.Column="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorAssistsList" Grid.Row="5" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center">Röda kort</TextBlock>
+                <ListBox Name="homeRedCardsList" Grid.Row="7" Grid.Column="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorRedCardsList" Grid.Row="7" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center">Gula kort</TextBlock>
+                <ListBox Name="homeYellowCardsList" Grid.Row="9" Grid.Column="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorYellowCardsList" Grid.Row="9" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Margin="20,0,0,0" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Center">Laguppställning</TextBlock>
+                <ListBox Name="homeLineupList" Grid.Row="11" Grid.Column="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorLineupList" Grid.Row="11" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Grid.Row="12" Grid.ColumnSpan="2" HorizontalAlignment="Center">Byten</TextBlock>
+                <ListBox Name="homeExchangesList" Grid.Row="13" Grid.Column="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Spelare" />
+                                <TextBlock Grid.Column="1" Text="Match minut"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorExchangesList" Grid.Row="13" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Spelare" />
+                                <TextBlock Grid.Column="1" Text="Match minut"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+
+        </Grid>
+
+    </Grid>
+</Page> 
+

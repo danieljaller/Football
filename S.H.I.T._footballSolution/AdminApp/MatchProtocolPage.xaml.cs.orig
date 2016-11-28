@@ -14,14 +14,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AdminApp
 {
     /// <summary>
-    /// Interaction logic for MatchProtocol.xaml
+    /// Interaction logic for MatchProtocolPage.xaml
     /// </summary>
-    public partial class MatchProtocol : Window
+    public partial class MatchProtocolPage : Page
     {
         MatchService matchService;
         TeamService teamService;
@@ -46,27 +47,21 @@ namespace AdminApp
         ObservableCollection<Exchange> visitorExchanges;
 
 
-        public MatchProtocol(Match _match)
+        public MatchProtocolPage()
         {
-            match = _match;
             matchService = new MatchService();
             teamService = new TeamService();
             playerService = new PlayerService(teamService);
             InitializeComponent();
             matchDatePicker.DisplayDateStart = DateTime.Today;
+            matchesList.ItemsSource = matchService.GetAll();
+                        
         }
-
-        private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            match.Date.Value = (DateTime)matchDatePicker.SelectedDate;
-        }
-
+       
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
             match.HomeGoals.Remove((Event)homeGoalsList.SelectedItem);
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
-            homeScore--;
-            homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
         }
 
@@ -78,8 +73,6 @@ namespace AdminApp
             {
                 match.HomeGoals.Add(addEventWindow.result);
                 homeGoals = new ObservableCollection<Event>(match.HomeGoals);
-                homeScore++;
-                homeTeamScoreBlock.DataContext = homeScore;
                 homeGoalsList.ItemsSource = homeGoals;
             }
         }
@@ -92,8 +85,6 @@ namespace AdminApp
             {
                 match.VisitorGoals.Add(addEventWindow.result);
                 visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
-                visitorScore++;
-                visitorTeamScoreBlock.DataContext = visitorScore;
                 visitorGoalsList.ItemsSource = visitorGoals;
             }
         }
@@ -102,8 +93,6 @@ namespace AdminApp
         {
             match.VisitorGoals.Remove((Event)visitorGoalsList.SelectedItem);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
-            visitorScore--;
-            visitorTeamScoreBlock.DataContext = visitorScore;
             visitorGoalsList.ItemsSource = visitorGoals;
         }
 
@@ -223,9 +212,7 @@ namespace AdminApp
 
         private void removePlayerHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeLineup.Remove((Guid)homeLineupList.SelectedItem);
-            homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
-            homeLineupList.ItemsSource = homeLineup;
+
         }
 
         private void addPlayerHome_Click(object sender, RoutedEventArgs e)
@@ -234,8 +221,7 @@ namespace AdminApp
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
-                foreach(Player player in addPlayerWindow.selectedPlayers)
-                match.HomeLineup.Add(player.Id);
+                match.HomeLineup.Add(addPlayerWindow.player.Id);
                 homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
                 homeLineupList.ItemsSource = homeLineup;
             }
@@ -245,10 +231,8 @@ namespace AdminApp
         {
             var addPlayerWindow = new AddPlayerWindow(visitorTeam, visitorLineup);
             var addPlayer = addPlayerWindow.ShowDialog();
-            if (addPlayer == true)
             {
-                foreach (Player player in addPlayerWindow.selectedPlayers)
-                    match.VisitorLineup.Add(player.Id);
+                match.VisitorLineup.Add(addPlayerWindow.player.Id);
                 visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
                 visitorLineupList.ItemsSource = visitorLineup;
             }
@@ -256,47 +240,29 @@ namespace AdminApp
 
         private void removePlayerAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorLineup.Remove((Guid)visitorLineupList.SelectedItem);
-            visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
-            visitorLineupList.ItemsSource = visitorLineup;
+
         }
 
         private void removeExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeExchanges.Remove((Exchange)homeExchangesList.SelectedItem);
-            homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
-            homeExchangesList.ItemsSource = homeExchanges;
+
         }
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup);
+            var addExchangeWindow = new AddExchangeWindow();
             var addExchange = addExchangeWindow.ShowDialog();
-            if (addExchange == true)
-            {
-                match.HomeExchanges.Add(addExchangeWindow.result);
-                homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
-                homeExchangesList.ItemsSource = homeExchanges;
-            }
         }
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup);
+            var addExchangeWindow = new AddExchangeWindow();
             var addExchange = addExchangeWindow.ShowDialog();
-            if (addExchange == true)
-            {
-                match.VisitorExchanges.Add(addExchangeWindow.result);
-                visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
-                visitorExchangesList.ItemsSource = visitorExchanges;
-            }
         }
 
         private void removeExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorExchanges.Remove((Exchange)visitorExchangesList.SelectedItem);
-            visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
-            visitorExchangesList.ItemsSource = visitorExchanges;
+
         }
 
         private void matchesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -312,9 +278,8 @@ namespace AdminApp
             else
             {
                 homeTeamScoreBlock.DataContext = " ";
-                visitorTeamScoreBlock.DataContext = " ";
+                visitorTeamScoreBlock.DataContext = " ";    
             }
-            matchDatePicker.SelectedDate = match.Date.Value;
             homeGoalsList.ItemsSource = homeGoals;
             visitorGoalsList.ItemsSource = visitorGoals;
             homeAssistsList.ItemsSource = homeAssists;
@@ -331,13 +296,16 @@ namespace AdminApp
 
         private void convertListsToObjects()
         {
-           
+            match = (Match)matchesList.SelectedItem;
             isPlayed = match.IsPlayed;
             homeTeam = teamService.GetBy(match.HomeTeamId);
             visitorTeam = teamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
             visitorScore = match.VisitorGoals.Count();
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
+<<<<<<< HEAD
+            visitorGoals = new ObservableCollection<Event> (match.VisitorGoals);
+=======
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
             homeAssists = new ObservableCollection<Event>(match.HomeAssists);
             visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
@@ -349,6 +317,7 @@ namespace AdminApp
             visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
             homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
+>>>>>>> origin/admin_matchprotocol_branch
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
+using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,63 +24,128 @@ namespace AdminApp
     /// </summary>
     public partial class NewSeriesPage : Page
     {
+        TeamService teamService;
+        SerieService serieService;
+        List<Team> teamList = new List<Team> { };
+        bool teamsAreValid;
+        bool nameIsValid;
+        bool dateIsValid;
+
         public NewSeriesPage()
         {
             InitializeComponent();
-            List<string> teamsListC = new List<string> { "Lag1", "Lag2", "Lag3", "Lag4", "Lag5", "Lag6",
-                                                         "Lag7", "Lag8", "Lag9", "Lag10", "Lag11", "Lag12",
-                                                         "Lag13", "Lag14", "Lag15", "Lag16", "Lag17", "Lag18",
-                                                         "Lag19", "Lag20"};
-            teamsList.ItemsSource = teamsListC;
+            teamService = new TeamService();
+            serieService = new SerieService();
+            teamsList.ItemsSource = teamService.GetAll();
             serieDatePicker.BlackoutDates.AddDatesInPast();
         }
 
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            this.NavigationService.Navigate(new Uri("NewTeamPage.xaml", UriKind.Relative));
+
+            NavigationService.Navigate(new Uri("NewTeamPage.xaml", UriKind.Relative));
         }
 
         private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)
         {
+            var teamIds = teamList.Select(x => x.Id).ToList();
+            var matchSchedule = SerieAndMatchGenerator.SerieGenerator(teamIds, Convert.ToDateTime(serieDatePicker.SelectedDate));
             
+            newSerieFrame.Content = new CreateSchedulePage(matchSchedule, serieName.Text, teamList);
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        List<string> tList = new List<string> { };
         private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
-        {            
-            var team = ((CheckBox)sender).Content;
-            tList.Add(team.ToString());
-            teamsCheckedList.ItemsSource = tList;
-            if (tList.Count == 16)
+        {
+            var team = teamService.GetBy(((CheckBox)sender).Content.ToString());
+            teamList.Add(team);
+            teamsCheckedList.ItemsSource = teamList;
+            if (teamList.Count == 16)
             {
-                CreateMatchScheduleButton.IsEnabled = true;
+                teamsAreValid = true;
             }
-            if(tList.Count > 16)
+            if (teamList.Count > 16)
             {
-                CreateMatchScheduleButton.IsEnabled = false;
+                teamsAreValid = false;
             }
             teamsCheckedList.Items.Refresh();
+            ToggleCreateMatchScheduleButton();
         }
 
         private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            var team = ((CheckBox)sender).Content;
-            tList.Remove(team.ToString());
-            teamsCheckedList.ItemsSource = tList;
-            if (tList.Count < 16)
+            var team = teamService.GetBy(((CheckBox)sender).Content.ToString());
+            teamList.Remove(team);
+            teamsCheckedList.ItemsSource = teamList;
+            if (teamList.Count < 16)
             {
-                CreateMatchScheduleButton.IsEnabled = false;
+                teamsAreValid = false;
             }
-            if(tList.Count == 16)
+            if (teamList.Count == 16)
+            {
+                teamsAreValid = true;
+            }
+            teamsCheckedList.Items.Refresh();
+            ToggleCreateMatchScheduleButton();
+        }
+
+        private void serieName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(serieName.Text))
+            {
+                nameIsValid = false;
+            }
+
+            else
+            {
+                GeneralName result;
+                if (GeneralName.TryParse(serieName.Text, out result))
+                    nameIsValid = true;
+                else
+                    nameIsValid = false;
+            }
+            ToggleCreateMatchScheduleButton();
+        }
+
+        private void serieDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (serieDatePicker.SelectedDate == null)
+            {
+                dateIsValid = false;
+            }
+            else
+            {
+                dateIsValid = true;
+            }
+            ToggleCreateMatchScheduleButton();
+        }
+
+        private void ToggleCreateMatchScheduleButton()
+        {
+            if (teamsAreValid && nameIsValid && dateIsValid)
             {
                 CreateMatchScheduleButton.IsEnabled = true;
             }
-            teamsCheckedList.Items.Refresh();
+            else
+            {
+                CreateMatchScheduleButton.IsEnabled = false;
+            }
+        }
+        private void AutoFill()
+        {
+            teamList = teamService.GetAll().Take(16).ToList();
+            teamsCheckedList.ItemsSource = teamList;
+            serieName.Text = "AutoSerie";
+            serieDatePicker.SelectedDate = DateTime.Today.AddDays(2);
+
+            teamsAreValid = true;
+            nameIsValid = true;
+            dateIsValid = true;
+            ToggleCreateMatchScheduleButton();
+        }
+
+        private void AutoFillButton_Click(object sender, RoutedEventArgs e)
+        {
+            AutoFill();
         }
     }
 }

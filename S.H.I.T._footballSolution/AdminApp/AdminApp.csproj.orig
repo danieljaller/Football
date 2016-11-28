@@ -67,10 +67,13 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\GeneralNameValidationRule.cs" />
+<<<<<<< HEAD
     <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
+=======
+    <Compile Include="Converters\GeneralNameValidationRule.cs" />
     <Compile Include="Converters\IsEnabledConverter.cs" />
     <Compile Include="Converters\NameValidationRule.cs" />
+>>>>>>> Create_Player_AdminApp
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="CreateSchedulePage.xaml.cs">
       <DependentUpon>CreateSchedulePage.xaml</DependentUpon>
@@ -233,9 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\matchprotocol_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

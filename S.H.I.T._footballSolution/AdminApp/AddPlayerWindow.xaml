@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         mc:Ignorable="d"
         Title="AddPlayerWindow" Height="300" Width="300">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -17,30 +18,28 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="20,0,0,0">Spelare:</TextBlock>
-       
-        <ListBox Grid.Row="0" Grid.Column="1" Margin="5">
-            <ListBoxItem>
-                <CheckBox>Spelare 1</CheckBox>
-            </ListBoxItem>
-            <ListBoxItem>
-                <CheckBox>Spelare 2</CheckBox>
-            </ListBoxItem>
-            <ListBoxItem>
-                <CheckBox>Spelare 3</CheckBox>
-            </ListBoxItem>
-            <ListBoxItem>
-                <CheckBox>Spelare 4</CheckBox>
-            </ListBoxItem>
-            <ListBoxItem>
-                <CheckBox>Spelare 5</CheckBox>
-            </ListBoxItem>
-            <ListBoxItem>
-                <CheckBox>Spelare 6</CheckBox>
-            </ListBoxItem>
+
+        <ListBox Name="playerListbox" Grid.Row="0" Grid.Column="1" Margin="5" SelectionMode="Multiple">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="{Binding Path=FullName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         
-        <Button Name="Ok" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Height="23" Width="50">
+        <Button Name="Ok" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Height="23" Width="50" Click="Ok_Click">
             <TextBlock>Skapa</TextBlock>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=playerListbox, Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button Name="Cancel" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="20" Height="23" Width="50" Click="Cancel_Click">
             <TextBlock>Avbryt</TextBlock>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,60 @@ namespace AdminApp
     /// </summary>
     public partial class AddEvent : Window
     {
-        public AddEvent()
+        PlayerService playerService;
+        TeamService teamService;
+        public Event result { get; set; }
+        public MatchMinute timeOfEvent;
+        IEnumerable<Player> playerList;
+
+        public AddEvent(Team team)
+            :this(team, 90)
         {
+        }
+
+        public AddEvent(Team team, int matchLength)
+        {
+            teamService = new TeamService();
+            playerService = new PlayerService(teamService);        
             InitializeComponent();
+            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            MatchMinute[] minutes = new MatchMinute[matchLength];
+            for(int i=1; i<=matchLength; i++)
+            {
+                MatchMinute min = new MatchMinute();
+                min.Value = i;
+                minutes[i-1] = min;
+            }           
+            playerListbox.ItemsSource = playerList;
+            timeBox.ItemsSource = minutes;
+        }
+
+        public AddEvent(Team team, MatchMinute[] matchMinutes)
+        {
+            teamService = new TeamService();
+            playerService = new PlayerService(teamService);
+            InitializeComponent();
+            playerList = teamService.GetAllPlayersByTeam(team.Id);
+            playerListbox.ItemsSource = playerList;
+            timeBox.ItemsSource = matchMinutes;
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            Player player = (Player)playerListbox.SelectedItem;
+            MatchMinute.TryParse(timeBox.SelectedIndex+1, out timeOfEvent);          
+            result = new Event(player.Id, timeOfEvent);
+            DialogResult = true;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private void timeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            timeBox.IsDropDownOpen = false;
         }
     }
 }

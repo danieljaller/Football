@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
+using FootballEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +23,13 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateSeriesPage : Page
     {
+        SerieService serieService = new SerieService();
+        TeamService teamService = new TeamService();
+        MatchService matchService = new MatchService();
+
+        private HashSet<Team> teamList = new HashSet<Team>();
+
+
         public CreateOrAdministrateSeriesPage()
         {
             InitializeComponent();
@@ -35,19 +45,90 @@ namespace AdminApp
             var match9 = new TempMatch("16-11-12", "Lag1", "Lag2", "Plats", "");
             var match10 = new TempMatch("16-11-19", "Lag1", "Lag2", "Plats", "");
 
-            Dictionary<string, List<TempMatch>> seriesDictionary = new Dictionary<string, List<TempMatch>>() {
-                {"serie1", new List<TempMatch>() {match1, match2, match3, match4, match5 } },
-                {"serie2", new List<TempMatch>() {match6, match7, match8, match9, match10 } }
+            Dictionary<string, HashSet<TempMatch>> seriesDictionary = new Dictionary<string, HashSet<TempMatch>>() {
+                {"serie1", new HashSet<TempMatch>() {match1, match2, match3, match4, match5 } },
+                {"serie2", new HashSet<TempMatch>() {match6, match7, match8, match9, match10 } }
             };
-                    
+            seriesList.ItemsSource = serieService.GetAll();
+        }
+
+        public CreateOrAdministrateSeriesPage(Serie selectedSerie)
+        {
+            Dictionary<string, HashSet<TempMatch>> seriesDictionary = new Dictionary<string, HashSet<TempMatch>>() {
+                {selectedSerie.Name.Value, new HashSet<TempMatch>() }
+            };
+            InitializeComponent();
             seriesList.ItemsSource = seriesDictionary;
         }
 
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
         {
             CreateOrAdministrateSeriesPageFrame.Content = new NewSeriesPage();
-            matchSchedule.Visibility = Visibility.Collapsed;
+            //matchSchedule.Visibility = Visibility.Collapsed;
         }
+
+        private void matchDatePicker_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void seriesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedSerie = (Serie)seriesList.SelectedItem;
+            HashSet<Guid> matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
+            HashSet<Match> matchScheduleWithMatches;
+            List<Team> homeTeamList, visitorTeamList;
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+        private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList)
+        {
+            matchProtocolList.ItemsSource = matchScheduleWithMatches;
+            homeTeamListBox.ItemsSource = homeTeamList;
+            visitorTeamListBox.ItemsSource = visitorTeamList;
+            dateListBox.ItemsSource = matchScheduleWithMatches;
+            resultListBox.ItemsSource = matchScheduleWithMatches;
+        }
+
+        private void CreateAndConvertLists(HashSet<Guid> matchScheduleWithIds, out HashSet<Match> matchScheduleWithMatches, out List<Team> homeTeamList, out List<Team> visitorTeamList)
+        {
+            matchScheduleWithMatches = new HashSet<Match>();
+            homeTeamList = new List<Team>();
+            visitorTeamList = new List<Team>();
+
+            foreach (var matchId in matchScheduleWithIds)
+            {
+                matchScheduleWithMatches.Add(matchService.GetBy(matchId));
+            }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                homeTeamList.Add(teamService.GetBy(match.HomeTeamId));
+            }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                visitorTeamList.Add(teamService.GetBy(match.VisitorTeamId));
+            }
+        }
+
+
+
+        private void matchProtocolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Match matchProto = (Match)matchProtocolList.SelectedItem;
+            if (matchProto != null)
+            {
+                var matchProtocolWindow = new MatchProtocol(matchProto);
+                matchProtocolWindow.ShowDialog();
+
+            }
+        }
+        
     }
     public class TempMatch
     {

@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,7 +48,7 @@
     <Compile Include="Domain\ValueObjects\Event.cs" />
     <Compile Include="Domain\ValueObjects\Exchange.cs" />
     <Compile Include="Domain\ValueObjects\MatchDate.cs" />
-    <Compile Include="Domain\ValueObjects\MatchGoals.cs" />
+    <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Exceptions\EmptyGuidException.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Exceptions\InvalidNumberOfPlayersException.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
     <Compile Include="Exceptions\SaveFailedException.cs" />
+    <Compile Include="Helper\IEnumerableUtil.cs" />
     <Compile Include="Helper\XmlHandler.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
     <Compile Include="Helper\SerieAndMatchGenerator.cs" />
