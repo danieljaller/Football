@@ -32,11 +32,11 @@ namespace FootballEngine.Domain.Entities.Tests
         public void Match_ValidateNewMatch()
         {
             Assert.AreNotEqual(Guid.Empty, match.Id);
-            Assert.IsNotNull(match.Assists);
-            Assert.AreEqual(0, match.Assists.Count);
-            // Date?
-            Assert.IsNotNull(match.Goals);
-            Assert.AreEqual(0, match.Goals.Count);
+            //Assert.IsNotNull(match.Assists);
+            //Assert.AreEqual(0, match.Assists.Count);
+            //// Date?
+            //Assert.IsNotNull(match.Goals);
+            //Assert.AreEqual(0, match.Goals.Count);
             Assert.IsNotNull(match.HomeGoals);
             Assert.IsNotNull(match.HomeLineup);
             Assert.AreEqual(0, match.HomeLineup.Count);
@@ -44,13 +44,13 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.AreEqual(0, match.Injuries.Count);
             // Location?
             // MatchTimeInMinutes?
-            Assert.IsNotNull(match.RedCards);
-            Assert.AreEqual(0, match.RedCards.Count);
+            //Assert.IsNotNull(match.RedCards);
+            //Assert.AreEqual(0, match.RedCards.Count);
             Assert.IsNotNull(match.VisitorGoals);
             Assert.IsNotNull(match.VisitorLineup);
             Assert.AreEqual(0, match.VisitorLineup.Count);
-            Assert.IsNotNull(match.YellowCards);
-            Assert.AreEqual(0, match.YellowCards.Count);
+            //Assert.IsNotNull(match.YellowCards);
+            //Assert.AreEqual(0, match.YellowCards.Count);
         }
 
         [TestMethod()]

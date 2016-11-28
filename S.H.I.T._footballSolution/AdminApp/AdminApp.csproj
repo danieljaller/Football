@@ -224,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\football_icon.ico" />
+    <Resource Include="Resources\matchprotocol_icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballEngine\FootballEngine.csproj">
@@ -233,9 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\matchprotocol_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

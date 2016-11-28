@@ -423,25 +423,25 @@ namespace TestApplication
                 playerBuilder.AppendLine($"Visitor team: {teamService.GetBy(match.VisitorTeamId).Name} - Goals: {match.VisitorGoals.Count()}");
                 playerBuilder.AppendLine($"Total match time: {match.MatchTimeInMinutes}");
                 playerBuilder.AppendLine($"Goals:");
-                foreach (var goal in match.Goals)
-                {
-                    playerBuilder.AppendLine($"{playerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
-                }
-                playerBuilder.AppendLine($"Assists:");
-                foreach (var assist in match.Assists)
-                {
-                    playerBuilder.AppendLine($"{playerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
-                }
-                playerBuilder.AppendLine("Red cards: ");
-                foreach (var card in match.RedCards)
-                {
-                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
-                }
-                playerBuilder.AppendLine("Yellow cards:");
-                foreach (var card in match.YellowCards)
-                {
-                    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
-                }
+                //foreach (var goal in match.Goals)
+                //{
+                //    playerBuilder.AppendLine($"{playerService.GetBy(goal.PlayerId)} - {goal.TimeOfEvent}");
+                //}
+                //playerBuilder.AppendLine($"Assists:");
+                //foreach (var assist in match.Assists)
+                //{
+                //    playerBuilder.AppendLine($"{playerService.GetBy(assist.PlayerId)} - {assist.TimeOfEvent}");
+                //}
+                //playerBuilder.AppendLine("Red cards: ");
+                //foreach (var card in match.RedCards)
+                //{
+                //    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                //}
+                //playerBuilder.AppendLine("Yellow cards:");
+                //foreach (var card in match.YellowCards)
+                //{
+                //    playerBuilder.AppendLine($"{playerService.GetBy(card.PlayerId)} - {card.TimeOfEvent}");
+                //}
                 playerBuilder.AppendLine("Injuries: ");
                 foreach (var injury in match.Injuries)
                 {
