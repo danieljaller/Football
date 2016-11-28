@@ -50,7 +50,6 @@ namespace AdminApp
                 {"serie2", new HashSet<TempMatch>() {match6, match7, match8, match9, match10 } }
             };
             seriesList.ItemsSource = serieService.GetAll();
-
         }
 
         public CreateOrAdministrateSeriesPage(Serie selectedSerie)
@@ -110,11 +109,11 @@ namespace AdminApp
 
             ConvertFromGuid(ref matchScheduleWithIds, ref matchScheduleWithMatches, ref homeTeamList, ref visitorTeamList);
 
-            matchProtocolList.ItemsSource = matchScheduleWithMatches.Take(20);
-            homeTeamListBox.ItemsSource = homeTeamList.Take(20);
-            visitorTeamListBox.ItemsSource = visitorTeamList.Take(20);
-            dateListBox.ItemsSource = matchScheduleWithMatches.Take(20);
-            resultListBox.ItemsSource = matchScheduleWithMatches.Take(20);
+            matchProtocolList.ItemsSource = matchScheduleWithMatches;
+            homeTeamListBox.ItemsSource = homeTeamList;
+            visitorTeamListBox.ItemsSource = visitorTeamList;
+            dateListBox.ItemsSource = matchScheduleWithMatches;
+            resultListBox.ItemsSource = matchScheduleWithMatches;
 
             //matchProtocolList.Items.Refresh();
             //homeTeamListBox.Items.Refresh();
