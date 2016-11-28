@@ -38,7 +38,7 @@ namespace AdminApp
             playersList.ItemsSource = _newPlayerWindow.tempPlayersList;
             ToggleCreateTeamButton();
             ToggleNewPlayerButton();
-            listOfPlayersUnChecked = listOfPlayers;
+            listOfPlayersUnChecked = new List<Player>();
 
         }
 
@@ -47,27 +47,7 @@ namespace AdminApp
             Player sentPlayer = listOfPlayers.Find(p => p.FullName == ((CheckBox)sender).Content.ToString());
 
             listOfPlayersUnChecked.Add(sentPlayer);
-            //playersList.ItemsSource = listOfPlayers;
-
-            if (listOfPlayersUnChecked.Count > 2 && listOfPlayersUnChecked.Count < 3)//25 och 31
-            {
-                playersAreValid = true;
-            }
-            else
-            {
-                playersAreValid = false;
-            }
-            playersList.Items.Refresh();
-
-            ToggleCreateTeamButton();
-        }
-
-        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Player sentPlayer = listOfPlayers.Find(p => p.FullName == ((CheckBox)sender).Content.ToString());
-
-            listOfPlayersUnChecked.Remove(sentPlayer);
-            //playersList.ItemsSource = listOfPlayers;
+            playersCheckedList.ItemsSource = listOfPlayersUnChecked;
 
             if (listOfPlayersUnChecked.Count >= 2 && listOfPlayersUnChecked.Count <= 3)//25 och 31
             {
@@ -77,7 +57,27 @@ namespace AdminApp
             {
                 playersAreValid = false;
             }
-            playersList.Items.Refresh();
+            playersCheckedList.Items.Refresh();
+
+            ToggleCreateTeamButton();
+        }
+
+        private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Player sentPlayer = listOfPlayers.Find(p => p.FullName == ((CheckBox)sender).Content.ToString());
+
+            listOfPlayersUnChecked.Remove(sentPlayer);
+            playersCheckedList.ItemsSource = listOfPlayersUnChecked;
+
+            if (listOfPlayersUnChecked.Count >= 2 && listOfPlayersUnChecked.Count <= 3)//25 och 31
+            {
+                playersAreValid = true;
+            }
+            else
+            {
+                playersAreValid = false;
+            }
+            playersCheckedList.Items.Refresh();
 
             ToggleCreateTeamButton();
         }
