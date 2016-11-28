@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -17,9 +13,24 @@ namespace FootballEngine.Domain.ValueObjects
 
         public Exchange(Guid playerOutId, Guid playerInId, MatchMinute timeOfExchange)
         {
-            PlayerOutId = playerOutId;
-            PlayerInId = playerInId;
-            TimeOfExchange = timeOfExchange;
+            if (IsValidInparameters(playerOutId, playerInId, timeOfExchange))
+            {
+                PlayerOutId = playerOutId;
+                PlayerInId = playerInId;
+                TimeOfExchange = timeOfExchange;
+            }
+        }
+
+        private bool IsValidInparameters(Guid playerOutId, Guid playerInId, int timeOfExchange)
+        {
+            if (playerOutId == Guid.Empty)
+                throw new ArgumentException($"{nameof(playerOutId)} cannot be an empty Guid.");
+            if (playerInId == Guid.Empty)
+                throw new ArgumentException($"{nameof(playerOutId)} cannot be an empty Guid.");
+            if (0 > timeOfExchange && timeOfExchange > MatchMinute.MaxValue)
+                throw new ArgumentOutOfRangeException($"{nameof(timeOfExchange)} must be between 0 and {MatchMinute.MaxValue}");
+
+            return true;
         }
     }
 }

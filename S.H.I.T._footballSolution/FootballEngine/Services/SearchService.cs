@@ -1,59 +1,91 @@
 ﻿using FootballEngine.Helper;
 using FootballEngine.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Services
 {
     public class SearchService
     {
-        public IEnumerable<object> Search(string searchText, bool ignoreCase, bool serieSearch, bool teamSearch, bool playerSearch)
+        private readonly MatchRepository _matchRepository = MatchRepository.Instance;
+        private readonly PlayerRepository _playerRepository = PlayerRepository.Instance;
+        private readonly SerieRepository _serieRepository = SerieRepository.Instance;
+        private readonly TeamRepository _teamRepository = TeamRepository.Instance;
+
+        private static readonly object CreationLock = new object();
+        private static SearchService _instance;
+        public static SearchService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (CreationLock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new SearchService();
+                        }
+                    }
+                }
+
+                return _instance;
+            }
+        }
+
+        public IEnumerable<object> Search(string searchText, bool matchDateSearch, bool playerSearch, bool serieSearch, bool teamSearch, bool ignoreCase)
         {
             IEnumerable<object> result = new List<object>();
 
-            if (!serieSearch && !teamSearch && !playerSearch )
+            if (!matchDateSearch && !playerSearch && !serieSearch && !teamSearch)
             {
+                matchDateSearch = true;
+                playerSearch = true;
                 serieSearch = true;
                 teamSearch = true;
-                playerSearch = true;
             }
 
-            if (serieSearch)
+            if (matchDateSearch)
             {
-                IEnumerable<object> serieResult = serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
+                IEnumerable<object> matchResult = _matchRepository.GetAll().Where(m => m.Date.Value.ToShortDateString().Contains(searchText, ignoreCase));
+                result = result.Concat(matchResult);
+            }
 
-                                                        teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
-                                                            .Any(t => t.SeriesIds.Contains(s.Id))
-                                                        );
                 result = result.Concat(serieResult);
             }
 
 
             if (playerSearch)
             {
-                IEnumerable<object> playerResult = playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase) ||
-                                                         p.DateOfBirth.ToShortDateString().Contains(searchText, ignoreCase) ||
+                IEnumerable<object> playerResult = _playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase) ||
+                                                         p.DateOfBirth.ToString().Contains(searchText, ignoreCase) ||
 
-                                                         teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
+                                                         _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
                                                             .Any(t => t.PlayerIds.Contains(p.Id))
                                                         );
 
                 result = result.Concat(playerResult);
             }
 
+            if (serieSearch)
+            {
+                IEnumerable<object> serieResult = _serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase) ||
+
+                                                        _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase))
+                                                            .Any(t => t.SerieIds.Contains(s.Id))
+                                                        );
+                result = result.Concat(serieResult);
+            }
 
             if (teamSearch)
             {
-                IEnumerable<object> teamResult = teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase) ||
+                IEnumerable<object> teamResult = _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase) ||
                                                          t.HomeArena.Value.Contains(searchText, ignoreCase) ||
-                                                         
-                                                         playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase))
-                                                            .Any(p => p.TeamId == t.Id) ||  
-                                                         
-                                                         serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase))
+
+                                                         _playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase))
+                                                            .Any(p => p.TeamId == t.Id) ||
+
+                                                         _serieRepository.GetAll().Where(s => s.Name.Value.Contains(searchText, ignoreCase))
                                                             .Any(s => s.TeamTable.Contains(t.Id))
                                                         );
                 result = result.Concat(teamResult);
@@ -62,25 +94,6 @@ namespace FootballEngine.Services
 
 
             return result;
-        }
-
-
-
-
-
-        private PlayerRepository playerRepository
-        {
-            get { return PlayerRepository.Instance; }
-        }
-
-        private TeamRepository teamRepository
-        {
-            get { return TeamRepository.Instance; }
-        }
-
-        private SerieRepository serieRepository
-        {
-            get { return SerieRepository.Instance; }
         }
     }
 }

@@ -5,17 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace FootballEngine.Repositories
 {
     public class SerieRepository : IRepository<Serie>
     {
-        private List<Serie> series;
+        private readonly string _path;
+        private List<Serie> _series;
+
         private SerieRepository()
         {
+            _path = AppDomain.CurrentDomain.BaseDirectory;
+            _path = Path.Combine(_path, "Resources");
+            if (!Directory.Exists(_path))
+                Directory.CreateDirectory(_path);
+            _path = Path.Combine(_path, "Series.xml");
             Load();
         }
 
@@ -25,82 +29,67 @@ namespace FootballEngine.Repositories
             get
             {
                 if (_instance == null)
-                {
                     _instance = new SerieRepository();
-                }
 
                 return _instance;
             }
         }
         public void Add(Serie serie)
         {
-            if (series != null && serie != null)
-            {
-                if (!series.Select(s => s.Id).Contains(serie.Id))
-                {
-                    series.Add(serie);
-                }
-            }
+            if (serie == null)
+                return;
+            if (!_series.Select(s => s.Id).Contains(serie.Id)) // Should check for name too!
+                _series.Add(serie);
+        }
+
+        public void AddRange(IEnumerable<Serie> series)
+        {
+            if (series == null)
+                throw new ArgumentNullException($"{nameof(series)} cannot be null.");
+            if (series.Count() == 0)
+                throw new ArgumentOutOfRangeException($"{nameof(series)} cannot be null.");
+            if (series.Contains(null))
+                throw new ArgumentException($"{nameof(series)} cannot contain null elements.");
+
+            _series.AddRange(series);
         }
 
         public void Delete(Guid id)
         {
-            if (series != null)
+            if (_series.Select(s => s.Id).Contains(id))
             {
-                if (series.Select(s => s.Id).Contains(id))
-                {
-                    series.Remove(series.Find(s => s.Id == id));
-                }
+                _series.Remove(_series.Find(s => s.Id == id));
             }
         }
 
         public IEnumerable<Serie> GetAll()
         {
-            if (series != null)
-            {
-                return series as IEnumerable<Serie>;
-            }
-
-            return null;
+            return _series;
         }
 
         public Serie GetBy(Guid id)
         {
-            if (series != null)
-            {
-                return series.Find(s => s.Id == id);
-            }
-
-            return null;
+            return _series.Find(s => s.Id == id);
         }
 
         public Serie GetBy(string name)
         {
-            if (series != null)
-            {
-                return series.Find(s => s.Name.Value == name);
-            }
-
-            return null;
+            return _series.Find(s => s.Name.Value == name);
         }
-        string[] directories = new string[2] { "FootballEngine", "Resources" };
+
         public void Load()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Resources");
-            path = Path.Combine(path, "Series.xml");
             try
             {
                 //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", false, out path))
-                if (true)
-                {
-                    series = (List<Serie>)XmlHandler.LoadFrom(path, typeof(List<Serie>));
-                }
-                
+                //{
+                _series = (List<Serie>)XmlHandler.LoadFrom(_path, typeof(List<Serie>));
+                //}
+
             }
-            catch(LoadFailedException)
+            catch (LoadFailedException)
             {
-                series = new List<Serie>();
+                _series = new List<Serie>();
             }
         }
 
@@ -108,18 +97,17 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                string path;
-                if (TryGetFilePath.InSolutionDirectory("Series.xml", directories, true, out path))
-                {
-                    XmlHandler.SaveTo(path, series);
-                }
-               
+                //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", true, out path))
+                //{
+                XmlHandler.SaveTo(_path, _series);
+                //}
+
             }
             catch (SaveFailedException s)
             {
                 throw s;
             }
-            catch(ArgumentException a)
+            catch (ArgumentException a)
             { throw a; }
         }
     }

@@ -45,22 +45,25 @@
     <Compile Include="Domain\Entities\Player.cs" />
     <Compile Include="Domain\Entities\Serie.cs" />
     <Compile Include="Domain\Entities\Team.cs" />
+    <Compile Include="Domain\ValueObjects\DateOfBirth.cs" />
     <Compile Include="Domain\ValueObjects\Event.cs" />
     <Compile Include="Domain\ValueObjects\Exchange.cs" />
     <Compile Include="Domain\ValueObjects\MatchDate.cs" />
     <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
+    <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
-    <Compile Include="Exceptions\EmptyGuidException.cs" />
-    <Compile Include="Exceptions\InvalidDateTimeException.cs" />
-    <Compile Include="Exceptions\InvalidNameException.cs" />
-    <Compile Include="Exceptions\InvalidNumberOfPlayersException.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
     <Compile Include="Exceptions\SaveFailedException.cs" />
+    <Compile Include="Factories\PlayerFactory.cs" />
+    <Compile Include="Factories\TeamFactory.cs" />
+    <Compile Include="Helper\CharUtil.cs" />
     <Compile Include="Helper\IEnumerableUtil.cs" />
+    <Compile Include="Helper\IntUtil.cs" />
+    <Compile Include="Helper\ServiceLocator.cs" />
     <Compile Include="Helper\XmlHandler.cs" />
     <Compile Include="Helper\PlayerStatusToString.cs" />
-    <Compile Include="Helper\SerieAndMatchGenerator.cs" />
+    <Compile Include="Factories\MatchTableFactory.cs" />
     <Compile Include="Helper\StringUtil.cs" />
     <Compile Include="Helper\TryGetFilePath.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -76,20 +79,8 @@
     <Compile Include="Services\SerieService.cs" />
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\Matches.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Players.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Series.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Teams.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

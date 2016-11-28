@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApplication.Helper
+namespace FootballEngine.Helper
 {
     public static class CharUtil
     {

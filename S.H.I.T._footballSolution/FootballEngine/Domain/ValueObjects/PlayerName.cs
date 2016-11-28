@@ -1,10 +1,4 @@
-﻿using FootballEngine.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -13,7 +7,7 @@ namespace FootballEngine.Domain.ValueObjects
         public string Value { get; set; }
         public static int MaxLenght
         {
-            get { return 25; }
+            get { return 50; }
         }
         public static int MinLenght
         {
@@ -26,33 +20,35 @@ namespace FootballEngine.Domain.ValueObjects
                 Value = name;
         }
 
-        public static bool IsValidName(string name)
+        private static bool IsValidName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("The name is either null, empty or consists only of white-space characters.");
-
-            if (name.StartsWith(" "))
-                throw new ArgumentException("A name can not start with ' '.");
-
-            if (name.EndsWith(" "))
-                throw new ArgumentException("A name can not end with ' '.");
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
 
             if (name.Length > MaxLenght)
-                throw new ArgumentException($"Name is too long. Maximum length is {MaxLenght} characters.");
+                throw new ArgumentOutOfRangeException($"{nameof(name)} is too long. Maximum length is {MaxLenght} characters.");
 
             if (name.Length < MinLenght)
-                throw new ArgumentException($"Name is too Short. Minimum length is {MinLenght} characters.");
+                throw new ArgumentOutOfRangeException($"{nameof(name)} is too Short. Minimum length is {MinLenght} characters.");
+
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException($"{nameof(name)} is either empty or consists only of white-space characters.");
+
+            if (name.StartsWith(" "))
+                throw new ArgumentException($"{nameof(name)} cannot start with a white-space character.");
+
+            if (name.EndsWith(" "))
+                throw new ArgumentException($"{nameof(name)} cannot end with a white-space character.");
 
             foreach (char character in name)
             {
-                if (char.IsLetter(character) || character == '-' || character == ' ')
+                if (char.IsLetter(character) || character == '-' || character == '\'' || character == ' ')
                     continue;
-                else
-                    throw new ArgumentException("Name contains illegal characters. Can only contain letters, '-' and white-spaces.");
+
+                throw new ArgumentException($"{nameof(name)} contains illegal characters. Can only contain letters, '-', ''' and white-space characters.");
             }
 
             return true;
-            //return Regex.IsMatch(name, @"\A[a-zA-Z´¨åäöÅÄÖ]+\s?-?[a-zA-Z´¨åäöÅÄÖ]*\z", RegexOptions.IgnoreCase);
         }
 
         public static bool TryParse(string name, out PlayerName result)
@@ -61,6 +57,16 @@ namespace FootballEngine.Domain.ValueObjects
             {
                 result = new PlayerName(name);
                 return true;
+            }
+            catch (ArgumentNullException)
+            {
+                result = null;
+                return false;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                result = null;
+                return false;
             }
             catch (ArgumentException)
             {

@@ -43,8 +43,8 @@ namespace UserApp.ViewModels
             get { return (_team != null) ? _team : ""; }
             set { _team = value; }
         }
-        public string Age { get { return (SelectedPlayer != null) ? (DateTime.Now.Year - SelectedPlayer.DateOfBirth.Year).ToString() : ""; } }
-        public string DateOfBirth { get { return (SelectedPlayer != null) ? SelectedPlayer.DateOfBirth.ToShortDateString() : ""; } }
+        public string Age { get { return (SelectedPlayer != null) ? (DateTime.Now.Year - SelectedPlayer.DateOfBirth.Value.Year).ToString() : ""; } }
+        public string DateOfBirth { get { return (SelectedPlayer != null) ? SelectedPlayer.DateOfBirth.ToString() : ""; } }
         public string Goals { get { return (SelectedPlayer != null) ? SelectedPlayer.Goals.Count.ToString() : ""; } }
         public string Assists { get { return (SelectedPlayer != null) ? SelectedPlayer.Assists.Count.ToString() : ""; } }
         public string RedCards { get { return (SelectedPlayer != null) ? SelectedPlayer.RedCards.Count.ToString() : ""; } }

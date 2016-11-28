@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApplication.Helper
+namespace FootballEngine.Helper
 {
     public static class IntUtil
     {
@@ -39,8 +39,8 @@ namespace TestApplication.Helper
 
             if (number > 0)
             {
-                if (words != "")
-                    words += "and ";
+                //if (words != "")
+                //    words += "and ";
 
                 var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
                 var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };

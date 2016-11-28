@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FootballEngine.Exceptions;
 using FootballEngine.Domain.ValueObjects;
 
 namespace FootballEngine.Domain.Entities.Tests
@@ -24,7 +23,7 @@ namespace FootballEngine.Domain.Entities.Tests
         [TestMethod]
         public void Match_CreateNewValidMatch()
         {
-            match = new Match(new MatchDate(DateTime.Now), Guid.NewGuid(), Guid.NewGuid());
+            match = new Match(new MatchDate(DateTime.Now), Guid.NewGuid(), Guid.NewGuid(), new GeneralName("Location"));
             Assert.IsNotNull(match);
         }
 
@@ -32,25 +31,15 @@ namespace FootballEngine.Domain.Entities.Tests
         public void Match_ValidateNewMatch()
         {
             Assert.AreNotEqual(Guid.Empty, match.Id);
-            //Assert.IsNotNull(match.Assists);
-            //Assert.AreEqual(0, match.Assists.Count);
             //// Date?
-            //Assert.IsNotNull(match.Goals);
-            //Assert.AreEqual(0, match.Goals.Count);
             Assert.IsNotNull(match.HomeGoals);
             Assert.IsNotNull(match.HomeLineup);
             Assert.AreEqual(0, match.HomeLineup.Count);
-            Assert.IsNotNull(match.Injuries);
-            Assert.AreEqual(0, match.Injuries.Count);
             // Location?
             // MatchTimeInMinutes?
-            //Assert.IsNotNull(match.RedCards);
-            //Assert.AreEqual(0, match.RedCards.Count);
             Assert.IsNotNull(match.VisitorGoals);
             Assert.IsNotNull(match.VisitorLineup);
             Assert.AreEqual(0, match.VisitorLineup.Count);
-            //Assert.IsNotNull(match.YellowCards);
-            //Assert.AreEqual(0, match.YellowCards.Count);
         }
 
         [TestMethod()]
@@ -65,35 +54,35 @@ namespace FootballEngine.Domain.Entities.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch1()
         {            
-            Match match = new Match(new MatchDate(DateTime.Now.AddDays(-1)), Guid.NewGuid(), Guid.NewGuid());
+            Match match = new Match(new MatchDate(DateTime.Now.AddDays(-1)), Guid.NewGuid(), Guid.NewGuid(), new GeneralName("Location"));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Match_CreateInvalidMatch2()
         {
-            Match match = new Match(new MatchDate(Match.EndDateForMatchCreation.AddDays(1)), Guid.NewGuid(), Guid.NewGuid());
+            Match match = new Match(new MatchDate(Match.EndDateForMatchCreation.AddDays(1)), Guid.NewGuid(), Guid.NewGuid(), new GeneralName("Location"));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Match_CreateInvalidMatch3()
         {
-            Match match = new Match(new MatchDate(DateTime.Now), Guid.Empty, Guid.Empty);
+            Match match = new Match(new MatchDate(DateTime.Now), Guid.Empty, Guid.Empty, new GeneralName("Location"));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Match_CreateInvalidMatch4()
         {
-            Match match = new Match(new MatchDate(DateTime.Now), Guid.NewGuid(), Guid.Empty);
+            Match match = new Match(new MatchDate(DateTime.Now), Guid.NewGuid(), Guid.Empty, new GeneralName("Location"));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Match_CreateInvalidMatch5()
         {
-            Match match = new Match(new MatchDate(DateTime.Now), Guid.Empty, Guid.NewGuid());
+            Match match = new Match(new MatchDate(DateTime.Now), Guid.Empty, Guid.NewGuid(), new GeneralName("Location"));
         }
     }
 }

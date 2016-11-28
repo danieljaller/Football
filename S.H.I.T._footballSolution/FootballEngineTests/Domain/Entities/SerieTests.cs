@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FootballEngine.Exceptions;
-using FootballEngineTests;
+using FootballEngine;
+using FootballEngine.Helper;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
@@ -15,8 +15,8 @@ namespace FootballEngine.Domain.Entities.Tests
     {
         private Serie validSerie;
         private ValueObjects.GeneralName validSerieName = new ValueObjects.GeneralName("Serie");
-        private List<Guid> validTeamTable = TestDataFactory.CreateListWithGuids(Serie.NumberOfTeams);
-        private List<Guid> validMatchTable = TestDataFactory.CreateListWithGuids(Serie.NumberOfMatches);
+        private HashSet<Guid> validTeamTable = TestDataFactory.CreateListWithGuids(Serie.NumberOfTeams).ToHashSet();
+        private HashSet<Guid> validMatchTable = TestDataFactory.CreateListWithGuids(Serie.NumberOfMatches).ToHashSet();
 
         [TestInitialize]
         public void Init()

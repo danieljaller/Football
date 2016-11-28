@@ -1,9 +1,4 @@
-﻿using FootballEngine.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -17,6 +12,9 @@ namespace FootballEngine.Domain.ValueObjects
 
         public Event(Guid playerId, MatchMinute timeOfEvent)
         {
+            if (playerId == Guid.Empty)
+                throw new ArgumentException($"{nameof(playerId)} cannot be an empty Guid.");
+
             PlayerId = playerId;
             TimeOfEvent = timeOfEvent;
         }

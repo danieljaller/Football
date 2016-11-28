@@ -1,9 +1,6 @@
 ﻿using FootballEngine.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.Entities
 {
@@ -15,21 +12,23 @@ namespace FootballEngine.Domain.Entities
         }
         public Team(GeneralName name, GeneralName homeArena)
         {
-            Id = Guid.NewGuid();
-            IsValidParameter(name, homeArena);
-            Name = name;
-            HomeArena = homeArena;
-            PlayerIds = new List<Guid>();
-            MatchIds = new List<Guid>();
-            SeriesIds = new List<Guid>();
-            Wins = 0;
-            Losses = 0;
-            Ties = 0;
-            GoalsFor = 0;
-            GoalsAgainst = 0;
-            GoalDifference = 0;
+            if (IsValidParameters(name, homeArena))
+            {
+                Id = Guid.NewGuid();
+                Name = name;
+                HomeArena = homeArena;
+                PlayerIds = new HashSet<Guid>();
+                MatchIds = new HashSet<Guid>();
+                SerieIds = new HashSet<Guid>();
+                Wins = 0;
+                Losses = 0;
+                Ties = 0;
+                GoalsFor = 0;
+                GoalsAgainst = 0;
+                GoalDifference = 0;
+            }
         }
-        private bool IsValidParameter(GeneralName name, GeneralName homeArena)
+        private bool IsValidParameters(GeneralName name, GeneralName homeArena)
         {
             if(name == null)
             { throw new ArgumentNullException($"{nameof(name)} cannot be null"); }
@@ -52,9 +51,9 @@ namespace FootballEngine.Domain.Entities
         }
         public int GoalsFor { get; set; }
         public int GoalsAgainst { get; set; }
-        public List<Guid> PlayerIds { get; set; }
-        public List<Guid> MatchIds { get; set; }
-        public List<Guid> SeriesIds { get; set; }
+        public HashSet<Guid> PlayerIds { get; set; }
+        public HashSet<Guid> MatchIds { get; set; }
+        public HashSet<Guid> SerieIds { get; set; }
         public int GoalDifference { get; set; }
     }
 }
