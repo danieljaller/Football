@@ -67,10 +67,10 @@
                 <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="Resultat"></TextBlock>
                 <TextBlock Grid.Column="4" HorizontalAlignment="Center" Text="Datum"></TextBlock>
 
-                <ListBox x:Name="matchProtocolList" Grid.Row="1" Grid.Column="0" BorderThickness="0">
+                <ListBox x:Name="matchProtocolList" Grid.Row="1" Grid.Column="0" BorderThickness="0" SelectionChanged="matchProtocolList_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="Resources/matchprotocol_icon.ico" Height="23" Width="20" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+                            <Image Source="Resources/matchprotocol_icon.ico" Height="23" Width="20" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

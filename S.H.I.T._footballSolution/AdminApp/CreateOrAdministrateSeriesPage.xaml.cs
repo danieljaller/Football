@@ -63,7 +63,7 @@ namespace AdminApp
 
         public void ConvertFromGuid(ref HashSet<Guid> matchScheduleWithIds, ref HashSet<Match> matchScheduleWithMatches, ref List<Team> homeTeamList, ref List<Team> visitorTeamList)
         {
-            
+
             //matchScheduleWithMatches.Clear();
             //    homeTeamList.Clear();
             //    visitorTeamList.Clear();
@@ -122,10 +122,17 @@ namespace AdminApp
             //resultListBox.Items.Refresh();
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+
+        private void matchProtocolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var matchProtocolWindow = new MatchProtocol();
-            matchProtocolWindow.ShowDialog();
+            Match matchProto = (Match)matchProtocolList.SelectedItem;
+            if (matchProto != null)
+            {
+                var matchProtocolWindow = new MatchProtocol(matchProto);
+                matchProtocolWindow.ShowDialog();
+
+            }
         }
     }
     public class TempMatch
