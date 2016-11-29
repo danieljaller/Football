@@ -24,7 +24,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock FontWeight="Bold" Text="{Binding}"/>
+                        <TextBlock FontWeight="Bold" Text="{Binding Path=Name}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -44,7 +44,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=teamsList, Path=SelectedItem}" FontWeight="Bold"/>
+            <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=teamsList, Path=SelectedItem.Name}" FontWeight="Bold"/>
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Grid.RowSpan="2">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serier:"/>
@@ -56,8 +56,20 @@
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Insläppta mål:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
             </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Grid.RowSpan="2" DataContext="{Binding ElementName=teamsList}">
+                <TextBox Name="arenaName" Margin="5,5,0,0" Width="90" HorizontalAlignment="Left" Text="{Binding Path=SelectedItem.HomeArena.Value}"/>
+
+
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="(--)"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Points}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Wins}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Losses}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Ties}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsFor}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsAgainst}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="(--)"/>
+            </StackPanel>
             
-            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="90" Margin="5"/>
             
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="30,0,0,0">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelare"/>
