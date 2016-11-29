@@ -12,7 +12,8 @@ namespace FootballEngine.Domain.Entities
         public bool IsPlayed { get; set; }
         public MatchDate Date { get; set; }
         public GeneralName Location { get; set; }
-        public MatchMinute MatchTimeInMinutes { get; set; }
+        public int MatchTimeInMinutes { get; set; }
+        public OverTime OverTimeInMinutes { get; set; }
         public string Result { get { return IsPlayed ? $"{HomeGoals.Count} - {VisitorGoals.Count}" : "-"; } }
         public List<Event> HomeAssists { get; set; }
         public HashSet<Exchange> HomeExchanges { get; set; }
@@ -38,9 +39,9 @@ namespace FootballEngine.Domain.Entities
             if (IsValidInparameters(date, homeTeamId, visitorTeamId, location))
             {
                 Date = date;
-                MatchTimeInMinutes = new MatchMinute(0);
+                MatchTimeInMinutes = 90;
+                OverTimeInMinutes = new OverTime(0);
                 Location = location;
-
                 HomeAssists = new List<Event>();
                 HomeExchanges = new HashSet<Exchange>();
                 HomeGoals = new List<Event>();
@@ -48,7 +49,7 @@ namespace FootballEngine.Domain.Entities
                 HomeLineup = new HashSet<Guid>();
                 HomeRedCards = new List<Event>();
                 HomeYellowCards = new List<Event>();
-
+                IsPlayed = false;
                 VisitorAssists = new List<Event>();
                 VisitorExchanges = new HashSet<Exchange>();
                 VisitorGoals = new List<Event>();

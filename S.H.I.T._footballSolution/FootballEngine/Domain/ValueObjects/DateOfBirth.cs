@@ -15,6 +15,8 @@ namespace FootballEngine.Domain.ValueObjects
 
         public DateTime Value { get; set; }
 
+        public DateOfBirth() { }
+
         public DateOfBirth(DateTime dateOfBirth)
         {
             if (IsValidInparameter(dateOfBirth))

@@ -23,12 +23,7 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateSeriesPage : Page
     {
-        //SerieService serieService = new SerieService();
-        //TeamService teamService = new TeamService();
-        //MatchService matchService = new MatchService();
-
         private HashSet<Team> teamList = new HashSet<Team>();
-
 
         public CreateOrAdministrateSeriesPage()
         {
@@ -116,16 +111,19 @@ namespace AdminApp
             }
         }
 
-
-
         private void matchProtocolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Match matchProto = (Match)matchProtocolList.SelectedItem;
             if (matchProto != null)
             {
+                var previousDate = matchProto.Date.Value;
+                var previousResult = matchProto.Result;
                 var matchProtocolWindow = new MatchProtocol(matchProto);
                 matchProtocolWindow.ShowDialog();
-
+                if (matchProto.Date.Value != previousDate)
+                    dateListBox.Items.Refresh();
+                if (matchProto.Result != previousResult)
+                    resultListBox.Items.Refresh();
             }
         }
         

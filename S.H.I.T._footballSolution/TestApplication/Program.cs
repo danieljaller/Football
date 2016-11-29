@@ -1,11 +1,11 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Factories;
-using FootballEngine.Helper;
 
 namespace TestApplication
 {
@@ -55,7 +55,7 @@ namespace TestApplication
                 Console.WriteLine(message);
                 Console.WriteLine("-------------------------");
             }
-            
+
             if (createTestData)
             {
                 int maxInputAttempts = DefaultMaxInputAttempts,
@@ -118,7 +118,7 @@ namespace TestApplication
                     matchList = MatchTableFactory.CreateMatchTable(teamList,
                         GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
 
-                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToList().ToHashSet(), matchList.Select(match => match.Id).ToList().ToHashSet());
+                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToHashSet(), matchList.Select(match => match.Id).ToHashSet());
 
                     foreach (Team team in teamList)
                         team.SerieIds.Add(serie.Id);
@@ -194,13 +194,13 @@ namespace TestApplication
 
             foreach (Guid matchId in matchIds)
                 ServiceLocator.Instance.MatchService.Delete(matchId);
-            
+
             foreach (Guid playerId in playerIds)
                 ServiceLocator.Instance.PlayerService.Delete(playerId);
-            
+
             foreach (Guid serieId in serieIds)
                 ServiceLocator.Instance.SerieService.Delete(serieId);
-            
+
             foreach (Guid teamId in teamIds)
                 ServiceLocator.Instance.TeamService.Delete(teamId);
         }
@@ -439,11 +439,3 @@ namespace TestApplication
         }
     }
 }
-
-
-
-
-
-
-
-

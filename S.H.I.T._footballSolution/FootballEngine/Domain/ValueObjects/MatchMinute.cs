@@ -30,8 +30,8 @@ namespace FootballEngine.Domain.ValueObjects
 
         private bool IsValidInparameters(int minute, int length)
         {
-            if (minute <= 0)
-                throw new ArgumentOutOfRangeException("A match minute can not be equal to or less than 0");
+            if (minute < 0)
+                throw new ArgumentOutOfRangeException("A match minute can not be less than 0");
 
             if (minute > MaxValue)
                 throw new ArgumentOutOfRangeException("A match minute can not be larger than the length of the match");

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         xmlns:converters="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
-        Title="MatchProtocol" Height="315" Width="440">
+        Title="MatchProtocol" Height="350" Width="440">
     <Window.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
         <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
@@ -46,6 +46,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
@@ -59,6 +60,7 @@
                 </StackPanel>
                 <DatePicker Name="matchDatePicker" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="4" Margin="5" SelectedDateChanged="matchDatePicker_SelectedDateChanged"/>
 
+                <CheckBox Name="isPlayedCheckBox" Grid.Row="1" Grid.Column="1" Content="Spelad" VerticalAlignment="Center" Checked="isPlayedCheckBox_Checked" Unchecked="isPlayedCheckBox_Unchecked"/>
 
                 <TextBlock Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center">Mål</TextBlock>
                 <Button Name="removeGoalHome" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeGoalHome_Click">
@@ -75,9 +77,27 @@
                 </Button>
                 <Button Name="addGoalHome" Grid.Row="2" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addGoalHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="addGoalAway" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addGoalAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="removeGoalAway" Grid.Row="2" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeGoalAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
@@ -107,9 +127,27 @@
                 </Button>
                 <Button Name="addAssistHome" Grid.Row="4" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addAssistHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="addAssistAway" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addAssistAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="removeAssistAway" Grid.Row="4" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeAssistAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
@@ -139,9 +177,27 @@
                 </Button>
                 <Button Name="addRedCardsHome" Grid.Row="6" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addRedCardsHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="addRedCardsAway" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addRedCardsAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="removeRedCardsAway" Grid.Row="6" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeRedCardsAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
@@ -171,9 +227,27 @@
                 </Button>
                 <Button Name="addYellowCardsHome" Grid.Row="8" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addYellowCardsHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="addYellowCardsAway" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addYellowCardsAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="removeYellowCardsAway" Grid.Row="8" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeYellowCardsAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
@@ -202,9 +276,27 @@
                 </Button>
                 <Button Name="addPlayerHome" Grid.Row="10" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addPlayerHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="addPlayerAway" Grid.Row="10" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addPlayerAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="removePlayerAway" Grid.Row="10" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removePlayerAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
@@ -234,9 +326,27 @@
                 </Button>
                 <Button Name="addExchangeHome" Grid.Row="12" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addExchangeHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="addExchangeAway" Grid.Row="12" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addExchangeAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Name="removeExchangeAway" Grid.Row="12" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeExchangeAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
@@ -447,6 +557,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
                                 <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
@@ -459,7 +570,8 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-
+            <Button Name="okButton" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="100" Height="20" Margin="20,2,0,3" Click="okButton_Click" >OK</Button>
+            <Button Name="cancelButton" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="0,2,20,3" Click="cancelButton_Click">Cancel</Button>
 
         </Grid>
 

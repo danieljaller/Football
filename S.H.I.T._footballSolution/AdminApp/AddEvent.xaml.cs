@@ -40,18 +40,18 @@ namespace AdminApp
             //playerService = new PlayerService(teamService);        
             InitializeComponent();
             playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
-            MatchMinute[] minutes = new MatchMinute[matchLength];
+            List<MatchMinute> minutes = new List<MatchMinute>();
             for(int i=1; i<=matchLength; i++)
             {
                 MatchMinute min = new MatchMinute();
                 min.Value = i;
-                minutes[i-1] = min;
+                minutes.Add(min);
             }           
             playerListbox.ItemsSource = playerList;
             timeBox.ItemsSource = minutes;
         }
 
-        public AddEvent(Team team, MatchMinute[] matchMinutes)
+        public AddEvent(Team team, List<MatchMinute> matchMinutes)
         {
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);

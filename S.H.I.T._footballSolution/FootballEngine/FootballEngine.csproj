@@ -51,6 +51,7 @@
     <Compile Include="Domain\ValueObjects\Exchange.cs" />
     <Compile Include="Domain\ValueObjects\MatchDate.cs" />
     <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
+    <Compile Include="Domain\ValueObjects\OverTime.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
@@ -80,7 +81,18 @@
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\Matches.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Players.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Series.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Teams.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
