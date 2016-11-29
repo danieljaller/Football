@@ -24,15 +24,11 @@ namespace AdminApp
     /// </summary>
     public partial class MatchProtocol : Window
     {
-        //MatchService matchService;
-        //TeamService teamService;
-        //PlayerService playerService;
         Match match;
         Team homeTeam;
         Team visitorTeam;
         int homeScore;
         int visitorScore;
-        bool isPlayed;
         ObservableCollection<Event> homeGoals;
         ObservableCollection<Event> visitorGoals;
         ObservableCollection<Event> homeAssists;
@@ -50,12 +46,10 @@ namespace AdminApp
         public MatchProtocol(Match _match)
         {
             match = _match;
-            //matchService = new MatchService();
-            //teamService = new TeamService();
-            //playerService = new PlayerService(teamService);
             InitializeComponent();
-            matchDatePicker.DisplayDateStart = DateTime.Today;
+            matchDatePicker.SelectedDate = match.Date.Value;
             ConvertListsToObjects();
+            isPlayedCheckBox.IsChecked = match.IsPlayed;
         }
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -236,8 +230,9 @@ namespace AdminApp
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
-                foreach(Player player in addPlayerWindow.selectedPlayers)
-                match.HomeLineup.Add(player.Id);
+                foreach (Player player in addPlayerWindow.selectedPlayers)
+                    match.HomeLineup.Add(player.Id);
+
                 homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
                 homeLineupList.ItemsSource = homeLineup;
             }
@@ -251,6 +246,7 @@ namespace AdminApp
             {
                 foreach (Player player in addPlayerWindow.selectedPlayers)
                     match.VisitorLineup.Add(player.Id);
+
                 visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
                 visitorLineupList.ItemsSource = visitorLineup;
             }
@@ -303,8 +299,6 @@ namespace AdminApp
 
         private void ConvertListsToObjects()
         {
-           
-            isPlayed = match.IsPlayed;
             homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
@@ -334,6 +328,16 @@ namespace AdminApp
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void isPlayedCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            match.IsPlayed = true;
+        }
+
+        private void isPlayedCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            match.IsPlayed = false;
         }
     }
 }
