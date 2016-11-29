@@ -365,30 +365,34 @@ namespace AdminApp
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            homeGoals = homeGoalsBackup;
+            match.HomeGoals = homeGoalsBackup.ToList();
+            match.VisitorGoals = visitorGoalsBackup.ToList();
+            match.HomeAssists = homeAssistsBackup.ToList();
+            match.VisitorAssists = visitorAssistsBackup.ToList();
+            match.HomeRedCards = homeRedCardsBackup.ToList();
+            match.VisitorRedCards = visitorRedCardsBackup.ToList();
+            match.HomeYellowCards = homeYellowCardsBackup.ToList();
+            match.VisitorYellowCards = visitorYellowCardsBackup.ToList();
+            match.HomeLineup = homeLineupBackup.ToHashSet();
+            match.VisitorLineup = visitorLineupBackup.ToHashSet();
+            match.HomeExchanges = homeExchangesBackup.ToHashSet();
+            match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
+
+            ConvertListsToObjects();
+
             homeGoalsList.ItemsSource = homeGoals;
-            visitorGoals = visitorGoalsBackup;
             visitorGoalsList.ItemsSource = visitorGoals;
-            homeAssists = homeAssistsBackup;
             homeAssistsList.ItemsSource = homeAssists;
-            visitorAssists = visitorAssistsBackup;
             visitorAssistsList.ItemsSource = visitorAssists;
-            homeRedCards = homeRedCardsBackup;
             homeRedCardsList.ItemsSource = homeRedCards;
-            visitorRedCards = visitorRedCardsBackup;
             visitorRedCardsList.ItemsSource = visitorRedCards;
-            homeYellowCards = homeYellowCardsBackup;
             homeYellowCardsList.ItemsSource = homeYellowCards;
-            visitorYellowCards = visitorYellowCardsBackup;
             visitorYellowCardsList.ItemsSource = visitorYellowCards;
-            homeLineup = homeLineupBackup;
             homeLineupList.ItemsSource = homeLineup;
-            visitorLineup = visitorLineupBackup;
             visitorLineupList.ItemsSource = visitorLineup;
-            homeExchanges = homeExchangesBackup;
             homeExchangesList.ItemsSource = homeExchanges;
-            visitorExchanges = visitorExchangesBackup;
             visitorExchangesList.ItemsSource = visitorExchanges;
+
             Close();
         }
 
