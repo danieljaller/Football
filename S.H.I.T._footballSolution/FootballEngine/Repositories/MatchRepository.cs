@@ -77,9 +77,17 @@ namespace FootballEngine.Repositories
             return null;
         }
 
-        public Match GetBy(string name)
+        public Match GetBy(string location)
         {
-            return _matches.Find(s => s.Location.Value == name);
+            if (location != null)
+            {
+                foreach (var match in _matches)
+                {
+                    if (match.Location.Value == location)
+                        return match;
+                }
+            }
+            return null;
         }
 
         public void Load()

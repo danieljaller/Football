@@ -69,13 +69,24 @@ namespace FootballEngine.Repositories
 
         public Team GetBy(Guid id)
         {
-            return _teams.Find(t => t.Id == id);
+            foreach (Team team in _teams)
+            {
+                if (team.Id == id)
+                    return team;
+            }
+            return null;
         }
 
         public Team GetBy(string name)
         {
             if (name != null)
-                return _teams.Find(t => t.Name.Value == name);
+            {
+                foreach (Team team in _teams)
+                {
+                    if (team.Name.Value == name)
+                        return team;
+                }
+            }
             return null;
         }
 
