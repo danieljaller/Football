@@ -111,8 +111,6 @@ namespace AdminApp
             }
         }
 
-
-
         private void matchProtocolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Match matchProto = (Match)matchProtocolList.SelectedItem;

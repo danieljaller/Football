@@ -59,9 +59,22 @@ namespace AdminApp
         {
             match = _match;
             InitializeComponent();
-            matchDatePicker.SelectedDate = match.Date.Value;
             ConvertListsToObjects();
+
             isPlayedCheckBox.IsChecked = match.IsPlayed;
+            matchDatePicker.SelectedDate = match.Date.Value;
+            homeGoalsList.ItemsSource = match.HomeGoals;
+            visitorGoalsList.ItemsSource = match.VisitorGoals;
+            homeAssistsList.ItemsSource = match.HomeAssists;
+            visitorAssistsList.ItemsSource = match.VisitorAssists;
+            homeExchangesList.ItemsSource = match.HomeExchanges;
+            visitorExchangesList.ItemsSource = match.VisitorExchanges;
+            homeLineupList.ItemsSource = match.HomeLineup;
+            visitorLineupList.ItemsSource = match.VisitorLineup;
+            homeRedCardsList.ItemsSource = match.HomeRedCards;
+            visitorRedCardsList.ItemsSource = match.VisitorRedCards;
+            homeYellowCardsList.ItemsSource = match.HomeYellowCards;
+            visitorRedCardsList.ItemsSource = match.VisitorYellowCards;
         }
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -76,6 +89,7 @@ namespace AdminApp
             homeScore--;
             homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
+            
         }
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
@@ -366,30 +380,34 @@ namespace AdminApp
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            homeGoals = homeGoalsBackup;
+            match.HomeGoals = homeGoalsBackup.ToList();
+            match.VisitorGoals = visitorGoalsBackup.ToList();
+            match.HomeAssists = homeAssistsBackup.ToList();
+            match.VisitorAssists = visitorAssistsBackup.ToList();
+            match.HomeRedCards = homeRedCardsBackup.ToList();
+            match.VisitorRedCards = visitorRedCardsBackup.ToList();
+            match.HomeYellowCards = homeYellowCardsBackup.ToList();
+            match.VisitorYellowCards = visitorYellowCardsBackup.ToList();
+            match.HomeLineup = homeLineupBackup.ToHashSet();
+            match.VisitorLineup = visitorLineupBackup.ToHashSet();
+            match.HomeExchanges = homeExchangesBackup.ToHashSet();
+            match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
+
+            ConvertListsToObjects();
+
             homeGoalsList.ItemsSource = homeGoals;
-            visitorGoals = visitorGoalsBackup;
             visitorGoalsList.ItemsSource = visitorGoals;
-            homeAssists = homeAssistsBackup;
             homeAssistsList.ItemsSource = homeAssists;
-            visitorAssists = visitorAssistsBackup;
             visitorAssistsList.ItemsSource = visitorAssists;
-            homeRedCards = homeRedCardsBackup;
             homeRedCardsList.ItemsSource = homeRedCards;
-            visitorRedCards = visitorRedCardsBackup;
             visitorRedCardsList.ItemsSource = visitorRedCards;
-            homeYellowCards = homeYellowCardsBackup;
             homeYellowCardsList.ItemsSource = homeYellowCards;
-            visitorYellowCards = visitorYellowCardsBackup;
             visitorYellowCardsList.ItemsSource = visitorYellowCards;
-            homeLineup = homeLineupBackup;
             homeLineupList.ItemsSource = homeLineup;
-            visitorLineup = visitorLineupBackup;
             visitorLineupList.ItemsSource = visitorLineup;
-            homeExchanges = homeExchangesBackup;
             homeExchangesList.ItemsSource = homeExchanges;
-            visitorExchanges = visitorExchangesBackup;
             visitorExchangesList.ItemsSource = visitorExchanges;
+
             Close();
         }
 
