@@ -53,6 +53,7 @@ namespace AdminApp
         ObservableCollection<Guid> visitorLineupBackup;
         ObservableCollection<Exchange> homeExchangesBackup;
         ObservableCollection<Exchange> visitorExchangesBackup;
+        private bool isPlayedBackup;
 
 
         public MatchProtocol(Match _match)
@@ -338,6 +339,7 @@ namespace AdminApp
 
         private void ConvertListsToObjects()
         {
+            isPlayedBackup = match.IsPlayed;
             homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
@@ -391,6 +393,7 @@ namespace AdminApp
             match.VisitorLineup = visitorLineupBackup.ToHashSet();
             match.HomeExchanges = homeExchangesBackup.ToHashSet();
             match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
+            isPlayedCheckBox.IsChecked = isPlayedBackup;
 
             ConvertListsToObjects();
 
@@ -406,7 +409,7 @@ namespace AdminApp
             visitorLineupList.ItemsSource = visitorLineup;
             homeExchangesList.ItemsSource = homeExchanges;
             visitorExchangesList.ItemsSource = visitorExchanges;
-
+            
             Close();
         }
 
