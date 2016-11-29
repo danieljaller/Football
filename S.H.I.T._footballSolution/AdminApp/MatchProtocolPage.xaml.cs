@@ -273,7 +273,10 @@ namespace AdminApp
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup);
+            List<Guid> exchangedPlayerIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                                    .Select(p => p.Id);
+            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup, exchangedPlayerIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {

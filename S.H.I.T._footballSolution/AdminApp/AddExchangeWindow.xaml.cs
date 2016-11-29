@@ -32,17 +32,23 @@ namespace AdminApp
         IEnumerable<Player> playerOutList;
 
 
-        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup)
-            :this(team, lineup, 90)
+        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, List<Guid> PlayerOutIds, List<Guid> PlayerInIds)
+            :this(team, lineup, 90, PlayerOutIds, PlayerInIds)
         { }
 
-        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, int matchLength)
+        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, int matchLength, List<Guid> playerOutIds, List<Guid> playerInIds)
         {
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);
             InitializeComponent();
-            playerInList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
-            playerOutList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => lineup.Contains(p.Id));
+            List<Guid> allPlayers = (List<Guid>)ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
+            List<Guid> activePlayers = (List<Guid>)allPlayers.Where(p => (lineup.Contains(p) || playerInIds.Contains(p)) 
+                                                                && !playerOutIds.Contains(p));
+            List<Guid> availablePlayers = (List<Guid>)allPlayers.Where(p => !lineup.Contains(p) && !playerInIds.Contains(p));
+
+
+            playerInList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => activePlayers.Contains(p.Id));
+            playerOutList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => availablePlayers.Contains(p.Id));
             string[] minutes = new string[matchLength];
             for (int i = 1; i <= matchLength; i++)
             {
