@@ -24,9 +24,7 @@ namespace AdminApp
         public NewTeamPage()
         {      
             DataContext = this;
-            InitializeComponent();
-
-            saveTeamArenaNameButton.IsEnabled = false;
+            InitializeComponent();               
        
             listOfPlayers = new List<Player>();          
             _newPlayerWindow = new NewPlayerWindow();            
