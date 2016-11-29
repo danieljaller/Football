@@ -73,6 +73,7 @@
                 </StackPanel>
                 <DatePicker Name="matchDatePicker" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="4" Margin="5" SelectedDateChanged="matchDatePicker_SelectedDateChanged"/>
 
+                <CheckBox Name="isPlayedCheckBox" Grid.Row="1" Grid.Column="1" Content="Spelad" VerticalAlignment="Center" Checked="isPlayedCheckBox_Checked" Unchecked="isPlayedCheckBox_Unchecked"/>
 
                 <TextBlock Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center">Mål</TextBlock>
                 <Button Name="removeGoalHome" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeGoalHome_Click">

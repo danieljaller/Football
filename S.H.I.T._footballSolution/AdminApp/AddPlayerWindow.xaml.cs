@@ -33,7 +33,7 @@ namespace AdminApp
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);
             InitializeComponent();
-            IEnumerable<Player> playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id));
+            IEnumerable<Player> playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id) && p.Playable);
             playerListbox.ItemsSource = playerList;
             InitializeComponent();
         }

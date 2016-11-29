@@ -303,7 +303,7 @@ namespace AdminApp
             var playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id);
-            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup, playerOutIds, playerInIds);
+            var addExchangeWindow = new AddExchangeWindow(homeLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -321,7 +321,7 @@ namespace AdminApp
             var playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id);
-            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup, playerOutIds, playerInIds);
+            var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
