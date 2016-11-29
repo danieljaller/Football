@@ -32,7 +32,7 @@ namespace AdminApp
         IEnumerable<Player> playerOutList;
 
 
-        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, IEnumerable<Guid> PlayerOutIds, IEnumerable<Guid> PlayerInIds)
+        public AddExchangeWindow(ObservableCollection<Guid> lineup, IEnumerable<Guid> PlayerOutIds, IEnumerable<Guid> PlayerInIds)
             :this(lineup, 90, PlayerOutIds, PlayerInIds)
         { }
 

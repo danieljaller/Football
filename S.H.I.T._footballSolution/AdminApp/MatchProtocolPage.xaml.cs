@@ -58,7 +58,7 @@ namespace AdminApp
         ObservableCollection<Guid> visitorLineupBackup;
         ObservableCollection<Exchange> homeExchangesBackup;
         ObservableCollection<Exchange> visitorExchangesBackup;
-
+        private bool isPlayedBackup;
 
         public MatchProtocolPage()
         {
@@ -292,7 +292,7 @@ namespace AdminApp
             List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
-            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup, playerOutIds, playerInIds);
+            var addExchangeWindow = new AddExchangeWindow(homeLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -310,7 +310,7 @@ namespace AdminApp
             List<Guid> playerInIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id);
-            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup, playerOutIds, playerInIds);
+            var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -330,6 +330,7 @@ namespace AdminApp
         private void matchesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             convertListsToObjects();
+            isPlayedCheckBox.IsChecked = match.IsPlayed;
             homeTeamNameBlock.DataContext = homeTeam;
             visitorTeamNameBlock.DataContext = visitorTeam;
             if (isPlayed)
@@ -366,28 +367,29 @@ namespace AdminApp
             homeScore = match.HomeGoals.Count();
             visitorScore = match.VisitorGoals.Count();
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
-            homeGoalsBackup = new ObservableCollection<Event>(homeGoals);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
-            visitorGoalsBackup = new ObservableCollection<Event>(visitorGoals);
             homeAssists = new ObservableCollection<Event>(match.HomeAssists);
-            homeAssistsBackup = new ObservableCollection<Event>(homeAssists);
             visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
-            visitorAssistsBackup = new ObservableCollection<Event>(visitorAssists);
             homeRedCards = new ObservableCollection<Event>(match.HomeRedCards);
-            homeRedCardsBackup = new ObservableCollection<Event>(homeRedCards);
             visitorRedCards = new ObservableCollection<Event>(match.VisitorRedCards);
-            visitorRedCardsBackup = new ObservableCollection<Event>(visitorRedCards);
             homeYellowCards = new ObservableCollection<Event>(match.HomeYellowCards);
-            homeYellowCardsBackup = new ObservableCollection<Event>(homeYellowCards);
             visitorYellowCards = new ObservableCollection<Event>(match.VisitorYellowCards);
-            visitorYellowCardsBackup = new ObservableCollection<Event>(visitorYellowCards);
             homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
-            homeLineupBackup = new ObservableCollection<Guid>(homeLineup);
             visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
-            visitorLineupBackup = new ObservableCollection<Guid>(visitorLineup);
             homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
-            homeExchangesBackup = new ObservableCollection<Exchange>(homeExchanges);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
+
+            homeGoalsBackup = new ObservableCollection<Event>(homeGoals);
+            visitorGoalsBackup = new ObservableCollection<Event>(visitorGoals);
+            homeAssistsBackup = new ObservableCollection<Event>(homeAssists);
+            homeRedCardsBackup = new ObservableCollection<Event>(homeRedCards);
+            visitorRedCardsBackup = new ObservableCollection<Event>(visitorRedCards);
+            visitorAssistsBackup = new ObservableCollection<Event>(visitorAssists);
+            homeYellowCardsBackup = new ObservableCollection<Event>(homeYellowCards);
+            visitorYellowCardsBackup = new ObservableCollection<Event>(visitorYellowCards);
+            homeLineupBackup = new ObservableCollection<Guid>(homeLineup);
+            visitorLineupBackup = new ObservableCollection<Guid>(visitorLineup);
+            homeExchangesBackup = new ObservableCollection<Exchange>(homeExchanges);
             visitorExchangesBackup = new ObservableCollection<Exchange>(visitorExchanges);
         }
 
@@ -397,6 +399,19 @@ namespace AdminApp
             ServiceLocator.Instance.PlayerService.Save();
             ServiceLocator.Instance.SerieService.Save();
             ServiceLocator.Instance.TeamService.Save();
+
+            homeGoalsBackup = homeGoals;
+            visitorGoalsBackup = visitorGoals;
+            homeAssistsBackup = homeAssists;
+            homeRedCardsBackup = homeRedCards;
+            visitorRedCardsBackup = visitorRedCards;
+            visitorAssistsBackup = visitorAssists;
+            homeYellowCardsBackup = homeYellowCards;
+            visitorYellowCardsBackup = visitorYellowCards;
+            homeLineupBackup = homeLineup;
+            visitorLineupBackup = visitorLineup;
+            homeExchangesBackup = homeExchanges;
+            visitorExchangesBackup = visitorExchanges;
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
@@ -413,6 +428,7 @@ namespace AdminApp
             match.VisitorLineup = visitorLineupBackup.ToHashSet();
             match.HomeExchanges = homeExchangesBackup.ToHashSet();
             match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
+            isPlayedCheckBox.IsChecked = isPlayedBackup;
 
             convertListsToObjects();
 
@@ -428,6 +444,26 @@ namespace AdminApp
             visitorLineupList.ItemsSource = visitorLineup;
             homeExchangesList.ItemsSource = homeExchanges;
             visitorExchangesList.ItemsSource = visitorExchanges;
+            if (isPlayed)
+            {
+                homeTeamScoreBlock.DataContext = homeScore;
+                visitorTeamScoreBlock.DataContext = visitorScore;
+            }
+            else
+            {
+                homeTeamScoreBlock.DataContext = " ";
+                visitorTeamScoreBlock.DataContext = " ";
+            }
+        }
+
+        private void isPlayedCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            match.IsPlayed = true;
+        }
+
+        private void isPlayedCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            match.IsPlayed = false;
         }
     }
 }
