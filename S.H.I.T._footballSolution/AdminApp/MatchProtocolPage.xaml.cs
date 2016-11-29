@@ -130,7 +130,7 @@ namespace AdminApp
 
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
         {
-            //MatchMinute[] minutes = new MatchMinute[homeGoals.Count()](homeGoals.Select)
+            List<MatchMinute> minutes = match.HomeGoals.Select(g => g.TimeOfEvent).ToList();
             var addEventWindow = new AddEvent(minutes, homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
