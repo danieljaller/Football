@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
       mc:Ignorable="d" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="CreateSchedulePage">
     <Page.Resources>
@@ -20,99 +21,108 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid Background="White" Name="grid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.ColumnSpan="4" Fill="LightBlue"/>
-        <TextBlock Grid.Column="0" HorizontalAlignment="Center" >Hemmalag</TextBlock>
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center">-</TextBlock>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" >Bortalag</TextBlock>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Center" >Resultat</TextBlock>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Center" >Datum</TextBlock>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Resources>
+                <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">13</sys:Double>
+            </ScrollViewer.Resources>
+            <Grid Background="White" Name="grid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.ColumnSpan="4" Fill="LightBlue"/>
+                <TextBlock Grid.Column="0" HorizontalAlignment="Center" >Hemmalag</TextBlock>
+                <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center">-</TextBlock>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" >Bortalag</TextBlock>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center" >Resultat</TextBlock>
+                <TextBlock Grid.Column="3" HorizontalAlignment="Center" >Datum</TextBlock>
 
-        <ListBox x:Name="homeTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="0"  BorderThickness="0" IsHitTestVisible="False">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}" Height="23"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                <ListBox x:Name="homeTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="0"  BorderThickness="0" IsHitTestVisible="False">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" Height="23"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
-        <ListBox x:Name="visitorTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="1"  BorderThickness="0" IsHitTestVisible="False">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}" Height="23"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <ListBox x:Name="resultListBox" AlternationCount="2" Grid.Row="1" Grid.Column="2"  BorderThickness="0" IsHitTestVisible="False">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Result}" Height="23"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <ListBox x:Name="dateListBox" AlternationCount="2" Grid.Row="1" Grid.Column="3" BorderThickness="0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <DatePicker 
-                        x:Name="matchDatePicker"
-                        Height="23"
-                        Width="100"
-                        Text="{Binding Path=Date}"
-                        SelectedDateChanged="matchDatePicker_SelectedDateChanged"
-                        GotFocus="matchDatePicker_GotFocus">
-                        <DatePicker.Style>
-                            <Style TargetType="{x:Type DatePicker}">
-                                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                <Style.Triggers>
-                                    <DataTrigger
+                <ListBox x:Name="visitorTeamListBox" AlternationCount="2" Grid.Row="1" Grid.Column="1"  BorderThickness="0" IsHitTestVisible="False">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" Height="23"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox x:Name="resultListBox" AlternationCount="2" Grid.Row="1" Grid.Column="2"  BorderThickness="0" IsHitTestVisible="False">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Result}" Height="23"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox x:Name="dateListBox" AlternationCount="2" Grid.Row="1" Grid.Column="3" BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <DatePicker 
+                                            x:Name="matchDatePicker"
+                                            Height="23"
+                                            Width="100"
+                                            Text="{Binding Path=Date}"
+                                            SelectedDateChanged="matchDatePicker_SelectedDateChanged">
+                                    <DatePicker.Style>
+                                        <Style TargetType="{x:Type DatePicker}">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                            <Style.Triggers>
+                                                <DataTrigger
                                         Binding="{Binding
                                             RelativeSource={RelativeSource
                                                 Mode=FindAncestor,
                                                 AncestorType={x:Type ListBoxItem}},
                                                 Path=IsSelected}"
                                                 Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DatePicker.Style>
-                    </DatePicker>
-                        <TextBlock Text="{Binding ElementName=matchDatePicker, Path=SelectedDate, StringFormat='yyyy-MM-dd'}">
-                            <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DatePicker.Style>
+                                </DatePicker>
+                                <TextBlock Text="{Binding ElementName=matchDatePicker, Path=SelectedDate, StringFormat='yyyy-MM-dd'}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <Style.Triggers>
+                                                <DataTrigger
                                         Binding="{Binding
                                             RelativeSource={RelativeSource
                                                 Mode=FindAncestor,
                                                 AncestorType={x:Type ListBoxItem}},
                                                 Path=IsSelected}"
                                                 Value="True">
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                        </TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button Name="createSerieButton" Content="Skapa serie" Grid.Row="2" Grid.Column="3" Margin="0,20,0,0" Click="createSerieButton_Click"/>
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </ScrollViewer>
+        <Button Name="createSerieButton" Content="Skapa serie" Grid.Row="1" Width="70" HorizontalAlignment="Right" Margin="0,15,5,5" Click="createSerieButton_Click"/>
     </Grid>
 </Page>
