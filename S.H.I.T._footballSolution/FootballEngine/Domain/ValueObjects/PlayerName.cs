@@ -23,7 +23,7 @@ namespace FootballEngine.Domain.ValueObjects
         private static bool IsValidName(string name)
         {
             if (name == null)
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException($"{nameof(name)} can't be null");
 
             if (name.Length > MaxLenght)
                 throw new ArgumentOutOfRangeException($"{nameof(name)} is too long. Maximum length is {MaxLenght} characters.");
