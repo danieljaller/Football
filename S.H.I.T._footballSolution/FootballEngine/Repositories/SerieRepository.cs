@@ -69,12 +69,25 @@ namespace FootballEngine.Repositories
 
         public Serie GetBy(Guid id)
         {
-            return _series.Find(s => s.Id == id);
+            foreach (Serie serie in _series)
+            {
+                if (serie.Id == id)
+                    return serie;
+            }
+            return null;
         }
 
         public Serie GetBy(string name)
         {
-            return _series.Find(s => s.Name.Value == name);
+            if (name != null)
+            {
+                foreach (Serie serie in _series)
+                {
+                    if (serie.Name.Value == name)
+                        return serie;
+                }
+            }
+            return null;
         }
 
         public void Load()
