@@ -381,11 +381,19 @@ namespace AdminApp
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            ServiceLocator.Instance.MatchService.Save();
-            ServiceLocator.Instance.TeamService.Save();
-            ServiceLocator.Instance.PlayerService.Save();
-            ServiceLocator.Instance.SerieService.Save();
-            Close();
+            if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
+            {
+                ServiceLocator.Instance.MatchService.Save();
+                ServiceLocator.Instance.TeamService.Save();
+                ServiceLocator.Instance.PlayerService.Save();
+                ServiceLocator.Instance.SerieService.Save();
+                Close();
+                MessageBox.Show($"Matchprotokoll sparat");
+            }
+            else
+            {
+                MessageBox.Show($"En laguppställning måste bestå av 11 spelare");
+            }
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
