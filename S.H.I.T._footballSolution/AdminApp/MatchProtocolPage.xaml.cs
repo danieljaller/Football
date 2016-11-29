@@ -285,7 +285,13 @@ namespace AdminApp
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup);
+            List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                                    .Select(p => p.Id).ToList();
+            List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
+                                                    .Select(p => p.Id).ToList();
+            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -297,7 +303,13 @@ namespace AdminApp
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup);
+            List<Guid> playerOutIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                        .Select(p => p.Id);
+            List<Guid> playerInIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
+                                                    .Select(p => p.Id);
+            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {

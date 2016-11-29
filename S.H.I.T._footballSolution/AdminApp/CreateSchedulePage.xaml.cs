@@ -24,9 +24,6 @@ namespace AdminApp
     /// </summary>
     public partial class CreateSchedulePage : Page
     {
-        //MatchService matchService = new MatchService();
-        //TeamService teamService = new TeamService();
-        //SerieService serieService = new SerieService();
         private string serieName;
         private List<Guid> matchScheduleWithIds = new List<Guid>();
         private List<Team> teamList = new List<Team>();

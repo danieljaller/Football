@@ -69,7 +69,12 @@ namespace FootballEngine.Repositories
 
         public Match GetBy(Guid id)
         {
-            return _matches.Find(s => s.Id == id);
+            foreach(var match in _matches)
+            {
+                if (match.Id == id)
+                    return match;
+            }
+            return null;
         }
 
         public Match GetBy(string name)

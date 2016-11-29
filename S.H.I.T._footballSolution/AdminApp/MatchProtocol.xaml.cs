@@ -284,7 +284,13 @@ namespace AdminApp
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup);
+            var playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                                     .Select(p => p.Id);
+            var playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
+                                                    .Select(p => p.Id);
+            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -296,7 +302,13 @@ namespace AdminApp
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup);
+            var playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                        .Select(p => p.Id);
+            var playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
+                                                    .Select(p => p.Id);
+            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
