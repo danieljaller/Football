@@ -15,24 +15,25 @@ namespace AdminApp
     {
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
-        NewPlayerWindow _newPlayerWindow;       
+        NewPlayerWindow _newPlayerWindow;
         List<Player> listOfPlayers;
         List<Player> listOfPlayersUnChecked;
         bool playersAreValid;
         Team team;
 
         public NewTeamPage()
-        {      
+        {
             DataContext = this;
-            InitializeComponent();               
-       
-            listOfPlayers = new List<Player>();          
-            _newPlayerWindow = new NewPlayerWindow();            
+            InitializeComponent();
+
+            listOfPlayers = new List<Player>();
+            _newPlayerWindow = new NewPlayerWindow();
             playersList.ItemsSource = _newPlayerWindow.tempPlayersList;
             ToggleCreateTeamButton();
             ToggleNewPlayerButton();
             listOfPlayersUnChecked = new List<Player>();
             showCreatedTeam.Text = $"";
+
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -85,7 +86,7 @@ namespace AdminApp
 
             if (newPlayerWindowResult == true)
             {
-                listOfPlayers = newPlayerWindow.tempPlayersList;                
+                listOfPlayers = newPlayerWindow.tempPlayersList;
             }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
@@ -94,7 +95,7 @@ namespace AdminApp
 
         private void ToggleNewPlayerButton()
         {
-            if (TeamName != null  && ArenaName != null)
+            if (TeamName != null && ArenaName != null)
             {
                 NewPlayerButton.IsEnabled = true;
             }
@@ -123,8 +124,10 @@ namespace AdminApp
                 team.PlayerIds.Add(pl.Id);
                 pl.TeamId = team.Id;
                 ServiceLocator.Instance.PlayerService.Add(pl);
+                //ServiceLocator.Instance.PlayerService.Save();
             }
             ServiceLocator.Instance.TeamService.Add(team);
+            //ServiceLocator.Instance.TeamService.Save();
             CreateTeamButton.IsEnabled = false;
             showCreatedTeam.Text = $"Du har lagt till laget {TeamName}";
         }
@@ -132,7 +135,7 @@ namespace AdminApp
         private void saveTeamArenaNameButton_Click(object sender, RoutedEventArgs e)
         {
             NewPlayerButton.IsEnabled = true;
-            saveTeamArenaNameButton.IsEnabled = false;            
+            saveTeamArenaNameButton.IsEnabled = false;
         }
 
         private void Binding_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)

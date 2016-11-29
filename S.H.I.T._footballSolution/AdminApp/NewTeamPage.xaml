@@ -29,7 +29,7 @@
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Namn:"/>
-            
+
             <TextBox Name="teamName" Margin="5" Width="100" 
                      ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}">
                 <TextBox.Text>
@@ -52,11 +52,11 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" >              
+            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" >
                 <Button.Visibility>
                     <MultiBinding Converter="{StaticResource isEnabledConverter}">
                         <Binding ElementName="teamName" Path="(Validation.Errors)[0]" />
-                        <Binding ElementName="arenaName" Path="(Validation.Errors)[0]" />                        
+                        <Binding ElementName="arenaName" Path="(Validation.Errors)[0]" />
                     </MultiBinding>
                 </Button.Visibility>
             </Button>
@@ -86,6 +86,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Name="showCreatedTeam" Text="{Binding}" Grid.Row="2" Grid.Column="2" Margin="5,180,5,5"></TextBlock>
+        <TextBlock Name="showCreatedTeam" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Text="{Binding}" Grid.Column="2" Margin="5,5,5,5"></TextBlock>
     </Grid>
 </Page>
