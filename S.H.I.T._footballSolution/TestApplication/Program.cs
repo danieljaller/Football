@@ -118,7 +118,7 @@ namespace TestApplication
                     matchList = MatchTableFactory.CreateMatchTable(teamList,
                         GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
 
-                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToList().ToHashSet(), matchList.Select(match => match.Id).ToList().ToHashSet());
+                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToHashSet(), matchList.Select(match => match.Id).ToHashSet());
 
                     foreach (Team team in teamList)
                         team.SerieIds.Add(serie.Id);
