@@ -31,7 +31,7 @@
             <TextBlock Margin="5" Text="Namn:"/>
 
             <TextBox Name="teamName" Margin="5" Width="100" 
-                     ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}">
+                     ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}" TextChanged="teamName_TextChanged">
                 <TextBox.Text>
                     <Binding Path="TeamName" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -42,8 +42,8 @@
             </TextBox>
 
             <TextBlock  Text="Arena:" Margin="5"/>
-            <TextBox Name="arenaName" Margin="5"  Grid.Row="1" Grid.Column="2" Width="100" 
-                     ToolTip="{Binding ElementName=arenaName, Path=(Validation.Errors)[0].ErrorContent}">
+            <TextBox Name="arenaName"  Margin="5"  Grid.Row="1" Grid.Column="2" Width="100" 
+                     ToolTip="{Binding ElementName=arenaName, Path=(Validation.Errors)[0].ErrorContent}" TextChanged="arenaName_TextChanged">
                 <TextBox.Text>
                     <Binding Path="ArenaName"  UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -53,12 +53,12 @@
                 </TextBox.Text>
             </TextBox>
             <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" >
-                <Button.Visibility>
+                <!--<Button.Visibility>
                     <MultiBinding Converter="{StaticResource isEnabledConverter}">
                         <Binding ElementName="teamName" Path="(Validation.Errors)[0]" />
                         <Binding ElementName="arenaName" Path="(Validation.Errors)[0]" />
                     </MultiBinding>
-                </Button.Visibility>
+                </Button.Visibility>-->
             </Button>
         </StackPanel>
 

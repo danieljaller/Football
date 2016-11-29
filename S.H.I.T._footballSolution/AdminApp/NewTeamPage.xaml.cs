@@ -5,6 +5,7 @@ using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using System.Collections.ObjectModel;
 using FootballEngine.Helper;
+using System;
 
 namespace AdminApp
 {
@@ -32,6 +33,7 @@ namespace AdminApp
             ToggleCreateTeamButton();
             ToggleNewPlayerButton();
             listOfPlayersUnChecked = new List<Player>();
+            saveTeamArenaNameButton.IsEnabled = false;
             showCreatedTeam.Text = $"";
 
         }
@@ -124,9 +126,9 @@ namespace AdminApp
                 team.PlayerIds.Add(pl.Id);
                 pl.TeamId = team.Id;
                 ServiceLocator.Instance.PlayerService.Add(pl);
-                //ServiceLocator.Instance.PlayerService.Save();
             }
             ServiceLocator.Instance.TeamService.Add(team);
+            //ServiceLocator.Instance.PlayerService.Save();
             //ServiceLocator.Instance.TeamService.Save();
             CreateTeamButton.IsEnabled = false;
             showCreatedTeam.Text = $"Du har lagt till laget {TeamName}";
@@ -141,6 +143,48 @@ namespace AdminApp
         private void Binding_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
         {
 
+        }
+
+        private bool teamNameIsValid;
+
+        private void teamName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                new GeneralName(teamName.Text);
+                teamNameIsValid = true;
+            }
+            catch (Exception)
+            {
+                teamNameIsValid = false;
+            }
+
+            enable_saveTeamArenaNameButton();
+        }
+
+        private bool arenaNameIsValid;
+
+        private void arenaName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                new GeneralName(arenaName.Text);
+                arenaNameIsValid = true;
+            }
+            catch (Exception)
+            {
+                arenaNameIsValid = false;
+            }
+
+            enable_saveTeamArenaNameButton();
+        }
+
+        private void enable_saveTeamArenaNameButton()
+        {
+            if (arenaNameIsValid && teamNameIsValid)
+                saveTeamArenaNameButton.IsEnabled = true;
+            else
+                saveTeamArenaNameButton.IsEnabled = false;
         }
     }
 }
