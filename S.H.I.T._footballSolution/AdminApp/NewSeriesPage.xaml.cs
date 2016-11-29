@@ -52,6 +52,7 @@ namespace AdminApp
             //var teamIds = teamList.Select(x => x.Id).ToList();
             var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, Convert.ToDateTime(serieDatePicker.SelectedDate));
             
+            ServiceLocator.Instance.MatchService.AddRange(matchSchedule);
             newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList);
         }
 
