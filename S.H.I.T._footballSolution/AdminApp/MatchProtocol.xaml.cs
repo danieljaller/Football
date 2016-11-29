@@ -53,6 +53,7 @@ namespace AdminApp
         ObservableCollection<Guid> visitorLineupBackup;
         ObservableCollection<Exchange> homeExchangesBackup;
         ObservableCollection<Exchange> visitorExchangesBackup;
+        private bool isPlayedBackup;
 
 
         public MatchProtocol(Match _match)
@@ -94,7 +95,7 @@ namespace AdminApp
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -108,7 +109,7 @@ namespace AdminApp
 
         private void addGoalAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -139,7 +140,7 @@ namespace AdminApp
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
         {
             List<MatchMinute> minutes = match.HomeGoals.Select(g => g.TimeOfEvent).ToList();
-            var addEventWindow = new AddEvent(homeTeam, minutes);
+            var addEventWindow = new AddEvent(minutes, homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -151,7 +152,8 @@ namespace AdminApp
 
         private void addAssistAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            List<MatchMinute> minutes = match.HomeGoals.Select(g => g.TimeOfEvent).ToList();
+            var addEventWindow = new AddEvent(minutes, visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -177,7 +179,7 @@ namespace AdminApp
 
         private void addRedCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -189,7 +191,7 @@ namespace AdminApp
 
         private void addRedCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -215,7 +217,7 @@ namespace AdminApp
 
         private void addYellowCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -227,7 +229,7 @@ namespace AdminApp
 
         private void addYellowCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -338,6 +340,7 @@ namespace AdminApp
 
         private void ConvertListsToObjects()
         {
+            isPlayedBackup = match.IsPlayed;
             homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
@@ -391,6 +394,7 @@ namespace AdminApp
             match.VisitorLineup = visitorLineupBackup.ToHashSet();
             match.HomeExchanges = homeExchangesBackup.ToHashSet();
             match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
+            isPlayedCheckBox.IsChecked = isPlayedBackup;
 
             ConvertListsToObjects();
 
@@ -406,7 +410,7 @@ namespace AdminApp
             visitorLineupList.ItemsSource = visitorLineup;
             homeExchangesList.ItemsSource = homeExchanges;
             visitorExchangesList.ItemsSource = visitorExchanges;
-
+            
             Close();
         }
 
