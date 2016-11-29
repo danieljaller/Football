@@ -59,9 +59,22 @@ namespace AdminApp
         {
             match = _match;
             InitializeComponent();
-            matchDatePicker.SelectedDate = match.Date.Value;
             ConvertListsToObjects();
+
             isPlayedCheckBox.IsChecked = match.IsPlayed;
+            matchDatePicker.SelectedDate = match.Date.Value;
+            homeGoalsList.ItemsSource = match.HomeGoals;
+            visitorGoalsList.ItemsSource = match.VisitorGoals;
+            homeAssistsList.ItemsSource = match.HomeAssists;
+            visitorAssistsList.ItemsSource = match.VisitorAssists;
+            homeExchangesList.ItemsSource = match.HomeExchanges;
+            visitorExchangesList.ItemsSource = match.VisitorExchanges;
+            homeLineupList.ItemsSource = match.HomeLineup;
+            visitorLineupList.ItemsSource = match.VisitorLineup;
+            homeRedCardsList.ItemsSource = match.HomeRedCards;
+            visitorRedCardsList.ItemsSource = match.VisitorRedCards;
+            homeYellowCardsList.ItemsSource = match.HomeYellowCards;
+            visitorRedCardsList.ItemsSource = match.VisitorYellowCards;
         }
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -76,6 +89,7 @@ namespace AdminApp
             homeScore--;
             homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
+            
         }
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
