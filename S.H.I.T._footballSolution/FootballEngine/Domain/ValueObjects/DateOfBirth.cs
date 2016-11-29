@@ -9,9 +9,9 @@ namespace FootballEngine.Domain.ValueObjects
     public class DateOfBirth
     {
         public static readonly int MaxAge = 100;
-        public static readonly DateTime MaxDateOfBirth = DateTime.Now.AddYears(-100).Date;
+        public static readonly DateTime MaxDateOfBirth = DateTime.Now.AddYears(-MaxAge).Date;
         public static readonly int MinAge = 16;
-        public static readonly DateTime MinDateOfBirth = DateTime.Now.AddYears(-16).Date;
+        public static readonly DateTime MinDateOfBirth = DateTime.Now.AddYears(-MinAge).Date;
 
         public DateTime Value { get; set; }
 
