@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace AdminApp.Converters
 {
-    public class IsEnabledConverter : IMultiValueConverter
+    public class IsEnabledConverterAddPlayer : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

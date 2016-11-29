@@ -22,13 +22,12 @@ namespace AdminApp
         Team team;
 
         public NewTeamPage()
-        {
-            TeamName = "ggg";
-            ArenaName = "ggg";
+        {      
             DataContext = this;
             InitializeComponent();
 
-            
+            saveTeamArenaNameButton.IsEnabled = false;
+       
             listOfPlayers = new List<Player>();          
             _newPlayerWindow = new NewPlayerWindow();            
             playersList.ItemsSource = _newPlayerWindow.tempPlayersList;
@@ -136,6 +135,11 @@ namespace AdminApp
         {
             NewPlayerButton.IsEnabled = true;
             saveTeamArenaNameButton.IsEnabled = false;            
+        }
+
+        private void Binding_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+
         }
     }
 }

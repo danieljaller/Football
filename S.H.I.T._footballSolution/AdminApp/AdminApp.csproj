@@ -73,7 +73,7 @@
     </Compile>
     <Compile Include="Converters\GeneralNameValidationRule.cs" />
     <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
-    <Compile Include="Converters\IsEnabledConverter.cs" />
+    <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
     <Compile Include="Converters\NameValidationRule.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="CreateSchedulePage.xaml.cs">

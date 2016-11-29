@@ -11,7 +11,7 @@
 
     <Page.Resources>
         <Converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
-        <Converters:IsEnabledConverter x:Key="isEnabledConverter"/>
+        <Converters:IsEnabledConverterAddPlayer x:Key="isEnabledConverter"/>
     </Page.Resources>
     <Grid Background="white">
         <Grid.ColumnDefinitions>
@@ -42,22 +42,23 @@
             </TextBox>
 
             <TextBlock  Text="Arena:" Margin="5"/>
-            <TextBox Name="arenaName" Margin="5"  Grid.Row="1" Grid.Column="2" Width="100" ToolTip="{Binding ElementName=arenaName, Path=(Validation.Errors)[0].ErrorContent}">
+            <TextBox Name="arenaName" Margin="5"  Grid.Row="1" Grid.Column="2" Width="100" 
+                     ToolTip="{Binding ElementName=arenaName, Path=(Validation.Errors)[0].ErrorContent}">
                 <TextBox.Text>
-                    <Binding Path="ArenaName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="ArenaName"  UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <Converters:GeneralNameValidationRule/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" >
-                <Button.IsEnabled>
+            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" >              
+                <Button.Visibility>
                     <MultiBinding Converter="{StaticResource isEnabledConverter}">
                         <Binding ElementName="teamName" Path="(Validation.Errors)[0]" />
                         <Binding ElementName="arenaName" Path="(Validation.Errors)[0]" />                        
                     </MultiBinding>
-                </Button.IsEnabled>
+                </Button.Visibility>
             </Button>
         </StackPanel>
 
