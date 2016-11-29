@@ -91,7 +91,6 @@
     <Compile Include="StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TempMatchToStringConverter.cs" />
     <Compile Include="MatchProtocol.xaml.cs">
       <DependentUpon>MatchProtocol.xaml</DependentUpon>
     </Compile>
