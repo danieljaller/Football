@@ -395,23 +395,32 @@ namespace AdminApp
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            ServiceLocator.Instance.MatchService.Save();
-            ServiceLocator.Instance.PlayerService.Save();
-            ServiceLocator.Instance.SerieService.Save();
-            ServiceLocator.Instance.TeamService.Save();
+            if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
+            {
+                ServiceLocator.Instance.MatchService.Save();
+                ServiceLocator.Instance.PlayerService.Save();
+                ServiceLocator.Instance.SerieService.Save();
+                ServiceLocator.Instance.TeamService.Save();
 
-            homeGoalsBackup = homeGoals;
-            visitorGoalsBackup = visitorGoals;
-            homeAssistsBackup = homeAssists;
-            homeRedCardsBackup = homeRedCards;
-            visitorRedCardsBackup = visitorRedCards;
-            visitorAssistsBackup = visitorAssists;
-            homeYellowCardsBackup = homeYellowCards;
-            visitorYellowCardsBackup = visitorYellowCards;
-            homeLineupBackup = homeLineup;
-            visitorLineupBackup = visitorLineup;
-            homeExchangesBackup = homeExchanges;
-            visitorExchangesBackup = visitorExchanges;
+                isPlayedBackup = match.IsPlayed;
+                homeGoalsBackup = homeGoals;
+                visitorGoalsBackup = visitorGoals;
+                homeAssistsBackup = homeAssists;
+                homeRedCardsBackup = homeRedCards;
+                visitorRedCardsBackup = visitorRedCards;
+                visitorAssistsBackup = visitorAssists;
+                homeYellowCardsBackup = homeYellowCards;
+                visitorYellowCardsBackup = visitorYellowCards;
+                homeLineupBackup = homeLineup;
+                visitorLineupBackup = visitorLineup;
+                homeExchangesBackup = homeExchanges;
+                visitorExchangesBackup = visitorExchanges;
+                MessageBox.Show($"Matchprotokoll sparat");
+            }
+            else
+            {
+                MessageBox.Show($"En laguppställning måste bestå av 11 spelare");
+            }
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
