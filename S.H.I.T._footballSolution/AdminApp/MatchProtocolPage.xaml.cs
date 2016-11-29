@@ -356,5 +356,15 @@ namespace AdminApp
             homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
         }
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

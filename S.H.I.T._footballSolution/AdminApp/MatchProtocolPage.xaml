@@ -59,6 +59,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
@@ -472,7 +473,8 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-
+            <Button Name="okButton" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="100" Height="20" Margin="20, 0, 0, 0" Click="okButton_Click" >OK</Button>
+            <Button Name="cancelButton" Grid.Column="2" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="0,0,20,0" Click="cancelButton_Click">Cancel</Button>
 
         </Grid>
 
