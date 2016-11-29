@@ -54,6 +54,7 @@ namespace AdminApp
         ObservableCollection<Exchange> homeExchangesBackup;
         ObservableCollection<Exchange> visitorExchangesBackup;
         private bool isPlayedBackup;
+        private DateTime dateBackup;
 
 
         public MatchProtocol(Match _match)
@@ -61,6 +62,9 @@ namespace AdminApp
             match = _match;
             InitializeComponent();
             ConvertListsToObjects();
+
+            if(match.Date.Value >= DateTime.Today)
+                isPlayedCheckBox.IsEnabled = false;
 
             isPlayedCheckBox.IsChecked = match.IsPlayed;
             matchDatePicker.SelectedDate = match.Date.Value;
@@ -81,6 +85,9 @@ namespace AdminApp
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             match.Date.Value = (DateTime)matchDatePicker.SelectedDate;
+
+            if (match.Date.Value < DateTime.Today)
+                isPlayedCheckBox.IsEnabled = true;
         }
 
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
@@ -341,6 +348,7 @@ namespace AdminApp
         private void ConvertListsToObjects()
         {
             isPlayedBackup = match.IsPlayed;
+            dateBackup = match.Date.Value;
             homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
@@ -395,6 +403,7 @@ namespace AdminApp
             match.HomeExchanges = homeExchangesBackup.ToHashSet();
             match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
             isPlayedCheckBox.IsChecked = isPlayedBackup;
+            matchDatePicker.SelectedDate = dateBackup;
 
             ConvertListsToObjects();
 

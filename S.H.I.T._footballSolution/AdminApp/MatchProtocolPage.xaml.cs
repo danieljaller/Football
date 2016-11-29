@@ -1,21 +1,11 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Helper;
 
 namespace AdminApp
@@ -25,9 +15,6 @@ namespace AdminApp
     /// </summary>
     public partial class MatchProtocolPage : Page
     {
-        //MatchService matchService;
-        //TeamService teamService;
-        //PlayerService playerService;
         Match match;
         Team homeTeam;
         Team visitorTeam;
@@ -62,10 +49,8 @@ namespace AdminApp
 
         public MatchProtocolPage()
         {
-            //matchService = new MatchService();
-            //teamService = new TeamService();
-            //playerService = new PlayerService(teamService);
             InitializeComponent();
+            
             matchDatePicker.DisplayDateStart = DateTime.Today;
             matchesList.ItemsSource = ServiceLocator.Instance.MatchService.GetAll(); 
         }
