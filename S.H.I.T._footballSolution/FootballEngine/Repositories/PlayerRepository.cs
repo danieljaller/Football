@@ -22,6 +22,7 @@ namespace FootballEngine.Repositories
             _path = Path.Combine(_path, "Players.xml");
             Load();
         }
+
         private static PlayerRepository _instance;
         public static PlayerRepository Instance
         {
@@ -33,12 +34,15 @@ namespace FootballEngine.Repositories
                 return _instance;
             }
         }
+
         public void Add(Player player)
         {
             if (player == null)
-                return;
-            if (!_players.Select(s => s.Id).Contains(player.Id))
-                _players.Add(player);
+                throw new ArgumentNullException($"{nameof(player)} cannot be null.");
+            if (_players.Select(s => s.Id).Contains(player.Id))
+                throw new ArgumentException($"A {nameof(player)} with the id '{player.Id}' already exsist in the repository.");
+
+            _players.Add(player);
         }
 
         public void AddRange(IEnumerable<Player> players)
@@ -50,7 +54,8 @@ namespace FootballEngine.Repositories
             if (players.Contains(null))
                 throw new ArgumentException($"{nameof(players)} cannot contain null elements.");
 
-            _players.AddRange(players);
+            foreach (Player player in players)
+                Add(player);
         }
 
         public void Delete(Guid id)
@@ -67,23 +72,19 @@ namespace FootballEngine.Repositories
         public Player GetBy(Guid id)
         {
             foreach (var player in _players)
-            {
                 if (player.Id == id)
                     return player;
-            }
+            
             return null;
         }
 
         public Player GetBy(string name)
         {
             if (name != null)
-            {
                 foreach (Player player in _players)
-                {
                     if (player.FullName == name)
                         return player;
-                }
-            }
+             
             return null;
         }
 
@@ -119,7 +120,9 @@ namespace FootballEngine.Repositories
                 throw s;
             }
             catch (ArgumentException a)
-            { throw a; }
+            {
+                throw a;
+            }
         }
     }
 }

@@ -34,12 +34,17 @@ namespace FootballEngine.Repositories
                 return _instance;
             }
         }
+
         public void Add(Serie serie)
         {
             if (serie == null)
-                return;
-            if (!_series.Select(s => s.Id).Contains(serie.Id)) // Should check for name too!
-                _series.Add(serie);
+                throw new ArgumentNullException($"{nameof(serie)} cannot be null.");
+            if (_series.Select(s => s.Id).Contains(serie.Id))
+                throw new ArgumentException($"A {nameof(serie)} with the id '{serie.Id}' already exsist in the repository.");
+            if (_series.Select(s => s.Name).Contains(serie.Name))
+                throw new ArgumentException($"A {nameof(serie)} with the name '{serie.Name}' already exsist in the repository.");
+
+            _series.Add(serie);
         }
 
         public void AddRange(IEnumerable<Serie> series)
@@ -51,15 +56,14 @@ namespace FootballEngine.Repositories
             if (series.Contains(null))
                 throw new ArgumentException($"{nameof(series)} cannot contain null elements.");
 
-            _series.AddRange(series);
+            foreach (Serie serie in series)
+                Add(serie);
         }
 
         public void Delete(Guid id)
         {
             if (_series.Select(s => s.Id).Contains(id))
-            {
                 _series.Remove(_series.Find(s => s.Id == id));
-            }
         }
 
         public IEnumerable<Serie> GetAll()
@@ -70,23 +74,19 @@ namespace FootballEngine.Repositories
         public Serie GetBy(Guid id)
         {
             foreach (Serie serie in _series)
-            {
                 if (serie.Id == id)
                     return serie;
-            }
+            
             return null;
         }
 
         public Serie GetBy(string name)
         {
             if (name != null)
-            {
                 foreach (Serie serie in _series)
-                {
                     if (serie.Name.Value == name)
                         return serie;
-                }
-            }
+            
             return null;
         }
 
@@ -121,7 +121,9 @@ namespace FootballEngine.Repositories
                 throw s;
             }
             catch (ArgumentException a)
-            { throw a; }
+            {
+                throw a;
+            }
         }
     }
 }

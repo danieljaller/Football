@@ -34,12 +34,14 @@ namespace FootballEngine.Repositories
                 return _instance;
             }
         }
+
         public void Add(Match match)
         {
             if (match == null)
                 throw new ArgumentNullException($"{nameof(match)} cannot be null.");
-            if (!_matches.Select(s => s.Id).Contains(match.Id))
-                _matches.Add(match);
+            if (_matches.Select(s => s.Id).Contains(match.Id))
+                throw new ArgumentException($"A {nameof(match)} with the id '{match.Id}' already exsist in the repository.");
+            _matches.Add(match);
         }
 
         public void AddRange(IEnumerable<Match> matches)
@@ -51,15 +53,14 @@ namespace FootballEngine.Repositories
             if (matches.Contains(null))
                 throw new ArgumentException($"{nameof(matches)} cannot contain null elements.");
 
-            _matches.AddRange(matches);
+            foreach (Match match in matches)
+                Add(match);
         }
 
         public void Delete(Guid id)
         {
             if (_matches.Select(s => s.Id).Contains(id))
-            {
                 _matches.Remove(_matches.Find(s => s.Id == id));
-            }
         }
 
         public IEnumerable<Match> GetAll()
@@ -70,23 +71,19 @@ namespace FootballEngine.Repositories
         public Match GetBy(Guid id)
         {
             foreach(var match in _matches)
-            {
                 if (match.Id == id)
                     return match;
-            }
+
             return null;
         }
 
         public Match GetBy(string location)
         {
             if (location != null)
-            {
                 foreach (var match in _matches)
-                {
                     if (match.Location.Value == location)
                         return match;
-                }
-            }
+
             return null;
         }
 
@@ -119,7 +116,9 @@ namespace FootballEngine.Repositories
                 throw s;
             }
             catch (ArgumentException a)
-            { throw a; }
+            {
+                throw a;
+            }
         }
     }
 }

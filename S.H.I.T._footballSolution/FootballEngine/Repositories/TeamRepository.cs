@@ -24,7 +24,6 @@ namespace FootballEngine.Repositories
         }
 
         private static TeamRepository _instance;
-
         public static TeamRepository Instance
         {
             get
@@ -41,9 +40,9 @@ namespace FootballEngine.Repositories
             if (team == null)
                 throw new ArgumentNullException($"{nameof(team)} cannot be null.");
             if (_teams.Select(t => t.Id).Contains(team.Id))
-                throw new ArgumentException($"A team with the id '{team.Id}' already exsist in the repository.");
+                throw new ArgumentException($"A {nameof(team)} with the id '{team.Id}' already exsist in the repository.");
             if (_teams.Select(t => t.Name).Contains(team.Name))
-                throw new ArgumentException($"A team with the name '{team.Name.Value}' already exsist in the repository.");
+                throw new ArgumentException($"A {nameof(team)} with the name '{team.Name.Value}' already exsist in the repository.");
 
             _teams.Add(team);
         }
@@ -75,23 +74,20 @@ namespace FootballEngine.Repositories
         public Team GetBy(Guid id)
         {
             foreach (Team team in _teams)
-            {
                 if (team.Id == id)
                     return team;
-            }
+            
+
             return null;
         }
 
         public Team GetBy(string name)
         {
             if (name != null)
-            {
                 foreach (Team team in _teams)
-                {
                     if (team.Name.Value == name)
                         return team;
-                }
-            }
+            
             return null;
         }
 
@@ -124,7 +120,9 @@ namespace FootballEngine.Repositories
                 throw s;
             }
             catch (ArgumentException a)
-            { throw a; }
+            {
+                throw a;
+            }
         }
     }
 }
