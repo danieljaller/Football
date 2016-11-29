@@ -55,6 +55,7 @@ namespace AdminApp
             //playerService = new PlayerService(teamService);
             InitializeComponent();
             matchDatePicker.DisplayDateStart = DateTime.Today;
+            ConvertListsToObjects();
         }
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -300,37 +301,7 @@ namespace AdminApp
             visitorExchangesList.ItemsSource = visitorExchanges;
         }
 
-        private void matchesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            convertListsToObjects();
-            homeTeamNameBlock.DataContext = homeTeam;
-            visitorTeamNameBlock.DataContext = visitorTeam;
-            if (isPlayed)
-            {
-                homeTeamScoreBlock.DataContext = homeScore;
-                visitorTeamScoreBlock.DataContext = visitorScore;
-            }
-            else
-            {
-                homeTeamScoreBlock.DataContext = " ";
-                visitorTeamScoreBlock.DataContext = " ";
-            }
-            matchDatePicker.SelectedDate = match.Date.Value;
-            homeGoalsList.ItemsSource = homeGoals;
-            visitorGoalsList.ItemsSource = visitorGoals;
-            homeAssistsList.ItemsSource = homeAssists;
-            visitorAssistsList.ItemsSource = visitorAssists;
-            homeRedCardsList.ItemsSource = homeRedCards;
-            visitorRedCardsList.ItemsSource = visitorRedCards;
-            homeYellowCardsList.ItemsSource = homeYellowCards;
-            visitorYellowCardsList.ItemsSource = visitorYellowCards;
-            homeLineupList.ItemsSource = homeLineup;
-            visitorLineupList.ItemsSource = visitorLineup;
-            homeExchangesList.ItemsSource = homeExchanges;
-            visitorExchangesList.ItemsSource = visitorExchanges;
-        }
-
-        private void convertListsToObjects()
+        private void ConvertListsToObjects()
         {
            
             isPlayed = match.IsPlayed;
@@ -350,6 +321,19 @@ namespace AdminApp
             visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
             homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
+        }
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.Instance.MatchService.Save();
+            ServiceLocator.Instance.TeamService.Save();
+            ServiceLocator.Instance.PlayerService.Save();
+            ServiceLocator.Instance.SerieService.Save();
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

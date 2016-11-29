@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         xmlns:converters="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
-        Title="MatchProtocol" Height="315" Width="440">
+        Title="MatchProtocol" Height="350" Width="440">
     <Window.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
         <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
@@ -43,6 +43,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -447,6 +448,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
                                 <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
@@ -459,7 +461,8 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-
+            <Button Name="okButton" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="100" Height="20" Margin="20,2,0,3" Click="okButton_Click" >OK</Button>
+            <Button Name="cancelButton" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="0,2,20,3" Click="cancelButton_Click">Cancel</Button>
 
         </Grid>
 
