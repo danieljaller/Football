@@ -33,29 +33,26 @@ namespace AdminApp
 
 
         public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, IEnumerable<Guid> PlayerOutIds, IEnumerable<Guid> PlayerInIds)
-            :this(team, lineup, 90, PlayerOutIds, PlayerInIds)
+            :this(lineup, 90, PlayerOutIds, PlayerInIds)
         { }
 
-        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds)
+        public AddExchangeWindow(ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds)
         {
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);
             InitializeComponent();
-            var allPlayers = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Select(p => p.Id);
-            var activePlayers = allPlayers.Where(p => (lineup.Contains(p) || playerInIds.Contains(p)) 
-                                                                && !playerOutIds.Contains(p));
-            var availablePlayers = allPlayers.Where(p => !lineup.Contains(p) && !playerInIds.Contains(p));
+            var allPlayers = ServiceLocator.Instance.PlayerService.GetAll();
+            var activePlayers = allPlayers.Where(p => (lineup.Contains(p.Id) || playerInIds.Contains(p.Id)) 
+                                                                && !playerOutIds.Contains(p.Id));
+            var availablePlayers = allPlayers.Where(p => !lineup.Contains(p.Id) && !playerInIds.Contains(p.Id) && p.Playable);
 
-
-            playerInList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => availablePlayers.Contains(p.Id));
-            playerOutList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => activePlayers.Contains(p.Id));
             string[] minutes = new string[matchLength];
             for (int i = 1; i <= matchLength; i++)
             {
                 minutes[i - 1] = i.ToString();
             }
-            playerOutListBox.ItemsSource = playerOutList;
-            playerInListBox.ItemsSource = playerInList;
+            playerOutListBox.ItemsSource = activePlayers;
+            playerInListBox.ItemsSource = availablePlayers;
             timeBox.ItemsSource = minutes;
         }
 
