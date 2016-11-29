@@ -42,7 +42,7 @@ namespace AdminApp
             listOfPlayersUnChecked.Add(sentPlayer);
             playersCheckedList.ItemsSource = listOfPlayersUnChecked;
 
-            if (listOfPlayersUnChecked.Count >= 2 && listOfPlayersUnChecked.Count <= 3)//25 och 31
+            if (listOfPlayersUnChecked.Count >= 24 && listOfPlayersUnChecked.Count <= 30)//25 och 31
             {
                 playersAreValid = true;
             }
@@ -62,7 +62,7 @@ namespace AdminApp
             listOfPlayersUnChecked.Remove(sentPlayer);
             playersCheckedList.ItemsSource = listOfPlayersUnChecked;
 
-            if (listOfPlayersUnChecked.Count >= 2 && listOfPlayersUnChecked.Count <= 3)//25 och 31
+            if (listOfPlayersUnChecked.Count >= 24 && listOfPlayersUnChecked.Count <= 31)//25 och 31
             {
                 playersAreValid = true;
             }
