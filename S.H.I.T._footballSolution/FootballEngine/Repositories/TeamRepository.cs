@@ -39,9 +39,13 @@ namespace FootballEngine.Repositories
         public void Add(Team team)
         {
             if (team == null)
-                return;
-            if (!_teams.Select(t => t.Id).Contains(team.Id) && !_teams.Select(t => t.Name).Contains(team.Name)) // Checking for name does not work!
-                _teams.Add(team);
+                throw new ArgumentNullException($"{nameof(team)} cannot be null.");
+            if (_teams.Select(t => t.Id).Contains(team.Id))
+                throw new ArgumentException($"A team with the id '{team.Id}' already exsist in the repository.");
+            if (_teams.Select(t => t.Name).Contains(team.Name))
+                throw new ArgumentException($"A team with the name '{team.Name.Value}' already exsist in the repository.");
+
+            _teams.Add(team);
         }
 
         public void AddRange(IEnumerable<Team> teams)
@@ -49,11 +53,12 @@ namespace FootballEngine.Repositories
             if (teams == null)
                 throw new ArgumentNullException($"{nameof(teams)} cannot be null.");
             if (teams.Count() == 0)
-                throw new ArgumentOutOfRangeException($"{nameof(teams)} cannot be null.");
+                throw new ArgumentOutOfRangeException($"{nameof(teams)} cannot be empty.");
             if (teams.Contains(null))
                 throw new ArgumentException($"{nameof(teams)} cannot contain null elements.");
 
-            _teams.AddRange(teams);
+            foreach (Team team in teams)
+                Add(team);
         }
 
         public void Delete(Guid id)
