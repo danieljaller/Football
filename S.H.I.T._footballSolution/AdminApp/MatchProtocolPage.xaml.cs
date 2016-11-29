@@ -86,7 +86,7 @@ namespace AdminApp
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -100,7 +100,7 @@ namespace AdminApp
 
         private void addGoalAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -130,8 +130,8 @@ namespace AdminApp
 
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
         {
-            //MatchMinute[] minutes = new MatchMinute[homeGoals.Count()](homeGoals.Select)
-            var addEventWindow = new AddEvent(homeTeam );
+            List<MatchMinute> minutes = match.HomeGoals.Select(g => g.TimeOfEvent).ToList();
+            var addEventWindow = new AddEvent(minutes, homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -143,7 +143,8 @@ namespace AdminApp
 
         private void addAssistAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            List<MatchMinute> minutes = match.HomeGoals.Select(g => g.TimeOfEvent).ToList();
+            var addEventWindow = new AddEvent(minutes, visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -169,7 +170,7 @@ namespace AdminApp
 
         private void addRedCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -181,7 +182,7 @@ namespace AdminApp
 
         private void addRedCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -207,7 +208,7 @@ namespace AdminApp
 
         private void addYellowCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeTeam);
+            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -219,7 +220,7 @@ namespace AdminApp
 
         private void addYellowCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorTeam);
+            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
