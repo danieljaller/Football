@@ -32,7 +32,7 @@ namespace AdminApp
         public CreateOrAdministrateTeamsPage(Team selectedTeam)
         {
             InitializeComponent();
-            List<string> searchResultTeam = new List<string> {selectedTeam.Name.Value};
+            List<Team> searchResultTeam = new List<Team> {selectedTeam};
             teamsList.ItemsSource = searchResultTeam;
         }
 
