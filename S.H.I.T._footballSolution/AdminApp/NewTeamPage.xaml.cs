@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
 using System.Collections.ObjectModel;
 using FootballEngine.Helper;
 
@@ -17,9 +15,7 @@ namespace AdminApp
     {
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
-        NewPlayerWindow _newPlayerWindow;
-        //PlayerService _playerService;
-        //TeamService _teamService;
+        NewPlayerWindow _newPlayerWindow;       
         List<Player> listOfPlayers;
         List<Player> listOfPlayersUnChecked;
         bool playersAreValid;
@@ -27,20 +23,19 @@ namespace AdminApp
 
         public NewTeamPage()
         {
-            listOfPlayers = new List<Player>();
+            TeamName = "ggg";
+            ArenaName = "ggg";
+            DataContext = this;
             InitializeComponent();
-            _newPlayerWindow = new NewPlayerWindow();
-            //_teamService = new TeamService();
-            //_playerService = new PlayerService(_teamService);
-            //TeamName = teamName.Text;
-            //ArenaName = arenaName.Text;
-            TeamName = "Team";
-            ArenaName = "Arena";
+
+            
+            listOfPlayers = new List<Player>();          
+            _newPlayerWindow = new NewPlayerWindow();            
             playersList.ItemsSource = _newPlayerWindow.tempPlayersList;
             ToggleCreateTeamButton();
             ToggleNewPlayerButton();
             listOfPlayersUnChecked = new List<Player>();
-
+            showCreatedTeam.Text = $"";
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -93,11 +88,7 @@ namespace AdminApp
 
             if (newPlayerWindowResult == true)
             {
-                foreach (var player in newPlayerWindow.tempPlayersList)
-                {
-                    listOfPlayers.Add(player);
-                    ToggleCreateTeamButton();
-                }
+                listOfPlayers = newPlayerWindow.tempPlayersList;                
             }
             playersList.ItemsSource = new ObservableCollection<Player>(listOfPlayers);
             ToggleCreateTeamButton();
@@ -106,7 +97,7 @@ namespace AdminApp
 
         private void ToggleNewPlayerButton()
         {
-            if (TeamName != null && ArenaName != null)
+            if (TeamName != null  && ArenaName != null)
             {
                 NewPlayerButton.IsEnabled = true;
             }
@@ -130,13 +121,21 @@ namespace AdminApp
 
         private void CreateTeamButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Player item in listOfPlayersUnChecked)
+            foreach (Player pl in listOfPlayersUnChecked)
             {
-                team.PlayerIds.Add(item.Id);
-                item.TeamId = team.Id;
-                ServiceLocator.Instance.PlayerService.Add(item);
+                team.PlayerIds.Add(pl.Id);
+                pl.TeamId = team.Id;
+                ServiceLocator.Instance.PlayerService.Add(pl);
             }
             ServiceLocator.Instance.TeamService.Add(team);
+            CreateTeamButton.IsEnabled = false;
+            showCreatedTeam.Text = $"Du har lagt till laget {TeamName}";
+        }
+
+        private void saveTeamArenaNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewPlayerButton.IsEnabled = true;
+            saveTeamArenaNameButton.IsEnabled = false;            
         }
     }
 }

@@ -22,7 +22,8 @@ namespace AdminApp
         public NewPlayerWindow()
         {
             InitializeComponent();
-            DataContext = this;           
+            DataContext = this;
+                   
             AllowedDates();
         }
 
