@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/Administrera lag" FontSize="20" />
-        <ListBox Name="teamsList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="150" MinHeight="250">
+        <ListBox Name="teamsList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="150" MinHeight="250" SelectionChanged="teamsList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -61,15 +61,15 @@
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Grid.RowSpan="2" DataContext="{Binding ElementName=teamsList}">
-                <TextBox Name="arenaName" Margin="5,5,0,0" Width="120" HorizontalAlignment="Left" Text="{Binding Path=SelectedItem.HomeArena.Value}"/>
-                <TextBlock FontWeight="Bold" Margin="5,3,0,0" Text="(--)"/>
+                <TextBox Name="arenaName" Margin="5,5,0,0" Width="120" HorizontalAlignment="Left" Text="{Binding Path=SelectedItem.HomeArena.Value}"  TextChanged="arenaName_TextChanged"/>
+                <TextBlock Name="seriesTextBox" FontWeight="Bold" Margin="5,3,0,0"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Points}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Wins}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Losses}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Ties}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsFor}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsAgainst}"/>
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="(--)"/>
+                <TextBlock Name="matchesPlayedTextBlock"  FontWeight="Bold" Margin="5,5,0,0" />
             </StackPanel>
 
 
