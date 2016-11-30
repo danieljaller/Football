@@ -58,6 +58,7 @@
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Oavgjorda"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Gjorda mål:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Insläppta mål:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Målskillnad:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Grid.RowSpan="2" DataContext="{Binding ElementName=teamsList}">
@@ -69,6 +70,7 @@
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Ties}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsFor}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsAgainst}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalDifference}"/>
                 <TextBlock Name="matchesPlayedTextBlock"  FontWeight="Bold" Margin="5,5,0,0" />
             </StackPanel>
 

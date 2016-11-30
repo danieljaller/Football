@@ -2,6 +2,7 @@
 using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,11 +14,16 @@ namespace AdminApp
     public partial class CreateOrAdministrateSeriesPage : Page
     {
         private HashSet<Team> teamList = new HashSet<Team>();
+        private HashSet<Guid> matchScheduleWithIds;
+        private HashSet<Match> matchScheduleWithMatches;
+        private List<Team> homeTeamList, visitorTeamList;
+        private Serie selectedSerie;
 
         public CreateOrAdministrateSeriesPage()
         {
             InitializeComponent();   
             seriesList.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
+            showAllRadioButton.IsChecked = true;
         }
 
         public CreateOrAdministrateSeriesPage(Serie selectedSerie)
@@ -35,12 +41,11 @@ namespace AdminApp
 
         private void seriesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedSerie = (Serie)seriesList.SelectedItem;
-            HashSet<Guid> matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
-            HashSet<Match> matchScheduleWithMatches;
-            List<Team> homeTeamList, visitorTeamList;
+            selectedSerie = (Serie)seriesList.SelectedItem;
+            matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
             SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            showAllRadioButton.IsChecked = true;
         }
 
         private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList)
@@ -88,6 +93,29 @@ namespace AdminApp
                 matchProtocolList.SelectedItem = null;
             }
         }
-        
+
+        private void showAllRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            selectedSerie = (Serie)seriesList.SelectedItem;
+            matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+        private void showPlayedRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            selectedSerie = (Serie)seriesList.SelectedItem;
+            matchScheduleWithIds = selectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == true).ToHashSet();
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+        private void showCommingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            selectedSerie = (Serie)seriesList.SelectedItem;
+            matchScheduleWithIds = selectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == false).ToHashSet();
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
     }
 }
