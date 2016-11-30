@@ -443,6 +443,26 @@ namespace AdminApp
         {
             if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
             {
+                homeTeam.GoalsFor = homeTeam.GoalsFor + homeScore;
+                visitorTeam.GoalsFor = visitorTeam.GoalsFor + visitorScore;
+                homeTeam.GoalsAgainst = homeTeam.GoalsAgainst + visitorScore;
+                visitorTeam.GoalsAgainst = visitorTeam.GoalsAgainst + homeScore;
+                if (homeScore > visitorScore)
+                {
+                    homeTeam.Wins++;
+                    visitorTeam.Losses++;
+                }
+                if (homeScore < visitorScore)
+                {
+                    homeTeam.Losses++;
+                    visitorTeam.Wins++;
+                }
+                if (homeScore == visitorScore)
+                {
+                    homeTeam.Ties++;
+                    visitorTeam.Ties++;
+                }
+
                 ServiceLocator.Instance.MatchService.Save();
                 ServiceLocator.Instance.TeamService.Save();
                 ServiceLocator.Instance.PlayerService.Save();
