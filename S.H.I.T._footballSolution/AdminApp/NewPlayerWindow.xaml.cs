@@ -38,7 +38,7 @@ namespace AdminApp
             DateOfBirth = (DateTime)datePicker1.SelectedDate;
             player = new Player(new PlayerName(FirstName), new PlayerName(LastName), new DateOfBirth(DateOfBirth));
 
-            if (tempPlayersList.Count < 3)//31
+            if (tempPlayersList.Count <= 30)
             {
                 tempPlayersList.Add(player);
             }
@@ -49,16 +49,16 @@ namespace AdminApp
             { numberOfPlayers.Text = "0"; }
             numberOfPlayers.Text = tempPlayersList.Count.ToString();
 
-            if (tempPlayersList.Count < 2)//24
+            if (tempPlayersList.Count < 24)
             {
                 addPlayersNowButton.IsEnabled = false;
             }
-            if (tempPlayersList.Count >= 2)//24
+            if (tempPlayersList.Count >= 24)
             {
                 addPlayersNowButton.IsEnabled = true;
             }
 
-            if (tempPlayersList.Count >=3)//30
+            if (tempPlayersList.Count >=30)
             {               
                 DialogResult = true;
             }

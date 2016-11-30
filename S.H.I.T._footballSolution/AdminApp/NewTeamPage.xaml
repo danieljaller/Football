@@ -52,15 +52,10 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" >
-                <!--<Button.Visibility>
-                    <MultiBinding Converter="{StaticResource isEnabledConverter}">
-                        <Binding ElementName="teamName" Path="(Validation.Errors)[0]" />
-                        <Binding ElementName="arenaName" Path="(Validation.Errors)[0]" />
-                    </MultiBinding>
-                </Button.Visibility>-->
-            </Button>
+            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK"/>
         </StackPanel>
+
+
 
         <ListBox Name="playersList" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
