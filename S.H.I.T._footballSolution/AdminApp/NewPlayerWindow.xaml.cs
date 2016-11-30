@@ -1,5 +1,6 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -17,12 +18,27 @@ namespace AdminApp
         public DateTime DateOfBirth { get; set; }
         public Player player { get; set; }
         public List<Player> tempPlayersList = new List<Player>();
-       
+        public bool mustAddThree;
+        public Team team;
 
-        public NewPlayerWindow()
+        public NewPlayerWindow(bool mustAddThree)
         {
             InitializeComponent();
-            DataContext = this;           
+            this.mustAddThree = mustAddThree;
+            if (!mustAddThree)
+                addPlayersNowButton.IsEnabled = true;
+            DataContext = this;
+            AllowedDates();
+        }
+
+        public NewPlayerWindow(bool mustAddThree, Team team)
+        {
+            InitializeComponent();
+            this.team = team;
+            this.mustAddThree = mustAddThree;
+            //if (!mustAddThree)
+            //    addPlayersNowButton.IsEnabled = true;
+            DataContext = this;
             AllowedDates();
         }
 
@@ -47,25 +63,42 @@ namespace AdminApp
             if (tempPlayersList == null)
             { numberOfPlayers.Text = "0"; }
             numberOfPlayers.Text = tempPlayersList.Count.ToString();
-
-            if (tempPlayersList.Count < 2)//24
+            if (mustAddThree)
             {
-                addPlayersNowButton.IsEnabled = false;
-            }
-            if (tempPlayersList.Count >= 2)//24
-            {
-                addPlayersNowButton.IsEnabled = true;
-            }
+                if (tempPlayersList.Count < 2)//24
+                {
+                    addPlayersNowButton.IsEnabled = false;
+                }
+                if (tempPlayersList.Count >= 2)//24
+                {
+                    addPlayersNowButton.IsEnabled = true;
+                }
 
-            if (tempPlayersList.Count >=3)//30
-            {               
-                DialogResult = true;
+                if (tempPlayersList.Count >= 3)//30
+                {
+                    DialogResult = true;
+                }
+            }
+            else
+            {
+                if (tempPlayersList.Count < 1)
+                    addPlayersNowButton.IsEnabled = false;
+                else
+                    addPlayersNowButton.IsEnabled = true;
             }
         }
 
         private void addPlayersNow_Clicked(object sender, RoutedEventArgs e)
-        {            
+        {
             DialogResult = true;
+            if (!mustAddThree)
+            {
+                foreach(var player in tempPlayersList)
+                {
+                    team.PlayerIds.Add(player.Id);
+                }
+                ServiceLocator.Instance.PlayerService.AddRange(tempPlayersList);
+            }
         }
 
         private void AllowedDates()
@@ -73,13 +106,13 @@ namespace AdminApp
             datePicker1.BlackoutDates.Add(new CalendarDateRange(new DateTime((DateTime.Today.Year - 16), 1, 1), DateTime.Now.AddDays(-1)));
             datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, new DateTime(1950, 1, 1)));
             datePicker1.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.MaxValue));
-            datePicker1.DisplayDate = new DateTime((DateTime.Today.Year - 17), 1, 1);           
+            datePicker1.DisplayDate = new DateTime((DateTime.Today.Year - 17), 1, 1);
         }
-        
+
 
         private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
         { }
 
-        
+
     }
 }

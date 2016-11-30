@@ -74,8 +74,7 @@
 
 
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,10,0">
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelare"/>
-                <ListBox Height="240" Width="170" Margin="5" ItemsSource="{Binding ElementName=teamsList, Path=SelectedItem.PlayerIds}">
+                <ListBox Name="playersList" MaxHeight="260" Width="170" Margin="5" ItemsSource="{Binding ElementName=teamsList, Path=SelectedItem.PlayerIds}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}"/>

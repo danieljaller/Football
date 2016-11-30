@@ -29,7 +29,7 @@ namespace AdminApp
         {
             listOfPlayers = new List<Player>();
             InitializeComponent();
-            _newPlayerWindow = new NewPlayerWindow();
+            _newPlayerWindow = new NewPlayerWindow(true);
             //_teamService = new TeamService();
             //_playerService = new PlayerService(_teamService);
             //TeamName = teamName.Text;
@@ -88,7 +88,7 @@ namespace AdminApp
             if (team == null)
             { team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName)); }
 
-            var newPlayerWindow = new NewPlayerWindow();
+            var newPlayerWindow = new NewPlayerWindow(true);
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
 
             if (newPlayerWindowResult == true)
