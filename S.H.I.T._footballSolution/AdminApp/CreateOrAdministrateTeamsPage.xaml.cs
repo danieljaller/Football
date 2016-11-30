@@ -48,6 +48,8 @@ namespace AdminApp
                 removePlayer.IsEnabled = true;
             if (team.PlayerIds.Count() >= 30)
                 addPlayer.IsEnabled = false;
+            ServiceLocator.Instance.TeamService.Save();
+            ServiceLocator.Instance.PlayerService.Save();
             playersList.Items.Refresh();
         }
 
@@ -70,6 +72,8 @@ namespace AdminApp
                     addPlayer.IsEnabled = true;
 
             }
+            ServiceLocator.Instance.TeamService.Save();
+            ServiceLocator.Instance.PlayerService.Save();
         }
 
         private void teamsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,6 +99,8 @@ namespace AdminApp
             {
                 team.HomeArena = new GeneralName(arenaName.Text);
                 arenaName.BorderBrush = new SolidColorBrush(Colors.Black);
+                ServiceLocator.Instance.TeamService.Save();
+                ServiceLocator.Instance.PlayerService.Save();
             }
             catch (Exception ex)
             {
