@@ -92,12 +92,14 @@ namespace AdminApp
 
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeGoals.Remove((Event)homeGoalsList.SelectedItem);
+            Event activeEvent = (Event)homeGoalsList.SelectedItem;
+            match.HomeGoals.Remove(activeEvent);
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
             homeScore--;
             homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
-            
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Goals.Remove(match.Id);
         }
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
@@ -111,6 +113,8 @@ namespace AdminApp
                 homeScore++;
                 homeTeamScoreBlock.DataContext = homeScore;
                 homeGoalsList.ItemsSource = homeGoals;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Goals.Add(match.Id);
             }
         }
 
@@ -125,23 +129,31 @@ namespace AdminApp
                 visitorScore++;
                 visitorTeamScoreBlock.DataContext = visitorScore;
                 visitorGoalsList.ItemsSource = visitorGoals;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Goals.Add(match.Id);
             }
         }
 
         private void removeGoalAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorGoals.Remove((Event)visitorGoalsList.SelectedItem);
+            Event activeEvent = (Event)visitorGoalsList.SelectedItem;
+            match.VisitorGoals.Remove(activeEvent);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
             visitorScore--;
             visitorTeamScoreBlock.DataContext = visitorScore;
             visitorGoalsList.ItemsSource = visitorGoals;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Goals.Remove(match.Id);
         }
 
         private void removeAssistHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeAssists.Remove((Event)homeAssistsList.SelectedItem);
+            Event activeEvent = (Event)homeAssistsList.SelectedItem;
+            match.HomeAssists.Remove(activeEvent);
             homeAssists = new ObservableCollection<Event>(match.HomeAssists);
             homeAssistsList.ItemsSource = homeAssists;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Assists.Remove(match.Id);
         }
 
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
@@ -154,12 +166,14 @@ namespace AdminApp
                 match.HomeAssists.Add(addEventWindow.result);
                 homeAssists = new ObservableCollection<Event>(match.HomeAssists);
                 homeAssistsList.ItemsSource = homeAssists;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Assists.Add(match.Id);
             }
         }
 
         private void addAssistAway_Click(object sender, RoutedEventArgs e)
         {
-            List<MatchMinute> minutes = match.HomeGoals.Select(g => g.TimeOfEvent).ToList();
+            List<MatchMinute> minutes = match.VisitorGoals.Select(g => g.TimeOfEvent).ToList();
             var addEventWindow = new AddEvent(minutes, visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
@@ -167,21 +181,29 @@ namespace AdminApp
                 match.VisitorAssists.Add(addEventWindow.result);
                 visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
                 visitorAssistsList.ItemsSource = visitorAssists;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Assists.Add(match.Id);
             }
         }
 
         private void removeAssistAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorAssists.Remove((Event)visitorAssistsList.SelectedItem);
+            Event activeEvent = (Event)visitorAssistsList.SelectedItem;
+            match.VisitorAssists.Remove(activeEvent);
             visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
             visitorAssistsList.ItemsSource = visitorAssists;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Assists.Remove(match.Id);
         }
 
         private void removeRedCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeRedCards.Remove((Event)homeRedCardsList.SelectedItem);
+            Event activeEvent = (Event)homeRedCardsList.SelectedItem;
+            match.HomeRedCards.Remove(activeEvent);
             homeRedCards = new ObservableCollection<Event>(match.HomeRedCards);
             homeRedCardsList.ItemsSource = homeRedCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.RedCards.Remove(match.Id);
         }
 
         private void addRedCardsHome_Click(object sender, RoutedEventArgs e)
@@ -193,6 +215,8 @@ namespace AdminApp
                 match.HomeRedCards.Add(addEventWindow.result);
                 homeRedCards = new ObservableCollection<Event>(match.HomeRedCards);
                 homeRedCardsList.ItemsSource = homeRedCards;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.RedCards.Add(match.Id);
             }
         }
 
@@ -205,21 +229,29 @@ namespace AdminApp
                 match.VisitorRedCards.Add(addEventWindow.result);
                 visitorRedCards = new ObservableCollection<Event>(match.VisitorRedCards);
                 visitorRedCardsList.ItemsSource = visitorRedCards;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.RedCards.Add(match.Id);
             }
         }
 
         private void removeRedCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorRedCards.Remove((Event)visitorRedCardsList.SelectedItem);
+            Event activeEvent = (Event)visitorRedCardsList.SelectedItem;
+            match.VisitorRedCards.Remove(activeEvent);
             visitorRedCards = new ObservableCollection<Event>(match.VisitorRedCards);
             visitorRedCardsList.ItemsSource = visitorRedCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.RedCards.Remove(match.Id);
         }
 
         private void removeYellowCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeYellowCards.Remove((Event)homeYellowCardsList.SelectedItem);
+            Event activeEvent = (Event)homeYellowCardsList.SelectedItem;
+            match.HomeYellowCards.Remove(activeEvent);
             homeYellowCards = new ObservableCollection<Event>(match.HomeYellowCards);
             homeYellowCardsList.ItemsSource = homeYellowCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.YellowCards.Remove(match.Id);
         }
 
         private void addYellowCardsHome_Click(object sender, RoutedEventArgs e)
@@ -231,6 +263,8 @@ namespace AdminApp
                 match.HomeYellowCards.Add(addEventWindow.result);
                 homeYellowCards = new ObservableCollection<Event>(match.HomeYellowCards);
                 homeYellowCardsList.ItemsSource = homeYellowCards;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.YellowCards.Add(match.Id);
             }
         }
 
@@ -243,21 +277,28 @@ namespace AdminApp
                 match.VisitorYellowCards.Add(addEventWindow.result);
                 visitorYellowCards = new ObservableCollection<Event>(match.VisitorYellowCards);
                 visitorYellowCardsList.ItemsSource = visitorYellowCards;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.YellowCards.Add(match.Id);
             }
         }
 
         private void removeYellowCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorYellowCards.Remove((Event)visitorYellowCardsList.SelectedItem);
+            Event activeEvent = (Event)visitorAssistsList.SelectedItem;
+            match.VisitorYellowCards.Remove(activeEvent);
             visitorYellowCards = new ObservableCollection<Event>(match.VisitorYellowCards);
             visitorYellowCardsList.ItemsSource = visitorYellowCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.YellowCards.Remove(match.Id);
         }
 
         private void removePlayerHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeLineup.Remove((Guid)homeLineupList.SelectedItem);
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy((Guid)homeLineupList.SelectedItem);
+            match.HomeLineup.Remove(activePlayer.Id);
             homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
             homeLineupList.ItemsSource = homeLineup;
+            activePlayer.MatchesPlayedIds.Remove(match.Id);
         }
 
         private void addPlayerHome_Click(object sender, RoutedEventArgs e)
@@ -266,11 +307,14 @@ namespace AdminApp
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
-                foreach (Player player in addPlayerWindow.selectedPlayers)
+                foreach (var player in addPlayerWindow.selectedPlayers)
+                {
                     match.HomeLineup.Add(player.Id);
-
+                    player.MatchesPlayedIds.Add(match.Id);
+                }
                 homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
                 homeLineupList.ItemsSource = homeLineup;
+
             }
         }
 
@@ -280,9 +324,13 @@ namespace AdminApp
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
-                foreach (Player player in addPlayerWindow.selectedPlayers)
+                foreach (var player in addPlayerWindow.selectedPlayers)
+                {
                     match.VisitorLineup.Add(player.Id);
-
+                    player.MatchesPlayedIds.Add(match.Id);
+                }
+                homeLineup = new ObservableCollection<Guid>(match.HomeLineup);
+                homeLineupList.ItemsSource = homeLineup;
                 visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
                 visitorLineupList.ItemsSource = visitorLineup;
             }
@@ -290,26 +338,31 @@ namespace AdminApp
 
         private void removePlayerAway_Click(object sender, RoutedEventArgs e)
         {
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy((Guid)visitorLineupList.SelectedItem);
             match.VisitorLineup.Remove((Guid)visitorLineupList.SelectedItem);
             visitorLineup = new ObservableCollection<Guid>(match.VisitorLineup);
             visitorLineupList.ItemsSource = visitorLineup;
+            activePlayer.MatchesPlayedIds.Remove(match.Id);
         }
 
         private void removeExchangeHome_Click(object sender, RoutedEventArgs e)
         {
+            Event activeEvent = (Event)homeExchangesList.SelectedItem;
             match.HomeExchanges.Remove((Exchange)homeExchangesList.SelectedItem);
             homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
             homeExchangesList.ItemsSource = homeExchanges;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.MatchesPlayedIds.Remove(match.Id);
         }
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            var playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
-                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
-                                                     .Select(p => p.Id);
-            var playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+            List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                                    .Select(p => p.Id).ToList();
+            List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
-                                                    .Select(p => p.Id);
+                                                    .Select(p => p.Id).ToList();
             var addExchangeWindow = new AddExchangeWindow(homeLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
@@ -317,15 +370,17 @@ namespace AdminApp
                 match.HomeExchanges.Add(addExchangeWindow.result);
                 homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
                 homeExchangesList.ItemsSource = homeExchanges;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addExchangeWindow.result.PlayerInId);
+                activePlayer.MatchesPlayedIds.Add(match.Id);
             }
         }
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            var playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+            List<Guid> playerOutIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
                                         .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
                                         .Select(p => p.Id);
-            var playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+            List<Guid> playerInIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id);
             var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
@@ -335,14 +390,19 @@ namespace AdminApp
                 match.VisitorExchanges.Add(addExchangeWindow.result);
                 visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
                 visitorExchangesList.ItemsSource = visitorExchanges;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addExchangeWindow.result.PlayerInId);
+                activePlayer.MatchesPlayedIds.Add(match.Id);
             }
         }
 
         private void removeExchangeAway_Click(object sender, RoutedEventArgs e)
         {
+            Event activeEvent = (Event)visitorExchangesList.SelectedItem;
             match.VisitorExchanges.Remove((Exchange)visitorExchangesList.SelectedItem);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
             visitorExchangesList.ItemsSource = visitorExchanges;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.MatchesPlayedIds.Remove(match.Id);
         }
 
         private void ConvertListsToObjects()
@@ -383,6 +443,26 @@ namespace AdminApp
         {
             if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
             {
+                homeTeam.GoalsFor = homeTeam.GoalsFor + homeScore;
+                visitorTeam.GoalsFor = visitorTeam.GoalsFor + visitorScore;
+                homeTeam.GoalsAgainst = homeTeam.GoalsAgainst + visitorScore;
+                visitorTeam.GoalsAgainst = visitorTeam.GoalsAgainst + homeScore;
+                if (homeScore > visitorScore)
+                {
+                    homeTeam.Wins++;
+                    visitorTeam.Losses++;
+                }
+                if (homeScore < visitorScore)
+                {
+                    homeTeam.Losses++;
+                    visitorTeam.Wins++;
+                }
+                if (homeScore == visitorScore)
+                {
+                    homeTeam.Ties++;
+                    visitorTeam.Ties++;
+                }
+
                 ServiceLocator.Instance.MatchService.Save();
                 ServiceLocator.Instance.TeamService.Save();
                 ServiceLocator.Instance.PlayerService.Save();
