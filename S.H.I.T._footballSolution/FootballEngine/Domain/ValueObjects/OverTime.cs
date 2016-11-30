@@ -15,7 +15,7 @@ namespace FootballEngine.Domain.ValueObjects
 
         public OverTime(int overTime)
         {
-            if (0 > overTime && overTime > MaxValue)
+            if (0 > overTime || overTime > MaxValue)
                 throw new ArgumentOutOfRangeException($"{nameof(overTime)} must be between 0 and {MaxValue}");
 
             Value = overTime;
