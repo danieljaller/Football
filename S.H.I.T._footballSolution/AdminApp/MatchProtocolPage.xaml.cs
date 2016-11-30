@@ -77,11 +77,14 @@ namespace AdminApp
 
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeGoals.Remove((Event)homeGoalsList.SelectedItem);
+            Event activeEvent = (Event)homeGoalsList.SelectedItem;
+            match.HomeGoals.Remove(activeEvent);
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
             homeScore--;
             homeTeamScoreBlock.DataContext = homeScore;
             homeGoalsList.ItemsSource = homeGoals;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Goals.Remove(match.Id);
         }
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
@@ -95,6 +98,8 @@ namespace AdminApp
                 homeScore++;
                 homeTeamScoreBlock.DataContext = homeScore;
                 homeGoalsList.ItemsSource = homeGoals;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Goals.Add(match.Id);
             }
         }
 
@@ -109,23 +114,31 @@ namespace AdminApp
                 visitorScore++;
                 visitorTeamScoreBlock.DataContext = visitorScore;
                 visitorGoalsList.ItemsSource = visitorGoals;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Goals.Add(match.Id);
             }
         }
 
         private void removeGoalAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorGoals.Remove((Event)visitorGoalsList.SelectedItem);
+            Event activeEvent = (Event)visitorGoalsList.SelectedItem;
+            match.VisitorGoals.Remove(activeEvent);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
             visitorScore--;
             visitorTeamScoreBlock.DataContext = visitorScore;
             visitorGoalsList.ItemsSource = visitorGoals;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Goals.Remove(match.Id);
         }
 
         private void removeAssistHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeAssists.Remove((Event)homeAssistsList.SelectedItem);
+            Event activeEvent = (Event)homeAssistsList.SelectedItem;
+            match.HomeAssists.Remove(activeEvent);
             homeAssists = new ObservableCollection<Event>(match.HomeAssists);
             homeAssistsList.ItemsSource = homeAssists;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Assists.Remove(match.Id);
         }
 
         private void addAssistHome_Click(object sender, RoutedEventArgs e)
@@ -138,6 +151,8 @@ namespace AdminApp
                 match.HomeAssists.Add(addEventWindow.result);
                 homeAssists = new ObservableCollection<Event>(match.HomeAssists);
                 homeAssistsList.ItemsSource = homeAssists;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Assists.Add(match.Id);
             }
         }
 
@@ -151,21 +166,29 @@ namespace AdminApp
                 match.VisitorAssists.Add(addEventWindow.result);
                 visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
                 visitorAssistsList.ItemsSource = visitorAssists;
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                activePlayer.Assists.Add(match.Id);
             }
         }
 
         private void removeAssistAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorAssists.Remove((Event)visitorAssistsList.SelectedItem);
+            Event activeEvent = (Event)visitorAssistsList.SelectedItem;
+            match.VisitorAssists.Remove(activeEvent);
             visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
             visitorAssistsList.ItemsSource = visitorAssists;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.Assists.Remove(match.Id);
         }
 
         private void removeRedCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeRedCards.Remove((Event)homeRedCardsList.SelectedItem);
+            Event activeEvent = (Event)homeRedCardsList.SelectedItem;
+            match.HomeRedCards.Remove(activeEvent);
             homeRedCards = new ObservableCollection<Event>(match.HomeRedCards);
             homeRedCardsList.ItemsSource = homeRedCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.RedCards.Remove(match.Id);
         }
 
         private void addRedCardsHome_Click(object sender, RoutedEventArgs e)
@@ -194,16 +217,22 @@ namespace AdminApp
 
         private void removeRedCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorRedCards.Remove((Event)visitorRedCardsList.SelectedItem);
+            Event activeEvent = (Event)visitorRedCardsList.SelectedItem;
+            match.VisitorRedCards.Remove(activeEvent);
             visitorRedCards = new ObservableCollection<Event>(match.VisitorRedCards);
             visitorRedCardsList.ItemsSource = visitorRedCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.RedCards.Remove(match.Id);
         }
 
         private void removeYellowCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeYellowCards.Remove((Event)homeYellowCardsList.SelectedItem);
+            Event activeEvent = (Event)homeYellowCardsList.SelectedItem;
+            match.HomeYellowCards.Remove(activeEvent);
             homeYellowCards = new ObservableCollection<Event>(match.HomeYellowCards);
             homeYellowCardsList.ItemsSource = homeYellowCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.YellowCards.Remove(match.Id);
         }
 
         private void addYellowCardsHome_Click(object sender, RoutedEventArgs e)
@@ -232,9 +261,12 @@ namespace AdminApp
 
         private void removeYellowCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            match.VisitorYellowCards.Remove((Event)visitorYellowCardsList.SelectedItem);
+            Event activeEvent = (Event)visitorAssistsList.SelectedItem;
+            match.VisitorYellowCards.Remove(activeEvent);
             visitorYellowCards = new ObservableCollection<Event>(match.VisitorYellowCards);
             visitorYellowCardsList.ItemsSource = visitorYellowCards;
+            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
+            activePlayer.YellowCards.Remove(match.Id);
         }
 
         private void removePlayerHome_Click(object sender, RoutedEventArgs e)
