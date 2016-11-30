@@ -18,14 +18,14 @@ namespace AdminApp
         public DateTime DateOfBirth { get; set; }
         public Player player { get; set; }
         public List<Player> tempPlayersList = new List<Player>();
-        public bool mustAddThree;
+        public bool hasMinValue;
         public Team team;
 
-        public NewPlayerWindow(bool mustAddThree)
+        public NewPlayerWindow(bool hasMinValue)
         {
             InitializeComponent();
-            this.mustAddThree = mustAddThree;
-            if (!mustAddThree)
+            this.hasMinValue = hasMinValue;
+            if (!hasMinValue)
                 addPlayersNowButton.IsEnabled = true;
             DataContext = this;
             AllowedDates();
@@ -35,7 +35,7 @@ namespace AdminApp
         {
             InitializeComponent();
             this.team = team;
-            this.mustAddThree = mustAddThree;
+            this.hasMinValue = mustAddThree;
             //if (!mustAddThree)
             //    addPlayersNowButton.IsEnabled = true;
             DataContext = this;
@@ -63,7 +63,7 @@ namespace AdminApp
             if (tempPlayersList == null)
             { numberOfPlayers.Text = "0"; }
             numberOfPlayers.Text = tempPlayersList.Count.ToString();
-            if (mustAddThree)
+            if (hasMinValue)
             {
                 if (tempPlayersList.Count < 2)//24
                 {
@@ -91,7 +91,7 @@ namespace AdminApp
         private void addPlayersNow_Clicked(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            if (!mustAddThree)
+            if (!hasMinValue)
             {
                 foreach(var player in tempPlayersList)
                 {
