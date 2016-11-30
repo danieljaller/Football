@@ -4,12 +4,13 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace AdminApp.Converters
 {
-    public class IsEnabledConverter : IMultiValueConverter
+    public class IsEnabledConverterAddPlayer : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -18,7 +19,7 @@ namespace AdminApp.Converters
             foreach (var val in values)
             {
                 if (val == null)
-                    continue;
+                    retValue = false;
 
                 if (val.GetType() == typeof(DateTime))
                 {

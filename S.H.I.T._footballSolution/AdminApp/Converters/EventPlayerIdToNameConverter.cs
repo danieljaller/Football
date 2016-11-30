@@ -13,9 +13,8 @@ namespace AdminApp.Converters
 {
     public class EventPlayerIdToNameConverter : IValueConverter
     {
-        //PlayerService playerService = new PlayerService(new TeamService());
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        {   
             Guid playerId = (Guid)value;
             Player player = ServiceLocator.Instance.PlayerService.GetBy(playerId);
             return player.FullName;

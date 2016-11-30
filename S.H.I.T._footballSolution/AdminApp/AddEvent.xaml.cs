@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FootballEngine.Helper;
+using System.Collections.ObjectModel;
 
 namespace AdminApp
 {
@@ -29,34 +30,36 @@ namespace AdminApp
         public MatchMinute timeOfEvent;
         IEnumerable<Player> playerList;
 
-        public AddEvent(Team team)
-            :this(team, 90)
+        public AddEvent(ObservableCollection<Guid> lineup, ObservableCollection<Exchange> exchanges)
+            :this(90, lineup, exchanges)
         {
         }
 
-        public AddEvent(Team team, int matchLength)
+        public AddEvent(int matchLength, ObservableCollection<Guid> lineup, ObservableCollection<Exchange> exchanges)
         {
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);        
             InitializeComponent();
-            playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
-            MatchMinute[] minutes = new MatchMinute[matchLength];
+            var allPlayers = ServiceLocator.Instance.PlayerService.GetAll();
+            playerList = allPlayers.Where(p => (lineup.Contains(p.Id) || exchanges.Select(ex => ex.PlayerInId).Contains(p.Id)));
+            List<MatchMinute> minutes = new List<MatchMinute>();
             for(int i=1; i<=matchLength; i++)
             {
                 MatchMinute min = new MatchMinute();
                 min.Value = i;
-                minutes[i-1] = min;
+                minutes.Add(min);
             }           
             playerListbox.ItemsSource = playerList;
             timeBox.ItemsSource = minutes;
         }
 
-        public AddEvent(Team team, MatchMinute[] matchMinutes)
+        public AddEvent(List<MatchMinute> matchMinutes, ObservableCollection<Guid> lineup, ObservableCollection<Exchange> exchanges)
         {
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);
             InitializeComponent();
-            playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
+            var allPlayers = ServiceLocator.Instance.PlayerService.GetAll();
+            playerList = allPlayers.Where(p => (lineup.Contains(p.Id) || exchanges.Select(ex => ex.PlayerInId).Contains(p.Id)));
             playerListbox.ItemsSource = playerList;
             timeBox.ItemsSource = matchMinutes;
         }

@@ -1,21 +1,12 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Helper;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FootballEngine.Factories;
 
 namespace AdminApp
@@ -49,9 +40,9 @@ namespace AdminApp
 
         private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-            //var teamIds = teamList.Select(x => x.Id).ToList();
             var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, Convert.ToDateTime(serieDatePicker.SelectedDate));
             
+            ServiceLocator.Instance.MatchService.AddRange(matchSchedule);
             newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList);
         }
 

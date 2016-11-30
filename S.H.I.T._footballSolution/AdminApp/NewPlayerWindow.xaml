@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="NewPlayerWindow" Height="250" Width="250" Closing="closingNewPlayerWindow">
     <Window.Resources>
-        <Converters:IsEnabledConverter x:Key="isEnabledConverter" />
+        <Converters:IsEnabledConverterAddPlayer x:Key="isEnabledConverter" />
     </Window.Resources>
        
     <Grid Margin="5">

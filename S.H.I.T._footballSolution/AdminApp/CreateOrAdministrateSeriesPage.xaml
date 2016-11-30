@@ -9,7 +9,6 @@
       d:DesignHeight="300" d:DesignWidth="400"
       Title="CreateOrAdministrateSeries">
     <Page.Resources>
-        <local:TempMatchToStringConverter x:Key="tempMatchToStringConverter"/>
         <Style TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Style.Triggers>
