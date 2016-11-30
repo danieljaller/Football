@@ -18,12 +18,14 @@ namespace AdminApp
     {
         Player player;
         Team team;
+        static int selectedIndexInTeamsList;
 
         public CreateOrAdministrateTeamsPage()
         {
             InitializeComponent();
 
             teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll();
+            teamsList.SelectedIndex = selectedIndexInTeamsList;
         }
 
         public CreateOrAdministrateTeamsPage(Team selectedTeam)
@@ -78,8 +80,9 @@ namespace AdminApp
 
         private void teamsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            selectedIndexInTeamsList = teamsList.SelectedIndex;
             var team = (Team)teamsList.SelectedItem;
-            if(team.PlayerIds.Count() >= 30)
+            if (team.PlayerIds.Count() >= 30)
             {
                 addPlayer.IsEnabled = false;
             }
@@ -90,22 +93,42 @@ namespace AdminApp
                 serieStringBuilder.Append($"{ServiceLocator.Instance.SerieService.GetBy(serieId).Name}, ");
             }
             seriesTextBox.Text = serieStringBuilder.ToString().TrimEnd(',', ' ');
+            matchesNotPlayedTextBlock.Text = team.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == false).Count().ToString();
         }
 
         private void arenaName_TextChanged(object sender, TextChangedEventArgs e)
         {
             var team = (Team)teamsList.SelectedItem;
-            try
+
+            GeneralName result;
+            if (GeneralName.TryParse(arenaName.Text, out result))
             {
-                team.HomeArena = new GeneralName(arenaName.Text);
-                arenaName.BorderBrush = new SolidColorBrush(Colors.Black);
+                team.HomeArena = result;
                 ServiceLocator.Instance.TeamService.Save();
-                ServiceLocator.Instance.PlayerService.Save();
             }
-            catch (Exception ex)
+        }
+
+        private void matchesPlayedButton_Click(object sender, RoutedEventArgs e)
+        {
+            teamsOverview.Visibility = Visibility.Hidden;
+            CreateOrAdministrateTeamsPageFrame.Content = new CreateOrAdministrateSeriesPage((Team)teamsList.SelectedItem, true);
+        }
+
+        private void matchesNotPlayedButton_Click(object sender, RoutedEventArgs e)
+        {
+            teamsOverview.Visibility = Visibility.Hidden;
+            CreateOrAdministrateTeamsPageFrame.Content = new CreateOrAdministrateSeriesPage((Team)teamsList.SelectedItem, false);
+        }
+
+        private void teamName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var team = (Team)teamsList.SelectedItem;
+
+            GeneralName result;
+            if (GeneralName.TryParse(teamName.Text, out result))
             {
-                arenaName.BorderBrush = new SolidColorBrush(Colors.Red);
-                MessageBox.Show(ex.Message);
+                team.Name = result;
+                ServiceLocator.Instance.TeamService.Save();
             }
         }
     }
