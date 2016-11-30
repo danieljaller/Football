@@ -71,6 +71,7 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CollectionCountToStringConverter.cs" />
     <Compile Include="Converters\GeneralNameValidationRule.cs" />
     <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
     <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
