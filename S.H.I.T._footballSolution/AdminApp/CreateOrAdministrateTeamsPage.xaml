@@ -10,6 +10,7 @@
       Title="CreateOrAdministrateTeamsPage">
     <Page.Resources>
         <Converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter"/>
+        <Converters:CollectionCountToStringConverter x:Key="collectionCountToStringConverter"/>
     </Page.Resources>
 
     <Grid Background="White">
@@ -65,9 +66,9 @@
                 <TextBox Name="arenaName" Margin="5,5,0,0" Width="120" HorizontalAlignment="Left" Text="{Binding Path=SelectedItem.HomeArena.Value}"  TextChanged="arenaName_TextChanged"/>
                 <TextBlock Name="seriesTextBox" FontWeight="Bold" Margin="5,3,0,0"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Points}"/>
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Wins}"/>
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Losses}"/>
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Ties}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Wins, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Losses, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Ties, Converter={StaticResource collectionCountToStringConverter}}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsFor}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalsAgainst}"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.GoalDifference}"/>
