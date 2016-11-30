@@ -25,7 +25,6 @@ namespace FootballEngine.Domain.Entities
                 Ties = 0;
                 GoalsFor = 0;
                 GoalsAgainst = 0;
-                GoalDifference = 0;
             }
         }
         private bool IsValidParameters(GeneralName name, GeneralName homeArena)
@@ -54,7 +53,13 @@ namespace FootballEngine.Domain.Entities
         public HashSet<Guid> PlayerIds { get; set; }
         public HashSet<Guid> MatchIds { get; set; }
         public HashSet<Guid> SerieIds { get; set; }
-        public int GoalDifference { get; set; }
+        public int GoalDifference
+        {
+            get
+            {
+                return GoalsFor - GoalsAgainst;
+            }
+        }
     }
 }
 
