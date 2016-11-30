@@ -28,7 +28,9 @@ namespace AdminApp
         Team homeTeam;
         Team visitorTeam;
         int homeScore;
+        int homeScoreBackup;
         int visitorScore;
+        int visitorScoreBackup;
         ObservableCollection<Event> homeGoals;
         ObservableCollection<Event> visitorGoals;
         ObservableCollection<Event> homeAssists;
@@ -412,7 +414,9 @@ namespace AdminApp
             homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
+            homeScoreBackup = homeScore;
             visitorScore = match.VisitorGoals.Count();
+            visitorScoreBackup = visitorScore;
             homeGoals = new ObservableCollection<Event>(match.HomeGoals);
             homeGoalsBackup = new ObservableCollection<Event>(homeGoals);
             visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
@@ -443,24 +447,48 @@ namespace AdminApp
         {
             if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
             {
-                homeTeam.GoalsFor = homeTeam.GoalsFor + homeScore;
-                visitorTeam.GoalsFor = visitorTeam.GoalsFor + visitorScore;
-                homeTeam.GoalsAgainst = homeTeam.GoalsAgainst + visitorScore;
-                visitorTeam.GoalsAgainst = visitorTeam.GoalsAgainst + homeScore;
+                homeTeam.GoalsFor = homeTeam.GoalsFor + homeScore - homeScoreBackup;
+                visitorTeam.GoalsFor = visitorTeam.GoalsFor + visitorScore - visitorScoreBackup;
+                homeTeam.GoalsAgainst = homeTeam.GoalsAgainst + visitorScore - visitorScoreBackup;
+                visitorTeam.GoalsAgainst = visitorTeam.GoalsAgainst + homeScore - homeScoreBackup;
                 if (homeScore > visitorScore)
                 {
-                    homeTeam.Wins++;
-                    visitorTeam.Losses++;
+                    if(homeTeam.Losses.Contains(match.Id))
+                        homeTeam.Losses.Remove(match.Id);
+                    if(homeTeam.Ties.Contains(match.Id))
+                        homeTeam.Ties.Remove(match.Id);
+                    if(visitorTeam.Wins.Contains(match.Id))
+                        visitorTeam.Wins.Remove(match.Id);
+                    if(visitorTeam.Ties.Contains(match.Id))
+                        visitorTeam.Ties.Remove(match.Id);
+                    homeTeam.Wins.Add(match.Id);
+                    visitorTeam.Losses.Add(match.Id);
                 }
                 if (homeScore < visitorScore)
                 {
-                    homeTeam.Losses++;
-                    visitorTeam.Wins++;
+                    if (homeTeam.Wins.Contains(match.Id))
+                        homeTeam.Wins.Remove(match.Id);
+                    if (homeTeam.Ties.Contains(match.Id))
+                        homeTeam.Ties.Remove(match.Id);
+                    if (visitorTeam.Losses.Contains(match.Id))
+                        visitorTeam.Losses.Remove(match.Id);
+                    if (visitorTeam.Ties.Contains(match.Id))
+                        visitorTeam.Ties.Remove(match.Id);
+                    homeTeam.Losses.Add(match.Id);
+                    visitorTeam.Wins.Add(match.Id);
                 }
                 if (homeScore == visitorScore)
                 {
-                    homeTeam.Ties++;
-                    visitorTeam.Ties++;
+                    if (homeTeam.Losses.Contains(match.Id))
+                        homeTeam.Losses.Remove(match.Id);
+                    if (homeTeam.Wins.Contains(match.Id))
+                        homeTeam.Wins.Remove(match.Id);
+                    if (visitorTeam.Wins.Contains(match.Id))
+                        visitorTeam.Wins.Remove(match.Id);
+                    if (visitorTeam.Losses.Contains(match.Id))
+                        visitorTeam.Losses.Remove(match.Id);
+                    homeTeam.Ties.Add(match.Id);
+                    visitorTeam.Ties.Add(match.Id);
                 }
 
                 ServiceLocator.Instance.MatchService.Save();

@@ -1,4 +1,4 @@
-﻿<Page x:Class="AdminApp.MatchProtocolPage"
+﻿<!--<Page x:Class="AdminApp.MatchProtocolPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -586,5 +586,5 @@
             <Button Name="cancelButton" Grid.Column="2" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="2, 2, 25, 2" Click="cancelButton_Click">Cancel</Button>
         </Grid>
     </Grid>
-</Page> 
+</Page>--> 
 

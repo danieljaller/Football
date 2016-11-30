@@ -80,6 +80,7 @@
     <Compile Include="Services\SerieService.cs" />
     <Compile Include="Services\TeamService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\Matches.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
