@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <ComboBox Name="serieSelector" Margin="10" Width="85" Height="20" Text="Välj serie"/>
+                <ComboBox Name="serieSelector" Margin="10" Width="85" Height="20" Text="Välj serie"  />
                 <TextBlock Text="Välj serie" Margin="18,12,12,12" FontWeight="Bold" IsHitTestVisible="False">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +25,16 @@ namespace AdminApp
         public PlayerPage()
         {
             InitializeComponent();
-            GenerateGridRowsAndSetRowColor();
+          //  GenerateGridRowsAndSetRowColor();
+            SetPlayerData();
         }
+        private void SetPlayerData()
+        {
+              playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAll().Take(10).ToList();
+        }
+           
+                
+            
 
         private void GenerateGridRowsAndSetRowColor()
         {
