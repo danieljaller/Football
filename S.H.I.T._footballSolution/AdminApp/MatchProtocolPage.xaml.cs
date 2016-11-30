@@ -377,6 +377,7 @@ namespace AdminApp
 
         private void matchesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Cancel();
             convertListsToObjects();
             isPlayedCheckBox.IsChecked = match.IsPlayed;
             homeTeamNameBlock.DataContext = homeTeam;
@@ -493,44 +494,7 @@ namespace AdminApp
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            match.HomeGoals = homeGoalsBackup.ToList();
-            match.VisitorGoals = visitorGoalsBackup.ToList();
-            match.HomeAssists = homeAssistsBackup.ToList();
-            match.VisitorAssists = visitorAssistsBackup.ToList();
-            match.HomeRedCards = homeRedCardsBackup.ToList();
-            match.VisitorRedCards = visitorRedCardsBackup.ToList();
-            match.HomeYellowCards = homeYellowCardsBackup.ToList();
-            match.VisitorYellowCards = visitorYellowCardsBackup.ToList();
-            match.HomeLineup = homeLineupBackup.ToHashSet();
-            match.VisitorLineup = visitorLineupBackup.ToHashSet();
-            match.HomeExchanges = homeExchangesBackup.ToHashSet();
-            match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
-            isPlayedCheckBox.IsChecked = isPlayedBackup;
-
-            convertListsToObjects();
-
-            homeGoalsList.ItemsSource = homeGoals;
-            visitorGoalsList.ItemsSource = visitorGoals;
-            homeAssistsList.ItemsSource = homeAssists;
-            visitorAssistsList.ItemsSource = visitorAssists;
-            homeRedCardsList.ItemsSource = homeRedCards;
-            visitorRedCardsList.ItemsSource = visitorRedCards;
-            homeYellowCardsList.ItemsSource = homeYellowCards;
-            visitorYellowCardsList.ItemsSource = visitorYellowCards;
-            homeLineupList.ItemsSource = homeLineup;
-            visitorLineupList.ItemsSource = visitorLineup;
-            homeExchangesList.ItemsSource = homeExchanges;
-            visitorExchangesList.ItemsSource = visitorExchanges;
-            if (isPlayed)
-            {
-                homeTeamScoreBlock.DataContext = homeScore;
-                visitorTeamScoreBlock.DataContext = visitorScore;
-            }
-            else
-            {
-                homeTeamScoreBlock.DataContext = " ";
-                visitorTeamScoreBlock.DataContext = " ";
-            }
+            Cancel();
         }
 
         private void isPlayedCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -541,6 +505,51 @@ namespace AdminApp
         private void isPlayedCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             match.IsPlayed = false;
+        }
+
+        public void Cancel()
+        {
+            if (match != null)
+            {
+                match.HomeGoals = homeGoalsBackup.ToList();
+                match.VisitorGoals = visitorGoalsBackup.ToList();
+                match.HomeAssists = homeAssistsBackup.ToList();
+                match.VisitorAssists = visitorAssistsBackup.ToList();
+                match.HomeRedCards = homeRedCardsBackup.ToList();
+                match.VisitorRedCards = visitorRedCardsBackup.ToList();
+                match.HomeYellowCards = homeYellowCardsBackup.ToList();
+                match.VisitorYellowCards = visitorYellowCardsBackup.ToList();
+                match.HomeLineup = homeLineupBackup.ToHashSet();
+                match.VisitorLineup = visitorLineupBackup.ToHashSet();
+                match.HomeExchanges = homeExchangesBackup.ToHashSet();
+                match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
+                isPlayedCheckBox.IsChecked = isPlayedBackup;
+
+                convertListsToObjects();
+
+                homeGoalsList.ItemsSource = homeGoals;
+                visitorGoalsList.ItemsSource = visitorGoals;
+                homeAssistsList.ItemsSource = homeAssists;
+                visitorAssistsList.ItemsSource = visitorAssists;
+                homeRedCardsList.ItemsSource = homeRedCards;
+                visitorRedCardsList.ItemsSource = visitorRedCards;
+                homeYellowCardsList.ItemsSource = homeYellowCards;
+                visitorYellowCardsList.ItemsSource = visitorYellowCards;
+                homeLineupList.ItemsSource = homeLineup;
+                visitorLineupList.ItemsSource = visitorLineup;
+                homeExchangesList.ItemsSource = homeExchanges;
+                visitorExchangesList.ItemsSource = visitorExchanges;
+                if (isPlayed)
+                {
+                    homeTeamScoreBlock.DataContext = homeScore;
+                    visitorTeamScoreBlock.DataContext = visitorScore;
+                }
+                else
+                {
+                    homeTeamScoreBlock.DataContext = " ";
+                    visitorTeamScoreBlock.DataContext = " ";
+                }
+            }
         }
     }
 }
