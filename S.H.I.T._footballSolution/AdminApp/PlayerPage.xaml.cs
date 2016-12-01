@@ -2,6 +2,7 @@
 using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,23 +21,31 @@ namespace AdminApp
     /// <summary>
     /// Interaction logic for PlayerPage.xaml
     /// </summary>
+    /// 
     public partial class PlayerPage : Page
     {
+        Serie selectedSerie;
+        ObservableCollection<Player> players;
+        bool isNameClicked;
         public PlayerPage()
         {
 
         }
         public PlayerPage(Serie selectedSerie)
         {
+            this.selectedSerie = selectedSerie;
             InitializeComponent();           
             SetPlayerData(selectedSerie);
             //GenerateGridRowsAndSetRowColor();
         }
         private void SetPlayerData(Serie selectedSerie)
         {
+            
             if (selectedSerie != null)
             {
-                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id);
+                players = new ObservableCollection<Player>(ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id));
+                playerStatsListbox.ItemsSource = players;
+                //playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id).ToObservableCollection();
             }
             
         }
@@ -60,6 +69,20 @@ namespace AdminApp
                 grid.Children.Add(rect);
                 Grid.SetColumnSpan(rect, 9);
                 Grid.SetRow(rect, i);
+            }
+        }
+
+        private void playerName_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isNameClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByLastName(selectedSerie.Id);
+                isNameClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByFirstName(selectedSerie.Id);
+                isNameClicked = true;
             }
         }
     }
