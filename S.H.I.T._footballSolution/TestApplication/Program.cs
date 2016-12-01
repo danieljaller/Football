@@ -87,11 +87,7 @@ namespace TestApplication
                     Console.ReadKey();
                     return;
                 }
-
-                int[] numberOfPlayersInEachTeam = new int[numberOfSeries * 16];
-                for (int i = 0; i < numberOfPlayersInEachTeam.Length; i++)
-                    numberOfPlayersInEachTeam[i] = _Random.Next(24, 31);
-
+                
                 int playerCounter = 1,
                     teamCounter = 1;
 
@@ -113,12 +109,13 @@ namespace TestApplication
                         playerCounter += amount;
                     }
                     teamList = TeamFactory.CreateTeamsAndSetPlayersTeamId(playerLists, teamCounter);
-                    teamCounter++;
+                    teamCounter += Serie.NumberOfTeams;
 
                     matchList = MatchTableFactory.CreateMatchTable(teamList,
                         GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
 
-                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToHashSet(), matchList.Select(match => match.Id).ToHashSet());
+                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToHashSet(), 
+                        matchList.Select(match => match.Id).ToHashSet());
 
                     foreach (Team team in teamList)
                         team.SerieIds.Add(serie.Id);
