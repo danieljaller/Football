@@ -83,6 +83,14 @@ namespace FootballEngine.Services
             _teamRepository.Save();
         }
 
+        public bool NameExist(string name)
+        {
+            if (_teamRepository.GetAll().Select(team => team.Name.Value).Contains(name))
+                return true;
+
+            return false;
+        }
+
         public IEnumerable<Team> OrderByTeamName(Guid serieId)
         {
             return GetAllTeamsBySerie(serieId).OrderBy(t => t.Name.Value);
