@@ -21,6 +21,7 @@ namespace FootballEngine.Domain.Entities
         public PlayerName LastName { get; set; }
         public string FullName { get { return $"{FirstName.Value} {LastName.Value}"; } }
         public DateOfBirth DateOfBirth { get; set; }
+        public int Age { get { return DateTime.Now.Year - DateOfBirth.Value.Year; } }
         public Status PlayerStatus { get; set; }
         public List<Guid> RedCards { get; set; }
         public List<Guid> YellowCards { get; set; }
