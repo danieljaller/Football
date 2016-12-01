@@ -445,7 +445,7 @@ namespace AdminApp
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
+            if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) && match.IsPlayed)
             {
                 homeTeam.GoalsFor = homeTeam.GoalsFor + homeScore - homeScoreBackup;
                 visitorTeam.GoalsFor = visitorTeam.GoalsFor + visitorScore - visitorScoreBackup;
@@ -497,6 +497,15 @@ namespace AdminApp
                 ServiceLocator.Instance.SerieService.Save();
                 Close();
                 MessageBox.Show($"Matchprotokoll sparat");
+            }
+            else if (homeGoals.Count==0 && visitorGoals.Count==0 && homeAssists.Count == 0 && visitorAssists.Count == 0 
+                    && homeRedCards.Count == 0 && visitorRedCards.Count == 0 && homeYellowCards.Count == 0 && visitorYellowCards.Count == 0 
+                    && homeLineup.Count == 0 && visitorLineup.Count == 0 && homeExchanges.Count == 0 && visitorExchanges.Count == 0
+                    && !match.IsPlayed)
+            {
+                ServiceLocator.Instance.MatchService.Save();
+                Close();
+                MessageBox.Show($"Matchdatum sparat");
             }
             else
             {
