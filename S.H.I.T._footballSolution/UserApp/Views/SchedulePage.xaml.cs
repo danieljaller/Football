@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,29 +22,92 @@ namespace UserApp
     /// </summary>
     public partial class SchedulePage : Page
     {
-        public SchedulePage()
+
+        private HashSet<Team> teamList = new HashSet<Team>();
+        private HashSet<Guid> matchScheduleWithIds;
+        private HashSet<Match> matchScheduleWithMatches;
+        private List<Team> homeTeamList, visitorTeamList;
+        private Serie SelectedSerie;
+
+        public SchedulePage(Serie selectedSerie)
         {
             InitializeComponent();
-            GenerateGridRowsAndSetRowColor();
+            SelectedSerie = selectedSerie;
+            matchScheduleWithIds = SelectedSerie.MatchTable;
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            showAllRadioButton.IsChecked = true;
         }
 
-        private void GenerateGridRowsAndSetRowColor()
+        private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList)
         {
-            string[] testArray = new string[30];
+            homeTeamListBox.ItemsSource = homeTeamList;
+            visitorTeamListBox.ItemsSource = visitorTeamList;
+            dateListBox.ItemsSource = matchScheduleWithMatches;
+            resultListBox.ItemsSource = matchScheduleWithMatches;
+        }
 
-            foreach (var position in testArray)
-            {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto, MinHeight = 20 });
-            }
+        private void CreateAndConvertLists(HashSet<Guid> matchScheduleWithIds, out HashSet<Match> matchScheduleWithMatches, out List<Team> homeTeamList, out List<Team> visitorTeamList)
+        {
+            matchScheduleWithMatches = new HashSet<Match>();
+            homeTeamList = new List<Team>();
+            visitorTeamList = new List<Team>();
 
-            for (int i = 2; i < grid.RowDefinitions.Count(); i += 2)
+            foreach (var matchId in matchScheduleWithIds)
             {
-                Rectangle rect = new Rectangle();
-                rect.Fill = new SolidColorBrush(Colors.LightGray);
-                grid.Children.Add(rect);
-                Grid.SetColumnSpan(rect, 9);
-                Grid.SetRow(rect, i);
+                matchScheduleWithMatches.Add(ServiceLocator.Instance.MatchService.GetBy(matchId));
             }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                homeTeamList.Add(ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId));
+            }
+            foreach (var match in matchScheduleWithMatches)
+            {
+                visitorTeamList.Add(ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId));
+            }
+        }
+
+        private void showAllRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            matchScheduleWithIds = SelectedSerie.MatchTable;
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+        private void showPlayedRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            matchScheduleWithIds = SelectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == true).ToHashSet();
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+
+        private void showCommingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            matchScheduleWithIds = SelectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == false).ToHashSet();
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+        
+        private void HomeTeam_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByHomeTeam(matchScheduleWithIds);
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+        private void VisitorTeam_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByVisitorTeam(matchScheduleWithIds);
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+        }
+
+        private void Date_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByDate(matchScheduleWithIds);
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
         }
     }
 }
