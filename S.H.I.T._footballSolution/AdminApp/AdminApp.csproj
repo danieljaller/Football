@@ -74,6 +74,7 @@
     <Compile Include="Converters\CollectionCountToStringConverter.cs" />
     <Compile Include="Converters\GeneralNameValidationRule.cs" />
     <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
+    <Compile Include="Converters\GuidToEntityNameConverter.cs" />
     <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
     <Compile Include="Converters\NameValidationRule.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
@@ -231,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\calendar_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

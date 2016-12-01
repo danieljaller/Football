@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AdminApp
 {
@@ -32,6 +33,31 @@ namespace AdminApp
             List<Serie> searchResult = new List<Serie>();
             searchResult.Add(selectedSerie);
             seriesList.ItemsSource = searchResult;
+        }
+        public CreateOrAdministrateSeriesPage(Team team, bool areMatchesPlayed)
+        {
+            InitializeComponent();
+            mainGrid.Background = new SolidColorBrush(Colors.White);
+            showAllRadioButton.Visibility = Visibility.Collapsed;
+            showCommingRadioButton.Visibility = Visibility.Collapsed;
+            showPlayedRadioButton.Visibility = Visibility.Collapsed;
+            seriesList.Visibility = Visibility.Collapsed;
+            NewSeriesButton.Visibility = Visibility.Collapsed;
+            
+            if (areMatchesPlayed)
+            {
+                Header.Text = $"{team.Name}s spelade matcher";
+                matchScheduleWithIds = ServiceLocator.Instance.MatchService.GetAll().Where(m => m.HomeTeamId == team.Id || m.VisitorTeamId == team.Id).Where(m => m.IsPlayed == true).Select(m => m.Id).ToHashSet();
+                CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            }
+            else
+            {
+                Header.Text = $"{team.Name}s kommande matcher";
+                matchScheduleWithIds = ServiceLocator.Instance.MatchService.GetAll().Where(m => m.HomeTeamId == team.Id || m.VisitorTeamId == team.Id).Where(m => m.IsPlayed == false).Select(m => m.Id).ToHashSet();
+                CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            }
         }
 
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)

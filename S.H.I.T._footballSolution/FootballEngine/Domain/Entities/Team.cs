@@ -24,7 +24,7 @@ namespace FootballEngine.Domain.Entities
                 Losses = new HashSet<Guid>();
                 Ties = new HashSet<Guid>();
                 GoalsFor = 0;
-                GoalsAgainst = 0;
+                GoalsAgainst = 0;               
             }
         }
         private bool IsValidParameters(GeneralName name, GeneralName homeArena)
@@ -46,6 +46,13 @@ namespace FootballEngine.Domain.Entities
             get
             {
                 return (Wins.Count * 3) + (Ties.Count * 1);
+            }
+        }
+        public int MatchesPlayed
+        {
+            get
+            {
+                return Wins.Count + Losses.Count + Ties.Count;
             }
         }
         public int GoalsFor { get; set; }
