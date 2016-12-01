@@ -11,7 +11,7 @@
     <Window.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
     </Window.Resources>
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=searchTextBox}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
