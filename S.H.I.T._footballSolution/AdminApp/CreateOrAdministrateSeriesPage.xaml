@@ -21,7 +21,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid>
+    <Grid Name="mainGrid" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -31,7 +31,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/administrera serie" FontSize="20" />
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/administrera serie" FontSize="20" Name="Header"/>
         <ListBox Name="seriesList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250" SelectionChanged="seriesList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>

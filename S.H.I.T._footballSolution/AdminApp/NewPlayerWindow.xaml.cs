@@ -31,11 +31,11 @@ namespace AdminApp
             AllowedDates();
         }
 
-        public NewPlayerWindow(bool mustAddThree, Team team)
+        public NewPlayerWindow(bool hasMinValue, Team team)
         {
             InitializeComponent();
             this.team = team;
-            this.hasMinValue = mustAddThree;
+            this.hasMinValue = hasMinValue;
             //if (!mustAddThree)
             //    addPlayersNowButton.IsEnabled = true;
             DataContext = this;
