@@ -24,13 +24,21 @@ namespace AdminApp
     {
         public PlayerPage()
         {
-            InitializeComponent();
-          //  GenerateGridRowsAndSetRowColor();
-            SetPlayerData();
+
         }
-        private void SetPlayerData()
+        public PlayerPage(Serie selectedSerie)
         {
-              playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAll().Take(10).ToList();
+            InitializeComponent();           
+            SetPlayerData(selectedSerie);
+            //GenerateGridRowsAndSetRowColor();
+        }
+        private void SetPlayerData(Serie selectedSerie)
+        {
+            if (selectedSerie != null)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id);
+            }
+            
         }
            
                 

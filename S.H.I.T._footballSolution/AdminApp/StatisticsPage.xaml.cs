@@ -26,7 +26,7 @@ namespace AdminApp
         public StatisticsPage()
         {
             InitializeComponent();
-            serieSelector.ItemsSource = ServiceLocator.Instance.SerieService.GetAll().Select(s => s.Name.ToString());
+            serieSelector.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
         }
 
         //private Serie GetSelectedSerie()
@@ -47,7 +47,7 @@ namespace AdminApp
 
         private void player_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new PlayerPage();
+            seriePageFrame.Content = new PlayerPage((Serie)serieSelector.SelectedItem);
         }
         
     }
