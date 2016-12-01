@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +26,13 @@ namespace AdminApp
         public StatisticsPage()
         {
             InitializeComponent();
+            serieSelector.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
         }
+
+        //private Serie GetSelectedSerie()
+        //{
+            
+        //}
 
         private void schedule_Click(object sender, RoutedEventArgs e)
         {
@@ -34,12 +42,13 @@ namespace AdminApp
 
         private void table_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new TablePage();
+            seriePageFrame.Content = new TablePage((Serie)serieSelector.SelectedItem);
         }
 
         private void player_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new PlayerPage();
+            seriePageFrame.Content = new PlayerPage((Serie)serieSelector.SelectedItem);
         }
+        
     }
 }
