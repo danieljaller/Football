@@ -71,6 +71,7 @@
     <Compile Include="AdministratePlayersPage.xaml.cs">
       <DependentUpon>AdministratePlayersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CollectionCountToStringConverter.cs" />
     <Compile Include="Converters\GeneralNameValidationRule.cs" />
     <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
     <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
@@ -152,10 +153,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MatchProtocolPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="NewPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,9 +191,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MatchProtocolPage.xaml.cs">
-      <DependentUpon>MatchProtocolPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

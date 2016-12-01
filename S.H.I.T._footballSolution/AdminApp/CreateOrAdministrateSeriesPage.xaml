@@ -105,5 +105,10 @@
                 </ListBox>
             </Grid>
         </ScrollViewer>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <RadioButton Name="showAllRadioButton" Content="Visa alla matcher" Margin="7" VerticalAlignment="Center" Checked="showAllRadioButton_Checked"/>
+            <RadioButton Name="showPlayedRadioButton" Content="Visa spelade matcher" Margin="7" VerticalAlignment="Center" Checked="showPlayedRadioButton_Checked"/>
+            <RadioButton Name="showCommingRadioButton" Content="Visa kommande matcher" Margin="7" VerticalAlignment="Center" Checked="showCommingRadioButton_Checked"/>
+        </StackPanel>
     </Grid>
 </Page>

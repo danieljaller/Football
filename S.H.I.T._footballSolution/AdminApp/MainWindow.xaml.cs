@@ -43,7 +43,7 @@ namespace AdminApp
 
         private void ProtocolButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPageFrame.Content = new MatchProtocolPage();
+        //    MainPageFrame.Content = new MatchProtocolPage();
         }
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)

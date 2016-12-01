@@ -20,9 +20,9 @@ namespace FootballEngine.Domain.Entities
                 PlayerIds = new HashSet<Guid>();
                 MatchIds = new HashSet<Guid>();
                 SerieIds = new HashSet<Guid>();
-                Wins = 0;
-                Losses = 0;
-                Ties = 0;
+                Wins = new HashSet<Guid>();
+                Losses = new HashSet<Guid>();
+                Ties = new HashSet<Guid>();
                 GoalsFor = 0;
                 GoalsAgainst = 0;
             }
@@ -38,14 +38,14 @@ namespace FootballEngine.Domain.Entities
         public Guid Id { get; set; }
         public GeneralName Name { get; set; }
         public GeneralName HomeArena { get; set; }
-        public int Wins { get; set; }
-        public int Losses { get; set; }
-        public int Ties { get; set; }
+        public HashSet<Guid> Wins { get; set; }
+        public HashSet<Guid> Losses { get; set; }
+        public HashSet<Guid> Ties { get; set; }
         public int Points
         {
             get
             {
-                return (Wins * 3) + (Ties * 1);
+                return (Wins.Count * 3) + (Ties.Count * 1);
             }
         }
         public int GoalsFor { get; set; }
