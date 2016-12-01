@@ -1,4 +1,5 @@
-﻿using FootballEngine.Domain.Entities;
+﻿using AdminApp.Converters;
+using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Helper;
 using System;
@@ -16,8 +17,10 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateTeamsPage : Page
     {
-        Player player;
-        Team team;
+        Player selectedPlayer;
+        Team selectedTeam;
+        string backupTeamName;
+        string backupArenaName;
         static int selectedIndexInTeamsList;
 
         public CreateOrAdministrateTeamsPage()
@@ -46,10 +49,11 @@ namespace AdminApp
             var newPlayerWindow = new NewPlayerWindow(false, (Team)teamsList.SelectedItem);
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
 
-            if (team.PlayerIds.Count() > 24)
+            if (selectedTeam.PlayerIds.Count() > 24)
                 removePlayer.IsEnabled = true;
-            if (team.PlayerIds.Count() >= 30)
+            if (selectedTeam.PlayerIds.Count() >= 30)
                 addPlayer.IsEnabled = false;
+
             ServiceLocator.Instance.TeamService.Save();
             ServiceLocator.Instance.PlayerService.Save();
             playersList.Items.Refresh();
@@ -59,52 +63,53 @@ namespace AdminApp
         {
             if (playersList.SelectedItem != null)
             {
-                player = ServiceLocator.Instance.PlayerService.GetBy((Guid)playersList.SelectedItem);
-                team = ServiceLocator.Instance.TeamService.GetBy(player.TeamId);
-                MessageBoxResult result = MessageBox.Show($"Är du säker på att du vill ta bort {player.FullName}?", "Bekräfta", MessageBoxButton.YesNo);
+                selectedPlayer = ServiceLocator.Instance.PlayerService.GetBy((Guid)playersList.SelectedItem);
+                selectedTeam = ServiceLocator.Instance.TeamService.GetBy(selectedPlayer.TeamId);
+                MessageBoxResult result = MessageBox.Show($"Är du säker på att du vill ta bort {selectedPlayer.FullName}?", "Bekräfta", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    team.PlayerIds.Remove(player.Id);
-                    ServiceLocator.Instance.PlayerService.Delete(player.Id);
+                    selectedTeam.PlayerIds.Remove(selectedPlayer.Id);
+                    ServiceLocator.Instance.PlayerService.Delete(selectedPlayer.Id);
+                    ServiceLocator.Instance.TeamService.Save();
+                    ServiceLocator.Instance.PlayerService.Save();
                     playersList.Items.Refresh();
                 }
-                if (team.PlayerIds.Count() <= 24)
+                if (selectedTeam.PlayerIds.Count() <= 24)
                     removePlayer.IsEnabled = false;
-                if (team.PlayerIds.Count() < 30)
+                if (selectedTeam.PlayerIds.Count() < 30)
                     addPlayer.IsEnabled = true;
-
             }
-            ServiceLocator.Instance.TeamService.Save();
-            ServiceLocator.Instance.PlayerService.Save();
         }
 
         private void teamsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedIndexInTeamsList = teamsList.SelectedIndex;
-            var team = (Team)teamsList.SelectedItem;
-            if (team.PlayerIds.Count() >= 30)
+            backupArenaName = arenaName.Text;
+            backupTeamName = teamName.Text;
+            selectedTeam = (Team)teamsList.SelectedItem;
+            if (selectedTeam.PlayerIds.Count() >= 30)
             {
                 addPlayer.IsEnabled = false;
             }
-            matchesPlayedTextBlock.Text = team.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == true).Count().ToString();
+            matchesPlayedTextBlock.Text = selectedTeam.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == true).Count().ToString();
             StringBuilder serieStringBuilder = new StringBuilder();
-            foreach (var serieId in team.SerieIds)
+            foreach (var serieId in selectedTeam.SerieIds)
             {
                 serieStringBuilder.Append($"{ServiceLocator.Instance.SerieService.GetBy(serieId).Name}, ");
             }
             seriesTextBox.Text = serieStringBuilder.ToString().TrimEnd(',', ' ');
-            matchesNotPlayedTextBlock.Text = team.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == false).Count().ToString();
+            matchesNotPlayedTextBlock.Text = selectedTeam.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == false).Count().ToString();
         }
 
         private void arenaName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var team = (Team)teamsList.SelectedItem;
-
-            GeneralName result;
-            if (GeneralName.TryParse(arenaName.Text, out result))
+            if (Validation.GetHasError(arenaName))
             {
-                team.HomeArena = result;
-                ServiceLocator.Instance.TeamService.Save();
+                saveBtn.IsEnabled = false;
+            }
+            else
+            {
+                saveBtn.IsEnabled = true;
             }
         }
 
@@ -122,14 +127,29 @@ namespace AdminApp
 
         private void teamName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var team = (Team)teamsList.SelectedItem;
-
-            GeneralName result;
-            if (GeneralName.TryParse(teamName.Text, out result))
+            if (Validation.GetHasError(teamName))
             {
-                team.Name = result;
-                ServiceLocator.Instance.TeamService.Save();
+                saveBtn.IsEnabled = false;
             }
+            else
+            {
+                saveBtn.IsEnabled = true;
+            }
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            selectedTeam.Name = new GeneralName(teamName.Text);
+            selectedTeam.HomeArena = new GeneralName(arenaName.Text);
+            ServiceLocator.Instance.TeamService.Save();
+            ServiceLocator.Instance.PlayerService.Save();
+            MessageBox.Show("Dina ändringar har sparats");
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            teamName.Text = backupTeamName;
+            arenaName.Text = backupArenaName;
         }
     }
 }

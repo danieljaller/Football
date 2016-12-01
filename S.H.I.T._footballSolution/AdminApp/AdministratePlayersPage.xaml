@@ -4,14 +4,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
+      xmlns:Converters ="clr-namespace:AdminApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
       Title="AdministratePlayersPage">
-
+    <Page.Resources>
+        <Converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter"/>
+        <Converters:CollectionCountToStringConverter x:Key="collectionCountToStringConverter"/>
+    </Page.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,91 +24,96 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Spelare" FontSize="20" />
-        <ListBox Name="playersList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock FontWeight="Bold" Text="{Binding Path=FullName}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button Grid.Column="0" Grid.Row="2" Content="Radera Spelare" Margin="10"/>
-
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <ComboBox Name="teamsSelector" SelectionChanged="teamsSelector_SelectionChanged" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name.Value}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ListBox Name="playersList" SelectedIndex="0" Grid.Row="1" Margin="5" Width="170" Height="332" SelectionChanged="playersList_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock FontWeight="Bold" Text="{Binding Path=FullName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Name="playersOverview">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=playersList, Path=SelectedItem.FullName}" FontWeight="Bold"/>
-            <TextBlock Grid.Row="1" FontWeight="Bold" Margin="5,5,0,0" Text="Förnamn:"/>
-
-            <TextBlock Grid.Row="2" FontWeight="Bold" Margin="5,5,0,0" Text="Efternamn:"/>
-
-            <TextBlock Grid.Row="3" FontWeight="Bold" Margin="5,5,0,0" Text="Födelsedatum:"/>
-
-            <TextBlock Grid.Row="4" FontWeight="Bold" Margin="5,5,0,0" Text="Spelbar:"/>
-
-            <TextBlock Grid.Row="5" FontWeight="Bold" Margin="5,5,0,0" Text="Gula kort:"/>
-
-            <TextBlock Grid.Row="6" FontWeight="Bold" Margin="5,5,0,0" Text="Röda kort:"/>
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="40,35,0,0">
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Förnamn:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Efternamn:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Födelsedatum:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Status:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Gula kort:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Röda kort:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Mål:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Assist:"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
+                <Button Grid.Row="10" Margin="0,65,0,0" Name="saveBtn" HorizontalAlignment="Left" Width="50" Content="Spara" Click="saveBtn_Click" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" DataContext="{Binding ElementName=playersList}" Width="150" Margin="5,35,0,0">
+                <!--<TextBox Height="23" FontWeight="Bold" Margin="5,5,0,0"/>-->
+                <TextBox Name="playerFirstName" Margin="5,5,0,0" Height="23" IsEnabled="False"
+                     ToolTip="{Binding ElementName=playerFirstName, Path=(Validation.Errors)[0].ErrorContent}" TextChanged="playerFirstName_TextChanged">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.FirstName.Value" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <Converters:NameValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="playerLastName" Margin="5,5,0,0" Height="23" IsEnabled="False"
+                     ToolTip="{Binding ElementName=playerLasttName, Path=(Validation.Errors)[0].ErrorContent}" TextChanged="playerLastName_TextChanged">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.LastName.Value" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <Converters:NameValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <DatePicker Name="playerDoBPicker" Grid.Row="3" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" IsEnabled="False"/>
+                <ComboBox Name="statusSelector" Height="23" FontWeight="Bold" Margin="5,5,0,0" SelectionChanged="statusSelector_SelectionChanged" IsEnabled="False">
+                    <ComboBoxItem Name="availableCBI">
+                        <TextBlock Text="Tillgänglig"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem Name="suspendedCBI">
+                        <TextBlock Text="Avstängd"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem Name="injuredCBI">
+                        <TextBlock Text="Skadad"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem Name="nationalTeamCBI">
+                        <TextBlock Text="Landslagsuppdrag"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem Name="otherCBI">
+                        <TextBlock Text="Annat"/>
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.YellowCards, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.RedCards, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Goals, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Assists, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.MatchesPlayedIds, Converter={StaticResource collectionCountToStringConverter}}"/>
+                <Button Grid.Row="10" Grid.Column="1" Margin="0,65,0,0"  Name="cancelBtn" HorizontalAlignment="Right" Width="50" Content="Avbryt" IsEnabled="False" Click="cancelBtn_Click"/>
+            </StackPanel>
+                
             
-            <TextBlock Grid.Row="7" FontWeight="Bold" Margin="5,5,0,0" Text="Mål:"/>
-
-            <TextBlock Grid.Row="8" FontWeight="Bold" Margin="5,5,0,0" Text="Assist:"/>
-
-            <TextBlock Grid.Row="9" FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
-
-            <TextBox Grid.Row="1" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0"/>
-
-            <TextBox Grid.Row="2" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-
-            <DatePicker Name="playerDoBPicker" Grid.Row="3" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-
-            <ComboBox Grid.Row="4" Grid.Column="1" Height="23" FontWeight="Bold" Margin="5,5,0,0" >
-                <ComboBoxItem>
-                    <TextBlock Text="Spelbar" />
-                </ComboBoxItem>
-                    
-                <ComboBoxItem>
-                    <TextBlock Text="Skadad"/>
-                </ComboBoxItem>
-
-                <ComboBoxItem>
-                    <TextBlock Text="Avstängd"/>
-                </ComboBoxItem>
-
-                <ComboBoxItem>
-                    <TextBlock Text="Landslagsuppdrag"/>
-                </ComboBoxItem>
-
-                <ComboBoxItem>
-                    <TextBlock Text="Annan frånvaro"/>
-                </ComboBoxItem>
-            </ComboBox>
-
-            <TextBlock Grid.Row="5" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-            <TextBlock Grid.Row="6" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-            <TextBlock Grid.Row="7" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-            <TextBlock Grid.Row="8" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-            <TextBlock Grid.Row="9" Grid.Column="1"  Height="23" FontWeight="Bold" Margin="5,5,0,0" />
-
-            <Button Grid.Row="10" Margin="0, 10,0,0" Name="Save" HorizontalAlignment="Left" Width="50">Save</Button>
-            <Button Grid.Row="10" Grid.Column="1" Margin="0, 10,0,0"  Name="Cancel" HorizontalAlignment="Right" Width="50">Cancel</Button>
+            
         </Grid>
 
     </Grid>
