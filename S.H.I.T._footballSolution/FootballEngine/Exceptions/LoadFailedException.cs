@@ -2,7 +2,7 @@
 
 namespace FootballEngine.Helper
 {
-    class LoadFailedException : SystemException
+    public class LoadFailedException : SystemException
     {
         private string _message;
         public override string Message
