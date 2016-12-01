@@ -29,7 +29,7 @@ namespace FootballEngine.Factories
             for (int i = playerNameStartValue; i <= (amount + playerNameStartValue - 1); i++)
             {
                 PlayerName firstName = new PlayerName("Player");
-                PlayerName lastName = new PlayerName(i.NumberToWords().FirstToUpper().Trim());
+                PlayerName lastName = new PlayerName(i.NumberToWords().FirstToUpper(true).Trim());
                 
                 int year = random.Next(DateTime.Now.Year - 50, DateTime.Now.Year - 17);
                 int month = random.Next(1, 13);

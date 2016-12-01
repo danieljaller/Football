@@ -3,6 +3,7 @@ using FootballEngine.Interfaces;
 using FootballEngine.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FootballEngine.Services
 {
@@ -12,6 +13,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static SerieService _instance;
+
         internal static SerieService Instance
         {
             get
@@ -50,7 +52,7 @@ namespace FootballEngine.Services
 
         public IEnumerable<Serie> GetAll()
         {
-           return _serieRepository.GetAll();
+            return _serieRepository.GetAll();
         }
 
         public Serie GetBy(string name)
@@ -66,6 +68,14 @@ namespace FootballEngine.Services
         public void Save()
         {
             _serieRepository.Save();
+        }
+
+        public bool NameExist(string name)
+        {
+            if (_serieRepository.GetAll().Select(serie => serie.Name.Value).Contains(name))
+                return true;
+
+            return false;
         }
     }
 }

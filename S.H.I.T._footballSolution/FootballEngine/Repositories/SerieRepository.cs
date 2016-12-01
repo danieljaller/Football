@@ -41,7 +41,7 @@ namespace FootballEngine.Repositories
                 throw new ArgumentNullException($"{nameof(serie)} cannot be null.");
             if (_series.Select(s => s.Id).Contains(serie.Id))
                 throw new ArgumentException($"A {nameof(serie)} with the id '{serie.Id}' already exsist in the repository.");
-            if (_series.Select(s => s.Name).Contains(serie.Name))
+            if (_series.Select(s => s.Name.Value).Contains(serie.Name.Value))
                 throw new ArgumentException($"A {nameof(serie)} with the name '{serie.Name}' already exsist in the repository.");
 
             _series.Add(serie);

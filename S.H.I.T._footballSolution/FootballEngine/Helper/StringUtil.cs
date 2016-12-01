@@ -1,4 +1,7 @@
-﻿namespace FootballEngine.Helper
+﻿using System.Linq;
+using System.Text;
+
+namespace FootballEngine.Helper
 {
     public static class StringUtil
     {
@@ -25,6 +28,25 @@
         public static string FirstToUpper(this string str)
         {
             return str[0].ToUpper() + str.Substring(1);
+        }
+
+        public static string FirstToUpper(this string str, bool firstLetterInEveryWord)
+        {
+            str = str.FirstToUpper();
+            if (str.Contains(' ') || str.Contains('-'))
+            {
+                StringBuilder stringBuilder = new StringBuilder(str);
+                for (int i = 1; i < str.Length; i++)
+                {
+                    if ((str[i] == ' ' || str[i] == '-') && (i + 1) < str.Length && char.IsLetter(str[i + 1]))
+                    {
+                        stringBuilder[i + 1] = str[i + 1].ToUpper();
+                        i = ((i + 2) < str.Length) ? (i + 2) : str.Length;
+                    }
+                }
+                return stringBuilder.ToString();
+            }
+            return str;
         }
     }
 }
