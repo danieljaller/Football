@@ -305,7 +305,7 @@ namespace AdminApp
 
         private void addPlayerHome_Click(object sender, RoutedEventArgs e)
         {
-            var addPlayerWindow = new AddPlayerWindow(homeTeam, homeLineup);
+            var addPlayerWindow = new AddPlayerWindow(homeTeam, homeLineup, homeLineup.Count);
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
@@ -322,7 +322,7 @@ namespace AdminApp
 
         private void addPlayerAway_Click(object sender, RoutedEventArgs e)
         {
-            var addPlayerWindow = new AddPlayerWindow(visitorTeam, visitorLineup);
+            var addPlayerWindow = new AddPlayerWindow(visitorTeam, visitorLineup, visitorLineup.Count);
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
