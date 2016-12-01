@@ -379,12 +379,12 @@ namespace AdminApp
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            List<Guid> playerOutIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+            List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
                                         .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
-                                        .Select(p => p.Id);
-            List<Guid> playerInIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+                                        .Select(p => p.Id).ToList();
+            List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
-                                                    .Select(p => p.Id);
+                                                    .Select(p => p.Id).ToList();
             var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
