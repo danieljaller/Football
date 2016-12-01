@@ -36,6 +36,7 @@ namespace AdminApp
             InitializeComponent();
             List<Team> searchResultTeam = new List<Team> { selectedTeam };
             teamsList.ItemsSource = searchResultTeam;
+            teamsList.SelectedIndex = 0;
         }
 
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
