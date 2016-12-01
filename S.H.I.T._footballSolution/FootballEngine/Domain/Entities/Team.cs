@@ -24,8 +24,7 @@ namespace FootballEngine.Domain.Entities
                 Losses = new HashSet<Guid>();
                 Ties = new HashSet<Guid>();
                 GoalsFor = 0;
-                GoalsAgainst = 0;
-                MatchesPlayed = 0;
+                GoalsAgainst = 0;               
             }
         }
         private bool IsValidParameters(GeneralName name, GeneralName homeArena)
