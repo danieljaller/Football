@@ -305,7 +305,7 @@ namespace AdminApp
 
         private void addPlayerHome_Click(object sender, RoutedEventArgs e)
         {
-            var addPlayerWindow = new AddPlayerWindow(homeTeam, homeLineup);
+            var addPlayerWindow = new AddPlayerWindow(homeTeam, homeLineup, homeLineup.Count);
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
@@ -322,7 +322,7 @@ namespace AdminApp
 
         private void addPlayerAway_Click(object sender, RoutedEventArgs e)
         {
-            var addPlayerWindow = new AddPlayerWindow(visitorTeam, visitorLineup);
+            var addPlayerWindow = new AddPlayerWindow(visitorTeam, visitorLineup, visitorLineup.Count);
             var addPlayer = addPlayerWindow.ShowDialog();
             if (addPlayer == true)
             {
@@ -379,12 +379,12 @@ namespace AdminApp
 
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            List<Guid> playerOutIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+            List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
                                         .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
-                                        .Select(p => p.Id);
-            List<Guid> playerInIds = (List<Guid>)ServiceLocator.Instance.PlayerService.GetAll()
+                                        .Select(p => p.Id).ToList();
+            List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
-                                                    .Select(p => p.Id);
+                                                    .Select(p => p.Id).ToList();
             var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
@@ -445,7 +445,7 @@ namespace AdminApp
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) || !match.IsPlayed)
+            if ((homeLineup.Count() == 11 && visitorLineup.Count() == 11) && match.IsPlayed)
             {
                 homeTeam.GoalsFor = homeTeam.GoalsFor + homeScore - homeScoreBackup;
                 visitorTeam.GoalsFor = visitorTeam.GoalsFor + visitorScore - visitorScoreBackup;
@@ -497,6 +497,15 @@ namespace AdminApp
                 ServiceLocator.Instance.SerieService.Save();
                 Close();
                 MessageBox.Show($"Matchprotokoll sparat");
+            }
+            else if (homeGoals.Count==0 && visitorGoals.Count==0 && homeAssists.Count == 0 && visitorAssists.Count == 0 
+                    && homeRedCards.Count == 0 && visitorRedCards.Count == 0 && homeYellowCards.Count == 0 && visitorYellowCards.Count == 0 
+                    && homeLineup.Count == 0 && visitorLineup.Count == 0 && homeExchanges.Count == 0 && visitorExchanges.Count == 0
+                    && !match.IsPlayed)
+            {
+                ServiceLocator.Instance.MatchService.Save();
+                Close();
+                MessageBox.Show($"Matchdatum sparat");
             }
             else
             {

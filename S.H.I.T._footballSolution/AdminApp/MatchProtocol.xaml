@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         xmlns:converters="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
-        Title="MatchProtocol" Height="350" Width="440">
+        Title="MatchProtocol" Height="550" Width="440">
     <Window.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
         <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
