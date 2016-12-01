@@ -51,6 +51,7 @@
         <TextBlock Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Gula Kort" Text="GK" />
         <TextBlock Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Röda kort" Text="RK" />
         <TextBlock Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Status" Text="S" />
+        
         <ListBox Name="playerStatsListbox" Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent" AlternationCount="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>

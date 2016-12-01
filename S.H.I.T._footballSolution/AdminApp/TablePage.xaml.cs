@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AdminApp
 {
@@ -21,28 +10,20 @@ namespace AdminApp
     public partial class TablePage : Page
     {
         public TablePage()
+        { }
+        public TablePage(Serie selectedSerie)
         {
             InitializeComponent();
-            GenerateGridRowsAndSetRowColor();
+            SetTableData(selectedSerie);
         }
 
-        private void GenerateGridRowsAndSetRowColor()
+        private void SetTableData(Serie selectedSerie)
         {
-            string[] testArray = new string[16];
-
-            foreach (var position in testArray)
+            if (selectedSerie != null)
             {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto, MinHeight = 20 });
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.GetAllTeamsBySerie(selectedSerie.Id);
             }
 
-            for (int i = 2; i < grid.RowDefinitions.Count(); i += 2)
-            {
-                Rectangle rect = new Rectangle();
-                rect.Fill = new SolidColorBrush(Colors.LightGray);
-                grid.Children.Add(rect);
-                Grid.SetColumnSpan(rect, 9);
-                Grid.SetRow(rect, i);
-            }
-        }
+        }        
     }
 }

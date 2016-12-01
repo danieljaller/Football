@@ -42,7 +42,7 @@ namespace AdminApp
 
         private void table_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new TablePage();
+            seriePageFrame.Content = new TablePage((Serie)serieSelector.SelectedItem);
         }
 
         private void player_Click(object sender, RoutedEventArgs e)
