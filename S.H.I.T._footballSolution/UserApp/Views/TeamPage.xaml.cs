@@ -21,6 +21,7 @@ namespace UserApp
     /// </summary>
     public partial class TeamPage : Page
     {
+        Serie serie;
         public TeamPage()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace UserApp
 
         private void schedule_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new SchedulePage();
+            teamPageFrame.Content = new SchedulePage(serie);
         }
 
         private void table_Click(object sender, RoutedEventArgs e)
