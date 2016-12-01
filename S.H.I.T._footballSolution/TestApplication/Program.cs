@@ -1,6 +1,7 @@
 ﻿using FootballEngine.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using FootballEngine.Helper;
@@ -87,7 +88,7 @@ namespace TestApplication
                     Console.ReadKey();
                     return;
                 }
-                
+
                 int playerCounter = 1,
                     teamCounter = 1;
 
@@ -114,7 +115,7 @@ namespace TestApplication
                     matchList = MatchTableFactory.CreateMatchTable(teamList,
                         GetRandomDate(DateTime.Now, DateTime.Now.AddYears(2)));
 
-                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToHashSet(), 
+                    Serie serie = new Serie(new GeneralName($"Serie-{s + 1}"), teamList.Select(team => team.Id).ToHashSet(),
                         matchList.Select(match => match.Id).ToHashSet());
 
                     foreach (Team team in teamList)
@@ -241,46 +242,121 @@ namespace TestApplication
 
             try
             {
-                Console.Write("Players: ");
+                Console.Write("Players: Save");
                 ServiceLocator.Instance.PlayerService.Save();
-                Console.WriteLine("Save successful");
+                Console.WriteLine("successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Save failed\n{e}");
+                Console.WriteLine($"failed\n{e}");
             }
 
             try
             {
-                Console.Write("Teams: ");
+                Console.Write("Teams: Save");
                 ServiceLocator.Instance.TeamService.Save();
-                Console.WriteLine("Save successful");
+                Console.WriteLine("successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Save failed\n{e}");
+                Console.WriteLine($"failed\n{e}");
             }
 
             try
             {
-                Console.Write("Matches: ");
+                Console.Write("Matches: Save");
                 ServiceLocator.Instance.MatchService.Save();
-                Console.WriteLine("Save successful");
+                Console.WriteLine("successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Save failed\n{e}");
+                Console.WriteLine($"failed\n{e}");
             }
 
             try
             {
-                Console.Write("Series: ");
+                Console.Write("Series: Save");
                 ServiceLocator.Instance.SerieService.Save();
-                Console.WriteLine("Save successful");
+                Console.WriteLine("successful");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Save failed\n{e}");
+                Console.WriteLine($"failed\n{e}");
+            }
+
+            CopyTestDataToFootballEngine();
+        }
+
+        private void CopyTestDataToFootballEngine()
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+
+            try
+            {
+                Console.Write("Copied Matches.xml: ");
+                string matchesSource = Path.Combine(path, "Matches.xml"), matchesDest = "";
+                if (TryGetFilePath.InSolutionDirectory("Matches.xml", new string[] {"FootballEngine", "Resources" }, false, out matchesDest))
+                    File.Copy(matchesSource, matchesDest, true);
+                else
+                    throw new Exception($"Could not copy {matchesSource} to {matchesDest}");
+
+                Console.WriteLine("Succeeded");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Failed");
+                Console.WriteLine(exception);
+            }
+
+            try
+            {
+                Console.Write("Copied Players.xml: ");
+                string playersSource = Path.Combine(path, "Players.xml"), playersDest = "";
+                if (TryGetFilePath.InSolutionDirectory("Players.xml", new string[] { "FootballEngine", "Resources" }, false, out playersDest))
+                    File.Copy(playersSource, playersDest, true);
+                else
+                    throw new Exception($"Could not copy {playersSource} to {playersDest}");
+
+                Console.WriteLine("Succeeded");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Failed");
+                Console.WriteLine(exception);
+            }
+
+            try
+            {
+                Console.Write("Copied Series.xml: ");
+                string seriesSource = Path.Combine(path, "Series.xml"), seriesDest = "";
+                if (TryGetFilePath.InSolutionDirectory("Series.xml", new string[] { "FootballEngine", "Resources" }, false, out seriesDest))
+                    File.Copy(seriesSource, seriesDest, true);
+                else
+                    throw new Exception($"Could not copy {seriesSource} to {seriesDest}");
+
+                Console.WriteLine("Succeeded");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Failed");
+                Console.WriteLine(exception);
+            }
+
+            try
+            {
+                Console.Write("Copied Teams.xml: ");
+                string teamsSource = Path.Combine(path, "Teams.xml"), teamsDest = "";
+                if (TryGetFilePath.InSolutionDirectory("Teams.xml", new string[] { "FootballEngine", "Resources" }, false, out teamsDest))
+                    File.Copy(teamsSource, teamsDest, true);
+                else
+                    throw new Exception($"Could not copy {teamsSource} to {teamsDest}");
+
+                Console.WriteLine("Succeeded");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Failed");
+                Console.WriteLine(exception);
             }
         }
 
