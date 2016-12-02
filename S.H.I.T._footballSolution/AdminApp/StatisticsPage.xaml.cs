@@ -27,6 +27,8 @@ namespace AdminApp
         {
             InitializeComponent();
             serieSelector.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
+            if (serieSelector.HasItems)
+                serieSelector.SelectedIndex = 0;
         }
 
         //private Serie GetSelectedSerie()
