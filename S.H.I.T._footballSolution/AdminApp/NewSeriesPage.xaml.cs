@@ -40,10 +40,18 @@ namespace AdminApp
 
         private void CreateMatchScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-            var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, Convert.ToDateTime(serieDatePicker.SelectedDate));
-            
-            ServiceLocator.Instance.MatchService.AddRange(matchSchedule);
-            newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList);
+            if (ServiceLocator.Instance.SerieService.NameExist(serieName.Text))
+            {
+                MessageBox.Show($"Det finns redan en serie med namnet {serieName.Text}.\nVar god välj ett annat namn.", "Ett fel uppstod");
+                serieName.Focus();
+
+            }
+            else
+            {
+                var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, Convert.ToDateTime(serieDatePicker.SelectedDate));
+                ServiceLocator.Instance.MatchService.AddRange(matchSchedule);
+                newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList);
+            }
         }
 
         private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
