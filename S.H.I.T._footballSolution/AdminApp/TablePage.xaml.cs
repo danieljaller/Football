@@ -1,5 +1,6 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Helper;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace AdminApp
@@ -9,10 +10,13 @@ namespace AdminApp
     /// </summary>
     public partial class TablePage : Page
     {
+        bool isMouseLeftButtonDown;
+        Serie selectedSerie;
         public TablePage()
         { }
         public TablePage(Serie selectedSerie)
         {
+            this.selectedSerie = selectedSerie;
             InitializeComponent();
             SetTableData(selectedSerie);
         }
@@ -21,9 +25,135 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.GetAllTeamsBySerie(selectedSerie.Id);
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByPoints(selectedSerie.Id);
             }
 
-        }        
+        }
+
+        private void team_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByTeamName(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByTeamName(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void points_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByPoints(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByPoints(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void goalDifference_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByGoalDifference(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByGoalDifference(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void wins_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfWins(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfWins(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void ties_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfTies(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfTies(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void losses_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfLosses(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfLosses(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void goalsMade_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfGoalsFor(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfGoalsFor(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void goalsReceived_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfGoalsAgainst(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfGoalsAgainst(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
+
+        private void numberOfMatches_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (isMouseLeftButtonDown)
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfMatchesPlayed(selectedSerie.Id);
+                isMouseLeftButtonDown = false;
+            }
+            else
+            {
+                tableStatsListbox.ItemsSource = ServiceLocator.Instance.TeamService.OrderByNumberOfMatchesPlayed(selectedSerie.Id).Reverse();
+                isMouseLeftButtonDown = true;
+            }
+        }
     }
 }

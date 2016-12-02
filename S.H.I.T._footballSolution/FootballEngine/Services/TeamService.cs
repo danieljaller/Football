@@ -123,17 +123,17 @@ namespace FootballEngine.Services
 
         public IEnumerable<Team> OrderByNumberOfWins(Guid serieId)
         {
-            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Wins);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Wins.Count);
         }
 
         public IEnumerable<Team> OrderByNumberOfLosses(Guid serieId)
         {
-            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Losses);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Losses.Count);
         }
 
         public IEnumerable<Team> OrderByNumberOfTies(Guid serieId)
         {
-            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Ties);
+            return GetAllTeamsBySerie(serieId).OrderByDescending(t => t.Ties.Count);
         }
     }
 }
