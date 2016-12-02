@@ -26,16 +26,17 @@ namespace AdminApp
     {
         Serie selectedSerie;
         ObservableCollection<Player> players;
-        bool isNameClicked;
+        bool isMouseButtonClicked;
         public PlayerPage()
         {
-
+           
         }
         public PlayerPage(Serie selectedSerie)
         {
             this.selectedSerie = selectedSerie;
             InitializeComponent();           
             SetPlayerData(selectedSerie);
+            isMouseButtonClicked = true;
             //GenerateGridRowsAndSetRowColor();
         }
         private void SetPlayerData(Serie selectedSerie)
@@ -43,46 +44,137 @@ namespace AdminApp
             
             if (selectedSerie != null)
             {
-                players = new ObservableCollection<Player>(ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id));
+                players = new ObservableCollection<Player>(ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id));
                 playerStatsListbox.ItemsSource = players;
                 //playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id).ToObservableCollection();
             }
             
         }
-           
-                
-            
-
-        private void GenerateGridRowsAndSetRowColor()
-        {
-            string[] testArray = new string[30];
-
-            foreach (var position in testArray)
-            {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto, MinHeight = 20 });
-            }
-
-            for (int i = 2; i < grid.RowDefinitions.Count(); i += 2)
-            {
-                Rectangle rect = new Rectangle();
-                rect.Fill = new SolidColorBrush(Colors.LightGray);
-                grid.Children.Add(rect);
-                Grid.SetColumnSpan(rect, 9);
-                Grid.SetRow(rect, i);
-            }
-        }
 
         private void playerName_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (isNameClicked)
+            
+            if (isMouseButtonClicked)   // orderByLast name eller orderByFirst name... inte som det är nu med båda...
             {
                 playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByLastName(selectedSerie.Id);
-                isNameClicked = false;
+                isMouseButtonClicked = false;
             }
             else
             {
                 playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByFirstName(selectedSerie.Id);
-                isNameClicked = true;
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerTeam_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByTeamName(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByTeamName(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerAge_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByDateOfBirth(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByDateOfBirth(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerMatchesPlayed_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfMatchesPlayed(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfMatchesPlayed(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerGoals_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerAssists_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfAssists(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfAssists(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerYellowCards_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfYellowCards(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfYellowCards(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerRedCards_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfRedCards(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfRedCards(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
+            }
+        }
+
+        private void playerStatus_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseButtonClicked)
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByPlayerStatus(selectedSerie.Id);
+                isMouseButtonClicked = false;
+            }
+            else
+            {
+                playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByPlayerStatus(selectedSerie.Id).Reverse();
+                isMouseButtonClicked = true;
             }
         }
     }

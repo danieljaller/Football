@@ -93,11 +93,11 @@ namespace FootballEngine.Services
         }
         public IEnumerable<Player> OrderByDateOfBirth(Guid serieId)
         {
-            return GetAllPlayersBySerie(serieId).OrderBy(p => p.DateOfBirth);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => p.DateOfBirth.Value);
         }
         public IEnumerable<Player> OrderByTeamName(Guid serieId)
         {
-            return GetAllPlayersBySerie(serieId).OrderBy(p => ServiceLocator.Instance.TeamService.GetBy(p.TeamId).Name);
+            return GetAllPlayersBySerie(serieId).OrderBy(p => ServiceLocator.Instance.TeamService.GetBy(p.TeamId).Name.Value);
         }
         public IEnumerable<Player> OrderByNumberOfMatchesPlayed(Guid serieId)
         {

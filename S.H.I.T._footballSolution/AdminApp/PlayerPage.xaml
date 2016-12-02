@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminApp"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:converters="clr-namespace:AdminApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -24,7 +25,6 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -44,14 +44,14 @@
 
         <Rectangle Grid.ColumnSpan="9" Fill="LightBlue" Panel.ZIndex="1"/>
         <TextBlock Name="playerName" Margin="10,0,0,0" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Height="auto" Width="auto" MouseLeftButtonDown="playerName_MouseLeftButtonDown" ToolTip="Namn" Text="Namn" />
-        <TextBlock Grid.Column="1" Grid.Row="0" Panel.ZIndex="2" Margin="10,0,0,0" ToolTip="Lag" Text="Lag" />
-        <TextBlock Grid.Column="2" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Ålder" Text="Å" />
-        <TextBlock Grid.Column="3" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Spelade matcher" Text="SM" />
-        <TextBlock Grid.Column="4" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Mål" Text="M" />
-        <TextBlock Grid.Column="5" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Assist" Text="A" />
-        <TextBlock Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Gula Kort" Text="GK" />
-        <TextBlock Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Röda kort" Text="RK" />
-        <TextBlock Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" ToolTip="Status" Text="S" />
+        <TextBlock Name="playerTeam" Grid.Column="1" Grid.Row="0" Panel.ZIndex="2" Margin="10,0,0,0" MouseLeftButtonDown="playerTeam_MouseLeftButtonDown" ToolTip="Lag" Text="Lag" />
+        <TextBlock Name="playerAge" Grid.Column="2" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerAge_MouseLeftButtonDown" ToolTip="Ålder" Text="Å" />
+        <TextBlock Name="playerMatchesPlayed" Grid.Column="3" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerMatchesPlayed_MouseLeftButtonDown" ToolTip="Spelade matcher" Text="SM" />
+        <TextBlock Name="playerGoals" Grid.Column="4" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerGoals_MouseLeftButtonDown" ToolTip="Mål" Text="M" />
+        <TextBlock Name="playerAssists" Grid.Column="5" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerAssists_MouseLeftButtonDown" ToolTip="Assist" Text="A" />
+        <TextBlock Name="playerYellowCards" Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerYellowCards_MouseLeftButtonDown" ToolTip="Gula Kort" Text="GK" />
+        <TextBlock Name="playerRedCards" Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerRedCards_MouseLeftButtonDown" ToolTip="Röda kort" Text="RK" />
+        <TextBlock Name="playerStatus" Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="playerStatus_MouseLeftButtonDown" ToolTip="Status" Text="S" />
         <ListBox Name="playerStatsListbox" Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent" AlternationCount="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -70,6 +70,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
+
                         <TextBlock Grid.Column="0" Grid.Row="0" Margin="3,0,0,0" Height="auto" Width="auto" Text="{Binding Path=FullName}"/>
                         <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" Height="auto" Width="auto"  Text="{Binding Path=TeamId, Converter={StaticResource guidToEntityNameConverter}}" />
                         <TextBlock Grid.Column="2" Grid.Row="0" Margin="10,0,0,0" Height="auto" Width="auto" HorizontalAlignment="Center"  Text="{Binding Path=Age}" />
@@ -83,6 +84,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </Grid>
 </Page>
