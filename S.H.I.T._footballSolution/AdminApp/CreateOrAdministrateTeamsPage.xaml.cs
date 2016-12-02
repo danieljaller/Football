@@ -26,7 +26,6 @@ namespace AdminApp
         public CreateOrAdministrateTeamsPage()
         {
             InitializeComponent();
-
             teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll();
             teamsList.SelectedIndex = selectedIndexInTeamsList;
         }
@@ -88,10 +87,11 @@ namespace AdminApp
             backupArenaName = arenaName.Text;
             backupTeamName = teamName.Text;
             selectedTeam = (Team)teamsList.SelectedItem;
-            if (selectedTeam.PlayerIds.Count() >= 30)
-            {
+            if (selectedTeam.PlayerIds.Count >= 30)
                 addPlayer.IsEnabled = false;
-            }
+            else
+                addPlayer.IsEnabled = true;
+
             matchesPlayedTextBlock.Text = selectedTeam.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == true).Count().ToString();
             StringBuilder serieStringBuilder = new StringBuilder();
             foreach (var serieId in selectedTeam.SerieIds)

@@ -8,10 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="StatisticsPage">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <ScrollViewer.Resources>
-            <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">13</sys:Double>
-        </ScrollViewer.Resources>
+    
     <Grid Margin="5" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -52,8 +49,12 @@
                 <Button Name="table" Margin="10" Grid.Column="2" Width="85" Height="20" Click="table_Click" Content="Serietabell" />
                 <Button Name="player" Margin="10" Grid.Column="3" Width="85" Height="20" Click="player_Click" Content="Spelare" />
             </Grid>
-        
-        <Frame Grid.Row="2" Margin="20" x:Name="seriePageFrame" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+            <ScrollViewer.Resources>
+                <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">13</sys:Double>
+            </ScrollViewer.Resources>
+            <Frame Grid.Row="2" Margin="20" x:Name="seriePageFrame" />
+        </ScrollViewer>
     </Grid>
-    </ScrollViewer>
+    
 </Page>
