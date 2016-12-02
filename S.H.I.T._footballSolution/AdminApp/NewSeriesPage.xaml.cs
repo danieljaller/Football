@@ -26,15 +26,12 @@ namespace AdminApp
         public NewSeriesPage()
         {
             InitializeComponent();
-            //teamService = new TeamService();
-            //serieService = new SerieService();
             teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll();
             serieDatePicker.BlackoutDates.AddDatesInPast();
         }
 
         private void NewTeamButton_Click(object sender, RoutedEventArgs e)
         {
-
             NavigationService.Navigate(new Uri("NewTeamPage.xaml", UriKind.Relative));
         }
 
@@ -48,9 +45,10 @@ namespace AdminApp
             }
             else
             {
-                var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, Convert.ToDateTime(serieDatePicker.SelectedDate));
+                var startDate = Convert.ToDateTime(serieDatePicker.SelectedDate);
+                var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, startDate);
                 ServiceLocator.Instance.MatchService.AddRange(matchSchedule);
-                newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList);
+                newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList, startDate);
             }
         }
 

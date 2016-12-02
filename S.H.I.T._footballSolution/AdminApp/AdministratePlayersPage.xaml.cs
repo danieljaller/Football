@@ -48,10 +48,6 @@ namespace AdminApp
             playersList.ItemsSource = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(selectedTeam.Id).ToList();
         }
 
-        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
         private void AllowedDates()
         {
             playerDoBPicker.BlackoutDates.Add(new CalendarDateRange(new DateTime((DateTime.Today.Year - 16), 1, 1), DateTime.Now.AddDays(-1)));

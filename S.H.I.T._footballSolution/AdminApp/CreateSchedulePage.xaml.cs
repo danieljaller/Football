@@ -20,18 +20,21 @@ namespace AdminApp
         private List<Match> matchScheduleWithMatches = new List<Match>();
         private List<Team> homeTeamList = new List<Team>();
         private List<Team> visitorTeamList = new List<Team>();
+        private DateTime startDate;
 
-        public CreateSchedulePage(List<Guid> matchSchedule, string serieName, List<Team> teamList)
+        public CreateSchedulePage(List<Guid> matchSchedule, string serieName, List<Team> teamList, DateTime startDate)
         {
             InitializeComponent();
             matchScheduleWithIds = matchSchedule;
             this.serieName = serieName;
             this.teamList = teamList;
+            this.startDate = startDate;
             ConvertFromGuid();
             homeTeamListBox.ItemsSource = homeTeamList;
             visitorTeamListBox.ItemsSource = visitorTeamList;
             dateListBox.ItemsSource = matchScheduleWithMatches;
             resultListBox.ItemsSource = matchScheduleWithMatches;
+            
 
         }
         public void ConvertFromGuid()
@@ -55,6 +58,7 @@ namespace AdminApp
             var selectedItem = (Match)dateListBox.SelectedItem;
             var datePicker = (DatePicker)sender;
             selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
+ 
         }
 
         private void createSerieButton_Click(object sender, RoutedEventArgs e)
@@ -76,6 +80,13 @@ namespace AdminApp
             
             grid.Visibility = Visibility.Hidden;
             createSerieButton.IsEnabled = false;
+        }
+
+        private void matchDatePicker_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var datePicker = sender as DatePicker;
+            datePicker.BlackoutDates.AddDatesInPast();
+            datePicker.BlackoutDates.Add(new CalendarDateRange(startDate.AddMonths(12), startDate.AddYears(20)));
         }
     }
 }
