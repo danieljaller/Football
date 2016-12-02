@@ -31,6 +31,7 @@ namespace AdminApp
         {
             InitializeComponent();
             teamsSelector.ItemsSource = ServiceLocator.Instance.TeamService.GetAll().ToList();
+            
         }
 
         public AdministratePlayersPage(Player selectedPlayer)
@@ -160,6 +161,7 @@ namespace AdminApp
             SetPlayerStatus();
             ServiceLocator.Instance.PlayerService.Save();
             MessageBox.Show("Dina ändringar är sparade");
+            playersList.Items.Refresh();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)

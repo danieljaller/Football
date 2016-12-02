@@ -25,7 +25,7 @@
 
         <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Spelare" FontSize="20" />
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <ComboBox Name="teamsSelector" SelectionChanged="teamsSelector_SelectionChanged" Margin="5">
+            <ComboBox Name="teamsSelector" SelectedIndex="0" SelectionChanged="teamsSelector_SelectionChanged" Margin="5">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=Name.Value}"/>
