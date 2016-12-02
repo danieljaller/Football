@@ -87,6 +87,8 @@ namespace AdminApp
 
         private void playersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (playersList.SelectedItem == null)
+                playersList.SelectedIndex = 0;
             startingFirstName = playerFirstName.Text;
             startingLastName = playerLastName.Text;
             EnableControls();
