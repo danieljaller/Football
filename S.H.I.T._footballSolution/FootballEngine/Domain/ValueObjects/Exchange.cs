@@ -6,7 +6,7 @@ namespace FootballEngine.Domain.ValueObjects
     {
         public Guid PlayerOutId { get; set; }
         public Guid PlayerInId { get; set; }
-        public MatchMinute TimeOfExchange;
+        public MatchMinute TimeOfExchange { get; set; }
 
         public Exchange()
         { }
@@ -27,7 +27,7 @@ namespace FootballEngine.Domain.ValueObjects
                 throw new ArgumentException($"{nameof(playerOutId)} cannot be an empty Guid.");
             if (playerInId == Guid.Empty)
                 throw new ArgumentException($"{nameof(playerOutId)} cannot be an empty Guid.");
-            if (0 > timeOfExchange.Value && timeOfExchange.Value > MatchMinute.MaxValue)
+            if (0 > timeOfExchange.Value || timeOfExchange.Value > MatchMinute.MaxValue)
                 throw new ArgumentOutOfRangeException($"{nameof(timeOfExchange)} must be between 0 and {MatchMinute.MaxValue}");
 
             return true;
