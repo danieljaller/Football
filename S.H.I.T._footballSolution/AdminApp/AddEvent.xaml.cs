@@ -67,7 +67,7 @@ namespace AdminApp
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Player player = (Player)playerListbox.SelectedItem;
-            MatchMinute.TryParse(timeBox.SelectedIndex+1, out timeOfEvent);          
+            timeOfEvent = (MatchMinute)timeBox.SelectedItem;          
             result = new Event(player.Id, timeOfEvent);
             DialogResult = true;
         }
