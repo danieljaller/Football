@@ -27,15 +27,18 @@ namespace AdminApp
         //PlayerService playerService;
         //TeamService teamService;
         public List<Player> selectedPlayers { get; set; }
+        private int NumberOfSelectedPlayers;
 
-        public AddPlayerWindow(Team team, ObservableCollection<Guid> lineup)
+        public AddPlayerWindow(Team team, ObservableCollection<Guid> lineup, int numberOfSelectedPlayers)
         {
             //teamService = new TeamService();
             //playerService = new PlayerService(teamService);
             InitializeComponent();
+            NumberOfSelectedPlayers = numberOfSelectedPlayers;
             IEnumerable<Player> playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id) && p.Playable);
             playerListbox.ItemsSource = playerList;
             InitializeComponent();
+            playerCountBlock.DataContext = playerListbox.SelectedItems.Count+NumberOfSelectedPlayers;
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
@@ -49,6 +52,11 @@ namespace AdminApp
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void playerListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            playerCountBlock.DataContext = playerListbox.SelectedItems.Count + NumberOfSelectedPlayers;
         }
     }
 }

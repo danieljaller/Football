@@ -15,11 +15,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="20,0,0,0">Spelare:</TextBlock>
 
-        <ListBox Name="playerListbox" Grid.Row="0" Grid.Column="1" Margin="5" SelectionMode="Multiple">
+        <ListBox Name="playerListbox" Grid.Row="0" Grid.Column="1" Margin="5" SelectionMode="Multiple" SelectionChanged="playerListbox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" >
@@ -28,8 +29,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
-        <Button Name="Ok" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Height="23" Width="50" Click="Ok_Click">
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,0,0,0">Valda spelare:</TextBlock>
+        <TextBlock Name="playerCountBlock" Grid.Row="2" Grid.Column="1" Text="{Binding}"/>
+
+        <Button Name="Ok" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Height="23" Width="50" Click="Ok_Click">
             <TextBlock>Skapa</TextBlock>
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -41,7 +45,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Name="Cancel" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="20" Height="23" Width="50" Click="Cancel_Click">
+        <Button Name="Cancel" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="20" Height="23" Width="50" Click="Cancel_Click">
             <TextBlock>Avbryt</TextBlock>
         </Button>
     </Grid>

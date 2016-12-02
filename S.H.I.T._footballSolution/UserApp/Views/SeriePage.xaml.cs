@@ -21,6 +21,7 @@ namespace UserApp
     /// </summary>
     public partial class SeriePage : Page
     {
+        Serie serie;
 
         public SeriePage()
         {
@@ -29,14 +30,14 @@ namespace UserApp
 
         public SeriePage(Serie selectedSerie)
         {
-            Serie serie = selectedSerie;
+            serie = selectedSerie;
             InitializeComponent();
             serieName.DataContext = serie;
         }
 
         private void schedule_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new SchedulePage();
+            seriePageFrame.Content = new SchedulePage(serie);
         }
 
        
