@@ -30,7 +30,7 @@ namespace FootballEngine.Domain.Entities
         public List<Event> VisitorRedCards { get; set; }
         public List<Event> VisitorYellowCards { get; set; }
         public static DateTime EndDateForMatchCreation { get { return DateTime.Now.AddYears(5); } }
-        
+
         public Match() { }
 
         public Match(MatchDate date, Guid homeTeamId, Guid visitorTeamId, GeneralName location)
@@ -69,10 +69,10 @@ namespace FootballEngine.Domain.Entities
                 throw new ArgumentOutOfRangeException($"{nameof(date)} is out of range can only be between now and {EndDateForMatchCreation} years from now.");
 
             if (homeTeamId == Guid.Empty)
-                throw new ArgumentException($"{nameof(homeTeamId)} cannot be a empty Guid.");
+                throw new ArgumentException($"{nameof(homeTeamId)} cannot be an empty Guid.");
 
             if (visitorTeamId == Guid.Empty)
-                throw new ArgumentException($"{nameof(visitorTeamId)} cannot be a empty Guid.");
+                throw new ArgumentException($"{nameof(visitorTeamId)} cannot be an empty Guid.");
 
             if (location == null)
                 throw new ArgumentNullException($"{nameof(location)} cannot be null.");

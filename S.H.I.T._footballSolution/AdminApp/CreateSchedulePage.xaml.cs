@@ -34,8 +34,6 @@ namespace AdminApp
             visitorTeamListBox.ItemsSource = visitorTeamList;
             dateListBox.ItemsSource = matchScheduleWithMatches;
             resultListBox.ItemsSource = matchScheduleWithMatches;
-            
-
         }
         public void ConvertFromGuid()
         {
@@ -58,7 +56,7 @@ namespace AdminApp
             var selectedItem = (Match)dateListBox.SelectedItem;
             var datePicker = (DatePicker)sender;
             selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
- 
+
         }
 
         private void createSerieButton_Click(object sender, RoutedEventArgs e)
@@ -69,15 +67,12 @@ namespace AdminApp
             {
                 team.SerieIds.Add(newSerie.Id);
             }
-            foreach (var match in matchScheduleWithMatches)
-            {
-                ServiceLocator.Instance.MatchService.Add(match);
-            }
+
             ServiceLocator.Instance.SerieService.Save();
             ServiceLocator.Instance.TeamService.Save();
             ServiceLocator.Instance.MatchService.Save();
             MessageBox.Show($"Serien {serieName} är skapad");
-            
+
             grid.Visibility = Visibility.Hidden;
             createSerieButton.IsEnabled = false;
         }

@@ -41,6 +41,7 @@ namespace FootballEngine.Repositories
                 throw new ArgumentNullException($"{nameof(match)} cannot be null.");
             if (_matches.Select(s => s.Id).Contains(match.Id))
                 throw new ArgumentException($"A {nameof(match)} with the id '{match.Id}' already exsist in the repository.");
+
             _matches.Add(match);
         }
 
