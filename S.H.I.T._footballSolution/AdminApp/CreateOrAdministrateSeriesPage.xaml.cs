@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace AdminApp
@@ -19,10 +20,13 @@ namespace AdminApp
         private HashSet<Match> matchScheduleWithMatches;
         private List<Team> homeTeamList, visitorTeamList;
         private Serie selectedSerie;
+        private bool homeTeamIsClicked;
+        private bool visitorTeamIsClicked;
+        private bool dateIsClicked;
 
         public CreateOrAdministrateSeriesPage()
         {
-            InitializeComponent();   
+            InitializeComponent();
             seriesList.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
             showAllRadioButton.IsChecked = true;
         }
@@ -43,20 +47,20 @@ namespace AdminApp
             showPlayedRadioButton.Visibility = Visibility.Collapsed;
             seriesList.Visibility = Visibility.Collapsed;
             NewSeriesButton.Visibility = Visibility.Collapsed;
-            
+
             if (areMatchesPlayed)
             {
                 Header.Text = $"{team.Name}s spelade matcher";
                 matchScheduleWithIds = ServiceLocator.Instance.MatchService.GetAll().Where(m => m.HomeTeamId == team.Id || m.VisitorTeamId == team.Id).Where(m => m.IsPlayed == true).Select(m => m.Id).ToHashSet();
                 CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
             }
             else
             {
                 Header.Text = $"{team.Name}s kommande matcher";
                 matchScheduleWithIds = ServiceLocator.Instance.MatchService.GetAll().Where(m => m.HomeTeamId == team.Id || m.VisitorTeamId == team.Id).Where(m => m.IsPlayed == false).Select(m => m.Id).ToHashSet();
                 CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
             }
         }
 
@@ -70,17 +74,28 @@ namespace AdminApp
             selectedSerie = (Serie)seriesList.SelectedItem;
             matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
             showAllRadioButton.IsChecked = true;
         }
 
-        private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList)
+        private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList, bool reverse)
         {
-            matchProtocolList.ItemsSource = matchScheduleWithMatches;
-            homeTeamListBox.ItemsSource = homeTeamList;
-            visitorTeamListBox.ItemsSource = visitorTeamList;
-            dateListBox.ItemsSource = matchScheduleWithMatches;
-            resultListBox.ItemsSource = matchScheduleWithMatches;
+            if (reverse)
+            {
+                matchProtocolList.ItemsSource = matchScheduleWithMatches.Reverse();
+                homeTeamListBox.ItemsSource = homeTeamList.ToObservableCollection().Reverse();
+                visitorTeamListBox.ItemsSource = visitorTeamList.ToObservableCollection().Reverse();
+                dateListBox.ItemsSource = matchScheduleWithMatches.Reverse();
+                resultListBox.ItemsSource = matchScheduleWithMatches.Reverse();
+            }
+            else
+            {
+                matchProtocolList.ItemsSource = matchScheduleWithMatches;
+                homeTeamListBox.ItemsSource = homeTeamList;
+                visitorTeamListBox.ItemsSource = visitorTeamList;
+                dateListBox.ItemsSource = matchScheduleWithMatches;
+                resultListBox.ItemsSource = matchScheduleWithMatches;
+            }
         }
 
         private void CreateAndConvertLists(HashSet<Guid> matchScheduleWithIds, out HashSet<Match> matchScheduleWithMatches, out List<Team> homeTeamList, out List<Team> visitorTeamList)
@@ -125,7 +140,7 @@ namespace AdminApp
             selectedSerie = (Serie)seriesList.SelectedItem;
             matchScheduleWithIds = selectedSerie.MatchTable.ToHashSet();
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
         }
 
         private void showPlayedRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -133,7 +148,7 @@ namespace AdminApp
             selectedSerie = (Serie)seriesList.SelectedItem;
             matchScheduleWithIds = selectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == true).ToHashSet();
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
         }
 
         private void showCommingRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -141,7 +156,57 @@ namespace AdminApp
             selectedSerie = (Serie)seriesList.SelectedItem;
             matchScheduleWithIds = selectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == false).ToHashSet();
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
-            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
+        }
+        private void HomeTeam_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByHomeTeam(matchScheduleWithIds);
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+
+            if (!homeTeamIsClicked)
+            {
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
+                homeTeamIsClicked = true;
+            }
+            else
+            {
+
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, true);
+                homeTeamIsClicked = false;
+            }
+        }
+
+        private void VisitorTeam_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByVisitorTeam(matchScheduleWithIds);
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+
+            if (!visitorTeamIsClicked)
+            {
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
+                visitorTeamIsClicked = true;
+            }
+            else
+            {
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, true);
+                visitorTeamIsClicked = false;
+            }
+        }
+
+        private void Date_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByDate(matchScheduleWithIds);
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            if (!dateIsClicked)
+            {
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
+                dateIsClicked = true;
+            }
+            else
+            {
+                SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, true);
+                dateIsClicked = false;
+            }
         }
     }
 }
