@@ -49,9 +49,9 @@
         <TextBlock Name="wins" Grid.Column="3" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="wins_MouseLeftButtonDown" ToolTip="Vinster" Text="V" />
         <TextBlock Name="ties" Grid.Column="4" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="ties_MouseLeftButtonDown" ToolTip="Oavgjorda" Text="O" />
         <TextBlock Name ="losses" Grid.Column="5" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="losses_MouseLeftButtonDown" ToolTip="Förluster" Text="F" />
-        <TextBlock Name="goalsMade" Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsMade_MouseLeftButtonDown" ToolTip="Gjorda mål" Text="GM" />
-        <TextBlock Name="goalsReceived" Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsReceived_MouseLeftButtonDown" ToolTip="Insläppta mål" Text="IM" />
-        <TextBlock Name="numberOfMatches" Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="numberOfMatches_MouseLeftButtonDown" ToolTip="Antal matcher" Text="AM" />
+        <TextBlock Name="goalsFor" Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsFor_MouseLeftButtonDown" ToolTip="Gjorda mål" Text="GM" />
+        <TextBlock Name="goalsAgainst" Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsAgainst_MouseLeftButtonDown" ToolTip="Insläppta mål" Text="IM" />
+        <TextBlock Name="matchesPlayed" Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="matchesPlayed_MouseLeftButtonDown" ToolTip="Antal matcher" Text="AM" />
 
         <ListBox Name="tableStatsListbox" Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent" AlternationCount="2">
             <ListBox.ItemTemplate>

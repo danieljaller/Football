@@ -26,16 +26,8 @@ namespace AdminApp
     {
         Serie selectedSerie;
         ObservableCollection<Player> players;
-        bool isMouseButtonClicked;
-        bool isNameClicked;
-        bool isTeamClicked;
-        bool isAgeClicked;
-        bool isMatchesPlayedClicked;
-        bool isGoalsClicked;
-        bool isRedCardsClicked;
-        bool isYellowCardsClicked;
-        bool isStatusClicked;
-        bool isAssistsClicked;
+        bool isNameClicked, isTeamClicked, isAgeClicked, isMatchesPlayedClicked, isGoalsClicked;
+        bool isRedCardsClicked, isYellowCardsClicked, isStatusClicked, isAssistsClicked;
 
         public PlayerPage()
         {
@@ -46,8 +38,6 @@ namespace AdminApp
             this.selectedSerie = selectedSerie;
             InitializeComponent();
             SetPlayerData(selectedSerie);
-            isMouseButtonClicked = true;
-            //GenerateGridRowsAndSetRowColor();
         }
         private void SetPlayerData(Serie selectedSerie)
         {
@@ -56,7 +46,6 @@ namespace AdminApp
             {
                 players = new ObservableCollection<Player>(ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id));
                 playerStatsListbox.ItemsSource = players;
-                //playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.GetAllPlayersBySerie(selectedSerie.Id).ToObservableCollection();
             }
 
         }
@@ -160,7 +149,7 @@ namespace AdminApp
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfMatchesPlayed(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = false;
+                    isMatchesPlayedClicked = false;
                 }
             }
         }

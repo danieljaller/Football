@@ -25,8 +25,6 @@ namespace AdminApp
         {
             InitializeComponent();
             this.hasMinValue = hasMinValue;
-            if (!hasMinValue)
-                addPlayersNowButton.IsEnabled = true;
             DataContext = this;
             AllowedDates();
         }
@@ -36,10 +34,7 @@ namespace AdminApp
             InitializeComponent();
             this.team = team;
             this.hasMinValue = hasMinValue;
-            //if (!mustAddThree)
-            //    addPlayersNowButton.IsEnabled = true;
             DataContext = this;
-                   
             AllowedDates();
         }
 
@@ -66,16 +61,16 @@ namespace AdminApp
             numberOfPlayers.Text = tempPlayersList.Count.ToString();
             if (hasMinValue)
             {
-            if (tempPlayersList.Count < 24)
+                if (tempPlayersList.Count < 24)
                 {
                     addPlayersNowButton.IsEnabled = false;
                 }
-            if (tempPlayersList.Count >= 24)
+                if (tempPlayersList.Count >= 24)
                 {
                     addPlayersNowButton.IsEnabled = true;
                 }
 
-            if (tempPlayersList.Count >=30)
+                if (tempPlayersList.Count >= 30)
                 {
                     DialogResult = true;
                 }
@@ -91,15 +86,16 @@ namespace AdminApp
 
         private void addPlayersNow_Clicked(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
             if (!hasMinValue)
             {
-                foreach(var player in tempPlayersList)
+                ServiceLocator.Instance.PlayerService.AddRange(tempPlayersList);
+                foreach (var player in tempPlayersList)
                 {
                     team.PlayerIds.Add(player.Id);
                 }
-                ServiceLocator.Instance.PlayerService.AddRange(tempPlayersList);
             }
+
+            DialogResult = true;
         }
 
         private void AllowedDates()
@@ -113,7 +109,6 @@ namespace AdminApp
 
         private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
         { }
-
 
     }
 }
