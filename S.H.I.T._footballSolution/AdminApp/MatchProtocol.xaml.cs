@@ -25,36 +25,12 @@ namespace AdminApp
     public partial class MatchProtocol : Window
     {
         Match match;
-        Team homeTeam;
-        Team visitorTeam;
-        int homeScore;
-        int homeScoreBackup;
-        int visitorScore;
-        int visitorScoreBackup;
-        ObservableCollection<Event> homeGoals;
-        ObservableCollection<Event> visitorGoals;
-        ObservableCollection<Event> homeAssists;
-        ObservableCollection<Event> visitorAssists;
-        ObservableCollection<Event> homeRedCards;
-        ObservableCollection<Event> visitorRedCards;
-        ObservableCollection<Event> homeYellowCards;
-        ObservableCollection<Event> visitorYellowCards;
-        ObservableCollection<Guid> homeLineup;
-        ObservableCollection<Guid> visitorLineup;
-        ObservableCollection<Exchange> homeExchanges;
-        ObservableCollection<Exchange> visitorExchanges;
-        ObservableCollection<Event> homeGoalsBackup;
-        ObservableCollection<Event> visitorGoalsBackup;
-        ObservableCollection<Event> homeAssistsBackup;
-        ObservableCollection<Event> visitorAssistsBackup;
-        ObservableCollection<Event> homeRedCardsBackup;
-        ObservableCollection<Event> visitorRedCardsBackup;
-        ObservableCollection<Event> homeYellowCardsBackup;
-        ObservableCollection<Event> visitorYellowCardsBackup;
-        ObservableCollection<Guid> homeLineupBackup;
-        ObservableCollection<Guid> visitorLineupBackup;
-        ObservableCollection<Exchange> homeExchangesBackup;
-        ObservableCollection<Exchange> visitorExchangesBackup;
+        Team homeTeam, visitorTeam;
+        int homeScore, homeScoreBackup, visitorScore, visitorScoreBackup;
+        ObservableCollection<Event> homeGoals, visitorGoals, homeAssists, visitorAssists, homeRedCards, visitorRedCards, homeYellowCards, visitorYellowCards,
+            homeGoalsBackup, visitorGoalsBackup, homeAssistsBackup, visitorAssistsBackup, homeRedCardsBackup, visitorRedCardsBackup, homeYellowCardsBackup, visitorYellowCardsBackup;
+        ObservableCollection<Guid> homeLineup, visitorLineup, homeLineupBackup, visitorLineupBackup;
+        ObservableCollection<Exchange> homeExchanges, visitorExchanges, homeExchangesBackup, visitorExchangesBackup;
         private bool isPlayedBackup;
         private DateTime dateBackup;
 
@@ -63,25 +39,14 @@ namespace AdminApp
         {
             match = _match;
             InitializeComponent();
-            ConvertListsToObjects();
+            SetProperties();
 
             if(match.Date.Value >= DateTime.Today)
                 isPlayedCheckBox.IsEnabled = false;
 
             isPlayedCheckBox.IsChecked = match.IsPlayed;
             matchDatePicker.SelectedDate = match.Date.Value;
-            homeGoalsList.ItemsSource = match.HomeGoals;
-            visitorGoalsList.ItemsSource = match.VisitorGoals;
-            homeAssistsList.ItemsSource = match.HomeAssists;
-            visitorAssistsList.ItemsSource = match.VisitorAssists;
-            homeExchangesList.ItemsSource = match.HomeExchanges;
-            visitorExchangesList.ItemsSource = match.VisitorExchanges;
-            homeLineupList.ItemsSource = match.HomeLineup;
-            visitorLineupList.ItemsSource = match.VisitorLineup;
-            homeRedCardsList.ItemsSource = match.HomeRedCards;
-            visitorRedCardsList.ItemsSource = match.VisitorRedCards;
-            homeYellowCardsList.ItemsSource = match.HomeYellowCards;
-            visitorRedCardsList.ItemsSource = match.VisitorYellowCards;
+            SetSources();
         }
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -407,7 +372,7 @@ namespace AdminApp
             activePlayer.MatchesPlayedIds.Remove(match.Id);
         }
 
-        private void ConvertListsToObjects()
+        private void SetProperties()
         {
             isPlayedBackup = match.IsPlayed;
             dateBackup = match.Date.Value;
@@ -441,6 +406,22 @@ namespace AdminApp
             homeExchangesBackup = new ObservableCollection<Exchange>(homeExchanges);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
             visitorExchangesBackup = new ObservableCollection<Exchange>(visitorExchanges);
+        }
+
+        private void SetSources()
+        {
+            homeGoalsList.ItemsSource = homeGoals;
+            visitorGoalsList.ItemsSource = visitorGoals;
+            homeAssistsList.ItemsSource = homeAssists;
+            visitorAssistsList.ItemsSource = visitorAssists;
+            homeRedCardsList.ItemsSource = homeRedCards;
+            visitorRedCardsList.ItemsSource = visitorRedCards;
+            homeYellowCardsList.ItemsSource = homeYellowCards;
+            visitorYellowCardsList.ItemsSource = visitorYellowCards;
+            homeLineupList.ItemsSource = homeLineup;
+            visitorLineupList.ItemsSource = visitorLineup;
+            homeExchangesList.ItemsSource = homeExchanges;
+            visitorExchangesList.ItemsSource = visitorExchanges;
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e)
@@ -530,20 +511,8 @@ namespace AdminApp
             isPlayedCheckBox.IsChecked = isPlayedBackup;
             matchDatePicker.SelectedDate = dateBackup;
 
-            ConvertListsToObjects();
-
-            homeGoalsList.ItemsSource = homeGoals;
-            visitorGoalsList.ItemsSource = visitorGoals;
-            homeAssistsList.ItemsSource = homeAssists;
-            visitorAssistsList.ItemsSource = visitorAssists;
-            homeRedCardsList.ItemsSource = homeRedCards;
-            visitorRedCardsList.ItemsSource = visitorRedCards;
-            homeYellowCardsList.ItemsSource = homeYellowCards;
-            visitorYellowCardsList.ItemsSource = visitorYellowCards;
-            homeLineupList.ItemsSource = homeLineup;
-            visitorLineupList.ItemsSource = visitorLineup;
-            homeExchangesList.ItemsSource = homeExchanges;
-            visitorExchangesList.ItemsSource = visitorExchanges;
+            SetProperties();
+            SetSources();
             
             Close();
         }
