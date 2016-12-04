@@ -48,6 +48,7 @@ namespace AdminApp
         {
             DateOfBirth = (DateTime)datePicker1.SelectedDate;
             player = new Player(new PlayerName(FirstName), new PlayerName(LastName), new DateOfBirth(DateOfBirth));
+            player.TeamId = team.Id;
 
             if (tempPlayersList.Count <= 30)
             {

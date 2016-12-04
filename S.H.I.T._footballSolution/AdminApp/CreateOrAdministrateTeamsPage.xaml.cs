@@ -46,7 +46,7 @@ namespace AdminApp
 
         private void addPlayer_Click(object sender, RoutedEventArgs e)
         {
-            var newPlayerWindow = new NewPlayerWindow(false, (Team)teamsList.SelectedItem);
+            var newPlayerWindow = new NewPlayerWindow(false, selectedTeam);
             var newPlayerWindowResult = newPlayerWindow.ShowDialog();
 
             if (selectedTeam.PlayerIds.Count() > 24)
@@ -64,7 +64,6 @@ namespace AdminApp
             if (playersList.SelectedItem != null)
             {
                 selectedPlayer = ServiceLocator.Instance.PlayerService.GetBy((Guid)playersList.SelectedItem);
-                selectedTeam = ServiceLocator.Instance.TeamService.GetBy(selectedPlayer.TeamId);
                 MessageBoxResult result = MessageBox.Show($"Är du säker på att du vill ta bort {selectedPlayer.FullName}?", "Bekräfta", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
