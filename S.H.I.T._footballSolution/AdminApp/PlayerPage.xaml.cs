@@ -27,6 +27,16 @@ namespace AdminApp
         Serie selectedSerie;
         ObservableCollection<Player> players;
         bool isMouseButtonClicked;
+        bool isNameClicked;
+        bool isTeamClicked;
+        bool isAgeClicked;
+        bool isMatchesPlayedClicked;
+        bool isGoalsClicked;
+        bool isRedCardsClicked;
+        bool isYellowCardsClicked;
+        bool isStatusClicked;
+        bool isAssistsClicked;
+
         public PlayerPage()
         {
 
@@ -55,15 +65,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)   // orderByLast name eller orderByFirst name... inte som det är nu med båda...
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isMatchesPlayedClicked = false;
+                isRedCardsClicked = false;
+                isGoalsClicked = false;
+                isYellowCardsClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isNameClicked)
                 {
-                    playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByLastName(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByFullName(selectedSerie.Id);
+                    isNameClicked = true;
                 }
                 else
                 {
-                    playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByFirstName(selectedSerie.Id);
-                    isMouseButtonClicked = true;
+                    playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByFullName(selectedSerie.Id).Reverse();
+                    isNameClicked = false;
                 }
             }
         }
@@ -72,15 +91,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isAgeClicked = false;
+                isMatchesPlayedClicked = false;
+                isRedCardsClicked = false;
+                isGoalsClicked = false;
+                isYellowCardsClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isTeamClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByTeamName(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isTeamClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByTeamName(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isTeamClicked = false;
                 }
             }
         }
@@ -89,15 +117,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isMatchesPlayedClicked = false;
+                isRedCardsClicked = false;
+                isGoalsClicked = false;
+                isYellowCardsClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isAgeClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByDateOfBirth(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isAgeClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByDateOfBirth(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isAgeClicked = false;
                 }
             }
         }
@@ -106,15 +143,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isRedCardsClicked = false;
+                isGoalsClicked = false;
+                isYellowCardsClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isMatchesPlayedClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfMatchesPlayed(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isMatchesPlayedClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfMatchesPlayed(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isMouseButtonClicked = false;
                 }
             }
         }
@@ -123,15 +169,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isRedCardsClicked = false;
+                isMatchesPlayedClicked = false;
+                isYellowCardsClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isGoalsClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isGoalsClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isGoalsClicked = false;
                 }
             }
         }
@@ -140,15 +195,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isGoalsClicked = false;
+                isRedCardsClicked = false;
+                isMatchesPlayedClicked = false;
+                isYellowCardsClicked = false;
+                isStatusClicked = false;
+
+                if (!isAssistsClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfAssists(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isAssistsClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfAssists(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isAssistsClicked = false;
                 }
             }
         }
@@ -157,15 +221,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isGoalsClicked = false;
+                isRedCardsClicked = false;
+                isMatchesPlayedClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isYellowCardsClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfYellowCards(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isYellowCardsClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfYellowCards(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isYellowCardsClicked = false;
                 }
             }
         }
@@ -174,15 +247,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isGoalsClicked = false;
+                isYellowCardsClicked = false;
+                isMatchesPlayedClicked = false;
+                isStatusClicked = false;
+                isAssistsClicked = false;
+
+                if (!isRedCardsClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfRedCards(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isRedCardsClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfRedCards(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isRedCardsClicked = false;
                 }
             }
         }
@@ -191,15 +273,24 @@ namespace AdminApp
         {
             if (selectedSerie != null)
             {
-                if (isMouseButtonClicked)
+                isNameClicked = false;
+                isTeamClicked = false;
+                isAgeClicked = false;
+                isGoalsClicked = false;
+                isYellowCardsClicked = false;
+                isMatchesPlayedClicked = false;
+                isRedCardsClicked = false;
+                isAssistsClicked = false;
+
+                if (!isStatusClicked)
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByPlayerStatus(selectedSerie.Id);
-                    isMouseButtonClicked = false;
+                    isStatusClicked = true;
                 }
                 else
                 {
                     playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByPlayerStatus(selectedSerie.Id).Reverse();
-                    isMouseButtonClicked = true;
+                    isStatusClicked = false;
                 }
             }
         }

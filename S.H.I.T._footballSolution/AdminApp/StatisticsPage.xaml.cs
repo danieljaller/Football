@@ -31,17 +31,6 @@ namespace AdminApp
             { serieSelector.SelectedIndex = 0;}
         }
 
-        //private Serie GetSelectedSerie()
-        //{
-            
-        //}
-
-        private void schedule_Click(object sender, RoutedEventArgs e)
-        {
-            seriePageFrame.Content = new SchedulePage();
-        }
-
-
         private void table_Click(object sender, RoutedEventArgs e)
         {
             seriePageFrame.Content = new TablePage((Serie)serieSelector.SelectedItem);

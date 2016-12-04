@@ -162,6 +162,8 @@ namespace AdminApp
         {
             matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByHomeTeam(matchScheduleWithIds);
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            visitorTeamIsClicked = false;
+            dateIsClicked = false;
 
             if (!homeTeamIsClicked)
             {
@@ -170,7 +172,6 @@ namespace AdminApp
             }
             else
             {
-
                 SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, true);
                 homeTeamIsClicked = false;
             }
@@ -180,6 +181,8 @@ namespace AdminApp
         {
             matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByVisitorTeam(matchScheduleWithIds);
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            homeTeamIsClicked = false;
+            dateIsClicked = false;
 
             if (!visitorTeamIsClicked)
             {
@@ -197,6 +200,9 @@ namespace AdminApp
         {
             matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByDate(matchScheduleWithIds);
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            homeTeamIsClicked = false;
+            visitorTeamIsClicked = false;
+
             if (!dateIsClicked)
             {
                 SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);

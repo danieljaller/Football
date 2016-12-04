@@ -99,12 +99,6 @@
     <Compile Include="PlayerPage.xaml.cs">
       <DependentUpon>PlayerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SchedulePage.xaml.cs">
-      <DependentUpon>SchedulePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SeriePage.xaml.cs">
-      <DependentUpon>SeriePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TablePage.xaml.cs">
       <DependentUpon>TablePage.xaml</DependentUpon>
     </Compile>
@@ -175,14 +169,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PlayerPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SchedulePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SeriePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

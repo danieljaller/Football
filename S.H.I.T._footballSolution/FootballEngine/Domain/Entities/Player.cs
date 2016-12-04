@@ -19,7 +19,7 @@ namespace FootballEngine.Domain.Entities
         public Guid Id { get; set; }
         public PlayerName FirstName { get; set; }
         public PlayerName LastName { get; set; }
-        public string FullName { get { return $"{FirstName.Value} {LastName.Value}"; } }
+        public string FullName { get { return $"{LastName.Value} {FirstName.Value}"; } }
         public DateOfBirth DateOfBirth { get; set; }
         public int Age { get { return DateTime.Now.Year - DateOfBirth.Value.Year; } }
         public Status PlayerStatus { get; set; }
