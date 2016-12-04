@@ -314,30 +314,36 @@ namespace AdminApp
 
         private void removeExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            Event activeEvent = (Event)homeExchangesList.SelectedItem;
-            match.HomeExchanges.Remove((Exchange)homeExchangesList.SelectedItem);
+            Exchange selectedExchange = (Exchange)homeExchangesList.SelectedItem;
+            match.HomeExchanges.Remove(selectedExchange);
             homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
             homeExchangesList.ItemsSource = homeExchanges;
-            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
-            activePlayer.MatchesPlayedIds.Remove(match.Id);
+            Player playerIn = ServiceLocator.Instance.PlayerService.GetBy(selectedExchange.PlayerInId);
+            playerIn.MatchesPlayedIds.Remove(match.Id);
         }
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+            //List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
+            //                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+            //                                        .Select(p => p.Id).ToList();
+            //List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+            //                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
+            //                                        .Select(p => p.Id).ToList();
+            List<Guid> playerOutIds = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(match.HomeTeamId)
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
-            List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
+            List<Guid> playerInIds = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(match.HomeTeamId)
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
             var addExchangeWindow = new AddExchangeWindow(homeLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
-                match.HomeExchanges.Add(addExchangeWindow.result);
+                match.HomeExchanges.Add(addExchangeWindow.Result);
                 homeExchanges = new ObservableCollection<Exchange>(match.HomeExchanges);
                 homeExchangesList.ItemsSource = homeExchanges;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addExchangeWindow.result.PlayerInId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addExchangeWindow.Result.PlayerInId);
                 activePlayer.MatchesPlayedIds.Add(match.Id);
             }
         }
@@ -345,31 +351,31 @@ namespace AdminApp
         private void addExchangeAway_Click(object sender, RoutedEventArgs e)
         {
             List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
-                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
-                                        .Select(p => p.Id).ToList();
+                                                    .Where(p => match.VisitorExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
+                                                    .Select(p => p.Id).ToList();
             List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
-                                                    .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
+                                                    .Where(p => match.VisitorExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
             var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
-                match.VisitorExchanges.Add(addExchangeWindow.result);
+                match.VisitorExchanges.Add(addExchangeWindow.Result);
                 visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
                 visitorExchangesList.ItemsSource = visitorExchanges;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addExchangeWindow.result.PlayerInId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addExchangeWindow.Result.PlayerInId);
                 activePlayer.MatchesPlayedIds.Add(match.Id);
             }
         }
 
         private void removeExchangeAway_Click(object sender, RoutedEventArgs e)
         {
-            Event activeEvent = (Event)visitorExchangesList.SelectedItem;
-            match.VisitorExchanges.Remove((Exchange)visitorExchangesList.SelectedItem);
+            Exchange selectedExchange = (Exchange)visitorExchangesList.SelectedItem;
+            match.VisitorExchanges.Remove(selectedExchange);
             visitorExchanges = new ObservableCollection<Exchange>(match.VisitorExchanges);
             visitorExchangesList.ItemsSource = visitorExchanges;
-            Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(activeEvent.PlayerId);
-            activePlayer.MatchesPlayedIds.Remove(match.Id);
+            Player playerIn = ServiceLocator.Instance.PlayerService.GetBy(selectedExchange.PlayerInId);
+            playerIn.MatchesPlayedIds.Remove(match.Id);
         }
 
         private void SetProperties()
