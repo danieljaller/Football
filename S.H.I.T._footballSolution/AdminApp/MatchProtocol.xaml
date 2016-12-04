@@ -19,11 +19,10 @@
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1" Grid.Column="1" >
+            <Grid Grid.Row="0" Grid.Column="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="205"/>
@@ -34,15 +33,15 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -62,207 +61,23 @@
 
                 <CheckBox Name="isPlayedCheckBox" Grid.Row="1" Grid.Column="1" Content="Spelad" VerticalAlignment="Center" Checked="isPlayedCheckBox_Checked" Unchecked="isPlayedCheckBox_Unchecked"/>
 
-                <TextBlock Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center">Mål</TextBlock>
-                <Button Name="removeGoalHome" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeGoalHome_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=homeGoalsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addGoalHome" Grid.Row="2" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addGoalHome_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addGoalAway" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addGoalAway_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="removeGoalAway" Grid.Row="2" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeGoalAway_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=visitorGoalsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
 
-
-                <Button Name="removeAssistHome" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeAssistHome_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=homeAssistsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addAssistHome" Grid.Row="4" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addAssistHome_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addAssistAway" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addAssistAway_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="removeAssistAway" Grid.Row="4" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeAssistAway_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=visitorAssistsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-
-                <Button Name="removeRedCardsHome" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeRedCardsHome_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=homeRedCardsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addRedCardsHome" Grid.Row="6" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addRedCardsHome_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addRedCardsAway" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addRedCardsAway_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="removeRedCardsAway" Grid.Row="6" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeRedCardsAway_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=visitorRedCardsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-
-                <Button Name="removeYellowCardsHome" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeYellowCardsHome_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=homeYellowCardsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addYellowCardsHome" Grid.Row="8" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addYellowCardsHome_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addYellowCardsAway" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addYellowCardsAway_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="removeYellowCardsAway" Grid.Row="8" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeYellowCardsAway_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=visitorYellowCardsList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-                <Button Name="removePlayerHome" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removePlayerHome_Click">
+                <TextBlock Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center">Laguppställning</TextBlock>
+                <ListBox Name="homeLineupList" Grid.Row="3" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorLineupList" Grid.Row="3" Grid.Column="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Name="removePlayerHome" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removePlayerHome_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -274,7 +89,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Name="addPlayerHome" Grid.Row="10" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addPlayerHome_Click">
+                <Button Name="addPlayerHome" Grid.Row="2" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addPlayerHome_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -286,7 +101,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Name="addPlayerAway" Grid.Row="10" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addPlayerAway_Click">
+                <Button Name="addPlayerAway" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addPlayerAway_Click">
                     <TextBlock VerticalAlignment="Center">+</TextBlock>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -298,7 +113,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Name="removePlayerAway" Grid.Row="10" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removePlayerAway_Click">
+                <Button Name="removePlayerAway" Grid.Row="2" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removePlayerAway_Click">
                     <TextBlock VerticalAlignment="Center">-</TextBlock>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -311,216 +126,9 @@
                     </Button.Style>
                 </Button>
 
-
-                <Button Name="removeExchangeHome" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeExchangeHome_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=homeExchangesList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addExchangeHome" Grid.Row="12" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addExchangeHome_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="addExchangeAway" Grid.Row="12" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addExchangeAway_Click">
-                    <TextBlock VerticalAlignment="Center">+</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Name="removeExchangeAway" Grid.Row="12" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeExchangeAway_Click">
-                    <TextBlock VerticalAlignment="Center">-</TextBlock>
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=visitorExchangesList, Path=SelectedItem}" Value="{x:Null}">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-
-                <ListBox Name="homeGoalsList" Grid.Row="3" Grid.Column="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <ListBox Name="visitorGoalsList" Grid.Row="3" Grid.Column="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: "/>
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <TextBlock Grid.Row="4" Grid.ColumnSpan="4" HorizontalAlignment="Center">Assist</TextBlock>
-                <ListBox Name="homeAssistsList" Grid.Row="5" Grid.Column="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <ListBox Name="visitorAssistsList" Grid.Row="5" Grid.Column="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: "/>
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <TextBlock Grid.Row="6" Grid.ColumnSpan="4" Foreground="red" HorizontalAlignment="Center">Röda kort</TextBlock>
-                <ListBox Name="homeRedCardsList" Grid.Row="7" Grid.Column="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <ListBox Name="visitorRedCardsList" Grid.Row="7" Grid.Column="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <TextBlock Grid.Row="8" Grid.ColumnSpan="4" Foreground="Gold" HorizontalAlignment="Center">Gula kort</TextBlock>
-                <ListBox Name="homeYellowCardsList" Grid.Row="9" Grid.Column="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <ListBox Name="visitorYellowCardsList" Grid.Row="9" Grid.Column="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <TextBlock Grid.Row="10" Grid.ColumnSpan="4" HorizontalAlignment="Center">Laguppställning</TextBlock>
-                <ListBox Name="homeLineupList" Grid.Row="11" Grid.Column="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <ListBox Name="visitorLineupList" Grid.Row="11" Grid.Column="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <TextBlock Grid.Row="12" Grid.ColumnSpan="4" HorizontalAlignment="Center">Byten</TextBlock>
-                <ListBox Name="homeExchangesList" Grid.Row="13" Grid.Column="1" Margin="0, 0, 0, 3">
+                
+                <TextBlock Grid.Row="4" Grid.ColumnSpan="4" HorizontalAlignment="Center">Byten</TextBlock>
+                <ListBox Name="homeExchangesList" Grid.Row="5" Grid.Column="1" Margin="0, 0, 0, 3">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -544,7 +152,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <ListBox Name="visitorExchangesList" Grid.Row="13" Grid.Column="2" Margin="0, 0, 0, 3">
+                <ListBox Name="visitorExchangesList" Grid.Row="5" Grid.Column="2" Margin="0, 0, 0, 3">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -569,9 +177,390 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                <Button Name="removeExchangeHome" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeExchangeHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=homeExchangesList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addExchangeHome" Grid.Row="4" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addExchangeHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addExchangeAway" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addExchangeAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="removeExchangeAway" Grid.Row="4" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeExchangeAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=visitorExchangesList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+                <TextBlock Grid.Row="6" Grid.ColumnSpan="6" HorizontalAlignment="Center">Mål</TextBlock>
+                <ListBox Name="homeGoalsList" Grid.Row="7" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorGoalsList" Grid.Row="7" Grid.Column="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: "/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Name="removeGoalHome" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeGoalHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=homeGoalsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addGoalHome" Grid.Row="6" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addGoalHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addGoalAway" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addGoalAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="removeGoalAway" Grid.Row="6" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeGoalAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=visitorGoalsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
+
+                <TextBlock Grid.Row="8" Grid.ColumnSpan="4" HorizontalAlignment="Center">Assist</TextBlock>
+                <ListBox Name="homeAssistsList" Grid.Row="9" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorAssistsList" Grid.Row="9" Grid.Column="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: "/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Name="removeAssistHome" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeAssistHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=homeAssistsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addAssistHome" Grid.Row="8" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addAssistHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addAssistAway" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addAssistAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="removeAssistAway" Grid.Row="8" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeAssistAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=visitorAssistsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                
+                <TextBlock Grid.Row="10" Grid.ColumnSpan="8" Foreground="red" HorizontalAlignment="Center">Röda kort</TextBlock>
+                <ListBox Name="homeRedCardsList" Grid.Row="11" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorRedCardsList" Grid.Row="11" Grid.Column="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Name="removeRedCardsHome" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeRedCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=homeRedCardsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addRedCardsHome" Grid.Row="10" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addRedCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addRedCardsAway" Grid.Row="10" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addRedCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="removeRedCardsAway" Grid.Row="10" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeRedCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=visitorRedCardsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                
+                <TextBlock Grid.Row="12" Grid.ColumnSpan="4" Foreground="Gold" HorizontalAlignment="Center">Gula kort</TextBlock>
+                <ListBox Name="homeYellowCardsList" Grid.Row="13" Grid.Column="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox Name="visitorYellowCardsList" Grid.Row="13" Grid.Column="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Name="removeYellowCardsHome" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" Height="15" Width="15" Click="removeYellowCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=homeYellowCardsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addYellowCardsHome" Grid.Row="12" Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Height="15" Width="15" Click="addYellowCardsHome_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="addYellowCardsAway" Grid.Row="12" Grid.Column="2" HorizontalAlignment="Right" Height="15" Width="15" Click="addYellowCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">+</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Name="removeYellowCardsAway" Grid.Row="12" Grid.Column="2" Margin="0,0,15,0" HorizontalAlignment="Right" Height="15" Width="15" Click="removeYellowCardsAway_Click">
+                    <TextBlock VerticalAlignment="Center">-</TextBlock>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=visitorYellowCardsList, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
-            <Button Name="okButton" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="100" Height="20" Margin="20,2,0,3" Click="okButton_Click" >OK</Button>
-            <Button Name="cancelButton" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="0,2,20,3" Click="cancelButton_Click">Cancel</Button>
+            
+            <Button Name="okButton" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="100" Height="20" Margin="20,20,0,3" Click="okButton_Click" >OK</Button>
+            <Button Name="cancelButton" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="0,20,20,3" Click="cancelButton_Click">Cancel</Button>
 
         </Grid>
 

@@ -45,7 +45,7 @@
         
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,0,0">Matchminut:</TextBlock>
        
-        <ListBox Name="playerListbox"  Grid.Row="0" Grid.Column="1" Margin="5"  ItemContainerStyle="{StaticResource radioListBoxItem}">
+        <ListBox Name="playerListbox"  Grid.Row="0" Grid.Column="1" Margin="5"  ItemContainerStyle="{StaticResource radioListBoxItem}" SelectionChanged="playerListbox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=FullName}" />
@@ -56,6 +56,15 @@
         
         
         <ComboBox Name="timeBox" Width="50" Grid.Row="1" Grid.Column="1" Margin="5,20,0,0" ItemContainerStyle="{StaticResource radioComboBoxItem}" SelectionChanged="timeBox_SelectionChanged">
+            <ComboBox.Style>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=playerListbox, Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Value}"/>

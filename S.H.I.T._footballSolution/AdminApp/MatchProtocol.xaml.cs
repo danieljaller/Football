@@ -75,12 +75,12 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.HomeGoals.Add(addEventWindow.result);
+                match.HomeGoals.Add(addEventWindow.Result);
                 homeGoals = new ObservableCollection<Event>(match.HomeGoals);
                 homeScore++;
                 homeTeamScoreBlock.DataContext = homeScore;
                 homeGoalsList.ItemsSource = homeGoals;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.Goals.Add(match.Id);
             }
         }
@@ -91,12 +91,12 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.VisitorGoals.Add(addEventWindow.result);
+                match.VisitorGoals.Add(addEventWindow.Result);
                 visitorGoals = new ObservableCollection<Event>(match.VisitorGoals);
                 visitorScore++;
                 visitorTeamScoreBlock.DataContext = visitorScore;
                 visitorGoalsList.ItemsSource = visitorGoals;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.Goals.Add(match.Id);
             }
         }
@@ -130,10 +130,10 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.HomeAssists.Add(addEventWindow.result);
+                match.HomeAssists.Add(addEventWindow.Result);
                 homeAssists = new ObservableCollection<Event>(match.HomeAssists);
                 homeAssistsList.ItemsSource = homeAssists;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.Assists.Add(match.Id);
             }
         }
@@ -145,10 +145,10 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.VisitorAssists.Add(addEventWindow.result);
+                match.VisitorAssists.Add(addEventWindow.Result);
                 visitorAssists = new ObservableCollection<Event>(match.VisitorAssists);
                 visitorAssistsList.ItemsSource = visitorAssists;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.Assists.Add(match.Id);
             }
         }
@@ -179,10 +179,10 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.HomeRedCards.Add(addEventWindow.result);
+                match.HomeRedCards.Add(addEventWindow.Result);
                 homeRedCards = new ObservableCollection<Event>(match.HomeRedCards);
                 homeRedCardsList.ItemsSource = homeRedCards;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.RedCards.Add(match.Id);
             }
         }
@@ -193,10 +193,10 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.VisitorRedCards.Add(addEventWindow.result);
+                match.VisitorRedCards.Add(addEventWindow.Result);
                 visitorRedCards = new ObservableCollection<Event>(match.VisitorRedCards);
                 visitorRedCardsList.ItemsSource = visitorRedCards;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.RedCards.Add(match.Id);
             }
         }
@@ -227,10 +227,10 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.HomeYellowCards.Add(addEventWindow.result);
+                match.HomeYellowCards.Add(addEventWindow.Result);
                 homeYellowCards = new ObservableCollection<Event>(match.HomeYellowCards);
                 homeYellowCardsList.ItemsSource = homeYellowCards;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.YellowCards.Add(match.Id);
             }
         }
@@ -241,10 +241,10 @@ namespace AdminApp
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
-                match.VisitorYellowCards.Add(addEventWindow.result);
+                match.VisitorYellowCards.Add(addEventWindow.Result);
                 visitorYellowCards = new ObservableCollection<Event>(match.VisitorYellowCards);
                 visitorYellowCardsList.ItemsSource = visitorYellowCards;
-                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.result.PlayerId);
+                Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy(addEventWindow.Result.PlayerId);
                 activePlayer.YellowCards.Add(match.Id);
             }
         }
