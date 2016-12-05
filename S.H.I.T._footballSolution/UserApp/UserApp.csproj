@@ -186,6 +186,11 @@
   <ItemGroup>
     <Folder Include="Messages\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\calendar_icon.ico" />
+    <Resource Include="Resources\football_icon.ico" />
+    <Resource Include="Resources\matchprotocol_icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
