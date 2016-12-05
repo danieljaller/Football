@@ -61,7 +61,6 @@
     <Compile Include="Converters\GuidToEntityNameConverter.cs" />
     <Compile Include="Converters\IdToNameConverter.cs" />
     <Compile Include="Converters\GeneralNameValidationRule.cs" />
-    <Compile Include="Converters\GuidToEntityNameConverter.cs" />
     <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="Converters\StatusToSwedishStringConverter.cs" />

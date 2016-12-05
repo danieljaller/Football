@@ -54,8 +54,6 @@ namespace UserApp
                 resultListBox.ItemsSource = matchScheduleWithMatches.Reverse();
             }
             else
-        }
-
             {
                 matchProtocolList.ItemsSource = matchScheduleWithMatches;
                 homeTeamListBox.ItemsSource = homeTeamList;
