@@ -56,9 +56,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\CollectionCountToStringConverter.cs" />
+    <Compile Include="Converters\EventPlayerIdToNameConverter.cs" />
     <Compile Include="Converters\GuidToEntityNameConverter.cs" />
     <Compile Include="Converters\IdToNameConverter.cs" />
+    <Compile Include="Converters\GeneralNameValidationRule.cs" />
+    <Compile Include="Converters\GuidToEntityNameConverter.cs" />
+    <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
+    <Compile Include="Converters\StatusToSwedishStringConverter.cs" />
     <Compile Include="InformationHolders\ObjectHolder.cs" />
     <Compile Include="Utilities\CustomCommand.cs" />
     <Compile Include="Utilities\Messenger.cs" />

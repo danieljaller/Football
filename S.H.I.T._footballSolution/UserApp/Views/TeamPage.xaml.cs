@@ -1,4 +1,5 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace UserApp
     public partial class TeamPage : Page
     {
         Serie serie;
+        Team selectedTeam;
         public TeamPage()
         {
             InitializeComponent();
@@ -29,19 +31,20 @@ namespace UserApp
 
         public TeamPage(Team selectedTeam)
         {
-            Team team = selectedTeam;
+            this.selectedTeam = selectedTeam;
+            serie = ServiceLocator.Instance.SerieService.GetBy(selectedTeam.SerieIds.First());
             InitializeComponent();
-            teamName.DataContext = team;
+            teamName.DataContext = selectedTeam;
         }
 
         private void teaminfo_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new TeamInfoPage();
+            teamPageFrame.Content = new TeamInfoPage(selectedTeam);
         }
 
         private void schedule_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new SchedulePage(serie);
+            teamPageFrame.Content = new SchedulePage(serie, selectedTeam);
         }
 
         private void table_Click(object sender, RoutedEventArgs e)

@@ -4,39 +4,89 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UserApp"
+      xmlns:Converters ="clr-namespace:UserApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="TeamInfoPage">
 
-    <Grid>
+    <Page.Resources>
+        <Converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter"/>
+    </Page.Resources>
+
+    <Grid Name="mainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Tabellplats:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Poäng:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Målskillnad:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Hemma-arena:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Vinster:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Förluster:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Oavgjorda:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Gjorda mål:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Insläppta mål:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="Röda kort:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="10" Grid.Column="0" Text="Gula kort:" />
+
+        <Frame x:Name="CreateOrAdministrateTeamsPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" NavigationUIVisibility="Hidden"/>
+
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Name="teamsOverview" Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding Path=Name}" FontWeight="Bold"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Grid.RowSpan="2">
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Namn:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serier:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Poäng:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Vinster:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Förluster:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Oavgjorda"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Gjorda mål:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Insläppta mål:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Målskillnad:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Kommande matcher:"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Grid.RowSpan="2" DataContext="{Binding}">
+                <TextBlock Name="teamName" Margin="5,5,0,0" Width="120" HorizontalAlignment="Left" Text="{Binding Path=Name.Value}"/>
+                <TextBlock Name="arenaName" Margin="5,5,0,0" Width="120" HorizontalAlignment="Left" Text="{Binding Path=HomeArena.Value}"/>
+                <TextBlock Name="seriesTextBox" FontWeight="Bold" Margin="5,3,0,0"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=Points}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=Wins.Count}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=Losses.Count}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=Ties.Count}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=GoalsFor}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=GoalsAgainst}"/>
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=GoalDifference}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="matchesPlayedTextBlock"  FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=MatchesPlayed}"/>
+                    <Button Name="matchesPlayedButton" Background="Transparent" BorderBrush="Transparent" Height="22" Width="22" VerticalAlignment="Bottom" Margin="17,2,0,0" Click="matchesPlayedButton_Click">
+                        <Image Source="/Resources/calendar_icon.ico"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="matchesNotPlayedTextBlock"  FontWeight="Bold" Margin="5,2,0,0" />
+                    <Button Name="matchesNotPlayedButton" Background="Transparent" BorderBrush="Transparent" Height="22" Width="22" VerticalAlignment="Bottom" Margin="10,0,0,0" Click="matchesNotPlayedButton_Click">
+                        <Image Source="/Resources/calendar_icon.ico"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <ListBox Name="playersList" MaxHeight="260" Width="170" Margin="5" ItemsSource="{Binding Path=PlayerIds}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Page>

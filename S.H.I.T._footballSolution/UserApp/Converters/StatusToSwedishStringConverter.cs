@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using static FootballEngine.Domain.Entities.Player;
 
-namespace AdminApp.Converters
+namespace UserApp.Converters
 {
     public class StatusToSwedishStringConverter : IValueConverter
     {
