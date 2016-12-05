@@ -23,7 +23,7 @@ namespace UserApp.Views
         public TeamInoPopUp(Team team)
         {
             InitializeComponent();
-            mainFrame.Content = new TeamInfoPage();
+            mainFrame.Content = new TeamInfoPage(team);
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
