@@ -54,7 +54,7 @@ namespace UserApp
 
         private void player_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new PlayerPage(serie);
+            teamPageFrame.Content = new PlayerPage(serie, selectedTeam);
         }
     }
 }
