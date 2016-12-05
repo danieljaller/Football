@@ -39,6 +39,19 @@ namespace UserApp
             showAllRadioButton.IsChecked = true;
         }
 
+        public SchedulePage(Serie selectedSerie, Team selectedTeam)
+        {
+            InitializeComponent();
+            SelectedSerie = selectedSerie;
+            matchScheduleWithIds = SelectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).HomeTeamId == selectedTeam.Id || ServiceLocator.Instance.MatchService.GetBy(m).VisitorTeamId == selectedTeam.Id).ToHashSet();
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList);
+            showAllRadioButton.IsChecked = false;
+            showAllRadioButton.Visibility = Visibility.Collapsed;
+            showCommingRadioButton.Visibility = Visibility.Collapsed;
+            showPlayedRadioButton.Visibility = Visibility.Collapsed;
+        }
+
         private void SetItemSources(HashSet<Match> matchScheduleWithMatches, List<Team> homeTeamList, List<Team> visitorTeamList)
         {
             homeTeamListBox.ItemsSource = homeTeamList;
