@@ -201,7 +201,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\calendar_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\football_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\matchprotocol_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

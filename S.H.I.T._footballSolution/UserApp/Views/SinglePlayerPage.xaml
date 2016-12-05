@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button Name="playerInfo" Grid.Row="1" Grid.Column="0" Width="85" Height="20" Margin="10" Click="playerInfo_Click" Content="Spelarinfo" />
-            <Button Name="team" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Margin="10" Click="team_Click" Content="Lag" />
+            <Button Name="teamInfo" Grid.Row="1" Grid.Column="1" Width="85" Height="20" Margin="10" Click="teamInfo_Click" Content="Laginfo" />
         </Grid>
 
         <Frame Grid.Row="2" x:Name="singlePlayerPageFrame" Margin="20,20,20,50"/>
