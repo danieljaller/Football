@@ -55,7 +55,7 @@ namespace AdminApp
         }
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchResult = ServiceLocator.Instance.SearchService.Search(searchTextBox.Text, true, true, true, true, true);
+            var searchResult = ServiceLocator.Instance.SearchService.Search(searchTextBox.Text, true, true, true, false, true);
             
             if (string.IsNullOrWhiteSpace(searchTextBox.Text) || searchResult == null)
             {
