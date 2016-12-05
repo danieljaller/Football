@@ -7,20 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using static FootballEngine.Domain.Entities.Player;
 
-namespace AdminApp.Converters
+namespace UserApp.Converters
 {
-    public class StatusToSwedishStringConverter : IValueConverter
+    public class EventPlayerIdToNameConverter : IValueConverter
     {
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            if (value.GetType() == typeof(Status))
-                return ((Status)value).ToSwedishString();
-
-            return "?";
-
+            Guid playerId = (Guid)value;
+            Player player = ServiceLocator.Instance.PlayerService.GetBy(playerId);
+            return player.FullName;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
