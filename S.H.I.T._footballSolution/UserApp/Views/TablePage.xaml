@@ -4,9 +4,26 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UserApp"
+      xmlns:converters="clr-namespace:UserApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="TablePage">
+
+    <Page.Resources>
+        <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
+        <converters:GuidToEntityNameConverter x:Key="guidToEntityNameConverter" />
+        <Style TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="White"/>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
@@ -22,42 +39,47 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Rectangle Grid.ColumnSpan="9" Fill="LightBlue"/>
-        <TextBlock Name="team" Margin="10,0,0,0" HorizontalAlignment="Left" ToolTip="Lag" Text="Lag" />
-        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Poäng" Text="P" />
-        <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Målskillnad" Text="MS" />
-        <TextBlock Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Vinster" Text="V" />
-        <TextBlock Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Oavgjorda" Text="O" />
-        <TextBlock Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Förluster" Text="F" />
-        <TextBlock Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Gjorda mål" Text="GM" />
-        <TextBlock Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Insläppta mål" Text="IM" />
-        <TextBlock Grid.Column="8" Grid.Row="0" HorizontalAlignment="Center" ToolTip="Antal matcher" Text="AM" />
 
-        <ListBox Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent">
+        <Rectangle Grid.ColumnSpan="9" Fill="LightBlue" Panel.ZIndex="1"/>
+        <TextBlock Name="team" Margin="10,0,0,0" Panel.ZIndex="1" HorizontalAlignment="Left" MouseLeftButtonDown="team_MouseLeftButtonDown" ToolTip="Lag" Text="Lag" />
+        <TextBlock Name="points" Grid.Column="1" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="points_MouseLeftButtonDown" ToolTip="Poäng" Text="P" />
+        <TextBlock Name="goalDifference" Grid.Column="2" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalDifference_MouseLeftButtonDown" ToolTip="Målskillnad" Text="MS" />
+        <TextBlock Name="wins" Grid.Column="3" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="wins_MouseLeftButtonDown" ToolTip="Vinster" Text="V" />
+        <TextBlock Name="ties" Grid.Column="4" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="ties_MouseLeftButtonDown" ToolTip="Oavgjorda" Text="O" />
+        <TextBlock Name ="losses" Grid.Column="5" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="losses_MouseLeftButtonDown" ToolTip="Förluster" Text="F" />
+        <TextBlock Name="goalsFor" Grid.Column="6" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsFor_MouseLeftButtonDown" ToolTip="Gjorda mål" Text="GM" />
+        <TextBlock Name="goalsAgainst" Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsAgainst_MouseLeftButtonDown" ToolTip="Insläppta mål" Text="IM" />
+        <TextBlock Name="matchesPlayed" Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="matchesPlayed_MouseLeftButtonDown" ToolTip="Antal matcher" Text="AM" />
+
+        <ListBox Name="tableStatsListbox" Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent" AlternationCount="2" SelectionChanged="tableStatsListbox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Height="auto" Width="auto"  Text="Lag" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Height="auto" Width="auto"  Text="P" />
-                        <TextBlock Grid.Column="2" Grid.Row="0" Height="auto" Width="auto"  Text="MS" />
-                        <TextBlock Grid.Column="3" Grid.Row="0" Height="auto" Width="auto"  Text="V" />
-                        <TextBlock Grid.Column="4" Grid.Row="0" Height="auto" Width="auto"  Text="O" />
-                        <TextBlock Grid.Column="5" Grid.Row="0" Height="auto" Width="auto"  Text="F" />
-                        <TextBlock Grid.Column="6" Grid.Row="0" Height="auto" Width="auto"  Text="GM" />
-                        <TextBlock Grid.Column="7" Grid.Row="0" Height="auto" Width="auto"  Text="IM" />
-                        <TextBlock Grid.Column="8" Grid.Row="0" Height="auto" Width="auto"  Text="AM" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3,0,0,0" Height="auto" Width="auto" Text="{Binding Path=Name}" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0"  Text="{Binding Path=Points}" />
+                        <TextBlock Grid.Column="2" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=GoalDifference}" />
+                        <TextBlock Grid.Column="3" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=Wins.Count}" />
+                        <TextBlock Grid.Column="4" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=Ties.Count}" />
+                        <TextBlock Grid.Column="5" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=Losses.Count}" />
+                        <TextBlock Grid.Column="6" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=GoalsFor}" />
+                        <TextBlock Grid.Column="7" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=GoalsAgainst}" />
+                        <TextBlock Grid.Column="8" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0" Text="{Binding Path=MatchesPlayed}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

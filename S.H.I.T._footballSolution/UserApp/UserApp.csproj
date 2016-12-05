@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\GuidToEntityNameConverter.cs" />
     <Compile Include="Converters\IdToNameConverter.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="InformationHolders\ObjectHolder.cs" />
@@ -91,6 +92,9 @@
     </Compile>
     <Compile Include="Views\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeamInoPopUp.xaml.cs">
+      <DependentUpon>TeamInoPopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TeamPage.xaml.cs">
       <DependentUpon>TeamPage.xaml</DependentUpon>
@@ -140,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TeamInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamInoPopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

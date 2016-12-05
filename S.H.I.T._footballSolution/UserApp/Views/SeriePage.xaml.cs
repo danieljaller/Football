@@ -43,7 +43,7 @@ namespace UserApp
        
         private void table_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new TablePage();
+            seriePageFrame.Content = new TablePage(serie);
         }
 
         private void player_Click(object sender, RoutedEventArgs e)
