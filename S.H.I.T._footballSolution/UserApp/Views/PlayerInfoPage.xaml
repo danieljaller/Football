@@ -35,6 +35,16 @@
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" Margin="0,0,0,5"/>
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Status:"/>
 
+        <TextBlock Name="team" Grid.Row="0" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="age" Grid.Row="1" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="dob" Grid.Row="2" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="goalsMade" Grid.Row="3" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="assists" Grid.Row="4" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="red" Grid.Row="5" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="yellow" Grid.Row="6" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="matchesPlayed" Grid.Row="7" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+        <TextBlock Name="status" Grid.Row="8" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
+
         <TextBlock Text="{Binding Team, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
         <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
         <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
