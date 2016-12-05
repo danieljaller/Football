@@ -1,18 +1,7 @@
 ﻿using FootballEngine.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FootballEngine.Helper;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace UserApp.Views
 {
@@ -34,14 +23,15 @@ namespace UserApp.Views
             singlePlayerName.DataContext = selectedPlayer;
         }
 
-        private void team_Click(object sender, RoutedEventArgs e)
-        {
-            singlePlayerPageFrame.Content = new TeamInfoPage();
-        }
-
         private void playerInfo_Click(object sender, RoutedEventArgs e)
         {
             singlePlayerPageFrame.Content = new PlayerInfoPage(selectedPlayer);
+        }
+
+        private void teamInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Team team = ServiceLocator.Instance.TeamService.GetBy(selectedPlayer.TeamId);
+            singlePlayerPageFrame.Content = new TeamInfoPage(team);
         }
     }
 }
