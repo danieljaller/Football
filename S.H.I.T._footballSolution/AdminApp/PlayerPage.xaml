@@ -13,6 +13,7 @@
         <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
         <converters:GuidToEntityNameConverter x:Key="guidToEntityNameConverter" />
         <converters:CollectionCountToStringConverter x:Key="collectionCountToStringConverter" />
+        <converters:StatusToSwedishStringConverter x:Key="statusToSwedishStringConverter" />
         <Style TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Style.Triggers>
@@ -80,7 +81,7 @@
                         <TextBlock Grid.Column="5" Grid.Row="0" Margin="10,0,0,0" Height="auto" Width="auto" HorizontalAlignment="Center" Text="{Binding Path=Assists, Converter={StaticResource collectionCountToStringConverter}}" />
                         <TextBlock Grid.Column="6" Grid.Row="0" Margin="10,0,0,0" Height="auto" Width="auto" HorizontalAlignment="Center" Text="{Binding Path=YellowCards, Converter={StaticResource collectionCountToStringConverter}}" />
                         <TextBlock Grid.Column="7" Grid.Row="0" Margin="10,0,0,0" Height="auto" Width="auto" HorizontalAlignment="Center" Text="{Binding Path=RedCards, Converter={StaticResource collectionCountToStringConverter}}" />
-                        <TextBlock Grid.Column="8" Grid.Row="0" Margin="10,0,0,0" Height="auto" Width="auto" HorizontalAlignment="Center" Text="{Binding Path=PlayerStatus}" />
+                        <TextBlock Grid.Column="8" Grid.Row="0" Margin="10,0,0,0" Height="auto" Width="auto" HorizontalAlignment="Center" Text="{Binding Path=PlayerStatus, Converter={StaticResource statusToSwedishStringConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

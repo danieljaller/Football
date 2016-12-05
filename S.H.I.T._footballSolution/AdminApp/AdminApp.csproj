@@ -78,6 +78,7 @@
     <Compile Include="Converters\IsEnabledConverterAddPlayer.cs" />
     <Compile Include="Converters\NameValidationRule.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
+    <Compile Include="Converters\StatusToSwedishStringConverter.cs" />
     <Compile Include="CreateSchedulePage.xaml.cs">
       <DependentUpon>CreateSchedulePage.xaml</DependentUpon>
     </Compile>

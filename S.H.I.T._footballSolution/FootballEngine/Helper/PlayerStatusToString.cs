@@ -9,7 +9,7 @@ namespace FootballEngine.Helper
             switch (status)
             {
                 case Status.Available:
-                    return "Spelbar";
+                    return "Tillgänglig";
                 case Status.Suspended:
                     return "Avstängd";
                 case Status.Injured:

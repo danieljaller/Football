@@ -100,7 +100,7 @@
                         <TextBlock Text="Landslagsuppdrag"/>
                     </ComboBoxItem>
                     <ComboBoxItem Name="otherCBI">
-                        <TextBlock Text="Annat"/>
+                        <TextBlock Text="Övrig frånvaro"/>
                     </ComboBoxItem>
                 </ComboBox>
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.YellowCards, Converter={StaticResource collectionCountToStringConverter}}"/>
