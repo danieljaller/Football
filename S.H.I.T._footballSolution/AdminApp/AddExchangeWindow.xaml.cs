@@ -31,17 +31,16 @@ namespace AdminApp
             IEnumerable<Player> playersInTeam = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(teamId);
             List<Player> activePlayers = new List<Player>();
             List<Player> availablePlayers = new List<Player>();
-            foreach (Player player in playersInTeam)
-            {
-                if ((lineup.Contains(player.Id) || playerInIds.Contains(player.Id)) && !playerOutIds.Contains(player.Id))
-                    activePlayers.Add(player);
-                else if (player.Playable && !playerInIds.Contains(player.Id))
-                    availablePlayers.Add(player);
-            }
-            //var allPlayers = ServiceLocator.Instance.PlayerService.GetAll();
-            //var activePlayers = allPlayers.Where(p => (lineup.Contains(p.Id) || playerInIds.Contains(p.Id)) 
-            //                                                    && !playerOutIds.Contains(p.Id));
-            //var availablePlayers = allPlayers.Where(p => !lineup.Contains(p.Id) && !playerInIds.Contains(p.Id) && p.Playable);
+            //foreach (Player player in playersInTeam)
+            //{
+            //    if ((lineup.Contains(player.Id) || playerInIds.Contains(player.Id)) && !playerOutIds.Contains(player.Id))
+            //        activePlayers.Add(player);
+            //    else if (player.Playable && !playerInIds.Contains(player.Id))
+            //        availablePlayers.Add(player);
+            //}
+            activePlayers = playersInTeam.Where(p => (lineup.Contains(p.Id) || playerInIds.Contains(p.Id))
+                                                                && !playerOutIds.Contains(p.Id)).ToList();
+            availablePlayers = playersInTeam.Where(p => !lineup.Contains(p.Id) && !playerInIds.Contains(p.Id) && p.Playable).ToList();
 
             string[] minutes = new string[matchLength];
             for (int i = 1; i <= matchLength; i++)
