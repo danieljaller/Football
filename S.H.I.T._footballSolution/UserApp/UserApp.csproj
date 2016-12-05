@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\IdToNameConverter.cs" />
     <Compile Include="Converters\SearchResultToStringConverter.cs" />
     <Compile Include="InformationHolders\ObjectHolder.cs" />
     <Compile Include="Utilities\CustomCommand.cs" />
