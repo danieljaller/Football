@@ -21,16 +21,17 @@ namespace UserApp.Views
     /// </summary>
     public partial class SinglePlayerPage : Page
     {
+        Player selectedPlayer;
         public SinglePlayerPage()
         {
             InitializeComponent();
         }
 
-        public SinglePlayerPage(Player selectedPlayer)
+        public SinglePlayerPage(Player _selectedPlayer)
         {
-            Player player = selectedPlayer;
+            selectedPlayer = _selectedPlayer;
             InitializeComponent();
-            singlePlayerName.DataContext = player;
+            singlePlayerName.DataContext = selectedPlayer;
         }
 
         private void team_Click(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace UserApp.Views
 
         private void playerInfo_Click(object sender, RoutedEventArgs e)
         {
-            singlePlayerPageFrame.Content = new PlayerInfoPage();
+            singlePlayerPageFrame.Content = new PlayerInfoPage(selectedPlayer);
         }
     }
 }
