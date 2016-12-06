@@ -33,13 +33,13 @@ namespace UserApp
             serie = selectedSerie;
             InitializeComponent();
             serieName.DataContext = serie;
+            seriePageFrame.Content = new SchedulePage(serie);
         }
 
         private void schedule_Click(object sender, RoutedEventArgs e)
         {
             seriePageFrame.Content = new SchedulePage(serie);
         }
-
        
         private void table_Click(object sender, RoutedEventArgs e)
         {

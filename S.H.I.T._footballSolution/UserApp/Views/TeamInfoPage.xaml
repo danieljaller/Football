@@ -34,7 +34,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <!--<TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding Path=Name}" FontWeight="Bold"/>-->
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Namn:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:"/>
@@ -62,20 +61,10 @@
                 <TextBlock Margin="5,5,0,0" Text="{Binding Path=GoalDifference}"/>
                 <TextBlock Name="matchesPlayedTextBlock" Margin="5,5,0,0" Text="{Binding Path=MatchesPlayed}"/>
                 <TextBlock Name="matchesNotPlayedTextBlock" Margin="5,7.5,0,0" />
-                <!--<StackPanel Orientation="Horizontal">
-                    <Button Name="matchesPlayedButton" Background="Transparent" BorderBrush="Transparent" Height="22" Width="22" VerticalAlignment="Bottom" Margin="17,2,0,0" Click="matchesPlayedButton_Click">
-                        <Image Source="/Resources/calendar_icon.ico"/>
-                    </Button>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button Name="matchesNotPlayedButton" Background="Transparent" BorderBrush="Transparent" Height="22" Width="22" VerticalAlignment="Bottom" Margin="10,0,0,0" Click="matchesNotPlayedButton_Click">
-                        <Image Source="/Resources/calendar_icon.ico"/>
-                    </Button>
-                </StackPanel>-->
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,10,0">
-                <ListBox Name="playersList" MaxHeight="400" Width="170" Margin="5" ItemsSource="{Binding Path=PlayerIds}" MouseDoubleClick="PlayersList_OnMouseDoubleClick">
+                <ListBox Name="playersList" MaxHeight="430" Width="230" Margin="5" ItemsSource="{Binding Path=PlayerIds}" MouseDoubleClick="PlayersList_OnMouseDoubleClick">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}"/>

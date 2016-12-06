@@ -69,7 +69,7 @@
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="23"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3,0,0,0" Height="auto" Width="auto" Text="{Binding Path=Name}" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Height="auto" Width="auto" Margin="20,0,0,0"  Text="{Binding Path=Points}" />

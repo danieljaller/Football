@@ -21,6 +21,7 @@ namespace UserApp.Views
             selectedPlayer = _selectedPlayer;
             InitializeComponent();
             singlePlayerName.DataContext = selectedPlayer;
+            singlePlayerPageFrame.Content = new PlayerInfoPage(selectedPlayer);
         }
 
         private void playerInfo_Click(object sender, RoutedEventArgs e)

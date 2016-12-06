@@ -35,7 +35,7 @@
                 <Button Name="player" Grid.Column="3" Margin="10" Width="85" Height="20" Click="player_Click" Content="Spelare" />
             </Grid>
             
-            <Frame Grid.Row="2" Margin="20, 20, 20, 50" x:Name="teamPageFrame" />
+            <Frame Grid.Row="2" Margin="20, 20, 20, 10" x:Name="teamPageFrame" />
         </Grid>
     </ScrollViewer>
 </Page>
