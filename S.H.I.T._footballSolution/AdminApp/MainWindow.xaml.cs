@@ -39,15 +39,17 @@ namespace AdminApp
         private void TeamButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new CreateOrAdministrateTeamsPage();
+            
         }
+            
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new StatisticsPage();
+        }
            
             
             
-        }
 
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {

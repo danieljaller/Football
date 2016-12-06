@@ -23,7 +23,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Spelare" FontSize="20" />
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Administrera Spelare" FontWeight="Bold" FontSize="20" />
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <ComboBox Name="teamsSelector" SelectedIndex="0" SelectionChanged="teamsSelector_SelectionChanged" Margin="5">
                 <ComboBox.ItemTemplate>
@@ -62,7 +62,7 @@
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Mål:"/>
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Assist:"/>
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
-                <Button Grid.Row="10" Margin="0,65,0,0" Name="saveBtn" HorizontalAlignment="Left" Width="50" Content="Spara" Click="saveBtn_Click" IsEnabled="False"/>
+                <Button Grid.Row="10" Margin="5,63,0,0" Name="saveBtn" HorizontalAlignment="Left" Width="50" Content="Spara" Click="saveBtn_Click" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1" DataContext="{Binding ElementName=playersList}" Width="150" Margin="5,35,0,0">
                 <TextBox Name="playerFirstName" Margin="5,5,0,0" Height="23" IsEnabled="False"
@@ -108,7 +108,7 @@
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Goals, Converter={StaticResource collectionCountToStringConverter}}"/>
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.Assists, Converter={StaticResource collectionCountToStringConverter}}"/>
                 <TextBlock Height="23" FontWeight="Bold" Margin="5,5,0,0" Text="{Binding Path=SelectedItem.MatchesPlayedIds, Converter={StaticResource collectionCountToStringConverter}}"/>
-                <Button Grid.Row="10" Grid.Column="1" Margin="0,65,0,0"  Name="cancelBtn" HorizontalAlignment="Right" Width="50" Content="Avbryt" IsEnabled="False" Click="cancelBtn_Click"/>
+                <Button Grid.Row="10" Grid.Column="1" Margin="0,63,0,0" Name="cancelBtn" HorizontalAlignment="Right" Width="50" Content="Avbryt" IsEnabled="False" Click="cancelBtn_Click"/>
             </StackPanel>
                 
             
