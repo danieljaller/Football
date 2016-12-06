@@ -26,7 +26,7 @@ namespace UserApp
             InitializeComponent();
             SetPlayerData(selectedSerie);
         }
-        public PlayerPage(Serie selectedSerie, Team team = null)
+        public PlayerPage(Serie selectedSerie, Team team)
         {
             this.selectedSerie = selectedSerie;
             _team = team;
@@ -42,7 +42,7 @@ namespace UserApp
                     .Where(p => p.TeamId == _team.Id));
                 playerStatsListbox.ItemsSource = players;
             }
-            if (selectedSerie != null)
+            else if (selectedSerie != null)
             {
                 players = new ObservableCollection<Player>(ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id));
                 playerStatsListbox.ItemsSource = players;
