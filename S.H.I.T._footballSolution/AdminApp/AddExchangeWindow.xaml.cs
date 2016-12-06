@@ -25,19 +25,10 @@ namespace AdminApp
         public AddExchangeWindow(ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds)
         {
             InitializeComponent();
-            //List<Guid> unexchangeablePlayerIds = new List<Guid>();
-            //unexchangeablePlayerIds.AddRange(playerOutIds.Concat(playerInIds));
             Guid teamId = ServiceLocator.Instance.PlayerService.GetBy(lineup[0]).TeamId;
             IEnumerable<Player> playersInTeam = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(teamId);
             List<Player> activePlayers = new List<Player>();
             List<Player> availablePlayers = new List<Player>();
-            //foreach (Player player in playersInTeam)
-            //{
-            //    if ((lineup.Contains(player.Id) || playerInIds.Contains(player.Id)) && !playerOutIds.Contains(player.Id))
-            //        activePlayers.Add(player);
-            //    else if (player.Playable && !playerInIds.Contains(player.Id))
-            //        availablePlayers.Add(player);
-            //}
             activePlayers = playersInTeam.Where(p => (lineup.Contains(p.Id) || playerInIds.Contains(p.Id))
                                                                 && !playerOutIds.Contains(p.Id)).ToList();
             availablePlayers = playersInTeam.Where(p => !lineup.Contains(p.Id) && !playerInIds.Contains(p.Id) && p.Playable).ToList();
