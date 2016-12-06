@@ -75,7 +75,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,10,0">
-                <ListBox Name="playersList" MaxHeight="250" Width="170" Margin="5" ItemsSource="{Binding Path=PlayerIds}" MouseDoubleClick="PlayersList_OnMouseDoubleClick">
+                <ListBox Name="playersList" MaxHeight="400" Width="170" Margin="5" ItemsSource="{Binding Path=PlayerIds}" MouseDoubleClick="PlayersList_OnMouseDoubleClick">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}"/>
