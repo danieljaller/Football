@@ -51,6 +51,7 @@ namespace AdminApp
                 overTimeMinutes[i] = i;
             timeBox.ItemsSource = overTimeMinutes;
             SetSources();
+            matchTime = match.MatchTimeInMinutes;
         }
 
         private void matchDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
