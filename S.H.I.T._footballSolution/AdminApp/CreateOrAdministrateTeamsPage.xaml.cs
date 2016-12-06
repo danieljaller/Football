@@ -144,6 +144,7 @@ namespace AdminApp
             ServiceLocator.Instance.TeamService.Save();
             ServiceLocator.Instance.PlayerService.Save();
             MessageBox.Show("Dina ändringar har sparats");
+            teamsList.Items.Refresh();            
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
