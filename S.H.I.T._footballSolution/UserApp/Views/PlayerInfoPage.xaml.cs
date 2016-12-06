@@ -28,6 +28,7 @@ namespace UserApp.Views
         public PlayerInfoPage(Player _selectedPlayer)
         {
             InitializeComponent();
+            name.Text = $"{_selectedPlayer.FirstName} {_selectedPlayer.LastName}";
             DataContext = _selectedPlayer;
         }
     }

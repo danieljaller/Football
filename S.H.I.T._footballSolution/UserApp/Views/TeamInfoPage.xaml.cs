@@ -53,17 +53,7 @@ namespace UserApp
             seriesTextBox.Text = serieStringBuilder.ToString().TrimEnd(',', ' ');
             matchesNotPlayedTextBlock.Text = selectedTeam.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == false).Count().ToString();
         }
-
-        private void matchesNotPlayedButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void matchesPlayedButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void PlayersList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (_teamPageFrame != null)

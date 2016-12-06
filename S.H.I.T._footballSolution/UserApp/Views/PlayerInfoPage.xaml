@@ -13,7 +13,7 @@
         <Converters:StatusToSwedishStringConverter x:Key="StatusToSwedishStringConverter"/>
     </Page.Resources>
 
-    <Grid>
+    <Grid Margin="15, 5, 0, 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -28,25 +28,28 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Lag:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ålder:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Födelsedatum:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Gjorda mål:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Assist:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Röda kort:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Gula kort:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Status:"/>
+        <TextBlock FontWeight="Bold" Text="Namn:" Margin="0,0,0,5" />
+        <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="0" Text="Lag:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="0" Text="Ålder:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="0" Text="Födelsedatum:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="4" Grid.Column="0" Text="Gjorda mål:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="5" Grid.Column="0" Text="Assist:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="6" Grid.Column="0" Text="Röda kort:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="7" Grid.Column="0" Text="Gula kort:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="8" Grid.Column="0" Text="Spelade matcher:" Margin="0,0,0,5"/>
+        <TextBlock FontWeight="Bold" Grid.Row="9" Grid.Column="0" Text="Status:"/>
 
-        <TextBlock Name="team" Grid.Row="0" Grid.Column="1" Text="{Binding Path=TeamId, Converter={StaticResource GuidToEntityNameConverter} }" Margin="10,0,0,5"/>
-        <TextBlock Name="age" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Age}" Margin="10,0,0,5"/>
-        <TextBlock Name="dob" Grid.Row="2" Grid.Column="1" Text="{Binding DateOfBirth.Value, StringFormat='yyyy-MM-dd'}" Margin="10,0,0,5"/>
-        <TextBlock Name="goalsMade" Grid.Row="3" Grid.Column="1" Text="{Binding Goals.Count}" Margin="10,0,0,5"/>
-        <TextBlock Name="assists" Grid.Row="4" Grid.Column="1" Text="{Binding Assists.Count}" Margin="10,0,0,5"/>
-        <TextBlock Name="red" Grid.Row="5" Grid.Column="1" Text="{Binding RedCards.Count}" Margin="10,0,0,5"/>
-        <TextBlock Name="yellow" Grid.Row="6" Grid.Column="1" Text="{Binding YellowCards.Count}" Margin="10,0,0,5"/>
-        <TextBlock Name="matchesPlayed" Grid.Row="7" Grid.Column="1" Text="{Binding MatchesPlayed}" Margin="10,0,0,5"/>
-        <TextBlock Name="status" Grid.Row="8" Grid.Column="1" Text="{Binding PlayerStatus, Converter={StaticResource StatusToSwedishStringConverter}}" Margin="10,0,0,5"/>
+        <TextBlock Name="name" Grid.Column="1" Margin="10,0,0,5"/>
+        <TextBlock Name="team" Grid.Row="1" Grid.Column="1" Text="{Binding Path=TeamId, Converter={StaticResource GuidToEntityNameConverter} }" Margin="10,0,0,5"/>
+        <TextBlock Name="age" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Age}" Margin="10,0,0,5"/>
+        <TextBlock Name="dob" Grid.Row="3" Grid.Column="1" Text="{Binding DateOfBirth.Value, StringFormat='yyyy-MM-dd'}" Margin="10,0,0,5"/>
+        <TextBlock Name="goalsMade" Grid.Row="4" Grid.Column="1" Text="{Binding Goals.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="assists" Grid.Row="5" Grid.Column="1" Text="{Binding Assists.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="red" Grid.Row="6" Grid.Column="1" Text="{Binding RedCards.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="yellow" Grid.Row="7" Grid.Column="1" Text="{Binding YellowCards.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="matchesPlayed" Grid.Row="8" Grid.Column="1" Text="{Binding MatchesPlayed}" Margin="10,0,0,5"/>
+        <TextBlock Name="status" Grid.Row="9" Grid.Column="1" Text="{Binding PlayerStatus, Converter={StaticResource StatusToSwedishStringConverter}}" Margin="10,0,0,5"/>
     </Grid>
 </Page>
