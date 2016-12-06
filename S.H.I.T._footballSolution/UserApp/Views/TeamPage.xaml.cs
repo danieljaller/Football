@@ -49,7 +49,7 @@ namespace UserApp
 
         private void table_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new TablePage();
+            teamPageFrame.Content = new TablePage(serie);
         }
 
         private void player_Click(object sender, RoutedEventArgs e)
