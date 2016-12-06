@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserApp.Views;
 
 namespace UserApp
 {
@@ -22,6 +23,7 @@ namespace UserApp
     /// </summary>
     public partial class TeamInfoPage : Page
     {
+        private Frame _teamPageFrame;
         public TeamInfoPage()
         {
             InitializeComponent();
@@ -29,6 +31,19 @@ namespace UserApp
         public TeamInfoPage(Team selectedTeam)
         {
             InitializeComponent();
+            DataContext = selectedTeam;
+            StringBuilder serieStringBuilder = new StringBuilder();
+            foreach (var serieId in selectedTeam.SerieIds)
+            {
+                serieStringBuilder.Append($"{ServiceLocator.Instance.SerieService.GetBy(serieId).Name}, ");
+            }
+            seriesTextBox.Text = serieStringBuilder.ToString().TrimEnd(',', ' ');
+            matchesNotPlayedTextBlock.Text = selectedTeam.MatchIds.Where(x => ServiceLocator.Instance.MatchService.GetBy(x).IsPlayed == false).Count().ToString();
+        }
+        public TeamInfoPage(Team selectedTeam, Frame teamPageFrame)
+        {
+            InitializeComponent();
+            _teamPageFrame = teamPageFrame;
             DataContext = selectedTeam;
             StringBuilder serieStringBuilder = new StringBuilder();
             foreach (var serieId in selectedTeam.SerieIds)
@@ -47,6 +62,16 @@ namespace UserApp
         private void matchesPlayedButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void PlayersList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_teamPageFrame != null)
+            {
+                Guid playerId = (Guid) playersList.SelectedItem;
+                Player selectedPlayer = ServiceLocator.Instance.PlayerService.GetBy(playerId);
+                _teamPageFrame.Content = new PlayerInfoPage(selectedPlayer);
+            }
         }
     }
 }
