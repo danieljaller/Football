@@ -31,14 +31,16 @@ namespace AdminApp
 
         public AddPlayerWindow(Team team, ObservableCollection<Guid> lineup, int numberOfSelectedPlayers)
         {
-            //teamService = new TeamService();
-            //playerService = new PlayerService(teamService);
             InitializeComponent();
             NumberOfSelectedPlayers = numberOfSelectedPlayers;
             IEnumerable<Player> playerList = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id).Where(p => !lineup.Contains(p.Id) && p.Playable);
             playerListbox.ItemsSource = playerList;
             InitializeComponent();
             playerCountBlock.DataContext = playerListbox.SelectedItems.Count+NumberOfSelectedPlayers;
+            if(playerListbox.SelectedItems.Count + NumberOfSelectedPlayers == 11)
+                Ok.IsEnabled = true;
+            else
+                Ok.IsEnabled = false;
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
@@ -57,6 +59,10 @@ namespace AdminApp
         private void playerListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             playerCountBlock.DataContext = playerListbox.SelectedItems.Count + NumberOfSelectedPlayers;
+            if (playerListbox.SelectedItems.Count + NumberOfSelectedPlayers == 11)
+                Ok.IsEnabled = true;
+            else
+                Ok.IsEnabled = false;
         }
     }
 }

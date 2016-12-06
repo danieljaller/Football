@@ -51,7 +51,6 @@
     <Compile Include="Domain\ValueObjects\Exchange.cs" />
     <Compile Include="Domain\ValueObjects\MatchDate.cs" />
     <Compile Include="Domain\ValueObjects\MatchMinute.cs" />
-    <Compile Include="Domain\ValueObjects\OverTime.cs" />
     <Compile Include="Domain\ValueObjects\PlayerName.cs" />
     <Compile Include="Domain\ValueObjects\GeneralName.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
