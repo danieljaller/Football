@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdminApp"
         xmlns:Converters ="clr-namespace:AdminApp.Converters"
         mc:Ignorable="d"
-        Title="NewPlayerWindow" Height="250" Width="250" Closing="closingNewPlayerWindow">
+        Title="NewPlayerWindow" Height="280" Width="250" Closing="closingNewPlayerWindow">
     <Window.Resources>
         <Converters:IsEnabledConverterAddPlayer x:Key="isEnabledConverter" />
     </Window.Resources>
@@ -16,6 +16,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>            
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -79,7 +80,8 @@
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
             <TextBlock  Text="Du har lagt till "/>
             <TextBlock Name="numberOfPlayers" Text="{Binding Path=NumberOfPlayers}"/>
-            <TextBlock  Text=" spelare."/>
+            <TextBlock  Text=" spelare."/>            
         </StackPanel>
+        <TextBlock Name="thirtyPlayers" Grid.Row="6" Grid.ColumnSpan="2" FontWeight="ExtraBlack" Text="{Binding}"></TextBlock>
     </Grid>
 </Window>
