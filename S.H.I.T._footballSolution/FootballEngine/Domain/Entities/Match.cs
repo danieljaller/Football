@@ -13,7 +13,6 @@ namespace FootballEngine.Domain.Entities
         public MatchDate Date { get; set; }
         public GeneralName Location { get; set; }
         public int MatchTimeInMinutes { get; set; }
-        public OverTime OverTimeInMinutes { get; set; }
         public string Result { get { return IsPlayed ? $"{HomeGoals.Count} - {VisitorGoals.Count}" : "-"; } }
         public List<Event> HomeAssists { get; set; }
         public HashSet<Exchange> HomeExchanges { get; set; }
@@ -40,7 +39,6 @@ namespace FootballEngine.Domain.Entities
             {
                 Date = date;
                 MatchTimeInMinutes = 90;
-                OverTimeInMinutes = new OverTime(0);
                 Location = location;
                 HomeAssists = new List<Event>();
                 HomeExchanges = new HashSet<Exchange>();
