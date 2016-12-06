@@ -48,7 +48,7 @@ namespace UserApp
 
         private void player_Click(object sender, RoutedEventArgs e)
         {
-            seriePageFrame.Content = new PlayerPage();
+            seriePageFrame.Content = new PlayerPage(serie);
         }
     }
 }
