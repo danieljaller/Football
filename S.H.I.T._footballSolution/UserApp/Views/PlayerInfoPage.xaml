@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UserApp.Views"
+      xmlns:Converters ="clr-namespace:UserApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="PlayerInfoPage"
-      DataContext="{Binding Source={StaticResource MainViewModelLocator}, Path=PlayerInfoViewModle}">
+      Title="PlayerInfoPage">
+    <Page.Resources>
+        <Converters:GuidToEntityNameConverter x:Key="GuidToEntityNameConverter"/>
+        <Converters:StatusToSwedishStringConverter x:Key="StatusToSwedishStringConverter"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -35,24 +39,14 @@
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Spelade matcher:" Margin="0,0,0,5"/>
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Status:"/>
 
-        <TextBlock Name="team" Grid.Row="0" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="age" Grid.Row="1" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="dob" Grid.Row="2" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="goalsMade" Grid.Row="3" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="assists" Grid.Row="4" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="red" Grid.Row="5" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="yellow" Grid.Row="6" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="matchesPlayed" Grid.Row="7" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-        <TextBlock Name="status" Grid.Row="8" Grid.Column="1" Text="{Binding }" Margin="10,0,0,5"/>
-
-        <TextBlock Text="{Binding Team, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding Goals, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding Assists, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding RedCards, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding YellowCards, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding MatchesPlayed, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,5"/>
-        <TextBlock Text="{Binding PlayerStatus, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1"/>
+        <TextBlock Name="team" Grid.Row="0" Grid.Column="1" Text="{Binding Path=TeamId, Converter={StaticResource GuidToEntityNameConverter} }" Margin="10,0,0,5"/>
+        <TextBlock Name="age" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Age}" Margin="10,0,0,5"/>
+        <TextBlock Name="dob" Grid.Row="2" Grid.Column="1" Text="{Binding DateOfBirth.Value, StringFormat='yyyy-MM-dd'}" Margin="10,0,0,5"/>
+        <TextBlock Name="goalsMade" Grid.Row="3" Grid.Column="1" Text="{Binding Goals.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="assists" Grid.Row="4" Grid.Column="1" Text="{Binding Assists.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="red" Grid.Row="5" Grid.Column="1" Text="{Binding RedCards.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="yellow" Grid.Row="6" Grid.Column="1" Text="{Binding YellowCards.Count}" Margin="10,0,0,5"/>
+        <TextBlock Name="matchesPlayed" Grid.Row="7" Grid.Column="1" Text="{Binding MatchesPlayed}" Margin="10,0,0,5"/>
+        <TextBlock Name="status" Grid.Row="8" Grid.Column="1" Text="{Binding PlayerStatus, Converter={StaticResource StatusToSwedishStringConverter}}" Margin="10,0,0,5"/>
     </Grid>
 </Page>

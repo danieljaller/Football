@@ -35,16 +35,17 @@ namespace UserApp
             serie = ServiceLocator.Instance.SerieService.GetBy(selectedTeam.SerieIds.First());
             InitializeComponent();
             teamName.DataContext = selectedTeam;
+            
         }
 
         private void teaminfo_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new TeamInfoPage(selectedTeam);
+            teamPageFrame.Content = new TeamInfoPage(selectedTeam, teamPageFrame);
         }
 
         private void schedule_Click(object sender, RoutedEventArgs e)
         {
-            teamPageFrame.Content = new SchedulePage(serie);
+            teamPageFrame.Content = new SchedulePage(serie, selectedTeam);
         }
 
         private void table_Click(object sender, RoutedEventArgs e)

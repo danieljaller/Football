@@ -23,12 +23,14 @@ namespace UserApp
     /// </summary>
     public partial class SchedulePage : Page
     {
-
+        private HashSet<Guid> _teamMatchScheduleWithIds;
+        private bool _isTeamSelected;
+        private Team _team;
         private HashSet<Team> teamList = new HashSet<Team>();
         private HashSet<Guid> matchScheduleWithIds;
         private HashSet<Match> matchScheduleWithMatches;
         private List<Team> homeTeamList, visitorTeamList;
-        private Serie SelectedSerie;
+        private Serie _selectedSerie;
         private bool homeTeamIsClicked;
         private bool visitorTeamIsClicked;
         private bool dateIsClicked;
@@ -36,8 +38,26 @@ namespace UserApp
         public SchedulePage(Serie selectedSerie)
         {
             InitializeComponent();
-            SelectedSerie = selectedSerie;
-            matchScheduleWithIds = SelectedSerie.MatchTable;
+            _selectedSerie = selectedSerie;
+            matchScheduleWithIds = _selectedSerie.MatchTable;
+            CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
+            SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
+            showAllRadioButton.IsChecked = true;
+            _isTeamSelected = false;
+        }
+
+        public SchedulePage(Serie selectedSerie, Team selectedTeam)
+        {
+            InitializeComponent();
+            _team = selectedTeam;
+            _selectedSerie = selectedSerie;
+            _isTeamSelected = true;
+            _teamMatchScheduleWithIds =
+                _selectedSerie.MatchTable.Where(
+                    m =>
+                        ServiceLocator.Instance.MatchService.GetBy(m).HomeTeamId == _team.Id ||
+                        ServiceLocator.Instance.MatchService.GetBy(m).VisitorTeamId == _team.Id).ToHashSet();
+            matchScheduleWithIds = _teamMatchScheduleWithIds;
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
             SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
             showAllRadioButton.IsChecked = true;
@@ -85,14 +105,21 @@ namespace UserApp
 
         private void showAllRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            matchScheduleWithIds = SelectedSerie.MatchTable;
+            if (_isTeamSelected)
+                matchScheduleWithIds = _teamMatchScheduleWithIds;
+            else
+                matchScheduleWithIds = _selectedSerie.MatchTable;
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
             SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
         }
 
         private void showPlayedRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            matchScheduleWithIds = SelectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == true).ToHashSet();
+            if (_isTeamSelected)
+                matchScheduleWithIds = _teamMatchScheduleWithIds.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == true).ToHashSet();
+            else
+                matchScheduleWithIds = _selectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == true).ToHashSet();
+
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
             SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
         }
@@ -100,7 +127,11 @@ namespace UserApp
 
         private void showCommingRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            matchScheduleWithIds = SelectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == false).ToHashSet();
+            if (_isTeamSelected)
+                matchScheduleWithIds = _teamMatchScheduleWithIds.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == false).ToHashSet();
+            else
+                matchScheduleWithIds = _selectedSerie.MatchTable.Where(m => ServiceLocator.Instance.MatchService.GetBy(m).IsPlayed == false).ToHashSet();
+
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
             SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
         }

@@ -36,7 +36,7 @@ namespace UserApp
 
         private void updateSearchCheckList(string searchText)
         { 
-            var searchResults = ServiceLocator.Instance.SearchService.Search(searchText, serieCheckBox.IsChecked == true, playerCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, true, true);
+            var searchResults = ServiceLocator.Instance.SearchService.Search(searchText, serieCheckBox.IsChecked == true, playerCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, false, true);
             if (searchText.Trim() == "")
             {
                 SearchCheckedList.ItemsSource = null;
