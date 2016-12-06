@@ -25,8 +25,9 @@ namespace AdminApp
     public partial class MatchProtocol : Window
     {
         Match match;
+        int[] overTimeMinutes = new int[31];
         Team homeTeam, visitorTeam;
-        int homeScore, homeScoreBackup, visitorScore, visitorScoreBackup;
+        int homeScore, homeScoreBackup, visitorScore, visitorScoreBackup, matchTime, matchTimeBackup;
         ObservableCollection<Event> homeGoals, visitorGoals, homeAssists, visitorAssists, homeRedCards, visitorRedCards, homeYellowCards, visitorYellowCards,
             homeGoalsBackup, visitorGoalsBackup, homeAssistsBackup, visitorAssistsBackup, homeRedCardsBackup, visitorRedCardsBackup, homeYellowCardsBackup, visitorYellowCardsBackup;
         ObservableCollection<Guid> homeLineup, visitorLineup, homeLineupBackup, visitorLineupBackup;
@@ -46,6 +47,9 @@ namespace AdminApp
 
             isPlayedCheckBox.IsChecked = match.IsPlayed;
             matchDatePicker.SelectedDate = match.Date.Value;
+            for (int i = 0; i <= 30; i++)
+                overTimeMinutes[i] = i;
+            timeBox.ItemsSource = overTimeMinutes;
             SetSources();
         }
 
@@ -56,6 +60,14 @@ namespace AdminApp
             if (match.Date.Value < DateTime.Today)
                 isPlayedCheckBox.IsEnabled = true;
         }
+
+        private void timeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            matchTime = 90 + timeBox.SelectedIndex;
+            match.MatchTimeInMinutes = matchTime;        
+            timeBox.IsDropDownOpen = false;
+        
+    }
 
         private void removeGoalHome_Click(object sender, RoutedEventArgs e)
         {
@@ -71,7 +83,7 @@ namespace AdminApp
 
         private void addGoalHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
+            var addEventWindow = new AddEvent(matchTime, homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -87,7 +99,7 @@ namespace AdminApp
 
         private void addGoalAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
+            var addEventWindow = new AddEvent(matchTime, visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -175,7 +187,7 @@ namespace AdminApp
 
         private void addRedCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
+            var addEventWindow = new AddEvent(matchTime, homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -189,7 +201,7 @@ namespace AdminApp
 
         private void addRedCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
+            var addEventWindow = new AddEvent(matchTime, visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -223,7 +235,7 @@ namespace AdminApp
 
         private void addYellowCardsHome_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(homeLineup, homeExchanges);
+            var addEventWindow = new AddEvent(matchTime, homeLineup, homeExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -237,7 +249,7 @@ namespace AdminApp
 
         private void addYellowCardsAway_Click(object sender, RoutedEventArgs e)
         {
-            var addEventWindow = new AddEvent(visitorLineup, visitorExchanges);
+            var addEventWindow = new AddEvent(matchTime, visitorLineup, visitorExchanges);
             var addEvent = addEventWindow.ShowDialog();
             if (addEvent == true)
             {
@@ -324,19 +336,13 @@ namespace AdminApp
 
         private void addExchangeHome_Click(object sender, RoutedEventArgs e)
         {
-            //List<Guid> playerOutIds = ServiceLocator.Instance.PlayerService.GetAll()
-            //                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
-            //                                        .Select(p => p.Id).ToList();
-            //List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
-            //                                        .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
-            //                                        .Select(p => p.Id).ToList();
             List<Guid> playerOutIds = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(match.HomeTeamId)
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerOutId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
             List<Guid> playerInIds = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(match.HomeTeamId)
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
-            var addExchangeWindow = new AddExchangeWindow(homeLineup, playerOutIds, playerInIds);
+            var addExchangeWindow = new AddExchangeWindow(homeLineup, matchTime, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -356,7 +362,7 @@ namespace AdminApp
             List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.VisitorExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
-            var addExchangeWindow = new AddExchangeWindow(visitorLineup, playerOutIds, playerInIds);
+            var addExchangeWindow = new AddExchangeWindow(visitorLineup, matchTime, playerOutIds, playerInIds);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
             {
@@ -382,6 +388,8 @@ namespace AdminApp
         {
             isPlayedBackup = match.IsPlayed;
             dateBackup = match.Date.Value;
+            matchTime = match.MatchTimeInMinutes;
+            matchTimeBackup = matchTime;
             homeTeam = ServiceLocator.Instance.TeamService.GetBy(match.HomeTeamId);
             visitorTeam = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
             homeScore = match.HomeGoals.Count();
@@ -516,6 +524,7 @@ namespace AdminApp
             match.VisitorExchanges = visitorExchangesBackup.ToHashSet();
             isPlayedCheckBox.IsChecked = isPlayedBackup;
             matchDatePicker.SelectedDate = dateBackup;
+            match.MatchTimeInMinutes = matchTimeBackup;
 
             SetProperties();
             SetSources();

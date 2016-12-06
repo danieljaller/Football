@@ -10,6 +10,16 @@
     <Window.Resources>
         <converters:SearchResultToStringConverter x:Key="searchResaultToStringConverter" />
         <converters:EventPlayerIdToNameConverter x:Key="eventPlayerIdToNameConverter" />
+        <Style x:Key="radioComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <RadioButton Content="{Binding}"
+                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid Background="White">
@@ -61,6 +71,25 @@
 
                 <CheckBox Name="isPlayedCheckBox" Grid.Row="1" Grid.Column="1" Content="Spelad" VerticalAlignment="Center" Checked="isPlayedCheckBox_Checked" Unchecked="isPlayedCheckBox_Unchecked"/>
 
+                <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock>Övertid:</TextBlock>
+                    <ComboBox Name="timeBox" Width="50" Height="20" Margin="5,0,0,0" ItemContainerStyle="{StaticResource radioComboBoxItem}" SelectionChanged="timeBox_SelectionChanged">
+                        <ComboBox.Style>
+                            <Style TargetType="{x:Type ComboBox}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=isPlayedCheckBox, Path=IsChecked}" Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ComboBox.Style>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
 
                 <TextBlock Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center">Laguppställning</TextBlock>
                 <ListBox Name="homeLineupList" Grid.Row="3" Grid.Column="1">
