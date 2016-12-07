@@ -48,7 +48,7 @@
         
         <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,0,0">Matchminut:</TextBlock>
        
-        <ListBox Name="playerOutListBox" Grid.Row="0" Grid.Column="1" Margin="5" ItemContainerStyle="{StaticResource radioListBoxItem}">
+        <ListBox Name="playerOutListBox" Grid.Row="0" Grid.Column="1" Margin="5" ItemContainerStyle="{StaticResource radioListBoxItem}" SelectionChanged="playerOutListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" >
@@ -58,7 +58,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <ListBox Name="playerInListBox" Grid.Row="1" Grid.Column="1" Margin="5" ItemContainerStyle="{StaticResource radioListBoxItem}">
+        <ListBox Name="playerInListBox" Grid.Row="1" Grid.Column="1" Margin="5" ItemContainerStyle="{StaticResource radioListBoxItem}" SelectionChanged="playerInListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" >
