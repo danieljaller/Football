@@ -22,12 +22,12 @@ namespace AdminApp
         private Player PlayerIn;
         private ObservableCollection<Event> Goals, Assists, RedCards, YellowCards;
 
-        public AddExchangeWindow(ObservableCollection<Guid> lineup, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds,
+        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds,
                                 ObservableCollection<Event> goals, ObservableCollection<Event> assists, ObservableCollection<Event> redCards, ObservableCollection<Event> yellowCards)
-            : this(lineup, 90, playerOutIds, playerInIds, goals, assists, redCards, yellowCards)
+            : this(team, lineup, 90, playerOutIds, playerInIds, goals, assists, redCards, yellowCards)
         { }
 
-        public AddExchangeWindow(ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds,
+        public AddExchangeWindow(Team team, ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds,
                                 ObservableCollection<Event> goals, ObservableCollection<Event> assists, ObservableCollection<Event> redCards, ObservableCollection<Event> yellowCards)
         {
             Goals = goals;
@@ -35,12 +35,12 @@ namespace AdminApp
             RedCards = redCards;
             YellowCards = yellowCards;
             InitializeComponent();
-            IEnumerable<Player> allPlayers = ServiceLocator.Instance.PlayerService.GetAll();
+            IEnumerable<Player> playersInTeam = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(team.Id);
             List<Player> activePlayers = new List<Player>();
             List<Player> availablePlayers = new List<Player>();
-            activePlayers = allPlayers.Where(p => (lineup.Contains(p.Id) || playerInIds.Contains(p.Id))
+            activePlayers = playersInTeam.Where(p => (lineup.Contains(p.Id) || playerInIds.Contains(p.Id))
                                                                 && !playerOutIds.Contains(p.Id)).ToList();
-            availablePlayers = allPlayers.Where(p => !lineup.Contains(p.Id) && !playerInIds.Contains(p.Id) && p.Playable).ToList();
+            availablePlayers = playersInTeam.Where(p => !lineup.Contains(p.Id) && !playerInIds.Contains(p.Id) && p.Playable).ToList();
 
             playerOutListBox.ItemsSource = activePlayers;
             playerInListBox.ItemsSource = availablePlayers;
