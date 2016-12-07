@@ -18,7 +18,6 @@ namespace UserApp.Views
         private Team homeTeam, visitorTeam;
         private int homeScore;
         private int visitorScore;
-        private bool isPlayed;
 
         private ObservableCollection<Event> homeGoals, visitorGoals, homeAssists, visitorAssists, homeRedCards, visitorRedCards, homeYellowCards
                                     , visitorYellowCards;

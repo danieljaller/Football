@@ -1,12 +1,12 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -15,19 +15,19 @@ namespace AdminApp
     /// </summary>
     public partial class AddExchangeWindow : Window
     {
-        int LastMinute, FirstMinute;
+        private int LastMinute, FirstMinute;
         public Exchange Result { get; set; }
         public MatchMinute TimeOfEvent;
-        Player PlayerOut;
-        Player PlayerIn;
-        ObservableCollection<Event> Goals, Assists, RedCards, YellowCards;
+        private Player PlayerOut;
+        private Player PlayerIn;
+        private ObservableCollection<Event> Goals, Assists, RedCards, YellowCards;
 
         public AddExchangeWindow(ObservableCollection<Guid> lineup, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds,
                                 ObservableCollection<Event> goals, ObservableCollection<Event> assists, ObservableCollection<Event> redCards, ObservableCollection<Event> yellowCards)
-            :this(lineup, 90, playerOutIds, playerInIds, goals, assists, redCards, yellowCards)
+            : this(lineup, 90, playerOutIds, playerInIds, goals, assists, redCards, yellowCards)
         { }
 
-        public AddExchangeWindow(ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds, 
+        public AddExchangeWindow(ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds,
                                 ObservableCollection<Event> goals, ObservableCollection<Event> assists, ObservableCollection<Event> redCards, ObservableCollection<Event> yellowCards)
         {
             Goals = goals;
@@ -104,7 +104,7 @@ namespace AdminApp
             {
                 minutes.Add(i.ToString());
             }
-            
+
             timeBox.ItemsSource = minutes;
         }
     }
