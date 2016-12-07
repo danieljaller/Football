@@ -31,7 +31,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/administrera serie" FontSize="20" Name="Header"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/administrera serie" Margin="0,0,0,10" FontWeight="Bold" FontSize="20" Name="Header"/>
         <ListBox Name="seriesList" SelectedIndex="0" Grid.Row="1" Margin="5" MinWidth="100" MinHeight="250" SelectionChanged="seriesList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -105,7 +105,7 @@
                 </ListBox>
             </Grid>
         </ScrollViewer>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,0">
             <RadioButton Name="showAllRadioButton" Content="Visa alla matcher" Margin="7" VerticalAlignment="Center" Checked="showAllRadioButton_Checked"/>
             <RadioButton Name="showPlayedRadioButton" Content="Visa spelade matcher" Margin="7" VerticalAlignment="Center" Checked="showPlayedRadioButton_Checked"/>
             <RadioButton Name="showCommingRadioButton" Content="Visa kommande matcher" Margin="7" VerticalAlignment="Center" Checked="showCommingRadioButton_Checked"/>

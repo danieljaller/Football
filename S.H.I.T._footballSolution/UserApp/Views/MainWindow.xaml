@@ -36,7 +36,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
+                
             <TextBox Name="searchBox" Grid.Row="1" Grid.Column="0" Margin="5, 25, 5, 5" HorizontalAlignment="Left"  Width="180" TextChanged="searchBox_TextChanged" />
             <TextBlock IsHitTestVisible="False" Grid.Row="1" Text="Sök" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,22,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
@@ -62,6 +62,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+                
         </Grid>
         <Frame Grid.Column="1" Grid.Row="1" x:Name="MainPageFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

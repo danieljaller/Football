@@ -24,9 +24,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Skapa/Administrera lag" FontSize="20" />
-        <StackPanel Orientation="Vertical" Grid.Row="1">
-            <ListBox Name="teamsList" Margin="5" Width="150" Height="330" SelectionChanged="teamsList_SelectionChanged">
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="Skapa/Administrera lag" FontWeight="Bold" FontSize="20" />
+        <StackPanel Orientation="Vertical" Grid.Row="1" >
+            <ListBox Name="teamsList" Margin="5,16,5,5" MaxHeight="450" Grid.Row="0" Width="150" SelectionChanged="teamsList_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -35,9 +35,15 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Row="2" Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click">SKAPA NYTT LAG</Button>
         </StackPanel>
-        
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,0,0,15" >
+                <Button Grid.Row="2" Margin="10,10,10,10" Name="NewTeamButton" Click="NewTeamButton_Click" Width="100">SKAPA NYTT LAG</Button>
+                <Button Name="saveBtn"  Content="Spara" Margin="37,10,10,10" Click="saveBtn_Click" IsEnabled="False" Width="100"/>
+                <Button Name="cancelBtn"  Content="Avbryt" Margin="30,10,10,10" Click="cancelBtn_Click" Width="100"/>
+                <Button Name="removePlayer" Grid.Column="3" Margin="214,10,10,10" Click="removePlayer_Click" Content="Ta bort spelare" Width="170"/>
+
+            </StackPanel>
+
         <Frame x:Name="CreateOrAdministrateTeamsPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" NavigationUIVisibility="Hidden"/>
 
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Name="teamsOverview" Margin="10,0,0,0">
@@ -48,11 +54,11 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
 
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.ColumnSpan="5" Grid.Row="0" Margin="0,10,0,10" HorizontalAlignment="Center" Text="{Binding ElementName=teamsList, Path=SelectedItem.Name}" FontWeight="Bold"/>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Grid.RowSpan="2">
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="1" Orientation="Vertical" Grid.RowSpan="2" VerticalAlignment="Top">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Namn:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serier:"/>
@@ -65,7 +71,6 @@
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Målskillnad:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Spelade matcher:"/>
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Kommande matcher:"/>
-                <Button Name="saveBtn" Content="Spara" Margin="0,63.2,40,0" Click="saveBtn_Click" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Grid.RowSpan="2" DataContext="{Binding ElementName=teamsList}">
                 <TextBox Name="teamName" Margin="5,5,0,0" Width="120" HorizontalAlignment="Left" 
@@ -109,24 +114,22 @@
                         <Image Source="Resources/calendar_icon.ico"/>
                     </Button>
                 </StackPanel>
-                <Button Name="cancelBtn" Content="Avbryt" Margin="0,58,40,0" Click="cancelBtn_Click"/>
             </StackPanel>
 
 
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,10,0">
-                <ListBox Name="playersList" MaxHeight="260" Width="170" Margin="5" ItemsSource="{Binding ElementName=teamsList, Path=SelectedItem.PlayerIds}">
+                <ListBox Name="playersList" MaxHeight="400" Width="170" Margin="5" ItemsSource="{Binding ElementName=teamsList, Path=SelectedItem.PlayerIds}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource eventPlayerIdToNameConverter}}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Name="addPlayer" Margin="5,10,0,0" Click="addPlayer_Click">
+                <Button Name="addPlayer" Margin="5,10,5,5" Click="addPlayer_Click" Width="170">
                     <TextBlock  VerticalAlignment="Center">Lägg till spelare</TextBlock>
                 </Button>
-                <Button Name="removePlayer" Margin="5,10,0,0" Click="removePlayer_Click">
-                    <TextBlock  VerticalAlignment="Center">Ta bort spelare</TextBlock>
-                </Button>
+
+
             </StackPanel>
         </Grid>
 
