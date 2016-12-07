@@ -39,36 +39,42 @@ namespace UserApp
         {
             var searchText = searchBox.Text;
             updateSearchCheckList(searchText);
+            searchBox.Focus();
         }
 
         private void serieCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             var searchText = searchBox.Text;
             updateSearchCheckList(searchText);
+            searchBox.Focus();
         }
 
         private void teamCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var searchText = searchBox.Text;
             updateSearchCheckList(searchText);
+            searchBox.Focus();
         }
 
         private void teamCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             var searchText = searchBox.Text;
             updateSearchCheckList(searchText);
+            searchBox.Focus();
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var searchText = searchBox.Text;
             updateSearchCheckList(searchText);
+            searchBox.Focus();
         }
 
         private void playerCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             var searchText = searchBox.Text;
             updateSearchCheckList(searchText);
+            searchBox.Focus();
         }
 
         private void SearchCheckedList_SelectionChanged(object sender, SelectionChangedEventArgs e)

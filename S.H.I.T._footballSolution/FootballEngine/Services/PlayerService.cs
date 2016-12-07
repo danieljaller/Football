@@ -48,14 +48,6 @@ namespace FootballEngine.Services
             _playerRepository.AddRange(players);
         }
 
-        public void Add(IEnumerable<Player> players)
-        {
-            foreach (Player player in players)
-            {
-                _playerRepository.Add(player);
-            }
-        }
-
         public void Delete(Guid id)
         {
             _playerRepository.Delete(id);

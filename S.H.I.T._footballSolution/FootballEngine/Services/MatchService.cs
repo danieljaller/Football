@@ -67,12 +67,7 @@ namespace FootballEngine.Services
         {
             return _matchRepository.GetBy(id);
         }
-
-        public IEnumerable<Match> GetAllMatchesBySerie(Guid id)
-        {
-            return _matchRepository.GetAll().Where(m => ServiceLocator.Instance.SerieService.GetBy(id).MatchTable.Contains(m.Id));
-        }
-
+        
         public void Save()
         {
             _matchRepository.Save();
