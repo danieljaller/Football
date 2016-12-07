@@ -27,19 +27,26 @@ namespace AdminApp
         {
             InitializeComponent();
             serieSelector.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
-            if(serieSelector.HasItems)
-            { serieSelector.SelectedIndex = 0;}
+            if (serieSelector.HasItems)
+            {
+                serieSelector.SelectedIndex = 0;
+                serieName.Text = ((Serie)serieSelector.SelectedItem).Name.Value;
+                seriePageFrame.Content = new TablePage((Serie)serieSelector.SelectedItem);
+            }
+
         }
 
         private void table_Click(object sender, RoutedEventArgs e)
         {
             seriePageFrame.Content = new TablePage((Serie)serieSelector.SelectedItem);
+            serieName.Text = ((Serie)serieSelector.SelectedItem).Name.Value;
         }
 
         private void player_Click(object sender, RoutedEventArgs e)
         {
             seriePageFrame.Content = new PlayerPage((Serie)serieSelector.SelectedItem);
+            serieName.Text = ((Serie)serieSelector.SelectedItem).Name.Value;
         }
-        
+
     }
 }

@@ -24,7 +24,6 @@ namespace UserApp
     /// </summary>
     public partial class TablePage : Page
     {
-        Team Result;
         bool isTeamClicked, isPointsClicked, isGoalDifferenceClicked, isWinsClicked, isLossesClicked;
         bool isTiesClicked, isGoalsForClicked, isGoalsAgainstClicked, isMatchesPlayedClicked;
         Serie selectedSerie;
