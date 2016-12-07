@@ -34,7 +34,7 @@ namespace AdminApp.Converters
                 var teamVisitor = ServiceLocator.Instance.TeamService.GetBy(match.VisitorTeamId);
                 return $"{teamHome.Name} - {teamVisitor.Name}";
             }
-            return "Did you mean black cocks?";
+            return "?";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

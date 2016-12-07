@@ -29,7 +29,7 @@ namespace AdminApp.Converters
                     return serieName;
                 }
             }
-            return "Did you mean black cocks?";
+            return "?";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
