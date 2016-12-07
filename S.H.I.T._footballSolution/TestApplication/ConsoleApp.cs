@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestApplication
 {
@@ -10,12 +7,12 @@ namespace TestApplication
     // Greatly improved by Martin Lindstedt
     public abstract class ConsoleApp
     {
-        const int defaultMaxInputAttempts = 5;
+        private const int defaultMaxInputAttempts = 5;
         protected static int DefaultMaxInputAttempts { get { return defaultMaxInputAttempts; } }
 
-        bool keepRunning;
-        Dictionary<ConsoleKey, Action> commandMapper;
-        Dictionary<ConsoleKey, string> commandLabelMapper;
+        private bool keepRunning;
+        private Dictionary<ConsoleKey, Action> commandMapper;
+        private Dictionary<ConsoleKey, string> commandLabelMapper;
 
         protected ConsoleApp()
         {
@@ -26,6 +23,7 @@ namespace TestApplication
         }
 
         protected abstract void Initialize();
+
         protected void RunLoop()
         {
             keepRunning = true;
@@ -36,10 +34,12 @@ namespace TestApplication
                 ExecuteCommand(command);
             } while (keepRunning);
         }
+
         protected void EndLoop()
         {
             keepRunning = false;
         }
+
         protected ConsoleKey GetCommand()
         {
             var command = Console.ReadKey().Key;
@@ -59,6 +59,7 @@ namespace TestApplication
                 Console.WriteLine("Unknown command!");
             }
         }
+
         protected void AddCommand(ConsoleKey command, string commandLabel, Action commandAction)
         {
             commandLabelMapper[command] = commandLabel;
@@ -198,7 +199,7 @@ namespace TestApplication
                         line = line.Insert(4, "-");
                     }
                 }
-                
+
                 Console.Write("Please enter a date value (yyyy-mm-dd) or (yyyymmdd): ");
                 line = Console.ReadLine();
 
@@ -208,6 +209,7 @@ namespace TestApplication
             PrintMaxInputAttemptsMessage(maxInputAttempts, errorMessage);
             answer = DateTime.MinValue;
         }
+
         /// <summary>
         /// Returns a string.
         /// </summary>
@@ -229,7 +231,7 @@ namespace TestApplication
         protected void AskFor(out bool answer, string prompt, string errorMessage = "", int maxInputAttempts = defaultMaxInputAttempts)
         {
             int counter = 0;
-            
+
             while (counter < maxInputAttempts)
             {
                 Console.Write($"{prompt} (Y/n): ");

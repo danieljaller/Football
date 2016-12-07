@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Factories;
 using FootballEngine.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace FootballEngineTests.Factories
 {
@@ -13,7 +13,6 @@ namespace FootballEngineTests.Factories
         [TestInitialize]
         public void Init()
         {
-
         }
 
         [TestMethod()]
@@ -77,8 +76,6 @@ namespace FootballEngineTests.Factories
             Assert.AreEqual(PlayerFactory.MaxPlayersRequired, listOfPlayerLists.Count);
         }
 
-
-
         [TestMethod()]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CreateListOfPlayerLists_TestInparam1_1_Invalid()
@@ -96,8 +93,6 @@ namespace FootballEngineTests.Factories
             List<Player> listOfPlayerLists = PlayerFactory.CreateListOfPlayerLists(amount, PlayerFactory.MinPlayerNameStartValue);
             Assert.AreEqual(amount, listOfPlayerLists.Count);
         }
-
-
 
         [TestMethod()]
         public void CreateListOfPlayerLists_TestInparam2_Min_Valid()
@@ -217,8 +212,6 @@ namespace FootballEngineTests.Factories
                 lastNameAsInt++;
             }
         }
-
-
 
         [TestMethod()]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]

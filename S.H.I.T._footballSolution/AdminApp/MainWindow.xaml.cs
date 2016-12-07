@@ -1,20 +1,9 @@
 ﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Services;
-using System;
-using System.Collections.Generic;
+using FootballEngine.Helper;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -23,12 +12,11 @@ namespace AdminApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        //SearchService searchService; 
+        //SearchService searchService;
         public MainWindow()
         {
             //searchService = new SearchService();
             InitializeComponent();
-            
         }
 
         private void SeriesButton_Click(object sender, RoutedEventArgs e)
@@ -39,26 +27,22 @@ namespace AdminApp
         private void TeamButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new CreateOrAdministrateTeamsPage();
-            
         }
-            
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new StatisticsPage();
         }
-           
-            
-            
 
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
             MainPageFrame.Content = new AdministratePlayersPage();
         }
+
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchResult = ServiceLocator.Instance.SearchService.Search(searchTextBox.Text, true, true, true, false, true);
-            
+
             if (string.IsNullOrWhiteSpace(searchTextBox.Text) || searchResult == null)
             {
                 searchResultList.ItemsSource = null;
@@ -70,12 +54,10 @@ namespace AdminApp
                 {
                     Grid.SetRowSpan(searchResultList, 1);
                 }
-                    
                 else if (searchResult.Count() < 6)
                 {
                     Grid.SetRowSpan(searchResultList, searchResult.Count());
                 }
-
                 else
                 {
                     Grid.SetRowSpan(searchResultList, 5);
@@ -95,12 +77,12 @@ namespace AdminApp
 
         private void searchResultList_KeyDown(object sender, KeyEventArgs e)
         {
-            if(searchResultList.SelectedIndex == 0 && e.Key == Key.Up)
+            if (searchResultList.SelectedIndex == 0 && e.Key == Key.Up)
             {
                 Keyboard.Focus(searchTextBox);
                 searchTextBox.Focus();
             }
-            if(e.Key == Key.Return)
+            if (e.Key == Key.Return)
             {
                 MainPageFrame.Focus();
             }

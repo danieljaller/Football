@@ -1,12 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Helper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FootballEngine;
-using FootballEngine.Helper;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
@@ -44,7 +39,6 @@ namespace FootballEngine.Domain.Entities.Tests
             Assert.AreEqual(Serie.NumberOfTeams, validSerie.TeamTable.Count);
             Assert.AreEqual(validMatchTable, validSerie.MatchTable);
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

@@ -38,19 +38,16 @@ namespace FootballEngine.Helper
                     objectToSave = objectToSave as List<Match>;
                     typeToSave = objectToSave.GetType();
                 }
-
                 else if (objectToSave.GetType() == typeof(List<Player>))
                 {
                     objectToSave = objectToSave as List<Player>;
                     typeToSave = objectToSave.GetType();
                 }
-
                 else if (objectToSave.GetType() == typeof(List<Serie>))
                 {
                     objectToSave = objectToSave as List<Serie>;
                     typeToSave = objectToSave.GetType();
                 }
-
                 else if (objectToSave.GetType() == typeof(List<Team>))
                 {
                     objectToSave = objectToSave as List<Team>;

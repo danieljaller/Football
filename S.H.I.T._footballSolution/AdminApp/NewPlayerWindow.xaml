@@ -10,32 +10,32 @@
     <Window.Resources>
         <Converters:IsEnabledConverterAddPlayer x:Key="isEnabledConverter" />
     </Window.Resources>
-       
+
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>            
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5" Text="NY SPELARE" FontWeight="Bold"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Förnamn:"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Efternamn:"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Date of birth:"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5" Text="NY SPELARE" FontWeight="Bold" />
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Förnamn:" />
+        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Efternamn:" />
+        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5" Text="Date of birth:" />
 
-        <TextBox Name="firstName" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95" 
+        <TextBox Name="firstName" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" MinWidth="95"
                  ToolTip="{Binding ElementName=firstName, Path=(Validation.Errors)[0].ErrorContent}">
             <TextBox.Text>
                 <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <Converters:NameValidationRule/>
+                        <Converters:NameValidationRule />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -46,23 +46,23 @@
             <TextBox.Text>
                 <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <Converters:NameValidationRule/>
+                        <Converters:NameValidationRule />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        
+
         <DatePicker Name="datePicker1"   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=selectedValue}">
             <DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
-                    <Setter Property="IsReadOnly" Value="True"/>
+                    <Setter Property="IsReadOnly" Value="True" />
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
 
         <Button  Margin="10" HorizontalAlignment="Left" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
                     VerticalAlignment="Bottom" Height="25" Content=" Avbryt " Click="cancel_Clicked"></Button>
-        
+
         <Button Name="addPlayerButton"  Margin="10" HorizontalAlignment="Right" Grid.Row="4" Grid.ColumnSpan="2" FontWeight="Bold"
                     VerticalAlignment="Bottom" Height="25" Content=" Lägg Till " Click="addPlayer_Clicked">
             <Button.IsEnabled>
@@ -72,15 +72,14 @@
                     <Binding ElementName="datePicker1" Path="Text" />
                 </MultiBinding>
             </Button.IsEnabled>
-                                    
         </Button>
         <Button Name="addPlayersNowButton" IsEnabled="False"  Margin="10" HorizontalAlignment="Right" Grid.Row="5" Grid.ColumnSpan="2" FontWeight="Bold"
-                    VerticalAlignment="Bottom" Height="25" Content=" Klar " Click="addPlayersNow_Clicked"></Button>          
-        
+                    VerticalAlignment="Bottom" Height="25" Content=" Klar " Click="addPlayersNow_Clicked"></Button>
+
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
-            <TextBlock  Text="Du har lagt till "/>
-            <TextBlock Name="numberOfPlayers" Text="{Binding Path=NumberOfPlayers}"/>
-            <TextBlock  Text=" spelare."/>            
+            <TextBlock  Text="Du har lagt till " />
+            <TextBlock Name="numberOfPlayers" Text="{Binding Path=NumberOfPlayers}" />
+            <TextBlock  Text=" spelare." />
         </StackPanel>
         <TextBlock Name="thirtyPlayers" Grid.Row="6" Grid.ColumnSpan="2" FontWeight="ExtraBlack" Text="{Binding}"></TextBlock>
     </Grid>

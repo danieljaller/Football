@@ -1,8 +1,6 @@
 ﻿using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
 using System;
 using System.Collections.Generic;
-using FootballEngine.Helper;
 
 namespace FootballEngine.Domain.Entities
 {
@@ -30,7 +28,9 @@ namespace FootballEngine.Domain.Entities
         public List<Event> VisitorYellowCards { get; set; }
         public static DateTime EndDateForMatchCreation { get { return DateTime.Now.AddYears(5); } }
 
-        public Match() { }
+        public Match()
+        {
+        }
 
         public Match(MatchDate date, Guid homeTeamId, Guid visitorTeamId, GeneralName location)
         {
@@ -83,7 +83,4 @@ namespace FootballEngine.Domain.Entities
             return $"{HomeGoals.Count} - {VisitorGoals.Count}";
         }
     }
-
-
-
 }

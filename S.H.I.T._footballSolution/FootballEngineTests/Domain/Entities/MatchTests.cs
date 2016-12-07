@@ -1,11 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.ValueObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FootballEngine.Domain.ValueObjects;
 
 namespace FootballEngine.Domain.Entities.Tests
 {
@@ -47,8 +43,6 @@ namespace FootballEngine.Domain.Entities.Tests
         {
             Assert.AreEqual($"{match.HomeGoals.Count()} - {match.VisitorGoals.Count()}", match.GetMatchResultAsString());
         }
-
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]

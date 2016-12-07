@@ -1,12 +1,12 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -19,7 +19,7 @@ namespace AdminApp
         public MatchMinute TimeOfEvent;
 
         public AddExchangeWindow(ObservableCollection<Guid> lineup, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds)
-            :this(lineup, 90, playerOutIds, playerInIds)
+            : this(lineup, 90, playerOutIds, playerInIds)
         { }
 
         public AddExchangeWindow(ObservableCollection<Guid> lineup, int matchLength, IEnumerable<Guid> playerOutIds, IEnumerable<Guid> playerInIds)

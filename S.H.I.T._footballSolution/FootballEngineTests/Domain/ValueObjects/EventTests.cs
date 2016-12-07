@@ -31,7 +31,7 @@
 //        public void Event_ValidateNewEvent()
 //        {
 //            Assert.AreEqual(validGuid, validEvent.PlayerId);
-//            Assert.AreEqual(Convert.ToUInt32(30), validEvent.TimeOfEvent);           
+//            Assert.AreEqual(Convert.ToUInt32(30), validEvent.TimeOfEvent);
 //        }
 
 //        [TestMethod]

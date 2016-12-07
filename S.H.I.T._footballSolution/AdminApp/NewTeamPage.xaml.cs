@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using System.Collections.ObjectModel;
 using FootballEngine.Helper;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace AdminApp
 {
@@ -16,11 +16,11 @@ namespace AdminApp
     {
         public string TeamName { get; set; }
         public string ArenaName { get; set; }
-        NewPlayerWindow _newPlayerWindow;
-        List<Player> listOfPlayers;
-        List<Player> listOfPlayersUnChecked;
-        bool playersAreValid;
-        Team team;
+        private NewPlayerWindow _newPlayerWindow;
+        private List<Player> listOfPlayers;
+        private List<Player> listOfPlayersUnChecked;
+        private bool playersAreValid;
+        private Team team;
 
         public NewTeamPage()
         {
@@ -34,7 +34,6 @@ namespace AdminApp
             listOfPlayersUnChecked = new List<Player>();
             saveTeamArenaNameButton.IsEnabled = false;
             showCreatedTeam.Text = $"";
-
         }
 
         private void playerCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -141,7 +140,6 @@ namespace AdminApp
 
         private void Binding_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
         {
-
         }
 
         private bool teamNameIsValid;

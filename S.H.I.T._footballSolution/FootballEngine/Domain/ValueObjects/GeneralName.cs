@@ -1,20 +1,26 @@
-﻿using System;
-using FootballEngine.Helper;
+﻿using FootballEngine.Helper;
+using System;
 
 namespace FootballEngine.Domain.ValueObjects
 {
     public class GeneralName
     {
         public string Value { get; set; }
+
         public static int MaxLenght
         {
             get { return 25; }
         }
+
         public static int MinLenght
         {
             get { return 2; }
         }
-        public GeneralName() { }
+
+        public GeneralName()
+        {
+        }
+
         public GeneralName(string name)
         {
             if (IsValidName(name))

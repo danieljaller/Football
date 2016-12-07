@@ -14,6 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static SearchService _instance;
+
         internal static SearchService Instance
         {
             get
@@ -33,7 +34,9 @@ namespace FootballEngine.Services
             }
         }
 
-        internal SearchService() { }
+        internal SearchService()
+        {
+        }
 
         public IEnumerable<object> Search(string searchText, bool serieSearch, bool playerSearch, bool teamSearch, bool matchDateSearch, bool ignoreCase)
         {
@@ -56,7 +59,7 @@ namespace FootballEngine.Services
                                                         );
                 result = result.Concat(serieResult);
             }
-            
+
             if (playerSearch)
             {
                 IEnumerable<object> playerResult = _playerRepository.GetAll().Where(p => p.FullName.Contains(searchText, ignoreCase) ||
@@ -68,7 +71,7 @@ namespace FootballEngine.Services
 
                 result = result.Concat(playerResult);
             }
-            
+
             if (teamSearch)
             {
                 IEnumerable<object> teamResult = _teamRepository.GetAll().Where(t => t.Name.Value.Contains(searchText, ignoreCase) ||

@@ -1,15 +1,10 @@
 ﻿using FootballEngine.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Globalization;
+using System.Windows.Controls;
 
 namespace AdminApp.Converters
 {
-    class GeneralNameValidationRule : ValidationRule
+    internal class GeneralNameValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

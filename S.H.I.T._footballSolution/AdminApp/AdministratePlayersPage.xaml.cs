@@ -1,20 +1,11 @@
 ﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Helper;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AdminApp
 {
@@ -23,15 +14,14 @@ namespace AdminApp
     /// </summary>
     public partial class AdministratePlayersPage : Page
     {
-        Player selectedPlayer;
-        string startingFirstName;
-        string startingLastName;
+        private Player selectedPlayer;
+        private string startingFirstName;
+        private string startingLastName;
 
         public AdministratePlayersPage()
         {
             InitializeComponent();
             teamsSelector.ItemsSource = ServiceLocator.Instance.TeamService.GetAll().ToList();
-            
         }
 
         public AdministratePlayersPage(Player selectedPlayer)
@@ -102,15 +92,19 @@ namespace AdminApp
                 case Player.Status.Available:
                     statusSelector.SelectedItem = availableCBI;
                     break;
+
                 case Player.Status.Suspended:
                     statusSelector.SelectedItem = suspendedCBI;
                     break;
+
                 case Player.Status.Injured:
                     statusSelector.SelectedItem = injuredCBI;
                     break;
+
                 case Player.Status.NationalTeam:
                     statusSelector.SelectedItem = nationalTeamCBI;
                     break;
+
                 case Player.Status.Other:
                     statusSelector.SelectedItem = otherCBI;
                     break;

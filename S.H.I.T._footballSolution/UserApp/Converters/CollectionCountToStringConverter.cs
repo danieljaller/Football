@@ -1,23 +1,20 @@
-﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Domain.ValueObjects;
+﻿using FootballEngine.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace UserApp.Converters
 {
-    class CollectionCountToStringConverter : IValueConverter
+    internal class CollectionCountToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value.GetType() == typeof(List<Guid>))
+            if (value.GetType() == typeof(List<Guid>))
             {
                 List<Guid> result = (List<Guid>)value;
-                return result.Count().ToString();              
+                return result.Count().ToString();
             }
             else if (value.GetType() == typeof(List<Event>))
             {

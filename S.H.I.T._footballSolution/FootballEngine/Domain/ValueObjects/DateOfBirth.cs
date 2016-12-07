@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -15,7 +11,9 @@ namespace FootballEngine.Domain.ValueObjects
 
         public DateTime Value { get; set; }
 
-        public DateOfBirth() { }
+        public DateOfBirth()
+        {
+        }
 
         public DateOfBirth(DateTime dateOfBirth)
         {

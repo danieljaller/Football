@@ -8,29 +8,29 @@
         mc:Ignorable="d"
         Title="MatchProtocol" Height="300" Width="300">
     <Window.Resources>
-        <converters:IdToNameConverter x:Key="idToNameConverter"/>
+        <converters:IdToNameConverter x:Key="idToNameConverter" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
@@ -53,7 +53,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -69,7 +69,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -86,7 +86,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -102,7 +102,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -119,7 +119,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOFEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOFEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -135,7 +135,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -152,7 +152,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -168,7 +168,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=PlayerId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="1" Text="Min: " />
-                        <TextBlock Grid.Column="2" Text="TimeOfEvent"/>
+                        <TextBlock Grid.Column="2" Text="TimeOfEvent" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -193,7 +193,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource idToNameConverter}}"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Converter={StaticResource idToNameConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -214,7 +214,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
-                        <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource idToNameConverter}}"  />
+                        <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
                         <TextBlock Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
                         <TextBlock Grid.Column="0" Grid.Row="1" Foreground="GreenYellow" Text="⬅" />
@@ -238,7 +238,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
-                        <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource idToNameConverter}}"  />
+                        <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource idToNameConverter}}" />
                         <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
                         <TextBlock Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
                         <TextBlock Grid.Column="0" Grid.Row="1" Foreground="GreenYellow" Text="⬅" />

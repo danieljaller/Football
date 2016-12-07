@@ -24,6 +24,7 @@ namespace FootballEngine.Repositories
         }
 
         private static PlayerRepository _instance;
+
         public static PlayerRepository Instance
         {
             get
@@ -74,7 +75,7 @@ namespace FootballEngine.Repositories
             foreach (var player in _players)
                 if (player.Id == id)
                     return player;
-            
+
             return null;
         }
 
@@ -84,7 +85,7 @@ namespace FootballEngine.Repositories
                 foreach (Player player in _players)
                     if (player.FullName == name)
                         return player;
-             
+
             return null;
         }
 
@@ -97,7 +98,6 @@ namespace FootballEngine.Repositories
                 //{
                 _players = (List<Player>)XmlHandler.LoadFrom(_path, typeof(List<Player>));
                 //}
-
             }
             catch (LoadFailedException)
             {
@@ -113,7 +113,6 @@ namespace FootballEngine.Repositories
                 //{
                 XmlHandler.SaveTo(_path, _players);
                 //}
-
             }
             catch (SaveFailedException s)
             {

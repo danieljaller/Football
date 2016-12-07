@@ -1,11 +1,11 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using FootballEngine.Helper;
 
 namespace AdminApp
 {
@@ -35,6 +35,7 @@ namespace AdminApp
             dateListBox.ItemsSource = matchScheduleWithMatches;
             resultListBox.ItemsSource = matchScheduleWithMatches;
         }
+
         public void ConvertFromGuid()
         {
             foreach (var matchId in matchScheduleWithIds)
@@ -56,7 +57,6 @@ namespace AdminApp
             var selectedItem = (Match)dateListBox.SelectedItem;
             var datePicker = (DatePicker)sender;
             selectedItem.Date.EditMatchDate(Convert.ToDateTime(datePicker.SelectedDate));
-
         }
 
         private void createSerieButton_Click(object sender, RoutedEventArgs e)

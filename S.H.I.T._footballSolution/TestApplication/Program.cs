@@ -1,20 +1,20 @@
 ﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Factories;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using FootballEngine.Helper;
-using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Factories;
 
 namespace TestApplication
 {
-    class Program : ConsoleApp
+    internal class Program : ConsoleApp
     {
         private static readonly Random _Random = new Random();
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             new Program();
         }
@@ -295,7 +295,7 @@ namespace TestApplication
             {
                 Console.Write("Copied Matches.xml: ");
                 string matchesSource = Path.Combine(path, "Matches.xml"), matchesDest = "";
-                if (TryGetFilePath.InSolutionDirectory("Matches.xml", new string[] {"FootballEngine", "Resources" }, false, out matchesDest))
+                if (TryGetFilePath.InSolutionDirectory("Matches.xml", new string[] { "FootballEngine", "Resources" }, false, out matchesDest))
                     File.Copy(matchesSource, matchesDest, true);
                 else
                     throw new Exception($"Could not copy {matchesSource} to {matchesDest}");

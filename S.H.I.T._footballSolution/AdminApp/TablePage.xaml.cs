@@ -11,12 +11,14 @@ namespace AdminApp
     /// </summary>
     public partial class TablePage : Page
     {
-        bool isTeamClicked, isPointsClicked, isGoalDifferenceClicked, isWinsClicked, isLossesClicked;
-        bool isTiesClicked, isGoalsForClicked, isGoalsAgainstClicked, isMatchesPlayedClicked;
-        Serie selectedSerie;
-        ObservableCollection<Team> teams;
+        private bool isTeamClicked, isPointsClicked, isGoalDifferenceClicked, isWinsClicked, isLossesClicked;
+        private bool isTiesClicked, isGoalsForClicked, isGoalsAgainstClicked, isMatchesPlayedClicked;
+        private Serie selectedSerie;
+        private ObservableCollection<Team> teams;
+
         public TablePage()
         { }
+
         public TablePage(Serie selectedSerie)
         {
             this.selectedSerie = selectedSerie;

@@ -13,7 +13,9 @@ namespace FootballEngine.Domain.Entities
         public HashSet<Guid> TeamTable { get; set; }
         public HashSet<Guid> MatchTable { get; set; }
 
-        public Serie() { }
+        public Serie()
+        {
+        }
 
         public Serie(GeneralName name, HashSet<Guid> teamTable, HashSet<Guid> matchTable)
         {

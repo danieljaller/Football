@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
-using FootballEngine.Domain.Entities;
-using FootballEngine.Factories;
+﻿using FootballEngine.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace FootballEngine.Factories
 {
@@ -100,8 +98,6 @@ namespace FootballEngine.Factories
             }
             List<Team> teamList = TeamFactory.CreateTeamsAndSetPlayersTeamId(listOfPlayerLists, TeamFactory.MinTeamNameStartValue);
         }
-
-
 
         [TestMethod]
         public void CreateTeamsAndSetPlayersTeamId_TestInparam2_1_Valid()
@@ -234,8 +230,6 @@ namespace FootballEngine.Factories
                 teamNumber++;
             }
         }
-
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]

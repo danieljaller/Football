@@ -15,7 +15,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                         <RadioButton Content="{Binding}"
-                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}"/>
+                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -24,52 +24,50 @@
     <Grid>
         <Grid Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="1" >
+            <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="205"/>
-                    <ColumnDefinition Width="205"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="205" />
+                    <ColumnDefinition Width="205" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Name="homeTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
                     <TextBlock Name="homeTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
-
                 </StackPanel>
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">-</TextBlock>
                 <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Name="visitorTeamScoreBlock" Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Text="{Binding}" />
                     <TextBlock Name="visitorTeamNameBlock" FontSize="20" FontWeight="Bold" Text="{Binding Path=Name.Value}" />
                 </StackPanel>
-                <DatePicker Name="matchDatePicker" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="4" Margin="5" SelectedDateChanged="matchDatePicker_SelectedDateChanged"/>
+                <DatePicker Name="matchDatePicker" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="4" Margin="5" SelectedDateChanged="matchDatePicker_SelectedDateChanged" />
 
-                <CheckBox Name="isPlayedCheckBox" Grid.Row="1" Grid.Column="1" Content="Spelad" VerticalAlignment="Center" Checked="isPlayedCheckBox_Checked" Unchecked="isPlayedCheckBox_Unchecked"/>
+                <CheckBox Name="isPlayedCheckBox" Grid.Row="1" Grid.Column="1" Content="Spelad" VerticalAlignment="Center" Checked="isPlayedCheckBox_Checked" Unchecked="isPlayedCheckBox_Unchecked" />
 
                 <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <TextBlock>Övertid:</TextBlock>
@@ -85,7 +83,7 @@
                         </ComboBox.Style>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}"/>
+                                <TextBlock Text="{Binding}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -155,7 +153,6 @@
                     </Button.Style>
                 </Button>
 
-                
                 <TextBlock Grid.Row="4" Grid.ColumnSpan="4" HorizontalAlignment="Center">Byten</TextBlock>
                 <ListBox Name="homeExchangesList" Grid.Row="5" Grid.Column="1" Margin="0, 0, 0, 3">
                     <ListBox.ItemTemplate>
@@ -172,7 +169,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
-                                <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
+                                <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
                                 <TextBlock Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
                                 <TextBlock Grid.Column="0" Grid.Row="1" Foreground="GreenYellow" Text="⬅" />
@@ -197,7 +194,7 @@
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Foreground="Red" Text="➞" />
-                                <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}"  />
+                                <TextBlock Grid.Column="1" Width="135" Grid.Row="0" Foreground="Red" Text="{Binding Path=PlayerOutId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="Min: " />
                                 <TextBlock Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" Text="{Binding Path=TimeOfExchange}" />
                                 <TextBlock Grid.Column="0" Grid.Row="1" Foreground="GreenYellow" Text="⬅" />
@@ -255,7 +252,6 @@
                     </Button.Style>
                 </Button>
 
-
                 <TextBlock Grid.Row="6" Grid.ColumnSpan="6" HorizontalAlignment="Center">Mål</TextBlock>
                 <ListBox Name="homeGoalsList" Grid.Row="7" Grid.Column="1">
                     <ListBox.ItemTemplate>
@@ -268,7 +264,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -283,8 +279,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: "/>
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -337,7 +333,6 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                
 
                 <TextBlock Grid.Row="8" Grid.ColumnSpan="4" HorizontalAlignment="Center">Assist</TextBlock>
                 <ListBox Name="homeAssistsList" Grid.Row="9" Grid.Column="1">
@@ -351,7 +346,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -366,8 +361,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
-                                <TextBlock Grid.Column="1" Text="Min: "/>
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="1" Text="Min: " />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -421,7 +416,6 @@
                     </Button.Style>
                 </Button>
 
-                
                 <TextBlock Grid.Row="10" Grid.ColumnSpan="8" Foreground="red" HorizontalAlignment="Center">Röda kort</TextBlock>
                 <ListBox Name="homeRedCardsList" Grid.Row="11" Grid.Column="1">
                     <ListBox.ItemTemplate>
@@ -434,7 +428,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -450,7 +444,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -504,7 +498,6 @@
                     </Button.Style>
                 </Button>
 
-                
                 <TextBlock Grid.Row="12" Grid.ColumnSpan="4" Foreground="Gold" HorizontalAlignment="Center">Gula kort</TextBlock>
                 <ListBox Name="homeYellowCardsList" Grid.Row="13" Grid.Column="1">
                     <ListBox.ItemTemplate>
@@ -517,7 +510,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -533,7 +526,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Width="143" Text="{Binding Path=PlayerId, Converter={StaticResource eventPlayerIdToNameConverter}}" />
                                 <TextBlock Grid.Column="1" Text="Min: " />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=TimeOfEvent}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -587,11 +580,9 @@
                     </Button.Style>
                 </Button>
             </Grid>
-            
+
             <Button Name="okButton" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="100" Height="20" Margin="20,20,0,3" Click="okButton_Click" >OK</Button>
             <Button Name="cancelButton" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="100" Height="20" Margin="0,20,20,3" Click="cancelButton_Click">Cancel</Button>
-
         </Grid>
-
     </Grid>
 </Window>

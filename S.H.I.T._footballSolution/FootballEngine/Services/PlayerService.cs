@@ -14,6 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static PlayerService _instance;
+
         internal static PlayerService Instance
         {
             get
@@ -33,7 +34,9 @@ namespace FootballEngine.Services
             }
         }
 
-        internal PlayerService() { }
+        internal PlayerService()
+        {
+        }
 
         public void Add(Player player)
         {
@@ -87,42 +90,52 @@ namespace FootballEngine.Services
         {
             return GetAllPlayersBySerie(serieId).OrderBy(p => p.FirstName.Value);
         }
+
         public IEnumerable<Player> OrderByLastName(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderBy(p => p.LastName.Value);
         }
+
         public IEnumerable<Player> OrderByFullName(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderBy(p => p.FullName);
         }
+
         public IEnumerable<Player> OrderByDateOfBirth(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.DateOfBirth.Value);
         }
+
         public IEnumerable<Player> OrderByTeamName(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderBy(p => ServiceLocator.Instance.TeamService.GetBy(p.TeamId).Name.Value);
         }
+
         public IEnumerable<Player> OrderByNumberOfMatchesPlayed(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.MatchesPlayed);
         }
+
         public IEnumerable<Player> OrderByNumberOfGoals(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.Goals.Count());
         }
+
         public IEnumerable<Player> OrderByNumberOfAssists(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.Assists.Count());
         }
+
         public IEnumerable<Player> OrderByNumberOfRedCards(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.RedCards.Count());
         }
+
         public IEnumerable<Player> OrderByNumberOfYellowCards(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => p.YellowCards.Count());
         }
+
         public IEnumerable<Player> OrderByPlayerStatus(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderByDescending(p => (int)p.PlayerStatus);

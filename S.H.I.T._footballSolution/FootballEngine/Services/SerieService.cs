@@ -33,7 +33,9 @@ namespace FootballEngine.Services
             }
         }
 
-        internal SerieService() { }
+        internal SerieService()
+        {
+        }
 
         public void Add(Serie serie)
         {

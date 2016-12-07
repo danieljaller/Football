@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using FootballEngine.Domain.Entities;
+using FootballEngine.Helper;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using FootballEngine.Domain.Entities;
-using FootballEngine.Helper;
 
 namespace UserApp
 {
@@ -12,20 +12,22 @@ namespace UserApp
     /// </summary>
     public partial class PlayerPage : Page
     {
-        Serie selectedSerie;
-        ObservableCollection<Player> players;
-        bool isNameClicked, isTeamClicked, isAgeClicked, isMatchesPlayedClicked, isGoalsClicked;
-        bool isRedCardsClicked, isYellowCardsClicked, isStatusClicked, isAssistsClicked;
+        private Serie selectedSerie;
+        private ObservableCollection<Player> players;
+        private bool isNameClicked, isTeamClicked, isAgeClicked, isMatchesPlayedClicked, isGoalsClicked;
+        private bool isRedCardsClicked, isYellowCardsClicked, isStatusClicked, isAssistsClicked;
         private Team _team;
 
         public PlayerPage()
         { }
+
         public PlayerPage(Serie selectedSerie)
         {
             this.selectedSerie = selectedSerie;
             InitializeComponent();
             SetPlayerData(selectedSerie);
         }
+
         public PlayerPage(Serie selectedSerie, Team team)
         {
             this.selectedSerie = selectedSerie;
@@ -190,7 +192,6 @@ namespace UserApp
 
                 if (!isMatchesPlayedClicked)
                 {
-
                     if (selectedSerie != null && _team != null)
                     {
                         playerStatsListbox.ItemsSource = ServiceLocator.Instance.PlayerService.OrderByNumberOfMatchesPlayed(selectedSerie.Id)

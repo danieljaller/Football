@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects
 {
@@ -12,7 +8,9 @@ namespace FootballEngine.Domain.ValueObjects
         public int MatchLength { get; set; }
         public static int MaxValue { get { return 120; } }
 
-        public MatchMinute() { }
+        public MatchMinute()
+        {
+        }
 
         public MatchMinute(int minute)
             : this(minute, 90)
@@ -24,7 +22,6 @@ namespace FootballEngine.Domain.ValueObjects
             {
                 MatchLength = length;
                 Value = minute;
-
             }
         }
 
@@ -40,7 +37,6 @@ namespace FootballEngine.Domain.ValueObjects
                 throw new ArgumentOutOfRangeException($"{nameof(length)} must be between 90 and {MaxValue}.");
 
             return true;
-
         }
 
         public static bool IsValidMinute(int minute)

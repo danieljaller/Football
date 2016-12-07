@@ -10,14 +10,19 @@ namespace FootballEngine.Helper
             {
                 case Status.Available:
                     return "Tillgänglig";
+
                 case Status.Suspended:
                     return "Avstängd";
+
                 case Status.Injured:
                     return "Skadad";
+
                 case Status.NationalTeam:
                     return "Landslagsuppdrag";
+
                 case Status.Other:
                     return "Övrig frånvaro";
+
                 default:
                     return "Okänd status";
             }

@@ -1,69 +1,68 @@
 ﻿<Page x:Class="AdminApp.NewSeriesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:converters="clr-namespace:AdminApp.Converters"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:AdminApp"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="NewSeriesPage">
     <Page.Resources>
-        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
+        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter" />
     </Page.Resources>
     <Grid Background="White" FocusManager.FocusedElement="{Binding ElementName=seriesName}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NY SERIE</TextBlock>
+
+        <Grid Grid.Row="1" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NY SERIE</TextBlock>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="1" Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                <TextBlock Margin="5" Text="Namn:" />
+                <TextBox Name="serieName"  Margin="5" Width="100" TextChanged="serieName_TextChanged" />
+                <TextBlock  Text="Startdatum:" Margin="5" />
+                <DatePicker Name="serieDatePicker" Text="Välj datum" Grid.Row="1" Grid.Column="2" Margin="5" Width="120" SelectedDateChanged="serieDatePicker_SelectedDateChanged" />
+            </StackPanel>
 
-                <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-                    <TextBlock Margin="5" Text="Namn:"/>
-                    <TextBox Name="serieName"  Margin="5" Width="100" TextChanged="serieName_TextChanged"/>
-                    <TextBlock  Text="Startdatum:" Margin="5"/>
-                    <DatePicker Name="serieDatePicker" Text="Välj datum" Grid.Row="1" Grid.Column="2" Margin="5" Width="120" SelectedDateChanged="serieDatePicker_SelectedDateChanged"/>
-                </StackPanel>
-
-                <ListBox Name="teamsList" Grid.Row="1" Margin="5" MinWidth="150" Height="260">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <CheckBox Name="teamCheckBox" Checked="teamCheckBox_Checked" Content="{Binding Converter={StaticResource searchResultToStringConverter}}" Unchecked="teamCheckBox_Unchecked"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <Button Grid.Row="2" Grid.Column="0"  Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click" HorizontalAlignment="Right">SKAPA NYTT LAG</Button>
-                <Button Grid.Row="2" Grid.Column="0" Margin="10" Name="AutoFillButton" Content="Auto" HorizontalAlignment="Left" Click="AutoFillButton_Click"/>
+            <ListBox Name="teamsList" Grid.Row="1" Margin="5" MinWidth="150" Height="260">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <CheckBox Name="teamCheckBox" Checked="teamCheckBox_Checked" Content="{Binding Converter={StaticResource searchResultToStringConverter}}" Unchecked="teamCheckBox_Unchecked" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Row="2" Grid.Column="0"  Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click" HorizontalAlignment="Right">SKAPA NYTT LAG</Button>
+            <Button Grid.Row="2" Grid.Column="0" Margin="10" Name="AutoFillButton" Content="Auto" HorizontalAlignment="Left" Click="AutoFillButton_Click" />
             <Button Grid.Row="2" Grid.Column="1" Margin="10" Name="CreateMatchScheduleButton" Click="CreateMatchScheduleButton_Click" IsEnabled="False">SKAPA SPELSCHEMA</Button>
 
             <ListBox Name="teamsCheckedList"  Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="100" Height="260" BorderThickness="0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-            <Frame Grid.Row="1" Margin="20" Name="newSerieFrame" NavigationUIVisibility="Hidden" />
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
-    
+        <Frame Grid.Row="1" Margin="20" Name="newSerieFrame" NavigationUIVisibility="Hidden" />
+    </Grid>
 </Page>

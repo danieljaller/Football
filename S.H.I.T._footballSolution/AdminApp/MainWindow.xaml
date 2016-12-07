@@ -8,34 +8,32 @@
         mc:Ignorable="d"
         Title="Football Administration App" Height="600" Width="1000"
         Icon="Resources/football_icon.ico">
-    
-    
 
     <Window.Resources>
-        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
+        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter" />
     </Window.Resources>
     <Grid FocusManager.FocusedElement="{Binding ElementName=searchTextBox}">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
 
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBox Name="searchTextBox" Grid.Row="0" Width="158" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="10, 5, 5, 0" TextChanged="searchTextBox_TextChanged" KeyDown="searchTextBox_KeyDown" PreviewKeyDown="searchTextBox_KeyDown"/>
+            <TextBox Name="searchTextBox" Grid.Row="0" Width="158" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="10, 5, 5, 0" TextChanged="searchTextBox_TextChanged" KeyDown="searchTextBox_KeyDown" PreviewKeyDown="searchTextBox_KeyDown" />
             <TextBlock IsHitTestVisible="False" Grid.Row="0" Text="Sök" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="13,3,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Setter Property="Visibility" Value="Collapsed" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=searchTextBox}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
+                                <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -43,21 +41,21 @@
             </TextBlock>
             <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Name="searchGrid" Panel.ZIndex="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <ListBox Name="searchResultList" Margin="10,0,5,5" Grid.Row="1" Panel.ZIndex="1" Width="158" Height="300" HorizontalAlignment="Left" KeyDown="searchResultList_KeyDown" PreviewKeyDown="searchResultList_KeyDown" SelectionChanged="searchResultList_SelectionChanged">
                     <ListBox.Style>
                         <Style TargetType="{x:Type ListBox}">
-                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Visibility" Value="Visible" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Text, ElementName=searchTextBox}" Value="">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -66,9 +64,9 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-                                <TextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>
+                                <TextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource searchResultToStringConverter}}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -82,7 +80,6 @@
                 <Button Margin="10" Name="StatisticsButton" Click="StatisticsButton_Click">STATISTIK</Button>
             </StackPanel>
         </Grid>
-        <Frame Grid.Column="1" x:Name="MainPageFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="1" x:Name="MainPageFrame" NavigationUIVisibility="Hidden" />
     </Grid>
-
 </Window>

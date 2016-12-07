@@ -8,10 +8,10 @@
         Title="TeamInoPopUp" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <Frame Name="mainFrame" Grid.Row="0" Margin="10"/>
+        <Frame Name="mainFrame" Grid.Row="0" Margin="10" />
         <Button Name="Ok" Grid.Row="1" Width="100" Click="Ok_Click">OK</Button>
     </Grid>
 </Window>

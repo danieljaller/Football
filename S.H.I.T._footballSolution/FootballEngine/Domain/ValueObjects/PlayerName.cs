@@ -5,15 +5,21 @@ namespace FootballEngine.Domain.ValueObjects
     public class PlayerName
     {
         public string Value { get; set; }
+
         public static int MaxLenght
         {
             get { return 50; }
         }
+
         public static int MinLenght
         {
             get { return 2; }
         }
-        public PlayerName() { }
+
+        public PlayerName()
+        {
+        }
+
         public PlayerName(string name)
         {
             if (IsValidName(name))
@@ -80,6 +86,4 @@ namespace FootballEngine.Domain.ValueObjects
             return Value;
         }
     }
-
 }
-

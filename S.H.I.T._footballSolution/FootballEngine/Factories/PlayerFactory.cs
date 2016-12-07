@@ -1,12 +1,8 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FootballEngine.Helper;
 
 namespace FootballEngine.Factories
 {
@@ -30,12 +26,12 @@ namespace FootballEngine.Factories
             {
                 PlayerName firstName = new PlayerName("Player");
                 PlayerName lastName = new PlayerName(i.NumberToWords().FirstToUpper(true).Trim());
-                
+
                 int year = random.Next(DateTime.Now.Year - 50, DateTime.Now.Year - 17);
                 int month = random.Next(1, 13);
                 int day = random.Next(1, DateTime.DaysInMonth(year, month) + 1);
                 DateTime dateOfBirth = new DateTime(year, month, day);
-                
+
                 players.Add(new Player(firstName, lastName, new DateOfBirth(dateOfBirth)));
             }
 

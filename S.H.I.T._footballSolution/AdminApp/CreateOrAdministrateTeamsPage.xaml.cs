@@ -1,5 +1,4 @@
-﻿using AdminApp.Converters;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Helper;
 using System;
@@ -8,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace AdminApp
 {
@@ -17,11 +15,11 @@ namespace AdminApp
     /// </summary>
     public partial class CreateOrAdministrateTeamsPage : Page
     {
-        Player selectedPlayer;
-        Team selectedTeam;
-        string backupTeamName;
-        string backupArenaName;
-        static int selectedIndexInTeamsList;
+        private Player selectedPlayer;
+        private Team selectedTeam;
+        private string backupTeamName;
+        private string backupArenaName;
+        private static int selectedIndexInTeamsList;
 
         public CreateOrAdministrateTeamsPage()
         {
@@ -144,7 +142,7 @@ namespace AdminApp
             ServiceLocator.Instance.TeamService.Save();
             ServiceLocator.Instance.PlayerService.Save();
             MessageBox.Show("Dina ändringar har sparats");
-            teamsList.Items.Refresh();            
+            teamsList.Items.Refresh();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Helper;
+using System;
+using System.Collections.Generic;
 
 namespace FootballEngine.Factories
 {
@@ -28,7 +27,7 @@ namespace FootballEngine.Factories
             _latestDate = startDate.AddDays(-1);
             List<Match> matches = new List<Match>();
 
-            for (int i = 0; i < 2*(teams.Count - 1); i++)
+            for (int i = 0; i < 2 * (teams.Count - 1); i++)
             {
                 matches.AddRange(RoundGenerator(teams, i));
                 teams = ListShuffler(teams);
@@ -97,7 +96,5 @@ namespace FootballEngine.Factories
 
             return teams = tempTeams;
         }
-
     }
 }
-

@@ -1,22 +1,8 @@
 ﻿using FootballEngine.Domain.Entities;
-using FootballEngine.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FootballEngine.Helper;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FootballEngine.Helper;
 using UserApp.Views;
-
 
 namespace UserApp
 {
@@ -27,7 +13,6 @@ namespace UserApp
     {
         //SearchService searchService;
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +20,7 @@ namespace UserApp
         }
 
         private void updateSearchCheckList(string searchText)
-        { 
+        {
             var searchResults = ServiceLocator.Instance.SearchService.Search(searchText, serieCheckBox.IsChecked == true, playerCheckBox.IsChecked == true, teamCheckBox.IsChecked == true, false, true);
             if (searchText.Trim() == "")
             {
@@ -113,6 +98,5 @@ namespace UserApp
                 MainPageFrame.Content = null;
             }
         }
-    
     }
 }

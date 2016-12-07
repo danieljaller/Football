@@ -1,61 +1,59 @@
 ﻿<Page x:Class="AdminApp.NewTeamPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:AdminApp"
-      xmlns:Converters="clr-namespace:AdminApp.Converters"      
-      mc:Ignorable="d" 
+      xmlns:Converters="clr-namespace:AdminApp.Converters"
+      mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="NewTeamPage">
 
     <Page.Resources>
-        <Converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
-        <Converters:IsEnabledConverterAddPlayer x:Key="isEnabledConverter"/>
+        <Converters:SearchResultToStringConverter x:Key="searchResultToStringConverter" />
+        <Converters:IsEnabledConverterAddPlayer x:Key="isEnabledConverter" />
     </Page.Resources>
     <Grid Background="white">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">NYTT LAG</TextBlock>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <TextBlock Margin="140,5,5,5" Text="Namn:"/>
+            <TextBlock Margin="140,5,5,5" Text="Namn:" />
 
             <TextBox Name="teamName" Margin="5" Width="100"
                      ToolTip="{Binding ElementName=teamName, Path=(Validation.Errors)[0].ErrorContent}" TextChanged="teamName_TextChanged">
                 <TextBox.Text>
                     <Binding Path="TeamName" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <Converters:GeneralNameValidationRule/>
+                            <Converters:GeneralNameValidationRule />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
 
-            <TextBlock  Text="Arena:" Margin="300,5,5,5"/>
-            <TextBox Name="arenaName"  Margin="5"  Grid.Row="1" Grid.Column="2" Width="100" 
+            <TextBlock  Text="Arena:" Margin="300,5,5,5" />
+            <TextBox Name="arenaName"  Margin="5"  Grid.Row="1" Grid.Column="2" Width="100"
                      ToolTip="{Binding ElementName=arenaName, Path=(Validation.Errors)[0].ErrorContent}" TextChanged="arenaName_TextChanged">
                 <TextBox.Text>
                     <Binding Path="ArenaName"  UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <Converters:GeneralNameValidationRule/>
+                            <Converters:GeneralNameValidationRule />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK"/>
+            <Button Name="saveTeamArenaNameButton" Click="saveTeamArenaNameButton_Click" Content="OK" />
         </StackPanel>
-
-
 
         <ListBox Name="playersList" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" MinWidth="100" MinHeight="250">
             <ListBox.ItemTemplate>
@@ -75,8 +73,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>
-
+                        <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

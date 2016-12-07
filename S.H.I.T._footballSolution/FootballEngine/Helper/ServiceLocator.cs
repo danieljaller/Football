@@ -6,6 +6,7 @@ namespace FootballEngine.Helper
     {
         private static readonly object CreationLock = new object();
         private static ServiceLocator _instance;
+
         public static ServiceLocator Instance
         {
             get

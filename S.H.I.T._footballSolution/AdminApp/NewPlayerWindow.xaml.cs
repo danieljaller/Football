@@ -21,7 +21,7 @@ namespace AdminApp
         public List<Player> tempPlayersList = new List<Player>();
         public bool hasMinValue;
         public Team team;
-        IEnumerable<Player> playersSavedInTeam;
+        private IEnumerable<Player> playersSavedInTeam;
 
         public NewPlayerWindow(bool hasMinValue)
         {
@@ -84,11 +84,11 @@ namespace AdminApp
             { numberOfPlayers.Text = "0"; }
             numberOfPlayers.Text = tempPlayersList.Count.ToString();
             if (team != null)
-            {               
-                    if (tempPlayersList.Count < 1 && tempPlayersList.Count + playersSavedInTeam.Count() >30)
-                        addPlayersNowButton.IsEnabled = false;
-                    else
-                        addPlayersNowButton.IsEnabled = true;                
+            {
+                if (tempPlayersList.Count < 1 && tempPlayersList.Count + playersSavedInTeam.Count() > 30)
+                    addPlayersNowButton.IsEnabled = false;
+                else
+                    addPlayersNowButton.IsEnabled = true;
             }
             if (team == null)
             {
@@ -108,7 +108,7 @@ namespace AdminApp
                         DialogResult = true;
                     }
                 }
-            }         
+            }
         }
 
         private void addPlayersNow_Clicked(object sender, RoutedEventArgs e)
@@ -132,9 +132,7 @@ namespace AdminApp
             datePicker1.DisplayDate = new DateTime((DateTime.Today.Year - 17), 1, 1);
         }
 
-
         private void closingNewPlayerWindow(object sender, System.ComponentModel.CancelEventArgs e)
         { }
-
     }
 }

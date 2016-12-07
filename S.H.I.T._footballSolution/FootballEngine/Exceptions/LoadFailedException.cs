@@ -5,6 +5,7 @@ namespace FootballEngine.Helper
     public class LoadFailedException : SystemException
     {
         private string _message;
+
         public override string Message
         {
             get
@@ -12,10 +13,11 @@ namespace FootballEngine.Helper
                 return _message;
             }
         }
+
         public new Exception InnerException { get; }
+
         public LoadFailedException() : this(null, null)
         {
-
         }
 
         public LoadFailedException(string message) : this(message, null)

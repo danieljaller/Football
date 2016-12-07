@@ -14,6 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static TeamService _instance;
+
         internal static TeamService Default
         {
             get
@@ -33,7 +34,9 @@ namespace FootballEngine.Services
             }
         }
 
-        internal TeamService() { }
+        internal TeamService()
+        {
+        }
 
         public void Add(Team team)
         {
@@ -53,13 +56,14 @@ namespace FootballEngine.Services
             }
             _teamRepository.Delete(id);
         }
+
         public IEnumerable<Team> GetAllTeamsBySerie(Guid serieId)
         {
             return GetAll().Where(t => t.SerieIds.Contains(serieId));
         }
 
         public IEnumerable<Player> GetAllPlayersByTeam(Guid id)
-        {   
+        {
             return ServiceLocator.Instance.PlayerService.GetAll().Where(p => p.TeamId == id);
         }
 
@@ -70,7 +74,7 @@ namespace FootballEngine.Services
 
         public Team GetBy(string name)
         {
-           return _teamRepository.GetBy(name);
+            return _teamRepository.GetBy(name);
         }
 
         public Team GetBy(Guid id)

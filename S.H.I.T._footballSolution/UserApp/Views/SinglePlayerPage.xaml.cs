@@ -10,7 +10,8 @@ namespace UserApp.Views
     /// </summary>
     public partial class SinglePlayerPage : Page
     {
-        Player selectedPlayer;
+        private Player selectedPlayer;
+
         public SinglePlayerPage()
         {
             InitializeComponent();

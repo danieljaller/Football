@@ -24,6 +24,7 @@ namespace FootballEngine.Repositories
         }
 
         private static TeamRepository _instance;
+
         public static TeamRepository Instance
         {
             get
@@ -76,7 +77,6 @@ namespace FootballEngine.Repositories
             foreach (Team team in _teams)
                 if (team.Id == id)
                     return team;
-            
 
             return null;
         }
@@ -87,7 +87,7 @@ namespace FootballEngine.Repositories
                 foreach (Team team in _teams)
                     if (team.Name.Value == name)
                         return team;
-            
+
             return null;
         }
 
@@ -98,7 +98,7 @@ namespace FootballEngine.Repositories
                 //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", false, out path))
                 //{
                 _teams = (List<Team>)XmlHandler.LoadFrom(_path, typeof(List<Team>));
-                //}               
+                //}
             }
             catch (LoadFailedException)
             {
@@ -113,7 +113,7 @@ namespace FootballEngine.Repositories
                 //if (TryGetFilePath.InSolutionDirectory("Teams.xml", "Resources", true, out path))
                 //{
                 XmlHandler.SaveTo(_path, _teams);
-                //}                
+                //}
             }
             catch (SaveFailedException s)
             {

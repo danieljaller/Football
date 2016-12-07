@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace FootballEngineTests.Factories
 {
@@ -14,7 +14,6 @@ namespace FootballEngineTests.Factories
         [TestInitialize]
         public void Init()
         {
-
         }
 
         private List<List<Player>> GetValidListOfPlayerLists()
@@ -51,7 +50,6 @@ namespace FootballEngineTests.Factories
             Assert.AreEqual(numberOfMatchesThatWillGetCreated, MatchTableFactory.CreateMatchTable(GetValidTeamList(), DateTime.Today).Count);
         }
 
-
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreateMatchTable_TestInparam1_1_Invalid()
@@ -83,8 +81,6 @@ namespace FootballEngineTests.Factories
             teamList.AddRange(GetValidTeamList());
             MatchTableFactory.CreateMatchTable(teamList, DateTime.Now);
         }
-
-
 
         [TestMethod()]
         public void CreateMatchTable_TestInparam2_1_Valid()

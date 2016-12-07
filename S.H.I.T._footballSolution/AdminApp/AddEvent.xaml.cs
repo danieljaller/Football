@@ -1,40 +1,30 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
-using FootballEngine.Services;
+using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using FootballEngine.Helper;
-using System.Collections.ObjectModel;
 
 namespace AdminApp
 {
-
     public partial class AddEvent : Window
     {
         public Event Result { get; set; }
         public MatchMinute TimeOfEvent;
-        List<Player> PlayerList;
-        List<Exchange> Exchanges;
-        int MatchLength;
+        private List<Player> PlayerList;
+        private List<Exchange> Exchanges;
+        private int MatchLength;
 
         public AddEvent(ObservableCollection<Guid> lineup, ObservableCollection<Exchange> exchanges)
-            :this(90, lineup, exchanges)
+            : this(90, lineup, exchanges)
         {
         }
 
         public AddEvent(int matchLength, ObservableCollection<Guid> lineup, ObservableCollection<Exchange> exchanges)
-        {    
+        {
             InitializeComponent();
             Exchanges = exchanges.ToList();
             MatchLength = matchLength;
@@ -56,8 +46,8 @@ namespace AdminApp
         {
             Player selectedPlayer = new Player();
             selectedPlayer = (Player)playerListbox.SelectedItem;
-            List<Guid> PlayerInIdsList = new List<Guid> (Exchanges.Select(ex => ex.PlayerInId).ToList());
-            List<Guid> PlayerOutIdsList = new List<Guid> (Exchanges.Select(ex => ex.PlayerOutId).ToList());
+            List<Guid> PlayerInIdsList = new List<Guid>(Exchanges.Select(ex => ex.PlayerInId).ToList());
+            List<Guid> PlayerOutIdsList = new List<Guid>(Exchanges.Select(ex => ex.PlayerOutId).ToList());
             List<MatchMinute> minutes = new List<MatchMinute>();
 
             for (int i = 1; i <= MatchLength; i++)
@@ -85,7 +75,7 @@ namespace AdminApp
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Player player = (Player)playerListbox.SelectedItem;
-            TimeOfEvent = (MatchMinute)timeBox.SelectedItem;          
+            TimeOfEvent = (MatchMinute)timeBox.SelectedItem;
             Result = new Event(player.Id, TimeOfEvent);
             DialogResult = true;
         }

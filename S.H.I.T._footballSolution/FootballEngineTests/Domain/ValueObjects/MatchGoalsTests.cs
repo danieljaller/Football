@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FootballEngine.Domain.ValueObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects.Tests
 {
@@ -12,6 +7,7 @@ namespace FootballEngine.Domain.ValueObjects.Tests
     public class MatchGoalsTests
     {
         #region Create invalid MatchGoals
+
         [TestMethod()]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void MatchGoals_CreateInvalidMatchGoals1()
@@ -25,9 +21,11 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         {
             //MatchGoals m = new MatchGoals(51);
         }
-        #endregion
+
+        #endregion Create invalid MatchGoals
 
         #region Create valid MatchGoals
+
         [TestMethod()]
         public void MatchGoals_CreateValidMatchGoals1()
         {
@@ -39,6 +37,7 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         {
             //Assert.AreEqual(50, (new MatchGoals(50)).Value);
         }
-        #endregion
+
+        #endregion Create valid MatchGoals
     }
 }

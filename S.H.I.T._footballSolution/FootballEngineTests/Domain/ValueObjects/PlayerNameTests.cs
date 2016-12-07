@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FootballEngine.Domain.ValueObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballEngine.Domain.ValueObjects.Tests
 {
@@ -12,6 +7,7 @@ namespace FootballEngine.Domain.ValueObjects.Tests
     public class PlayerNameTests
     {
         #region Create invalid names
+
         [TestMethod()]
         [ExpectedException(typeof(ArgumentException))]
         public void PlayerName_CreateInvalidName1()
@@ -116,15 +112,17 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         {
             PlayerName p = new PlayerName("¨");
         }
-        #endregion
+
+        #endregion Create invalid names
 
         #region Create valid names
+
         [TestMethod()]
         public void PlayerName_CreateValidName1()
         {
             Assert.AreEqual("Kalle Anka", (new PlayerName("Kalle Anka")).Value);
         }
-        
+
         [TestMethod()]
         public void PlayerName_CreateValidName2()
         {
@@ -166,6 +164,7 @@ namespace FootballEngine.Domain.ValueObjects.Tests
         {
             Assert.AreEqual("Ìvar Hungrig", (new PlayerName("Ìvar Hungrig")).Value);
         }
-        #endregion
+
+        #endregion Create valid names
     }
 }

@@ -14,6 +14,7 @@ namespace FootballEngine.Services
 
         private static readonly object CreationLock = new object();
         private static MatchService _instance;
+
         internal static MatchService Instance
         {
             get
@@ -33,7 +34,9 @@ namespace FootballEngine.Services
             }
         }
 
-        internal MatchService() { }
+        internal MatchService()
+        {
+        }
 
         public void Add(Match match)
         {
@@ -74,7 +77,6 @@ namespace FootballEngine.Services
         {
             _matchRepository.Save();
         }
-
 
         public HashSet<Guid> OrderByHomeTeam(HashSet<Guid> matchIds)
         {

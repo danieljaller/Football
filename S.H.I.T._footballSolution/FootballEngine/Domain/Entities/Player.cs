@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-
 namespace FootballEngine.Domain.Entities
 {
     public class Player
@@ -27,13 +26,14 @@ namespace FootballEngine.Domain.Entities
         public List<Guid> YellowCards { get; set; }
         public List<Guid> Assists { get; set; }
         public List<Guid> Goals { get; set; }
-        public int MatchesPlayed{ get { return MatchesPlayedIds.Count; } }
+        public int MatchesPlayed { get { return MatchesPlayedIds.Count; } }
         public Guid TeamId { get; set; }
         public HashSet<Guid> MatchesPlayedIds { get; set; }
         public bool Playable { get { return (PlayerStatus == Status.Available); } }
 
-        public Player() { }
-
+        public Player()
+        {
+        }
 
         public Player(PlayerName firstName, PlayerName lastName, DateOfBirth dateOfBirth)
         {

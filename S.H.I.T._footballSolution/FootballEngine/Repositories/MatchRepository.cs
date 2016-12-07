@@ -24,6 +24,7 @@ namespace FootballEngine.Repositories
         }
 
         private static MatchRepository _instance;
+
         public static MatchRepository Instance
         {
             get
@@ -71,7 +72,7 @@ namespace FootballEngine.Repositories
 
         public Match GetBy(Guid id)
         {
-            foreach(var match in _matches)
+            foreach (var match in _matches)
                 if (match.Id == id)
                     return match;
 

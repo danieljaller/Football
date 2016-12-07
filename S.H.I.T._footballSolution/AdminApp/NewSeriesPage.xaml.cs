@@ -1,5 +1,6 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
+using FootballEngine.Factories;
 using FootballEngine.Helper;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using FootballEngine.Factories;
 
 namespace AdminApp
 {
@@ -18,10 +18,11 @@ namespace AdminApp
     {
         //TeamService teamService;
         //SerieService serieService;
-        List<Team> teamList = new List<Team> { };
-        bool teamsAreValid;
-        bool nameIsValid;
-        bool dateIsValid;
+        private List<Team> teamList = new List<Team> { };
+
+        private bool teamsAreValid;
+        private bool nameIsValid;
+        private bool dateIsValid;
 
         public NewSeriesPage()
         {
@@ -41,7 +42,6 @@ namespace AdminApp
             {
                 MessageBox.Show($"Det finns redan en serie med namnet {serieName.Text}.\nVar god välj ett annat namn.", "Ett fel uppstod");
                 serieName.Focus();
-
             }
             else
             {
@@ -92,7 +92,6 @@ namespace AdminApp
             {
                 nameIsValid = false;
             }
-
             else
             {
                 GeneralName result;
@@ -128,6 +127,7 @@ namespace AdminApp
                 CreateMatchScheduleButton.IsEnabled = false;
             }
         }
+
         private void AutoFill()
         {
             teamList = ServiceLocator.Instance.TeamService.GetAll().Take(16).ToList();
@@ -145,7 +145,5 @@ namespace AdminApp
         {
             AutoFill();
         }
-
-       
     }
 }

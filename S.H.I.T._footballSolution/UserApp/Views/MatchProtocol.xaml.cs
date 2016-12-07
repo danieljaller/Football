@@ -1,21 +1,10 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Domain.ValueObjects;
 using FootballEngine.Helper;
-using FootballEngine.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace UserApp.Views
 {
@@ -24,18 +13,18 @@ namespace UserApp.Views
     /// </summary>
     public partial class MatchProtocol : Window
     {
-        
+        private MatchDate matchDate;
+        private Match match;
+        private Team homeTeam, visitorTeam;
+        private int homeScore;
+        private int visitorScore;
+        private bool isPlayed;
 
-        MatchDate matchDate;
-        Match match;
-        Team homeTeam, visitorTeam;
-        int homeScore;
-        int visitorScore;
-        bool isPlayed;
-        ObservableCollection<Event> homeGoals, visitorGoals, homeAssists, visitorAssists, homeRedCards, visitorRedCards, homeYellowCards
+        private ObservableCollection<Event> homeGoals, visitorGoals, homeAssists, visitorAssists, homeRedCards, visitorRedCards, homeYellowCards
                                     , visitorYellowCards;
-        ObservableCollection<Guid> homeLineup, visitorLineup;
-        ObservableCollection<Exchange> homeExchanges, visitorExchanges;
+
+        private ObservableCollection<Guid> homeLineup, visitorLineup;
+        private ObservableCollection<Exchange> homeExchanges, visitorExchanges;
 
         public MatchProtocol(Match _match)
         {

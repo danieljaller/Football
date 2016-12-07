@@ -1,11 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FootballEngine.Domain.Entities;
+﻿using FootballEngine.Domain.ValueObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FootballEngine.Domain.ValueObjects;
 using static FootballEngine.Domain.Entities.Player;
 
 namespace FootballEngine.Domain.Entities.Tests

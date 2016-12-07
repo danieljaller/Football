@@ -1,53 +1,41 @@
 ﻿using FootballEngine.Domain.Entities;
 using FootballEngine.Helper;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AdminApp
 {
     /// <summary>
     /// Interaction logic for PlayerPage.xaml
     /// </summary>
-    /// 
+    ///
     public partial class PlayerPage : Page
     {
-        Serie selectedSerie;
-        ObservableCollection<Player> players;
-        bool isNameClicked, isTeamClicked, isAgeClicked, isMatchesPlayedClicked, isGoalsClicked;
-        bool isRedCardsClicked, isYellowCardsClicked, isStatusClicked, isAssistsClicked;
+        private Serie selectedSerie;
+        private ObservableCollection<Player> players;
+        private bool isNameClicked, isTeamClicked, isAgeClicked, isMatchesPlayedClicked, isGoalsClicked;
+        private bool isRedCardsClicked, isYellowCardsClicked, isStatusClicked, isAssistsClicked;
 
         public PlayerPage()
         {
-
         }
+
         public PlayerPage(Serie selectedSerie)
         {
             this.selectedSerie = selectedSerie;
             InitializeComponent();
             SetPlayerData(selectedSerie);
         }
+
         private void SetPlayerData(Serie selectedSerie)
         {
-
             if (selectedSerie != null)
             {
                 players = new ObservableCollection<Player>(ServiceLocator.Instance.PlayerService.OrderByNumberOfGoals(selectedSerie.Id));
                 playerStatsListbox.ItemsSource = players;
             }
-
         }
 
         private void playerName_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

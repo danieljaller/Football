@@ -38,6 +38,7 @@ namespace AdminApp
             searchResult.Add(selectedSerie);
             seriesList.ItemsSource = searchResult;
         }
+
         public CreateOrAdministrateSeriesPage(Team team, bool areMatchesPlayed)
         {
             InitializeComponent();
@@ -158,6 +159,7 @@ namespace AdminApp
             CreateAndConvertLists(matchScheduleWithIds, out matchScheduleWithMatches, out homeTeamList, out visitorTeamList);
             SetItemSources(matchScheduleWithMatches, homeTeamList, visitorTeamList, false);
         }
+
         private void HomeTeam_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             matchScheduleWithIds = ServiceLocator.Instance.MatchService.OrderByHomeTeam(matchScheduleWithIds);

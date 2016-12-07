@@ -8,15 +8,16 @@ namespace FootballEngine.Domain.ValueObjects
         public DateTime MaxDate { get { return defaultDate.AddMonths(1); } }
         public DateTime MinDate { get { return defaultDate.AddMonths(-1); } }
         public DateTime Value { get; set; }
+
         public MatchDate()
         {
-            
         }
+
         public MatchDate(DateTime matchDate)
         {
-            if(matchDate.Date < DateTime.Now.Date)
+            if (matchDate.Date < DateTime.Now.Date)
                 throw new ArgumentOutOfRangeException("Date cannot be earlier than today.");
-            
+
             Value = matchDate;
             defaultDate = matchDate;
         }

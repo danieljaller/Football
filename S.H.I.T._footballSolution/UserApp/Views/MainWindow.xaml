@@ -10,18 +10,18 @@
         Title="User App" Height="600" Width="1000">
 
     <Window.Resources>
-        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter"/>
+        <converters:SearchResultToStringConverter x:Key="searchResultToStringConverter" />
     </Window.Resources>
     <Grid FocusManager.FocusedElement="{Binding ElementName=searchBox}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-     
+
         <Grid Grid.Column="0" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -36,34 +36,33 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-                
+
             <TextBox Name="searchBox" Grid.Row="1" Grid.Column="0" Margin="5, 25, 5, 5" HorizontalAlignment="Left"  Width="180" TextChanged="searchBox_TextChanged" />
             <TextBlock IsHitTestVisible="False" Grid.Row="1" Text="Sök" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,22,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Setter Property="Visibility" Value="Collapsed" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=searchBox}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
+                                <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <CheckBox Name="serieCheckBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 10, 0, 5" Content="Serie" Checked="serieCheckBox_Checked" Unchecked="serieCheckBox_Unchecked"/>
-            <CheckBox Name="teamCheckBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 5" Content="Lag" Checked="teamCheckBox_Checked" Unchecked="teamCheckBox_Unchecked"/>
-            <CheckBox Name="playerCheckBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 5" Content="Spelare" Checked="playerCheckBox_Checked" Unchecked="playerCheckBox_Unchecked"/>
+            <CheckBox Name="serieCheckBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 10, 0, 5" Content="Serie" Checked="serieCheckBox_Checked" Unchecked="serieCheckBox_Unchecked" />
+            <CheckBox Name="teamCheckBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 5" Content="Lag" Checked="teamCheckBox_Checked" Unchecked="teamCheckBox_Unchecked" />
+            <CheckBox Name="playerCheckBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 0, 5" Content="Spelare" Checked="playerCheckBox_Checked" Unchecked="playerCheckBox_Unchecked" />
             <ListBox Name="SearchCheckedList"  Grid.Row="6" Grid.Column="0" Margin="5" Width="180" MaxHeight="400" HorizontalAlignment="Left" SelectionChanged="SearchCheckedList_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}"/>
+                            <TextBlock Text="{Binding Converter={StaticResource searchResultToStringConverter}}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-                
         </Grid>
-        <Frame Grid.Column="1" Grid.Row="1" x:Name="MainPageFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="1" Grid.Row="1" x:Name="MainPageFrame" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

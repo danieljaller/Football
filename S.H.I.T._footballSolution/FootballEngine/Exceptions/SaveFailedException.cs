@@ -5,6 +5,7 @@ namespace FootballEngine.Helper
     public class SaveFailedException : SystemException
     {
         private string _message;
+
         public override string Message
         {
             get
@@ -12,10 +13,11 @@ namespace FootballEngine.Helper
                 return _message;
             }
         }
+
         public new Exception InnerException { get; }
+
         public SaveFailedException() : this(null, null)
         {
-
         }
 
         public SaveFailedException(string message) : this(message, null)

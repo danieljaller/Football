@@ -24,6 +24,7 @@ namespace FootballEngine.Repositories
         }
 
         private static SerieRepository _instance;
+
         public static SerieRepository Instance
         {
             get
@@ -76,7 +77,7 @@ namespace FootballEngine.Repositories
             foreach (Serie serie in _series)
                 if (serie.Id == id)
                     return serie;
-            
+
             return null;
         }
 
@@ -86,7 +87,7 @@ namespace FootballEngine.Repositories
                 foreach (Serie serie in _series)
                     if (serie.Name.Value == name)
                         return serie;
-            
+
             return null;
         }
 
@@ -98,7 +99,6 @@ namespace FootballEngine.Repositories
                 //{
                 _series = (List<Serie>)XmlHandler.LoadFrom(_path, typeof(List<Serie>));
                 //}
-
             }
             catch (LoadFailedException)
             {
@@ -114,7 +114,6 @@ namespace FootballEngine.Repositories
                 //{
                 XmlHandler.SaveTo(_path, _series);
                 //}
-
             }
             catch (SaveFailedException s)
             {
