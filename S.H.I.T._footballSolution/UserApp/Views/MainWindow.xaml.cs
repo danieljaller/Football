@@ -11,12 +11,9 @@ namespace UserApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        //SearchService searchService;
-
         public MainWindow()
         {
             InitializeComponent();
-            //searchService = new SearchService();
         }
 
         private void updateSearchCheckList(string searchText)

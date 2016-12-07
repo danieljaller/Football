@@ -14,8 +14,6 @@ namespace AdminApp
     /// </summary>
     public partial class AddPlayerWindow : Window
     {
-        //PlayerService playerService;
-        //TeamService teamService;
         public List<Player> selectedPlayers { get; set; }
 
         private int NumberOfSelectedPlayers;

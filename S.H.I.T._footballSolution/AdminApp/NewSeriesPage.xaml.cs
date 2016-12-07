@@ -16,10 +16,7 @@ namespace AdminApp
     /// </summary>
     public partial class NewSeriesPage : Page
     {
-        //TeamService teamService;
-        //SerieService serieService;
         private List<Team> teamList = new List<Team> { };
-
         private bool teamsAreValid;
         private bool nameIsValid;
         private bool dateIsValid;

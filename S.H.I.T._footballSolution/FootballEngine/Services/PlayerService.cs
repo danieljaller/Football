@@ -86,16 +86,6 @@ namespace FootballEngine.Services
             return ServiceLocator.Instance.TeamService.GetAllTeamsBySerie(serieId).SelectMany(t => ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(t.Id));
         }
 
-        public IEnumerable<Player> OrderByFirstName(Guid serieId)
-        {
-            return GetAllPlayersBySerie(serieId).OrderBy(p => p.FirstName.Value);
-        }
-
-        public IEnumerable<Player> OrderByLastName(Guid serieId)
-        {
-            return GetAllPlayersBySerie(serieId).OrderBy(p => p.LastName.Value);
-        }
-
         public IEnumerable<Player> OrderByFullName(Guid serieId)
         {
             return GetAllPlayersBySerie(serieId).OrderBy(p => p.FullName);
