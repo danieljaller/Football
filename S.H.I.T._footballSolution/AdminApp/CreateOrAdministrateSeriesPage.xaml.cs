@@ -23,9 +23,11 @@ namespace AdminApp
         private bool homeTeamIsClicked;
         private bool visitorTeamIsClicked;
         private bool dateIsClicked;
+        private Frame mainFrame;
 
-        public CreateOrAdministrateSeriesPage()
+        public CreateOrAdministrateSeriesPage(Frame mainFrame)
         {
+            this.mainFrame = mainFrame;
             InitializeComponent();
             seriesList.ItemsSource = ServiceLocator.Instance.SerieService.GetAll();
             showAllRadioButton.IsChecked = true;
@@ -67,7 +69,7 @@ namespace AdminApp
 
         private void NewSeriesButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateOrAdministrateSeriesPageFrame.Content = new NewSeriesPage();
+            mainFrame.Content = new NewSeriesPage(mainFrame);
         }
 
         private void seriesList_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -41,8 +41,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="2" Margin="10" Name="NewSeriesButton" Click="NewSeriesButton_Click">SKAPA NY SERIE</Button>
-        <Frame x:Name="CreateOrAdministrateSeriesPageFrame" Grid.ColumnSpan="2" Grid.RowSpan="3" Panel.ZIndex="10" />
+        <Button Grid.Row="2" Margin="10" Name="NewSeriesButton" Click="NewSeriesButton_Click">Skapa ny serie</Button>
         <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="1">
             <ScrollViewer.Resources>
                 <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">13</sys:Double>

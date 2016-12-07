@@ -21,10 +21,13 @@ namespace AdminApp
         private List<Team> homeTeamList = new List<Team>();
         private List<Team> visitorTeamList = new List<Team>();
         private DateTime startDate;
+        private Frame mainFrame;
 
-        public CreateSchedulePage(List<Guid> matchSchedule, string serieName, List<Team> teamList, DateTime startDate)
+        public CreateSchedulePage(List<Guid> matchSchedule, string serieName, List<Team> teamList, DateTime startDate, Frame mainFrame)
         {
+            this.mainFrame = mainFrame;
             InitializeComponent();
+            nameTextBlock.Text = serieName;
             matchScheduleWithIds = matchSchedule;
             this.serieName = serieName;
             this.teamList = teamList;
@@ -72,9 +75,9 @@ namespace AdminApp
             ServiceLocator.Instance.TeamService.Save();
             ServiceLocator.Instance.MatchService.Save();
             MessageBox.Show($"Serien {serieName} är skapad");
-
-            grid.Visibility = Visibility.Hidden;
-            createSerieButton.IsEnabled = false;
+            mainFrame.Content = new CreateOrAdministrateSeriesPage(mainFrame);
+            //grid.Visibility = Visibility.Hidden;
+            //createSerieButton.IsEnabled = false;
         }
 
         private void matchDatePicker_GotFocus(object sender, RoutedEventArgs e)

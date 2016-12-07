@@ -12,16 +12,15 @@ namespace AdminApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        //SearchService searchService;
+
         public MainWindow()
         {
-            //searchService = new SearchService();
             InitializeComponent();
         }
 
         private void SeriesButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPageFrame.Content = new CreateOrAdministrateSeriesPage();
+            MainPageFrame.Content = new CreateOrAdministrateSeriesPage(MainPageFrame);
         }
 
         private void TeamButton_Click(object sender, RoutedEventArgs e)

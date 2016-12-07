@@ -23,9 +23,11 @@ namespace AdminApp
         private bool teamsAreValid;
         private bool nameIsValid;
         private bool dateIsValid;
+        private Frame mainFrame;
 
-        public NewSeriesPage()
+        public NewSeriesPage(Frame mainFrame)
         {
+            this.mainFrame = mainFrame;
             InitializeComponent();
             teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll();
             serieDatePicker.BlackoutDates.AddDatesInPast();
@@ -48,7 +50,7 @@ namespace AdminApp
                 var startDate = Convert.ToDateTime(serieDatePicker.SelectedDate);
                 var matchSchedule = MatchTableFactory.CreateMatchTable(teamList, startDate);
                 ServiceLocator.Instance.MatchService.AddRange(matchSchedule);
-                newSerieFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList, startDate);
+                mainFrame.Content = new CreateSchedulePage(matchSchedule.Select(match => match.Id).ToList(), serieName.Text, teamList, startDate, mainFrame);
             }
         }
 

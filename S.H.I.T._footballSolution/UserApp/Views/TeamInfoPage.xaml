@@ -36,7 +36,7 @@
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Namn:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:" />
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serier:" />
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serie:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Poäng:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Vinster:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Förluster:" />

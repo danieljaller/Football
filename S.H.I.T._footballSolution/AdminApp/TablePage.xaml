@@ -54,7 +54,7 @@
         <TextBlock Name="goalsAgainst" VerticalAlignment="Center" Grid.Column="7" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="goalsAgainst_MouseLeftButtonDown" ToolTip="Insläppta mål" Text="IM" />
         <TextBlock Name="matchesPlayed" VerticalAlignment="Center" Grid.Column="8" Grid.Row="0" Panel.ZIndex="2" HorizontalAlignment="Center" MouseLeftButtonDown="matchesPlayed_MouseLeftButtonDown" ToolTip="Antal matcher" Text="AM" />
 
-        <ListBox Name="tableStatsListbox" Grid.Row="1" Grid.ColumnSpan="9" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" BorderThickness="0" Background="Transparent" AlternationCount="2">
+        <ListBox Name="tableStatsListbox" Grid.Row="1" Grid.ColumnSpan="9" BorderThickness="0" Background="Transparent" AlternationCount="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

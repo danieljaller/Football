@@ -37,7 +37,7 @@
             </ListBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,0,0,15">
-            <Button Grid.Row="2" Margin="10,10,10,10" Name="NewTeamButton" Click="NewTeamButton_Click" Width="100">SKAPA NYTT LAG</Button>
+            <Button Grid.Row="2" Margin="10,10,10,10" Name="NewTeamButton" Click="NewTeamButton_Click" Width="100">Skapa nytt lag</Button>
             <Button Name="saveBtn"  Content="Spara" Margin="37,10,10,10" Click="saveBtn_Click" IsEnabled="False" Width="100" />
             <Button Name="cancelBtn"  Content="Avbryt" Margin="30,10,10,10" Click="cancelBtn_Click" Width="100" />
             <Button Name="removePlayer" Grid.Column="3" Margin="214,10,10,10" Click="removePlayer_Click" Content="Ta bort spelare" Width="170" />
@@ -60,7 +60,7 @@
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="1" Orientation="Vertical" Grid.RowSpan="2" VerticalAlignment="Top">
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Namn:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Hemmaarena:" />
-                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serier:" />
+                <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Serie:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Poäng:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Vinster:" />
                 <TextBlock FontWeight="Bold" Margin="5,5,0,0" Text="Förluster:" />
