@@ -60,13 +60,13 @@ namespace AdminApp
             if (PlayerInIdsList.Contains(selectedPlayer.Id))
             {
                 Exchange activeExchange = Exchanges.Find(ex => ex.PlayerInId == selectedPlayer.Id);
-                minutes = minutes.Where(m => m.Value > activeExchange.TimeOfExchange.Value).ToList();
+                minutes = minutes.Where(m => m.Value >= activeExchange.TimeOfExchange.Value).ToList();
             }
 
             if (PlayerOutIdsList.Contains(selectedPlayer.Id))
             {
                 Exchange activeExchange = Exchanges.Find(ex => ex.PlayerOutId == selectedPlayer.Id);
-                minutes = minutes.Where(m => m.Value < activeExchange.TimeOfExchange.Value).ToList();
+                minutes = minutes.Where(m => m.Value <= activeExchange.TimeOfExchange.Value).ToList();
             }
 
             timeBox.ItemsSource = minutes;
