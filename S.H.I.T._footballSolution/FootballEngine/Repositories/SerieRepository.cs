@@ -95,10 +95,7 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", false, out path))
-                //{
                 _series = (List<Serie>)XmlHandler.LoadFrom(_path, typeof(List<Serie>));
-                //}
             }
             catch (LoadFailedException)
             {
@@ -110,10 +107,7 @@ namespace FootballEngine.Repositories
         {
             try
             {
-                //if (TryGetFilePath.InSolutionDirectory("Series.xml", "Resources", true, out path))
-                //{
                 XmlHandler.SaveTo(_path, _series);
-                //}
             }
             catch (SaveFailedException s)
             {
