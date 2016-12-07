@@ -217,9 +217,7 @@
       <Name>FootballEngine</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\calendar_icon.ico" />
   </ItemGroup>

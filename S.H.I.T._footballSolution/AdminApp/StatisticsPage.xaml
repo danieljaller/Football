@@ -52,7 +52,7 @@
             <ScrollViewer.Resources>
                 <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">13</sys:Double>
             </ScrollViewer.Resources>
-            <Frame Grid.Row="2" Margin="20" x:Name="seriePageFrame" />
+            <Frame Grid.Row="2" Margin="20, 20, 20, 10" x:Name="seriePageFrame" />
         </ScrollViewer>
     </Grid>
 </Page>
