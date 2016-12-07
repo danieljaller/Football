@@ -266,7 +266,8 @@ namespace AdminApp
         private void removePlayerHome_Click(object sender, RoutedEventArgs e)
         {
             Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy((Guid)homeLineupList.SelectedItem);
-            if (CheckForEvents(activePlayer.Id, homeGoals, homeAssists, homeRedCards, homeYellowCards))
+            if (CheckForEvents(activePlayer.Id, homeGoals, homeAssists, homeRedCards, homeYellowCards)
+                || CheckForExchanges(activePlayer, homeExchanges))
                 MessageBox.Show($"Kan inte ta bort spelaren");
             else
             {
@@ -314,7 +315,8 @@ namespace AdminApp
         private void removePlayerAway_Click(object sender, RoutedEventArgs e)
         {
             Player activePlayer = ServiceLocator.Instance.PlayerService.GetBy((Guid)visitorLineupList.SelectedItem);
-            if (CheckForEvents(activePlayer.Id, homeGoals, homeAssists, homeRedCards, homeYellowCards))
+            if (CheckForEvents(activePlayer.Id, homeGoals, homeAssists, homeRedCards, homeYellowCards)
+                || CheckForExchanges(activePlayer, homeExchanges))
                 MessageBox.Show($"Kan inte ta bort spelaren");
             else
             {
@@ -348,7 +350,7 @@ namespace AdminApp
             List<Guid> playerInIds = ServiceLocator.Instance.TeamService.GetAllPlayersByTeam(match.HomeTeamId)
                                                     .Where(p => match.HomeExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
-            var addExchangeWindow = new AddExchangeWindow(homeLineup, matchTime, playerOutIds, playerInIds,
+            var addExchangeWindow = new AddExchangeWindow(homeTeam, homeLineup, matchTime, playerOutIds, playerInIds,
                                                             homeGoals, homeAssists, homeRedCards, homeYellowCards);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
@@ -370,7 +372,7 @@ namespace AdminApp
             List<Guid> playerInIds = ServiceLocator.Instance.PlayerService.GetAll()
                                                     .Where(p => match.VisitorExchanges.Select(ex => ex.PlayerInId).Contains(p.Id))
                                                     .Select(p => p.Id).ToList();
-            var addExchangeWindow = new AddExchangeWindow(visitorLineup, matchTime, playerOutIds, playerInIds,
+            var addExchangeWindow = new AddExchangeWindow(visitorTeam, visitorLineup, matchTime, playerOutIds, playerInIds,
                                                             homeGoals, homeAssists, homeRedCards, homeYellowCards);
             var addExchange = addExchangeWindow.ShowDialog();
             if (addExchange == true)
@@ -567,6 +569,19 @@ namespace AdminApp
                 foundEvents = allEvents.OrderByDescending(x => x.TimeOfEvent.Value).ToList().Where(x => x.PlayerId == selectedPlayer.Id).ToList();
             }
             if (foundEvents.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        private bool CheckForExchanges(Player selectedPlayer, ObservableCollection<Exchange> Exchanges)
+        {
+            List<Exchange> foundExchanges = new List<Exchange>();
+            if (selectedPlayer != null)
+            {
+                foundExchanges = Exchanges.OrderByDescending(x => x.TimeOfExchange.Value).ToList().Where(x => x.PlayerOutId == selectedPlayer.Id).ToList();
+            }
+            if (foundExchanges.Count > 0)
                 return true;
             else
                 return false;
