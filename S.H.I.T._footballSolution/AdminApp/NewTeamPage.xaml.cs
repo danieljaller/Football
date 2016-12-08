@@ -81,8 +81,8 @@ namespace AdminApp
             if (team == null)
             { team = new Team(new GeneralName(TeamName), new GeneralName(ArenaName)); }
 
-            var newPlayerWindow = new NewPlayerWindow(true);
-            var newPlayerWindowResult = newPlayerWindow.ShowDialog();
+            var newPlayerWindow = new NewPlayerWindow(true, team);
+            bool? newPlayerWindowResult = newPlayerWindow.ShowDialog();
 
             if (newPlayerWindowResult == true)
             {
