@@ -49,8 +49,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Row="2" Grid.Column="0"  Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click" HorizontalAlignment="Right">Skapa nytt lag</Button>
-            <Button Grid.Row="2" Grid.Column="0" Margin="10" Name="AutoFillButton" Content="Auto" HorizontalAlignment="Left" Click="AutoFillButton_Click" />
+            <Button Grid.Row="2" Grid.Column="0"  Margin="10" Name="NewTeamButton" Click="NewTeamButton_Click" HorizontalAlignment="Left">Skapa nytt lag</Button>
             <Button Grid.Row="2" Grid.Column="1" Margin="10" Name="CreateMatchScheduleButton" Width="120" HorizontalAlignment="Right" Click="CreateMatchScheduleButton_Click" IsEnabled="False">Skapa spelschema</Button>
 
             <ListBox Name="teamsCheckedList"  Grid.Row="1" Grid.Column="1" Margin="20,20,5,5" MinWidth="100" MaxHeight="400" IsHitTestVisible="False" BorderThickness="0">
