@@ -43,7 +43,7 @@ namespace FootballEngine.Factories
             for (int j = 0; j < teams.Count / 2; j++)
             {
                 Team[] pairing = new Team[2];
-                if (i < teams.Count / 2)
+                if (i <= teams.Count)
                 {
                     pairing[0] = teams[j];
                     pairing[1] = teams[teams.Count - 1 - j];
