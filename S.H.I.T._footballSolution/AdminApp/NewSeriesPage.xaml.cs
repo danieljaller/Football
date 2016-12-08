@@ -26,7 +26,7 @@ namespace AdminApp
         {
             this.mainFrame = mainFrame;
             InitializeComponent();
-            teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll();
+            teamsList.ItemsSource = ServiceLocator.Instance.TeamService.GetAll().Where(t => t.SerieIds.Count == 0);
             serieDatePicker.BlackoutDates.AddDatesInPast();
         }
 
